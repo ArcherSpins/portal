@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The NotFound component renders correctly 1`] = `
+<div
+  className="not-found"
+>
+  404 Not Found
+</div>
+`;

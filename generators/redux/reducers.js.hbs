@@ -1,0 +1,19 @@
+// @flow
+// import * as {{ camelCase name}}Types from './constants';
+import type { {{properCase name}}Actions } from './types';
+
+type State = {};
+
+const initialState: State = {};
+
+export default (
+    state: State = initialState,
+    action: {{properCase name}}Actions
+): State => {
+    switch (action.type) {
+        // place case statements here
+
+        default:
+            return state;
+    }
+};
