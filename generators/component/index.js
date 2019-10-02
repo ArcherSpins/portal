@@ -5,7 +5,7 @@
 const { componentExists } = require('../utils');
 
 module.exports = {
-  description: 'Add an unconnected component',
+  description: 'Add a component',
   prompts: [
     {
       type: 'input',
@@ -15,7 +15,7 @@ module.exports = {
       validate: (value) => {
         if (/.+/.test(value)) {
           return componentExists(value)
-            ? 'A component or container with this name already exists'
+            ? 'A component with this name already exists'
             : true;
         }
 
@@ -24,29 +24,29 @@ module.exports = {
     },
     {
       type: 'confirm',
+      name: 'isClass',
+      default: false,
+      message: 'Do you want class component?',
+    },
+    {
+      type: 'confirm',
       name: 'isStory',
       default: true,
       message: 'Do you want stories for this component?',
     },
   ],
-  actions: data => {
+  actions: (data) => {
     // Generate index.js and index.test.js
     const actions = [
       {
         type: 'add',
-        path: '../src/components/{{properCase name}}/index.js',
-        templateFile: './component/index.js.hbs',
-        abortOnFail: true,
-      },
-      {
-        type: 'add',
-        path: '../src/components/{{properCase name}}/tests/index.test.js',
+        path: '../src/ui-kit/{{properCase name}}/tests/index.test.js',
         templateFile: './component/test.js.hbs',
         abortOnFail: true,
       },
       {
         type: 'add',
-        path: '../src/components/{{properCase name}}/{{ properCase name }}.module.scss',
+        path: '../src/ui-kit/{{properCase name}}/{{ properCase name }}.module.scss',
         templateFile: './component/scss.hbs',
         abortOnFail: true,
       },
@@ -55,15 +55,31 @@ module.exports = {
     if (data.isStory) {
       actions.push({
         type: 'add',
-        path: '../src/components/{{properCase name}}/{{properCase name}}.stories.js',
+        path: '../src/ui-kit/{{properCase name}}/{{properCase name}}.stories.js',
         templateFile: './component/story.js.hbs',
+        abortOnFail: true,
+      });
+    }
+
+    if (data.isClass) {
+      actions.push({
+        type: 'add',
+        path: '../src/ui-kit/{{properCase name}}/index.js',
+        templateFile: './component/index.class.hbs',
+        abortOnFail: true,
+      });
+    } else {
+      actions.push({
+        type: 'add',
+        path: '../src/ui-kit/{{properCase name}}/index.js',
+        templateFile: './component/index.func.hbs',
         abortOnFail: true,
       });
     }
 
     actions.push({
       type: 'prettify',
-      path: '/components/',
+      path: '/ui-kit/',
     });
 
     return actions;

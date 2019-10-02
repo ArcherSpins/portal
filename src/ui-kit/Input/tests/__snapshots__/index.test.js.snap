@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The Input component borderless input renders correctly 1`] = `
+<div
+  className="
+      borderless
+      
+    "
+>
+  <input
+    disabled={false}
+    onChange={[Function]}
+    placeholder=""
+    type="text"
+    value=""
+  />
+</div>
+`;
+
+exports[`The Input component default input renders correctly 1`] = `
+<div
+  className="
+      default
+      
+    "
+>
+  <input
+    disabled={false}
+    onChange={[Function]}
+    placeholder=""
+    type="text"
+    value=""
+  />
+</div>
+`;

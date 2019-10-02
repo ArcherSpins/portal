@@ -1,0 +1,61 @@
+@import "../variables";
+@import "../mixins";
+
+.input {
+  input {
+    @include default-transition(all);
+    padding: 0.375rem 0.5rem;
+    line-height: 1.5rem;
+    font-size: 1rem;
+    width: 100%;
+    outline: none;
+    &::placeholder {
+      color: $disabled-color;
+    }
+
+    &:focus {
+      &::placeholder {
+        color: lighten($disabled-color, 5%);
+      }
+    }
+
+    &:disabled {
+      background: $grey-disabled;
+      cursor: not-allowed;
+    }
+  }
+}
+
+.default {
+  @extend .input;
+  input {
+    border: 1px solid $grey;
+    border-radius: 0.25rem;
+    &:focus {
+      border-color: $main-color;
+    }
+  }
+}
+
+.borderless {
+  @extend .input;
+  input {
+    border: 0;
+    border-bottom: 2px solid $grey-200;
+    &:focus {
+      border-color: $main-color;
+    }
+    &:disabled {
+      border-color: $disabled-color;
+    }
+  }
+}
+
+.error {
+  input {
+    border-color: $danger;
+    &:focus {
+      border-color: darken($danger, 5%);
+    }
+  }
+}

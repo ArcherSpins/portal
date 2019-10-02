@@ -1,0 +1,60 @@
+@import "../../variables.scss";
+@import "../../mixins.scss";
+
+$background: transparent;
+$foreground: black;
+
+.spinner {
+  font-size: 0.6rem;
+  display: inline-block;
+  // margin:50px auto;
+  text-indent:-9999em;
+  width:1rem;
+  height:1rem;
+  border-radius:50%;
+  position: relative;
+  animation:load 1.4s infinite linear;
+  transform: translateZ(0);
+  line-height: 1;
+  position: absolute;
+  left: 50%;
+  margin-left: -0.5rem;
+  top: 0.5rem;
+  &:before {
+    width:50%;
+    height:50%;
+    // background: $foreground;
+    border-radius: 100% 0 0 0;
+    position:absolute;
+    top:0;
+    left:0;
+    content:'';
+  }
+
+  &:after {
+    // background:$background;
+    @include default-transition(background);
+    width: 65%;
+    height: 65%;
+    border-radius:50%;
+    content:'';
+    margin:auto;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+  }
+};
+
+@keyframes load {
+  0% {
+  	transform:rotate(0deg);
+  }
+
+  100% {
+  	transform:rotate(360deg);
+  }
+}
+
+.visible {
+  visibility: visible;
+  display: inline-block;
+}

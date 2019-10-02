@@ -2,15 +2,9 @@ const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
 const componentGenerator = require('./component');
-const containerGenerator = require('./container');
-const pageGenerator = require('./page');
-const reduxGenerator = require('./redux');
 
-module.exports = plop => {
+module.exports = (plop) => {
   plop.setGenerator('component', componentGenerator);
-  plop.setGenerator('container', containerGenerator);
-  plop.setGenerator('page', pageGenerator);
-  plop.setGenerator('redux', reduxGenerator);
 
   plop.setActionType('prettify', (answers, config) => {
     const folderPath = `${path.join(
@@ -34,7 +28,7 @@ module.exports = plop => {
     console.log(config.message);
   });
 
-  plop.addHelper('directory', comp => {
+  plop.addHelper('directory', (comp) => {
     try {
       fs.accessSync(
         path.join(__dirname, `../../src/containers/${comp}`),
@@ -42,7 +36,7 @@ module.exports = plop => {
       );
       return `containers/${comp}`;
     } catch (e) {
-      return `components/${comp}`;
+      return `ui-kit/${comp}`;
     }
   });
   plop.addHelper('curly', (object, open) => (open ? '{' : '}'));
