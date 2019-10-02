@@ -2,7 +2,8 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import { Link } from 'react-router-dom';
-import configureStore from 'apps/admin/store/configureStore';
+
+import configureStore from 'subApps/admin/store/configureStore';
 
 type Props = {};
 
