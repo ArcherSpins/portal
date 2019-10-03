@@ -2,6 +2,7 @@
 // @flow
 import React, { type Node } from 'react';
 import noop from 'lodash.noop';
+import classNames from 'classnames';
 import styles from './Button.module.scss';
 import { type ButtonUse } from './types';
 
@@ -16,7 +17,7 @@ export type ButtonProps = {
   use?: ButtonUse,
   children: Node,
   disabled?: boolean,
-  className?: '',
+  className?: string,
   size?: Size
 };
 
@@ -26,7 +27,7 @@ const Button = (props: ButtonProps) => {
     use = DEFAULT,
     children,
     disabled,
-    className = '',
+    className = [],
     size,
     ...restProps
   } = props;
@@ -35,11 +36,7 @@ const Button = (props: ButtonProps) => {
       {...restProps}
       type="button"
       disabled={disabled}
-      className={`
-        ${styles[use]}
-        ${styles[size]}
-        ${className}
-      `}
+      className={classNames(styles[use], styles[size], className)}
       onClick={onClick}
     >
       <span>
