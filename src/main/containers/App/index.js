@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import ProtectedRoute from 'main/ProtectedRoute';
+import ProtectedRoute from 'main/containers/ProtectedRoute';
 
-import Auth from 'main/Auth';
+import Auth from 'main/containers/Auth';
 // apps
 import AdminApp from 'subApps/admin/containers/AdminApp';
-import MainApp from 'main/MainApp';
+import MainApp from 'main/containers/MainApp';
 import './App.module.scss';
 
 class App extends Component<Props> {
@@ -15,11 +15,10 @@ class App extends Component<Props> {
       <div className="app">
         <Switch>
           <Route path="/auth" component={Auth} />
-          <Route path="/" component={MainApp} />
+          <ProtectedRoute path="/" component={MainApp} />
         </Switch>
         <Switch>
           <ProtectedRoute exact path="/admin" component={AdminApp} />
-          <Route path="/" component={() => <div>No Route</div>} />
         </Switch>
       </div>
     );

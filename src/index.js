@@ -6,7 +6,7 @@ import { ApolloProvider } from '@apollo/react-hooks';
 import history from 'utils/history';
 import client from 'utils/api';
 
-import App from 'main/App';
+import App from 'main/containers/App';
 import * as serviceWorker from './serviceWorker';
 
 const MOUNT_NODE = document.getElementById('root');

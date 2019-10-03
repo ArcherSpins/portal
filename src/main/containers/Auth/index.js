@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import Login from 'main/Login';
+import Login from 'main/containers/Login';
 
 type Props = {};
 type State = {
