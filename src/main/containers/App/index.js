@@ -15,11 +15,10 @@ class App extends Component<Props> {
       <div className="app">
         <Switch>
           <Route path="/auth" component={Auth} />
-          <Route path="/" component={MainApp} />
+          <ProtectedRoute path="/" component={MainApp} />
         </Switch>
         <Switch>
           <ProtectedRoute exact path="/admin" component={AdminApp} />
-          <Route path="/" component={() => <div>No Route</div>} />
         </Switch>
       </div>
     );
