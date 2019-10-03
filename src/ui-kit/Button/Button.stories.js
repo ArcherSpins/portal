@@ -19,8 +19,12 @@ const stories = storiesOf('Button', module)
             sectionFn: () => <Button onClick={onClick}>Add Employee</Button>,
           },
           {
+            title: "Small",
+            sectionFn: () => <Button size="sm" onClick={onClick}>Add Employee</Button>,
+          },
+          {
             title: "With spinner",
-            sectionFn: () => <ButtonWithProgress loading={boolean('loading', false)} onClick={onClick}>Add Employee</ButtonWithProgress>,
+            sectionFn: () => <ButtonWithProgress loading={boolean('loading', true)} onClick={onClick}>Add Employee</ButtonWithProgress>,
           },
           {
             title: "Disabled",
@@ -39,8 +43,12 @@ const stories = storiesOf('Button', module)
             sectionFn: () => <Button use="transparent" onClick={onClick}>Add Employee</Button>,
           },
           {
+            title: "Small",
+            sectionFn: () => <Button use="transparent" size="sm" onClick={onClick}>Add Employee</Button>,
+          },
+          {
             title: "With spinner",
-            sectionFn: () => <ButtonWithProgress use="transparent" loading={boolean('loading', false)} onClick={onClick}>Add Employee</ButtonWithProgress>,
+            sectionFn: () => <ButtonWithProgress use="transparent" loading={boolean('loading', true)} onClick={onClick}>Add Employee</ButtonWithProgress>,
           },
           {
             title: "Disabled",
@@ -59,12 +67,40 @@ const stories = storiesOf('Button', module)
             sectionFn: () => <Button use="grey" onClick={onClick}>Add Employee</Button>,
           },
           {
+            title: "Small",
+            sectionFn: () => <Button use="grey" size="sm" onClick={onClick}>Add Employee</Button>,
+          },
+          {
             title: "With spinner",
-            sectionFn: () => <ButtonWithProgress use="grey" loading={boolean('loading', false)} onClick={onClick}>Add Employee</ButtonWithProgress>,
+            sectionFn: () => <ButtonWithProgress use="grey" loading={boolean('loading', true)} onClick={onClick}>Add Employee</ButtonWithProgress>,
           },
           {
             title: "Disabled",
             sectionFn: () => <Button use="grey" disabled onClick={onClick}>Add Employee</Button>
+          }
+        ],
+      }
+    ]
+  })
+  .addWithChapters('Danger', {
+    chapters: [
+      {
+        sections: [
+          {
+            title: "Idle",
+            sectionFn: () => <Button use="danger" onClick={onClick}>Add Employee</Button>,
+          },
+          {
+            title: "Small",
+            sectionFn: () => <Button use="danger" size="sm" onClick={onClick}>Add Employee</Button>,
+          },
+          {
+            title: "With spinner",
+            sectionFn: () => <ButtonWithProgress use="danger" loading={boolean('loading', true)} onClick={onClick}>Add Employee</ButtonWithProgress>,
+          },
+          {
+            title: "Disabled",
+            sectionFn: () => <Button use="danger" disabled onClick={onClick}>Add Employee</Button>
           }
         ],
       }

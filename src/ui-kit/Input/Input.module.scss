@@ -53,9 +53,9 @@
 
 .error {
   input {
-    border-color: $danger;
+    border-color: $danger-400;
     &:focus {
-      border-color: darken($danger, 5%);
+      border-color: darken($danger-400, 5%);
     }
   }
 }

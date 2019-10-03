@@ -7,6 +7,8 @@ import { type ButtonUse } from './types';
 
 export const DEFAULT = 'default';
 
+type Size = 'md' | 'sm';
+
 export type ButtonProps = {
   /** Функция-обработчик события клика */
   onClick?: (SyntheticMouseEvent<HTMLButtonElement>) => void,
@@ -14,6 +16,7 @@ export type ButtonProps = {
   use?: ButtonUse,
   children: Node,
   disabled?: boolean,
+  size?: Size
 };
 
 const Button = (props: ButtonProps) => {
@@ -22,6 +25,7 @@ const Button = (props: ButtonProps) => {
     use = DEFAULT,
     children,
     disabled,
+    size,
     ...restProps
   } = props;
   return (
@@ -31,6 +35,7 @@ const Button = (props: ButtonProps) => {
       disabled={disabled}
       className={`
         ${styles[use]}
+        ${styles[size]}
       `}
       onClick={onClick}
     >
@@ -45,6 +50,7 @@ Button.defaultProps = {
   onClick: noop,
   use: DEFAULT,
   disabled: false,
+  size: 'md',
 };
 
 export default Button;
