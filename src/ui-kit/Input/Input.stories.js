@@ -18,6 +18,10 @@ storiesOf('Input', module)
             sectionFn: withDecorator(<Input placeholder="Placeholder text" onChange={onChange}>Add Employee</Input>),
           },
           {
+            title: "With label",
+            sectionFn: withDecorator(<Input label="This is a label" placeholder="Placeholder text" onChange={onChange}>Add Employee</Input>),
+          },
+          {
             title: "Error state",
             sectionFn: withDecorator(<Input placeholder="Placeholder text" error onChange={onChange}>Add Employee</Input>),
           },
@@ -36,6 +40,10 @@ storiesOf('Input', module)
           {
             title: "Idle",
             sectionFn: withDecorator(<Input placeholder="Placeholder text" use="borderless" onChange={onChange}>Add Employee</Input>),
+          },
+          {
+            title: "With label",
+            sectionFn: withDecorator(<Input label="This is a label" use="borderless" placeholder="Placeholder text" onChange={onChange}>Add Employee</Input>),
           },
           {
             title: "Error state",

@@ -18,6 +18,8 @@ type Props = {
   disabled?: boolean,
   className?: string,
   value?: string,
+  label?: string,
+  name: string,
   /** onChange */
   onChange?: (e: SyntheticEvent<HTMLInputElement>) => void,
 }
@@ -30,20 +32,27 @@ const Input = ({
   disabled,
   value,
   className = '',
+  name,
   use = 'default',
+  label,
   ...restProps
 }: Props): Node => (
   <div
     {...restProps}
     className={classNames(styles[use], { [styles[error]]: error }, className)}
   >
-    <input
-      type={type}
-      placeholder={placeholder}
-      onChange={onChange}
-      disabled={disabled}
-      value={value}
-    />
+    <label htmlFor={name}>
+      {label}
+      <input
+        name={name}
+        type={type}
+        placeholder={placeholder}
+        onChange={onChange}
+        disabled={disabled}
+        value={value}
+      />
+    </label>
+
   </div>
 );
 
@@ -56,6 +65,7 @@ Input.defaultProps = {
   use: 'default',
   value: '',
   className: '',
+  label: '',
 };
 
 export default Input;
