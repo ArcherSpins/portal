@@ -16,6 +16,7 @@ const createHeading = (type: HeadingsType) => ({ children, className = '', ...re
   return React.createElement(type, hProps, children);
 };
 
+
 export const H1 = createHeading('h1');
 export const H2 = createHeading('h2');
 export const H3 = createHeading('h3');

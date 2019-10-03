@@ -9,6 +9,8 @@ import client from 'utils/api';
 import App from 'main/containers/App';
 import * as serviceWorker from './serviceWorker';
 
+import './index.css';
+
 const MOUNT_NODE = document.getElementById('root');
 
 ReactDOM.render(

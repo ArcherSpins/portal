@@ -10,7 +10,7 @@ storiesOf('Headings', module)
       {
         sections: [
           {
-            title: "Idle",
+            title: "H1 Heading:",
             sectionFn: () => <H1>Lorem Ipsum</H1>,
           },
         ]
