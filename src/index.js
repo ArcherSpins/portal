@@ -9,7 +9,7 @@ import client from 'utils/api';
 import App from 'main/containers/App';
 import * as serviceWorker from './serviceWorker';
 
-import './index.css';
+import 'main/assets/main.css';
 
 const MOUNT_NODE = document.getElementById('root');
 
