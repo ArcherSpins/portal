@@ -1,0 +1,41 @@
+.page {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  font-family: 'Proxima Nova';
+}
+
+.content {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+}
+
+.form {
+  width: 100%;
+  h1 {
+    text-align: center;
+  }
+}
+
+.input {
+  margin-bottom: 1rem;
+}
+
+.button {
+  display: block;
+  margin-top: 0.5rem;
+}
+
+.loginButton {
+  @extend .button;
+  min-width: 7rem;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
