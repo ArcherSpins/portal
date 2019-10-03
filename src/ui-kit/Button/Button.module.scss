@@ -21,7 +21,7 @@
   min-width: 4rem;
   text-align: center;
   position: relative;
-
+  outline: none;
   &:disabled {
     cursor: not-allowed;
   }
@@ -233,6 +233,44 @@
       &:after {
         background: $danger-100;
       }
+    }
+  }
+}
+
+.simple {
+  @extend .button;
+  color: $text-color-200;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  &:after {
+    @include default-transition(background);
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0.25rem;
+    height: 1px;
+    background: transparent;
+  }
+
+  &:hover {
+    border-color: $text-color-200;
+    &:after {
+      background: $text-color-200;
+    }
+  }
+
+  &:focus {
+    color: $blue-400;
+    &:after {
+      background: $blue-400;
+    }
+  }
+
+  &:disabled {
+    color: $text-color-100;
+    &:after {
+      height: 0;
     }
   }
 }

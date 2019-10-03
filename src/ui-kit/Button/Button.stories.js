@@ -106,3 +106,19 @@ const stories = storiesOf('Button', module)
       }
     ]
   })
+  .addWithChapters('Simple (small)', {
+    chapters: [
+      {
+        sections: [
+          {
+            title: "Idle",
+            sectionFn: () => <Button use="simple" size="sm" onClick={onClick}>Add Employee</Button>,
+          },
+          {
+            title: "Disabled",
+            sectionFn: () => <Button use="simple" size="sm" disabled onClick={onClick}>Add Employee</Button>
+          }
+        ],
+      }
+    ]
+  })
