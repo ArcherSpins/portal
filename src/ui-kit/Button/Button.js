@@ -16,6 +16,7 @@ export type ButtonProps = {
   use?: ButtonUse,
   children: Node,
   disabled?: boolean,
+  className?: '',
   size?: Size
 };
 
@@ -25,6 +26,7 @@ const Button = (props: ButtonProps) => {
     use = DEFAULT,
     children,
     disabled,
+    className = '',
     size,
     ...restProps
   } = props;
@@ -36,6 +38,7 @@ const Button = (props: ButtonProps) => {
       className={`
         ${styles[use]}
         ${styles[size]}
+        ${className}
       `}
       onClick={onClick}
     >
@@ -51,6 +54,7 @@ Button.defaultProps = {
   use: DEFAULT,
   disabled: false,
   size: 'md',
+  className: '',
 };
 
 export default Button;
