@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { AUTH_TOKEN_KEY } from 'utils/constants';
 import Login from './Login';
+import SendResetToken from './SendResetToken';
 import ResetPassword from './ResetPassword';
 
 type Props = {};
@@ -32,7 +33,8 @@ class Auth extends Component<Props, State> {
         {isAuthenticated ? <Redirect to="/" /> : (
           <Switch>
             <Route exact path="/auth/login" component={Login} />
-            <Route exact path="/auth/reset-password" component={ResetPassword} />
+            <Route exact path="/auth/reset-password" component={SendResetToken} />
+            <Route exact path="/auth/reset-password/:token" component={ResetPassword} />
             <Redirect to="/auth/login" />
           </Switch>
         ) }

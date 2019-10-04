@@ -11,12 +11,14 @@ export const SIGN_IN = gql`
 `;
 
 export const RESET_PASSWORD_INIT = gql`
-  mutation initiateResetPasswordProcedure(
-    $login: String!
-  ) {
-    initiateResetPasswordProcedure(
-      login: $login
-    )
+  mutation initiateResetPasswordProcedure($login: String!) {
+    initiateResetPasswordProcedure(login: $login)
+  }
+`;
+
+export const SET_NEW_PASSWORD = gql`
+  mutation resetPassword($token: String!, $newPassword: String!) {
+    resetPassword(token: $token, newPassword: $newPassword)
   }
 `;
 

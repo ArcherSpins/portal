@@ -1,35 +1,28 @@
 // @flow
 import React, { Component } from 'react';
 import { Formik, type FormikActions, FormikValues } from 'formik';
-import { type Match } from 'react-router-dom';
-
 import history from 'utils/history';
 import client from 'utils/api';
 import { AUTH_TOKEN_KEY, ROOT_PAGE_ROUTE } from 'utils/constants';
 
-import { SET_NEW_PASSWORD } from 'graphql/mutations/auth';
+import { RESET_PASSWORD_INIT } from 'graphql/mutations/auth';
 import {
   ButtonWithProgress, H1, Input, Separator,
 } from 'ui-kit';
 import styles from '../Auth.module.scss';
 
-type Props = {
-  match: Match
-};
+type Props = {};
 
-class ResetPassword extends Component<Props> {
+class SendResetToken extends Component<Props> {
   onReset = async (values: FormikValues, { setSubmitting }: FormikActions) => {
-    const { match } = this.props;
-    const { token } = match.params;
-    const { newPassword } = values;
-
+    const { login, password } = values;
     setSubmitting(true);
     try {
       await client.mutate<void>({
-        mutation: SET_NEW_PASSWORD,
+        mutation: RESET_PASSWORD_INIT,
         variables: {
-          token,
-          newPassword,
+          login,
+          password,
         },
       });
       setSubmitting(false);
@@ -61,19 +54,11 @@ class ResetPassword extends Component<Props> {
       <div className={styles.page}>
         <main className={styles.content}>
           <Formik
-            initialValues={{ newPassword: '', oldPassword: '' }}
+            initialValues={{ login: '' }}
             validate={(values) => {
               const errors = {};
-              if (!values.newPassword) {
-                errors.newPassword = 'Required';
-              }
-
-              if (!values.oldPassword) {
-                errors.oldPassword = 'Required';
-              }
-
-              if (values.newPassword !== values.oldPassword) {
-                errors.confirm = 'passwords don\'t match';
+              if (!values.login) {
+                errors.login = 'Required';
               }
 
               return errors;
@@ -87,35 +72,20 @@ class ResetPassword extends Component<Props> {
               handleSubmit,
               isSubmitting,
               touched,
-              handleBlur,
               isValid,
             }) => (
               <form onSubmit={handleSubmit} className={styles.form}>
-                <H1>Set new password</H1>
+                <H1>Log In</H1>
                 <Separator />
                 <Input
-                  placeholder="Your new password"
+                  placeholder="emusk@sfxdx.ru"
                   className={styles.input}
-                  value={values.newPassword}
-                  label="New password"
-                  name="newPassword"
-                  type="password"
-                  onBlur={handleBlur}
-                  error={touched.newPassword && errors.newPassword}
+                  value={values.login}
+                  label="Login"
+                  name="login"
+                  error={touched.login && errors.login}
                   onChange={handleChange}
                 />
-                <Input
-                  placeholder="Repeat your new password"
-                  className={styles.input}
-                  value={values.oldPassword}
-                  label="Repeat password"
-                  name="oldPassword"
-                  onBlur={handleBlur}
-                  type="password"
-                  error={touched.oldPassword && errors.oldPassword}
-                  onChange={handleChange}
-                />
-                {touched.newPassword && touched.oldPassword && errors.confirm}
                 <div className={styles.actions}>
                   <ButtonWithProgress
                     loading={isSubmitting}
@@ -123,7 +93,7 @@ class ResetPassword extends Component<Props> {
                     onClick={handleSubmit}
                     disabled={!isValid}
                   >
-                    Save
+                    Recover
                   </ButtonWithProgress>
                 </div>
               </form>
@@ -135,4 +105,4 @@ class ResetPassword extends Component<Props> {
   }
 }
 
-export default ResetPassword;
+export default SendResetToken;
