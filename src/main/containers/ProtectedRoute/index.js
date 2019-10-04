@@ -29,7 +29,7 @@ class PrivateRoute extends React.Component<Props> {
   }
 
   checkAuthState(): void {
-    this.isAuthenticated = !!localStorage.getItem('isAuthenticated');
+    this.isAuthenticated = !!localStorage.getItem('token');
   }
 
   render() {

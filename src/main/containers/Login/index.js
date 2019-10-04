@@ -1,9 +1,9 @@
 // @flow
 import React, { Component } from 'react';
-// import history from 'utils/history';
+import history from 'utils/history';
 import client from 'utils/api';
 
-import { SIGN_IN } from 'graphql/mutations/auth';
+import { SIGN_IN, type SignInResponse } from 'graphql/mutations/auth';
 import {
   Button, ButtonWithProgress, H1, Input, Separator,
 } from 'ui-kit';
@@ -33,16 +33,31 @@ class Login extends Component<Props, State> {
       loading: true,
     });
     try {
-      await client.mutate({
+      const { data } = await client.mutate<SignInResponse>({
         mutation: SIGN_IN,
         variables: {
           login,
           password,
         },
       });
+      this.saveToken(data.signIn.accessToken);
+      this.setState({
+        loading: false,
+      }, this.redirect);
+      this.redirect();
     } catch (err) {
-      console.log(err);
+      this.setState({
+        loading: false,
+      });
     }
+  }
+
+  saveToken = (token: string) => {
+    localStorage.setItem('token', token);
+  }
+
+  redirect = () => {
+    history.push('/');
   }
 
   onInputChange = (e: SyntheticInputEvent<HTMLInputElement>) => {
@@ -58,7 +73,7 @@ class Login extends Component<Props, State> {
     return (
       <div className={styles.page}>
         <main className={styles.content}>
-          <form className={styles.form}>
+          <form onSubmit={this.onLogin} className={styles.form}>
             <H1>Log In</H1>
             <Separator />
             <Input
@@ -82,6 +97,7 @@ class Login extends Component<Props, State> {
               <ButtonWithProgress
                 loading={loading}
                 className={styles.loginButton}
+                onClick={this.onLogin}
               >
                 Log In
               </ButtonWithProgress>

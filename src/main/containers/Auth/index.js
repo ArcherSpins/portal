@@ -17,7 +17,7 @@ class Auth extends Component<Props, State> {
   }
 
   componentDidMount() {
-    const isAuthenticated = !!localStorage.getItem('isAuthenticated');
+    const isAuthenticated = !!localStorage.getItem('token');
     this.setState({
       isAuthenticated,
     });
