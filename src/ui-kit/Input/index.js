@@ -39,7 +39,7 @@ const Input = ({
 }: Props): Node => (
   <div
     {...restProps}
-    className={classNames(styles[use], { [styles[error]]: error }, className)}
+    className={classNames(styles[use], { [styles.error]: error }, className)}
   >
     <label htmlFor={name}>
       {label}

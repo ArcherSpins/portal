@@ -2,6 +2,8 @@
 import React, { type ComponentType } from 'react';
 import { Route, Redirect, type LocationShape } from 'react-router-dom';
 
+import { AUTH_TOKEN_KEY } from 'utils/constants';
+
 type Props = {
   component: ComponentType<*>,
   location: LocationShape
@@ -29,7 +31,7 @@ class PrivateRoute extends React.Component<Props> {
   }
 
   checkAuthState(): void {
-    this.isAuthenticated = !!localStorage.getItem('token');
+    this.isAuthenticated = !!localStorage.getItem(AUTH_TOKEN_KEY);
   }
 
   render() {

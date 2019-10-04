@@ -1,7 +1,9 @@
 // @flow
 import React, { Component } from 'react';
+import { Formik, type FormikActions, FormikValues } from 'formik';
 import history from 'utils/history';
 import client from 'utils/api';
+import { AUTH_TOKEN_KEY, ROOT_PAGE_ROUTE } from 'utils/constants';
 
 import { SIGN_IN, type SignInResponse } from 'graphql/mutations/auth';
 import {
@@ -11,27 +13,10 @@ import styles from './Login.module.scss';
 
 type Props = {};
 
-type State = {
-  login: string,
-  password: string,
-  loading: boolean
-}
-
-class Login extends Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      login: '',
-      password: '',
-      loading: false,
-    };
-  }
-
-  onLogin = async () => {
-    const { login, password } = this.state;
-    this.setState({
-      loading: true,
-    });
+class Login extends Component<Props> {
+  onLogin = async (values: FormikValues, { setSubmitting }: FormikActions) => {
+    const { login, password } = values;
+    setSubmitting(true);
     try {
       const { data } = await client.mutate<SignInResponse>({
         mutation: SIGN_IN,
@@ -41,23 +26,19 @@ class Login extends Component<Props, State> {
         },
       });
       this.saveToken(data.signIn.accessToken);
-      this.setState({
-        loading: false,
-      }, this.redirect);
+      setSubmitting(false);
       this.redirect();
     } catch (err) {
-      this.setState({
-        loading: false,
-      });
+      // console.log(err);
     }
   }
 
   saveToken = (token: string) => {
-    localStorage.setItem('token', token);
+    localStorage.setItem(AUTH_TOKEN_KEY, token);
   }
 
   redirect = () => {
-    history.push('/');
+    history.push(ROOT_PAGE_ROUTE);
   }
 
   onInputChange = (e: SyntheticInputEvent<HTMLInputElement>) => {
@@ -69,43 +50,71 @@ class Login extends Component<Props, State> {
 
 
   render() {
-    const { login, password, loading } = this.state;
     return (
       <div className={styles.page}>
         <main className={styles.content}>
-          <form onSubmit={this.onLogin} className={styles.form}>
-            <H1>Log In</H1>
-            <Separator />
-            <Input
-              placeholder="emusk@sfxdx.ru"
-              className={styles.input}
-              value={login}
-              label="Login"
-              name="login"
-              onChange={this.onInputChange}
-            />
-            <Input
-              placeholder="Your password"
-              className={styles.input}
-              value={password}
-              type="password"
-              name="password"
-              label="Password"
-              onChange={this.onInputChange}
-            />
-            <div className={styles.actions}>
-              <ButtonWithProgress
-                loading={loading}
-                className={styles.loginButton}
-                onClick={this.onLogin}
-              >
-                Log In
-              </ButtonWithProgress>
-            </div>
-            <div className={styles.actions}>
-              <Button className={styles.button} use="simple" size="sm">Forgot password?</Button>
-            </div>
-          </form>
+          <Formik
+            initialValues={{ login: '', password: '' }}
+            validate={(values) => {
+              const errors = {};
+              if (!values.login) {
+                errors.login = 'Required';
+              }
+
+              if (!values.password) {
+                errors.password = 'Required';
+              }
+              return errors;
+            }}
+            onSubmit={this.onLogin}
+          >
+            {({
+              values,
+              errors,
+              handleChange,
+              handleSubmit,
+              isSubmitting,
+              touched,
+              isValid,
+            }) => (
+              <form onSubmit={handleSubmit} className={styles.form}>
+                <H1>Log In</H1>
+                <Separator />
+                <Input
+                  placeholder="emusk@sfxdx.ru"
+                  className={styles.input}
+                  value={values.login}
+                  label="Login"
+                  name="login"
+                  error={touched.login && errors.login}
+                  onChange={handleChange}
+                />
+                <Input
+                  placeholder="Your password"
+                  className={styles.input}
+                  value={values.password}
+                  type="password"
+                  name="password"
+                  error={touched.login && errors.password}
+                  label="Password"
+                  onChange={handleChange}
+                />
+                <div className={styles.actions}>
+                  <ButtonWithProgress
+                    loading={isSubmitting}
+                    className={styles.loginButton}
+                    onClick={handleSubmit}
+                    disabled={!isValid}
+                  >
+                    Log In
+                  </ButtonWithProgress>
+                </div>
+                <div className={styles.actions}>
+                  <Button className={styles.button} use="simple" size="sm">Forgot password?</Button>
+                </div>
+              </form>
+            )}
+          </Formik>
         </main>
       </div>
     );

@@ -1,6 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
+import { AUTH_TOKEN_KEY } from 'utils/constants';
 import Login from 'main/containers/Login';
 
 type Props = {};
@@ -17,7 +18,7 @@ class Auth extends Component<Props, State> {
   }
 
   componentDidMount() {
-    const isAuthenticated = !!localStorage.getItem('token');
+    const isAuthenticated = !!localStorage.getItem(AUTH_TOKEN_KEY);
     this.setState({
       isAuthenticated,
     });
