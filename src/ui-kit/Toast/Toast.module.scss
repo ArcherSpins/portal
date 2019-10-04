@@ -1,0 +1,12 @@
+@import "../variables.scss";
+
+.toast {
+  position: fixed;
+  background: $danger-400;
+  padding: 0.875rem 1.25rem;
+  color: white;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 0.25rem;
+}
