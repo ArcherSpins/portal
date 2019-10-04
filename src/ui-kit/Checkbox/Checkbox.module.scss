@@ -1,0 +1,38 @@
+@import "ui-kit/variables";
+
+.checkbox {
+  font-size: 0.875rem;
+  display: flex;
+
+  input {
+    display: none;
+  }
+
+  b {
+    margin-left: 0.625rem;
+  }
+
+  i {
+    position: absolute;
+  }
+
+  label {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  &__icon {
+    color: $main-color;
+    border: 1px solid $border-color;
+    border-radius: 6px;
+    box-sizing: border-box;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    position: relative;
+  }
+}
