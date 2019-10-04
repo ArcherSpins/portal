@@ -10,6 +10,16 @@ export const SIGN_IN = gql`
   }
 `;
 
+export const RESET_PASSWORD_INIT = gql`
+  mutation initiateResetPasswordProcedure(
+    $login: String!
+  ) {
+    initiateResetPasswordProcedure(
+      login: $login
+    )
+  }
+`;
+
 export type SignInResponse = {
   signIn: {
     accessToken: string

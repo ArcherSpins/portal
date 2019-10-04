@@ -5,21 +5,21 @@ import history from 'utils/history';
 import client from 'utils/api';
 import { AUTH_TOKEN_KEY, ROOT_PAGE_ROUTE } from 'utils/constants';
 
-import { SIGN_IN, type SignInResponse } from 'graphql/mutations/auth';
+import { RESET_PASSWORD_INIT } from 'graphql/mutations/auth';
 import {
-  Button, ButtonWithProgress, H1, Input, Separator,
+  ButtonWithProgress, H1, Input, Separator,
 } from 'ui-kit';
-import styles from './Login.module.scss';
+import styles from '../Auth.module.scss';
 
 type Props = {};
 
-class Login extends Component<Props> {
-  onLogin = async (values: FormikValues, { setSubmitting }: FormikActions) => {
+class ResetPassword extends Component<Props> {
+  onReset = async (values: FormikValues, { setSubmitting }: FormikActions) => {
     const { login, password } = values;
     setSubmitting(true);
     try {
-      const { data } = await client.mutate<SignInResponse>({
-        mutation: SIGN_IN,
+      const { data } = await client.mutate<void>({
+        mutation: RESET_PASSWORD_INIT,
         variables: {
           login,
           password,
@@ -29,6 +29,7 @@ class Login extends Component<Props> {
       setSubmitting(false);
       this.redirect();
     } catch (err) {
+      setSubmitting(false);
       // console.log(err);
     }
   }
@@ -54,19 +55,16 @@ class Login extends Component<Props> {
       <div className={styles.page}>
         <main className={styles.content}>
           <Formik
-            initialValues={{ login: '', password: '' }}
+            initialValues={{ login: '' }}
             validate={(values) => {
               const errors = {};
               if (!values.login) {
                 errors.login = 'Required';
               }
 
-              if (!values.password) {
-                errors.password = 'Required';
-              }
               return errors;
             }}
-            onSubmit={this.onLogin}
+            onSubmit={this.onReset}
           >
             {({
               values,
@@ -89,16 +87,6 @@ class Login extends Component<Props> {
                   error={touched.login && errors.login}
                   onChange={handleChange}
                 />
-                <Input
-                  placeholder="Your password"
-                  className={styles.input}
-                  value={values.password}
-                  type="password"
-                  name="password"
-                  error={touched.login && errors.password}
-                  label="Password"
-                  onChange={handleChange}
-                />
                 <div className={styles.actions}>
                   <ButtonWithProgress
                     loading={isSubmitting}
@@ -106,11 +94,8 @@ class Login extends Component<Props> {
                     onClick={handleSubmit}
                     disabled={!isValid}
                   >
-                    Log In
+                    Recover
                   </ButtonWithProgress>
-                </div>
-                <div className={styles.actions}>
-                  <Button className={styles.button} use="simple" size="sm">Forgot password?</Button>
                 </div>
               </form>
             )}
@@ -121,4 +106,4 @@ class Login extends Component<Props> {
   }
 }
 
-export default Login;
+export default ResetPassword;
