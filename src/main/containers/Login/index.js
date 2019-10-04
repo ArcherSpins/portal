@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import history from 'utils/history';
+// import history from 'utils/history';
 import client from 'utils/api';
 
 import { SIGN_IN } from 'graphql/mutations/auth';
