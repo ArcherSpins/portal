@@ -6,7 +6,7 @@
 <font id="fontello" horiz-adv-x="1000" >
 <font-face font-family="fontello" font-weight="400" font-stretch="normal" units-per-em="1000" ascent="850" descent="-150" />
 <missing-glyph horiz-adv-x="1000" />
-<glyph glyph-name="ok-1" unicode="&#xe801;" d="M0 339q0-35 24-60l246-239q24-25 60-25 36 0 60 25l505 495q25 24 25 59t-25 58q-25 25-60 25t-60-25l-445-435-185 181q-25 24-60 24t-61-24q-24-24-24-59z" horiz-adv-x="920.4" />
+<glyph glyph-name="check" unicode="&#xe800;" d="M718 553c22 21 57 21 78 0 22-22 22-57 0-78l-330-331c-22-22-57-22-78 0l-184 184c-22 21-22 56 0 78 21 21 56 21 78 0l145-145 291 292z" horiz-adv-x="1000" />
 </font>
 </defs>
 </svg>
