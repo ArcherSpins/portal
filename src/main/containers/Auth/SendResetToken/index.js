@@ -7,7 +7,7 @@ import { AUTH_TOKEN_KEY, ROOT_PAGE_ROUTE } from 'utils/constants';
 
 import { RESET_PASSWORD_INIT } from 'graphql/auth';
 import {
-  ButtonWithProgress, H1, Input, Separator,
+  ButtonWithProgress, H1, Input, Separator, Toast,
 } from 'ui-kit';
 import styles from '../Auth.module.scss';
 
@@ -26,6 +26,7 @@ class SendResetToken extends Component<Props> {
         },
       });
       setSubmitting(false);
+      Toast.push({ message: 'Reset link is sent to your registration email', type: 'info' });
       this.redirect();
     } catch (err) {
       setSubmitting(false);
