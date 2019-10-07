@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import { Navbar } from 'ui-kit';
 
 class MainApp extends Component {
   render() {
     return (
       <>
-        <header>Navigation</header>
+        <header><Navbar /></header>
         <aside>Sidebar</aside>
       </>
     );

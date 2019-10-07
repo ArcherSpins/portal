@@ -1,0 +1,19 @@
+.toast-enter {
+  opacity: 0;
+  top: -50px;
+  transition: opacity 300ms, top 300ms;
+}
+.toast-enter-active {
+  opacity: 1;
+  top: 0;
+  transition: opacity 300ms, top 300ms;
+}
+.toast-exit {
+  opacity: 1;
+  transition: opacity 300ms, top 300ms;
+}
+.toast-exit-active {
+  opacity: 0;
+  top: -50px;
+  transition: opacity 300ms, top 300ms;
+}

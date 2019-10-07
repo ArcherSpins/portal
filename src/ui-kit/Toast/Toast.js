@@ -2,16 +2,18 @@
 // @flow
 import React, { Component } from 'react';
 // import { Animated } from 'ui-kit';
-import { CSSTransition } from 'react-transition-group';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import noop from 'lodash.noop';
 
 import styles from './Toast.module.scss';
+import './index.scss';
 
 type Props = {
 };
 
 type State = {
-  notification: ?string
+  notification: ?string,
+  id: number
 }
 
 class Toast extends Component<Props, State> {
@@ -22,7 +24,8 @@ class Toast extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      notification: null
+      notification: null,
+      id: 0
     }
   }
 
@@ -54,22 +57,35 @@ class Toast extends Component<Props, State> {
     this.setState({ notification: null });
   }
 
-  render() {
-    const { notification } = this.state;
-    console.log(notification);
+  renderToast = () => {
+    const { notification, id } = this.state;
+
+    if (!notification) {
+      return null;
+    };
+
     return (
       <CSSTransition
-        in={!!notification}
-        classNames="fadeInDown"
-        timeout={300}
-        unmountOnExit
+        key={id}
+        classNames="toast"
+        timeout={{
+          enter: 200,
+          exit: 150,
+        }}
       >
-        <div>
-          <div className={styles.toast}>
-            {notification}
-          </div>
+        <div className={styles.toast}>
+          {notification}
         </div>
       </CSSTransition>
+    );
+  }
+
+  render() {
+    const { notification } = this.state;
+    return (
+      <TransitionGroup>
+        {this.renderToast()}
+      </TransitionGroup>
     );
   }
 }

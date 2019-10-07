@@ -2,6 +2,11 @@
 import React, { type ComponentType } from 'react';
 import { Route, Redirect, type LocationShape } from 'react-router-dom';
 
+// import client from 'utils/api';
+
+import { AUTH_TOKEN_KEY } from 'utils/constants';
+// import { GET_SELF_INFO } from 'graphql/auth';
+
 type Props = {
   component: ComponentType<*>,
   location: LocationShape
@@ -28,8 +33,8 @@ class PrivateRoute extends React.Component<Props> {
     );
   }
 
-  checkAuthState(): void {
-    this.isAuthenticated = !!localStorage.getItem('isAuthenticated');
+  checkAuthState() {
+    this.isAuthenticated = !!localStorage.getItem(AUTH_TOKEN_KEY);
   }
 
   render() {

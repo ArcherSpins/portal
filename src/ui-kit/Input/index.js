@@ -22,6 +22,8 @@ type Props = {
   name: string,
   /** onChange */
   onChange?: (e: SyntheticEvent<HTMLInputElement>) => void,
+  /** Срабатывает при потере фокуса */
+  onBlur?: (e: SyntheticEvent<HTMLInputElement>) => void
 }
 
 const Input = ({
@@ -35,11 +37,12 @@ const Input = ({
   name,
   use = 'default',
   label,
+  onBlur,
   ...restProps
 }: Props): Node => (
   <div
     {...restProps}
-    className={classNames(styles[use], { [styles[error]]: error }, className)}
+    className={classNames(styles[use], { [styles.error]: error }, className)}
   >
     <label htmlFor={name}>
       {label}
@@ -48,6 +51,7 @@ const Input = ({
         type={type}
         placeholder={placeholder}
         onChange={onChange}
+        onBlur={onBlur}
         disabled={disabled}
         value={value}
       />
@@ -60,6 +64,7 @@ Input.defaultProps = {
   type: 'text',
   placeholder: '',
   onChange: noop,
+  onBlur: noop,
   error: false,
   disabled: false,
   use: 'default',

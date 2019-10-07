@@ -8,6 +8,7 @@ import Checkbox from 'ui-kit/Checkbox';
 
 storiesOf('Checkbox', module)
   .addDecorator(withKnobs)
+  // TODO: $FlowFixMe
   .addWithChapters('Default', {
     chapters: [
       {

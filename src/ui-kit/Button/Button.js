@@ -9,6 +9,7 @@ import { type ButtonUse } from './types';
 export const DEFAULT = 'default';
 
 type Size = 'md' | 'sm';
+type ButtonType = 'button' | 'submit' | 'reset';
 
 export type ButtonProps = {
   /** Функция-обработчик события клика */
@@ -18,7 +19,8 @@ export type ButtonProps = {
   children: Node,
   disabled?: boolean,
   className?: string,
-  size?: Size
+  size?: Size,
+  type?: ButtonType
 };
 
 const Button = (props: ButtonProps) => {
@@ -29,13 +31,15 @@ const Button = (props: ButtonProps) => {
     disabled,
     className = [],
     size,
+    type = 'button',
     ...restProps
   } = props;
   return (
+    // eslint-disable-next-line react/button-has-type
     <button
       {...restProps}
-      type="button"
       disabled={disabled}
+      type={type}
       className={classNames(styles[use], styles[size], className)}
       onClick={onClick}
     >
@@ -52,6 +56,7 @@ Button.defaultProps = {
   disabled: false,
   size: 'md',
   className: '',
+  type: 'button',
 };
 
 export default Button;

@@ -3,6 +3,7 @@
 @import "css/fontello-codes.css";
 @import "css/fontello.css";
 @import "css/animation.css";
+@import "css/reset.css";
 
 html {
     font: 16px/1.5 'Proxima Nova';
