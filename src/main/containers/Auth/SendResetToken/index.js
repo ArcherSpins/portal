@@ -5,7 +5,7 @@ import history from 'utils/history';
 import client from 'utils/api';
 import { AUTH_TOKEN_KEY, ROOT_PAGE_ROUTE } from 'utils/constants';
 
-import { RESET_PASSWORD_INIT } from 'graphql/mutations/auth';
+import { RESET_PASSWORD_INIT } from 'graphql/auth';
 import {
   ButtonWithProgress, H1, Input, Separator,
 } from 'ui-kit';

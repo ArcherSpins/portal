@@ -6,7 +6,7 @@ import history from 'utils/history';
 import client from 'utils/api';
 import { AUTH_TOKEN_KEY, ROOT_PAGE_ROUTE } from 'utils/constants';
 
-import { SIGN_IN, type SignInResponse } from 'graphql/mutations/auth';
+import { SIGN_IN, type SignInResponse } from 'graphql/auth';
 import {
   Button, ButtonWithProgress, H1, Input, Separator,
 } from 'ui-kit';
