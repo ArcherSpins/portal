@@ -1,6 +1,8 @@
 // @flow
 import React, { Component } from 'react';
-import { Formik, type FormikActions, FormikValues } from 'formik';
+import {
+  Formik, Form, type FormikActions, FormikValues,
+} from 'formik';
 import { Link } from 'react-router-dom';
 import history from 'utils/history';
 import client from 'utils/api';
@@ -79,7 +81,7 @@ class Login extends Component<Props> {
               touched,
               isValid,
             }) => (
-              <form onSubmit={handleSubmit} className={styles.form}>
+              <Form className={styles.form}>
                 <H1>Log In</H1>
                 <Separator />
                 <Input
@@ -107,6 +109,7 @@ class Login extends Component<Props> {
                     className={styles.loginButton}
                     onClick={handleSubmit}
                     disabled={!isValid}
+                    type="submit"
                   >
                     Log In
                   </ButtonWithProgress>
@@ -120,7 +123,7 @@ class Login extends Component<Props> {
                     <Link to="/auth/reset-password">Forgot password?</Link>
                   </Button>
                 </div>
-              </form>
+              </Form>
             )}
           </Formik>
         </main>

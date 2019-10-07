@@ -122,6 +122,7 @@ class ResetPassword extends Component<Props> {
                     className={styles.loginButton}
                     onClick={handleSubmit}
                     disabled={!isValid}
+                    type="submit"
                   >
                     Save
                   </ButtonWithProgress>

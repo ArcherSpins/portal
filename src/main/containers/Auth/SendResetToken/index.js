@@ -92,6 +92,7 @@ class SendResetToken extends Component<Props> {
                     className={styles.loginButton}
                     onClick={handleSubmit}
                     disabled={!isValid}
+                    type="submit"
                   >
                     Recover
                   </ButtonWithProgress>

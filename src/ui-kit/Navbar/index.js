@@ -16,7 +16,7 @@ const Navbar = () => (
         <NavLink exact className={styles.logo} to="/">
           <img className={styles.logo} src={logo} alt="Logo" />
         </NavLink>
-        <NavLink activeClassName={styles.active} className={styles.link} to="/">
+        <NavLink activeClassName={styles.active} className={styles.link} to="/sales">
           Sales
         </NavLink>
         <NavLink activeClassName={styles.active} className={styles.link} to="/projects">
