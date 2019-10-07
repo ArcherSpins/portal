@@ -1,16 +1,20 @@
 // @flow
 
-import React, { Component } from 'react';
+import React from 'react';
+import { useQuery } from '@apollo/react-hooks';
 import { Navbar } from 'ui-kit';
+import { GET_SELF_INFO } from 'graphql/auth';
 
-type Props = {};
-
-class Header extends Component<Props> {
-  render() {
-    return (
-      <Navbar />
-    );
+function Header() {
+  // TODO: fix employee typing
+  const { data } = useQuery<{selfInfo: { name: string } }, void>(GET_SELF_INFO);
+  let username = '';
+  if (data) {
+    username = data.selfInfo.name;
   }
+  return (
+    <Navbar username={username} />
+  );
 }
 
 export default Header;

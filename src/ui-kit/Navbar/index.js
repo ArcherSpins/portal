@@ -6,8 +6,11 @@ import { Container } from 'ui-kit';
 import logo from './logo.png';
 import styles from './Navbar.module.scss';
 
+type Props = {
+  username: string
+}
 
-const Navbar = () => (
+const Navbar = ({ username }: Props) => (
   <nav className={styles.nav}>
     <Container
       className={styles.container}
@@ -28,7 +31,7 @@ const Navbar = () => (
       </div>
       <div>
         <NavLink activeClassName={styles.active} className={styles.link} to="/profile">
-          Name UserName
+          {username}
         </NavLink>
         <NavLink
           activeClassName={styles.active}

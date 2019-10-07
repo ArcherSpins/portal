@@ -28,8 +28,11 @@ export const SET_NEW_PASSWORD = gql`
 `;
 
 export const GET_SELF_INFO = gql`
-  query selfInfo {
-    id
+  query {
+    selfInfo {
+      id
+      name
+    }
   }
 `;
 
