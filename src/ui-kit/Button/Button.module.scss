@@ -23,6 +23,12 @@
   position: relative;
   outline: none;
   font-family: 'Proxima Nova';
+  div[type="spinner"] {
+    position: absolute;
+    left: 50%;
+    margin-left: -0.5rem;
+    top: 0.5rem;
+  }
   &:disabled {
     cursor: not-allowed;
   }

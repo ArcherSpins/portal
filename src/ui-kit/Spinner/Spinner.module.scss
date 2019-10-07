@@ -1,5 +1,5 @@
-@import "../../variables.scss";
-@import "../../mixins.scss";
+@import "../variables.scss";
+@import "../mixins.scss";
 
 $background: transparent;
 $foreground: black;
@@ -12,18 +12,13 @@ $foreground: black;
   width:1rem;
   height:1rem;
   border-radius:50%;
-  position: relative;
   animation:load 1.4s infinite linear;
+  position: relative;
   transform: translateZ(0);
   line-height: 1;
-  position: absolute;
-  left: 50%;
-  margin-left: -0.5rem;
-  top: 0.5rem;
   &:before {
     width:50%;
     height:50%;
-    // background: $foreground;
     border-radius: 100% 0 0 0;
     position:absolute;
     top:0;
@@ -32,7 +27,6 @@ $foreground: black;
   }
 
   &:after {
-    // background:$background;
     @include default-transition(background);
     width: 65%;
     height: 65%;
@@ -57,4 +51,24 @@ $foreground: black;
 .visible {
   visibility: visible;
   display: inline-block;
+}
+
+.dark {
+  background: linear-gradient(to right,  rgba($text-color,1) 10%,rgba($text-color,0) 65%);
+  &:before { 
+    background: $text-color;
+  }
+  &:after {
+    background: white;
+  }
+}
+
+.light {
+  background: linear-gradient(to right,  rgba(#fff,1) 10%,rgba(#fff,0) 65%);
+  &:before { 
+    background: #fff;
+  }
+  &:after {
+    background: #333;
+  }
 }

@@ -5,6 +5,7 @@ export { default as Navbar } from './Navbar';
 export { default as Separator } from './Separator';
 export { default as Toast } from './Toast';
 export { default as Container } from './Container';
+export { default as Spinner } from './Spinner';
 export {
   H1, H2, H3, H4,
 } from './Headings';

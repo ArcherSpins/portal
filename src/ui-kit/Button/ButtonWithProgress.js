@@ -3,7 +3,7 @@
 import React, { type Node } from 'react';
 import noop from 'lodash.noop';
 import classNames from 'classnames';
-import Spinner from './Spinner';
+import Spinner from '../Spinner';
 import Button, { DEFAULT, type ButtonProps } from './Button';
 import styles from './Button.module.scss';
 
@@ -29,7 +29,7 @@ const ButtonWithProgress = (props: Props): Node => {
       disabled={disabled}
       className={classNames(className)}
     >
-      <Spinner data-type="spinner" use={use} className={loading ? styles.contentVisible : styles.contentHidden} />
+      <Spinner data-type="spinner" className={loading ? styles.contentVisible : styles.contentHidden} />
       <span
         className={loading ? styles.contentHidden : styles.contentVisible}
         data-type="content"
