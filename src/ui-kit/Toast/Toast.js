@@ -82,7 +82,6 @@ class Toast extends Component<Props, State> {
 
   render() {
     const { notification } = this.state;
-    console.log(notification);
     return (
       <TransitionGroup>
         {this.renderToast()}

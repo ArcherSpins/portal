@@ -80,7 +80,7 @@ class Login extends Component<Props> {
               isValid,
             }) => (
               <form onSubmit={handleSubmit} className={styles.form}>
-                <H1>Reset Password</H1>
+                <H1>Log In</H1>
                 <Separator />
                 <Input
                   placeholder="emusk@sfxdx.ru"
