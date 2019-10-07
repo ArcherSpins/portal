@@ -1,18 +1,22 @@
 /* eslint-disable */
 // @flow
 import React, { Component } from 'react';
-// import { Animated } from 'ui-kit';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import classNames from 'classnames';
 import noop from 'lodash.noop';
 
 import styles from './Toast.module.scss';
 import './index.scss';
 
-type Props = {
-};
+export type Notification = {
+  message: string,
+  type: 'danger' | 'success' | 'info'
+}
+
+type Props = {};
 
 type State = {
-  notification: ?string,
+  notification: ?Notification,
   id: number
 }
 
@@ -32,13 +36,13 @@ class Toast extends Component<Props, State> {
   TIMEOUT: number = 5;
   timeout: ?TimeoutID = null;
 
-  push = (message: string) => {
+  push = (newNotification: Notification) => {
     const { notification } = this.state;
     if (notification) {
       this.close();
     }
 
-    this.setState({ notification: message }, this.setTimer);
+    this.setState({ notification: newNotification }, this.setTimer);
   }
 
   clearTimer = () => {
@@ -73,8 +77,8 @@ class Toast extends Component<Props, State> {
           exit: 150,
         }}
       >
-        <div className={styles.toast}>
-          {notification}
+        <div className={classNames(styles[notification.type])}>
+          {notification.message}
         </div>
       </CSSTransition>
     );

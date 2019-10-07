@@ -2,13 +2,38 @@
 import React from 'react';
 // import { action } from '@storybook/addon-actions';
 import { Toast } from 'ui-kit';
+import { storiesOf } from '@storybook/react';
 
-export default {
-  title: 'Toast',
-};
-
-export const defaultStory = () => {
-  return (
-    <button onClick={() => Toast.push('Show notification')}>Show toast</button>
-  )
-};
+storiesOf('Toast', module)
+  .addWithChapters('Toast', {
+    chapters: [
+      {
+        sections: [
+          {
+            title: 'Toast type=danger',
+            sectionFn: () => {
+              return (
+                <button onClick={() => Toast.push({ message: "Some error text", type: "danger" })}>Click me!</button>
+              );
+            },
+          },
+          {
+            title: 'Toast type=success',
+            sectionFn: () => {
+              return (
+                <button onClick={() => Toast.push({ message: "Some error text", type: "success" })}>Click me!</button>
+              );
+            },
+          },
+          {
+            title: 'Toast type=info',
+            sectionFn: () => {
+              return (
+                <button onClick={() => Toast.push({ message: "Some error text", type: "info" })}>Click me!</button>
+              );
+            },
+          },
+        ],
+      },
+    ],
+  });
