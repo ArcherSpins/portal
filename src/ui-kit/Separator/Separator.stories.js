@@ -7,4 +7,4 @@ export default {
   title: 'Separator',
 };
 
-export const defaultStory = () => <Separator />;
+export const separator = () => <Separator />;

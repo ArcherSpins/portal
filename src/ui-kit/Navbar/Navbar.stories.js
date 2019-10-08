@@ -8,4 +8,4 @@ export default {
   title: 'Navbar',
 };
 
-export const defaultStory = () => <Router><Navbar /></Router>;
+export const navbar = () => <Router><Navbar /></Router>;
