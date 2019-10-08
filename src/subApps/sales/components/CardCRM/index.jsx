@@ -4,6 +4,7 @@
 import React from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import { Link } from 'react-router-dom';
+import getRoute from '../../helpers/getRoute';
 import './style.scss';
 
 export type CardCRMProps = {
@@ -36,7 +37,7 @@ const CardCRM = React.memo<CardCRMProps>((props: CardCRMProps) => {
       {
         (provider, shot) => (
           <Link
-            to={`/crm/details/${linkTitle}`}
+            to={getRoute(`/details/${linkTitle}`)}
             className="container-crm-card"
           >
             <div

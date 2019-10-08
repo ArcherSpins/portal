@@ -2,10 +2,10 @@ import React from 'react';
 import {
   Route,
   Switch,
-  // Redirect,
+  Redirect,
 } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
-import createBaseRoute from 'utils/createRouteNames';
+import getRoute from '../../helpers/getRoute';
 // TODO: FIX
 // eslint-disable-next-line import/no-cycle
 import {
@@ -18,7 +18,6 @@ import { theme, GlobalStyle, Content } from './styled';
 import '../../assets/fonts/style.css';
 import './style.scss';
 
-const createRoute = createBaseRoute('sales');
 const App = () => (
   <>
     <GlobalStyle />
@@ -26,22 +25,23 @@ const App = () => (
       <div className="page">
         <Content>
           <Switch>
-            <Route exact path={createRoute('/')} component={CRMContainer} />
+            <Route exact path={getRoute('/')} component={CRMContainer} />
             <Route
               exact
-              path={createRoute('/details/:id')}
+              path={getRoute('/details/:id')}
               component={CRMDetailsContainer}
             />
             <Route
               exact
-              path={createRoute('/details')}
+              path={getRoute('/details')}
               component={CRMDetailsContainer}
             />
             <Route
               exact
-              path={createRoute('/search/:search?')}
+              path={getRoute('/search/:search?')}
               component={SearchDealContainer}
             />
+            <Redirect to={getRoute('/')} />
           </Switch>
         </Content>
       </div>

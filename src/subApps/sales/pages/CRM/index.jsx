@@ -2,6 +2,7 @@
 import React from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { Link } from 'react-router-dom';
+import getRoute from '../../helpers/getRoute';
 import { Header, Content } from './styled';
 // TODO: Fix this
 // eslint-disable-next-line import/no-cycle
@@ -66,7 +67,7 @@ const CRMPage = ({
           </button>
         </div>
         <div>
-          <Link to="/crm/details" className="add-deal-button">
+          <Link to={getRoute('/details')} className="add-deal-button">
             Add deal
           </Link>
         </div>

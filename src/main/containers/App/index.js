@@ -18,7 +18,8 @@ class App extends Component<Props> {
           <ProtectedRoute path="/" component={MainApp} />
         </Switch>
         <Switch>
-          <ProtectedRoute exact path="/sales" component={SalesApp} />
+          <ProtectedRoute path="/sales" component={SalesApp} />
+          <ProtectedRoute path="/admin" component={() => <div>Here is admin</div>} />
           <ProtectedRoute exact path="/">
             <Redirect to="/sales" />
           </ProtectedRoute>
