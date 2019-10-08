@@ -1,0 +1,20 @@
+---
+- name: "login docker registry"
+  docker_login:
+    registry: "{{ docker_registry }}"
+    username: "{{ docker_login }}"
+    password: "{{ docker_pass }}"
+    reauthorize: yes
+
+- name: "internal-portal-frontend"
+  docker_container:
+    name: "internal-portal-front"
+    image: "{{ docker_image }}"
+    pull: yes
+    restart_policy: always
+    network_mode: host
+    detach: yes
+    restart: yes
+    volumes:
+    - /srv/nginx/conf-internal-portal:/etc/nginx/conf.d
+
