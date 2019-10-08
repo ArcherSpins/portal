@@ -8,6 +8,7 @@ storiesOf('Toast', module)
   .addWithChapters('Toast', {
     chapters: [
       {
+        info: "Комопонент Toast используется в виде статического класса. Все обязанности по части рендера он берет на себя.",
         sections: [
           {
             title: 'Toast type=danger',
