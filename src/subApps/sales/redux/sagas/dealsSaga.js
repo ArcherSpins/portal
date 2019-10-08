@@ -20,6 +20,7 @@ import type {
   UpdateDealReorderType,
   PropsFilterDeals,
 } from '../actions/types';
+import getRoute from '../../helpers/getRoute';
 
 export function* getDealsSaga(action: {
   type: 'GET_DEALS_REQUEST',
@@ -106,7 +107,7 @@ export function* updateDealSaga(action: {
       action.payload.returnUpdated(response);
     }
     yield put({ type: 'UPDATE_DEAL_SUCCESS', payload: response });
-    history.push(response.title.replace(/\s/g, '_').replace('/', '&'));
+    history.push(getRoute(response.title.replace(/\s/g, '_').replace('/', '&')));
   } catch (error) {
     yield put({ type: 'OPEN_ERROR_ALERT', payload: error.message });
     yield put({ type: 'UPDATE_DEAL_FAIL' });
@@ -128,7 +129,7 @@ export function* createDealSaga(action: {
       action.payload.returnCreated(response);
     }
     yield put({ type: 'CREATE_DEAL_SUCCESS', payload: response });
-    history.push('/crm');
+    history.push(getRoute('/'));
   } catch (error) {
     yield put({ type: 'OPEN_ERROR_ALERT', payload: error.message });
     yield put({ type: 'CREATE_DEAL_FAIL' });
@@ -143,7 +144,7 @@ export function* deleteDealSaga(action: {
 }): Saga<void> {
   try {
     yield call(fetchDeleteDeals, action.payload);
-    history.push('/crm');
+    history.push(getRoute('/'));
   } catch (error) {
     yield put({ type: 'OPEN_ERROR_ALERT', payload: error.message });
     yield put({ type: 'DELETE_DEAL_FAIL' });

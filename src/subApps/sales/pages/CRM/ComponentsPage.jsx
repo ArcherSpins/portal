@@ -2,6 +2,7 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { Title, LeftTitleBlock } from './styled';
+import getRoute from '../../helpers/getRoute';
 import SearchInput from '../../components/shared/Input/SearchInput';
 
 type LeftBlockProps = {
@@ -33,7 +34,7 @@ const LeftBlock = ({
     </form>
     {
       redirect ? (
-        <Redirect to={`crm/search/${searchValue}`} />
+        <Redirect to={getRoute(`/search/${searchValue}`)} />
       )
         : null
     }

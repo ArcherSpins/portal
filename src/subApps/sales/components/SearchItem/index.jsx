@@ -5,6 +5,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 // TODO: Refactor this to date-fns
 import dayjs from 'dayjs';
+import getRoute from '../../helpers/getRoute';
 import './style.scss';
 
 export type SearchItemProps = {
@@ -32,7 +33,7 @@ export const SearchItem = ({
   path,
 }: SearchItemProps) => (
   <li className="search-item">
-    <Link to={path}>
+    <Link to={getRoute(path)}>
       <div className={`search-item-block ${className}`}>
         <h4 className="search-item-title">
           {title}
