@@ -82,7 +82,7 @@ const SearchDealPage = ({
               ? dataDeals.map((item, i) => (
                 <SearchItem
                   key={item.id || i}
-                  path={`/crm/details/${item.title.replace(/\s/g, '_')}`}
+                  path={`/details/${item.title.replace(/\s/g, '_')}`}
                   {...item}
                 />
               ))

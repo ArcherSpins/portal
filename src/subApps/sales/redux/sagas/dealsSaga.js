@@ -107,7 +107,7 @@ export function* updateDealSaga(action: {
       action.payload.returnUpdated(response);
     }
     yield put({ type: 'UPDATE_DEAL_SUCCESS', payload: response });
-    history.push(getRoute(response.title.replace(/\s/g, '_').replace('/', '&')));
+    history.push(getRoute(`/details/${response.title.replace(/\s/g, '_').replace('/', '&')}`));
   } catch (error) {
     yield put({ type: 'OPEN_ERROR_ALERT', payload: error.message });
     yield put({ type: 'UPDATE_DEAL_FAIL' });
