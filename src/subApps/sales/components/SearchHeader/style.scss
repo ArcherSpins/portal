@@ -1,0 +1,30 @@
+.header-search {
+    padding: 20px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .filters {
+        background: #818A95;
+        border: 1px solid #818A95;
+        box-sizing: border-box;
+        border-radius: 4px;
+        color: white;
+        padding: 6px 10px;
+        display: flex;
+        align-items: center;
+
+        &.none {
+            background-color: transparent;
+            color: #333;
+        }
+
+        img {
+            margin-left: 8px;
+        }
+    }
+
+    .search-input {
+        min-width: 400px;
+    }
+}

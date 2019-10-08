@@ -1,0 +1,90 @@
+.details-content {
+    width: calc(100% - 322px);
+    position: relative;
+
+    .header-content {
+        height: 43px;
+        align-items: center;
+        display: flex;
+        border-top: 1px solid #E5E5E5;
+        padding-left: 20px;
+    }
+
+    .content-section {
+        max-height: 89%;
+        height: 89%;
+        overflow-y: auto;
+        padding-bottom: 40px;
+        box-sizing: border-box;
+        min-height: calc(100% - 170px);
+
+        &::-webkit-scrollbar-track {
+            background-color: rgba(152, 166, 173, .08);
+            border-radius: 2px;
+        }
+    
+        &::-webkit-scrollbar {
+            width: 5px;
+        }
+    
+        &::-webkit-scrollbar-thumb {
+            background-color: rgba(51, 51, 51, .12);
+            border-radius: 2px;
+        }
+    }
+
+    .chat-form-container {
+        background: #F5F7FB;
+        box-shadow: inset 0px 1px 0px #E7EAEF;
+        padding: 10px;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 85px;
+        max-height: 170px;
+
+        &.focus {
+            height: 105px !important;
+        }
+
+        textarea {
+            // transition: 1s;
+            overflow-y: auto;
+            padding-top: 7px;
+  
+            &::-webkit-scrollbar-track {
+                background-color: rgba(152, 166, 173, .08);
+                border-radius: 2px;
+            }
+        
+            &::-webkit-scrollbar {
+                width: 5px;
+            }
+        
+            &::-webkit-scrollbar-thumb {
+                background-color: rgba(51, 51, 51, .12);
+                border-radius: 2px;
+            }
+
+            // &:focus {
+            //     height: 80px;
+            //     max-height: 80px;
+            // }
+
+            &:-moz-placeholder { color: #C6CCD5; }
+        }
+    }
+}
+
+.not-found-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding-bottom: 70px;
+
+    p {
+        color: rgba(51, 51, 51, 0.54);
+    }
+}

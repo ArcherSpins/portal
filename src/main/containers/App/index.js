@@ -5,7 +5,7 @@ import ProtectedRoute from 'main/containers/ProtectedRoute';
 
 import Auth from 'main/containers/Auth';
 // apps
-import AdminApp from 'subApps/admin/containers/AdminApp';
+import SalesApp from 'subApps/sales';
 import MainApp from 'main/containers/MainApp';
 import './App.module.scss';
 
@@ -18,7 +18,7 @@ class App extends Component<Props> {
           <ProtectedRoute path="/" component={MainApp} />
         </Switch>
         <Switch>
-          <ProtectedRoute exact path="/admin" component={AdminApp} />
+          <ProtectedRoute exact path="/sales" component={SalesApp} />
         </Switch>
       </div>
     );

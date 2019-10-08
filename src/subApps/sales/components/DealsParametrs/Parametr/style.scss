@@ -1,0 +1,34 @@
+.block-parametr {
+    background: #FFFFFF;
+    border: 1px solid #DDDFE2;
+    box-sizing: border-box;
+    padding: 12px 8px;
+
+    .delete-button {
+        background-color: transparent;
+        border: none;
+        outline: none;
+
+        &:hover {
+            cursor: pointer;
+
+            svg {
+                path {
+                    fill: #818A95;
+                }
+            }
+        }
+    }
+}
+
+.buttons-parametr {
+    button {
+        background: #E9EEF2;
+        border-radius: 4px;
+
+        &.active {
+            background-color: #61B16F;
+            color: white;
+        }
+    }
+}

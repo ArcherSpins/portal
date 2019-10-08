@@ -1,0 +1,121 @@
+.message {
+    padding: 20px 20px 10px 20px;
+
+    &:hover {
+        background-color: #F5F7FB;
+    }
+
+    &:hover .buttons {
+        display: flex !important;
+    }
+
+    .container {
+        width: 75%;
+        position: relative;
+
+        .buttons {
+            position: absolute;
+            top: -10px;
+            right: 0;
+            display: none;
+
+            button {
+                background: #FFFFFF;
+                border: 1px solid #E7EAEF;
+                box-sizing: border-box;
+                border-radius: 4px;
+                width: 25px;
+                height: 25px;
+                cursor: pointer;
+
+                &:nth-child(2) {
+                    margin-left: 3px;
+                }
+
+                .icon path {
+                    transition: 0.8s;
+                }
+
+                &:hover .icon path {
+                    fill: #959DAA;
+                }
+
+                svg {
+                    width: 12px;
+                    height: 16px;
+                }
+
+                &.button-toggle-edit {
+                    width: auto;
+                    color: #bdbfc3;
+
+                    &:hover {
+                        color: #959DAA;
+                    }
+                }
+            }
+        }
+    }
+
+    header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+        padding-left: 0;
+
+        h4 {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        span {
+            color: gray;
+        }
+    }
+
+    .content {
+        margin-bottom: 10px;
+        color: #333333;
+        padding-right: 50px;
+        max-height: 120px;
+        line-height: 17px;
+    }
+
+    .files-block {
+        background: #FFFFFF;
+        border: 1px solid #E7EAEF;
+        box-sizing: border-box;
+        border-radius: 4px;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+
+        img {
+            margin-right: 10px;
+        }
+
+        a {
+            color: #61B16F;
+            display: block;
+            padding: 1px 0;
+            border-bottom:1px solid #61b16f61;
+            
+            &:nth-child(n+2) {
+                margin-left: 10px;
+            }
+        }
+    }
+}
+
+.textareaContent {
+    min-height: 40px;
+    border-radius: 6px;
+    border: 1px solid rgb(97, 177, 111);
+    padding: 6px;
+    max-height: 140px;
+    max-width: 100%;
+    min-width: 100%;
+    outline: none;
+    color: #333333;
+}
+

@@ -1,0 +1,22 @@
+.header-crm-list {
+    border-top: 1px solid #f1f1f1;
+
+    ul {
+        display: flex;
+        width: 100%;
+
+        li {
+            background-color: #F5F7FB;
+            width: 25%;
+
+            &:nth-child(n+2) {
+                border-left: 1px solid #DFE5EF;
+            } 
+
+            div {
+                padding: 10px;
+                text-align: center;
+            }
+        }
+    }
+}

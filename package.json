@@ -4,19 +4,34 @@
   "private": true,
   "dependencies": {
     "@apollo/react-hooks": "^3.1.2",
-    "apollo-boost": "^0.4.4",
+    "apollo-cache-inmemory": "^1.6.3",
+    "apollo-client": "^2.6.4",
+    "apollo-link": "^1.2.13",
+    "apollo-link-context": "^1.0.19",
+    "apollo-link-error": "^1.1.12",
+    "apollo-link-http": "^1.5.16",
+    "autosize": "^4.0.2",
     "classnames": "^2.2.6",
+    "countries-and-timezones": "^1.0.2",
+    "dayjs": "^1.8.16",
     "formik": "^1.5.8",
     "graphql": "^14.5.8",
+    "graphql-tag": "^2.10.1",
     "history": "^4.10.1",
     "lodash.noop": "^3.0.1",
+    "moment": "^2.24.0",
     "react": "^16.9.0",
+    "react-beautiful-dnd": "^11.0.5",
+    "react-datepicker": "^2.9.6",
     "react-dom": "^16.9.0",
+    "react-loading": "^2.0.3",
     "react-redux": "^7.1.1",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.1.1",
+    "react-select": "^3.0.8",
     "redux": "^4.0.4",
-    "redux-saga": "^1.1.1"
+    "redux-saga": "^1.1.1",
+    "styled-components": "^4.4.0"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^5.2.1",
@@ -41,6 +56,7 @@
     "prettier": "^1.18.2",
     "react-storybook-addon-chapters": "^3.1.6",
     "react-test-renderer": "^16.9.0",
+    "redux-devtools-extension": "^2.13.8",
     "source-map-explorer": "^2.0.1"
   },
   "scripts": {
@@ -51,7 +67,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "flow": "flow",
-    "lint": "eslint src/",
+    "lint": "eslint src/ --ext .js,.jsx",
     "prettify": "prettier --write",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public"

@@ -1,0 +1,66 @@
+.component-deals-parametrs {
+    width: 80%;
+    margin: 0 auto;
+    padding-top: 30px;
+}
+
+.block-form {
+    margin-bottom: 10px;
+    margin-top: 10px;
+
+    .title {
+        margin-bottom: 5px;
+    }
+}
+
+.form-parametrs-creator {
+    background: #F5F7FB;
+    border: 1px solid #E7EAEF;
+    box-sizing: border-box;
+    border-radius: 4px;
+    padding: 15px 10px;
+    display: grid;
+    grid-template-columns: 4fr 1fr 1fr;
+
+    input, select, button {
+        width: 100%;
+        margin: 0;
+    }
+
+    .select-details {
+        margin: 0;
+        width: 100%;
+    }
+
+    .button-block {
+        align-self: flex-end;
+
+        div:nth-child(1) {
+            display: block !important;
+        }
+    }
+
+    .field-block {
+        label {
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        &:nth-child(n+2) {
+            margin-left: 10px;
+        }
+
+        &:nth-last-child(1) {
+            margin-left: 15px;
+        }
+    }
+}
+
+.input-form {
+    height: 32px;
+    background: #FFFFFF;
+    border: 1px solid #C6CCD5;
+    box-sizing: border-box;
+    border-radius: 4px;
+    padding: 5px;
+}

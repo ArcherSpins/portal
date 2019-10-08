@@ -1,0 +1,64 @@
+a {
+    text-decoration: none;
+    color: #333;
+}
+
+.card-crm {
+    padding: 20px;
+    background-color: white;
+    border-radius: 4px;
+    margin: 5px;
+    transition: transform .6s;
+    transform: rotate(0deg);
+
+    cursor: move !important;
+
+    &.error-drag {
+        background-color: red;
+    }
+
+    h4 {
+        font-size: 16px;
+        font-weight: bold;
+
+        cursor: pointer !important;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    
+    }
+
+    div {
+        cursor: pointer !important;
+    }
+
+    .field-span {
+        color: gray;
+    }
+
+    &.rotate-animate {
+        transform: rotate(8.94deg);
+        box-shadow: 0 0 15px 0 rgba(0,0,0, 0.3);
+    }
+
+}
+
+.mt-1 {
+    margin-top: 5px;
+}
+
+.mb-1 {
+    margin-bottom: 5px;
+}
+
+.mr-1 {
+    margin-right: 5px;
+}
+
+.rotate {
+    background: tomato;
+}
+
+.d-flex {
+    display: flex;
+}

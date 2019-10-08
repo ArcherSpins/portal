@@ -52,6 +52,6 @@ describe('The Checkbox component', () => {
     const input = wrapper.find('label input').first();
     expect(input.prop('onChange')).toEqual(onChange);
     input.simulate('change', { target: { checked: true } });
-    expect(onChange).toBeCalled();
+    expect(onChange).toHaveBeenCalled();
   });
 });

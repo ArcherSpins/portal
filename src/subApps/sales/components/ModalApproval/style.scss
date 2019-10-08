@@ -1,0 +1,12 @@
+.modal-approve {
+  animation-name: top;
+  animation-duration: 0.3s;
+}
+
+@keyframes top {
+  from {
+    margin-top: -100%;
+  } to {
+    margin-top: 0;
+  }
+}

@@ -1,0 +1,102 @@
+.header-details-crm {
+    padding: 20px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+
+    h1 {
+        color: #303030;
+        font-size: 2rem;
+        display: inline-block;
+        margin-right: 20px;
+        font-weight: bold;
+    }
+
+    .left-block {
+        display: flex;
+        align-items: center;
+        max-width: 85%;
+
+        button {
+            padding: 10px;
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            color: gray;
+            cursor: pointer;
+            text-decoration: none;
+            background-color: white;
+            border: none;
+            margin-right: 10px;
+            position: absolute;
+            height: 100%;
+            left: 0;
+            padding-left: 18px;
+            outline: none;
+
+            img {
+                width: 10px;
+                height: 10px;
+                margin-right: 5px;
+            }
+        }
+
+        .block-title {
+            margin-left: 35px;
+            max-width: 100%;
+
+            input {
+                max-width: 100%;
+            }
+        }
+    }
+
+    .right-block {
+        color: gray;
+        display: flex;
+        align-items: center;
+
+        .select-details {
+            width: 145px;
+            margin-left: 10px;
+            padding: 5px;
+            background-color: white;
+            border: 1px solid #CDD2DA;
+            box-sizing: border-box;
+            border-radius: 4px;
+            height: 36px;
+        }
+    }
+}
+        
+.select-details {
+    border-radius: 4px;
+
+    span {
+        display: none;
+    }
+}
+
+select {
+    font-size: 16px;
+    color: hsl(0,0%,20%);
+    font-family: Proxima Nova;
+}
+
+.delete-deal-button {
+    color: #79818D;
+    background-color: transparent;
+    border: none;
+    padding: 3px 2px;
+    border-bottom: 1px solid #79818D;
+    font-size: 16px;
+    margin-right: 10px;
+    outline: none;
+    
+    &:hover {
+        cursor: pointer;
+        color: tomato;
+        border-color: tomato;
+    }
+}

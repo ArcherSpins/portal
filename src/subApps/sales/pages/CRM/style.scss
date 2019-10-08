@@ -1,0 +1,93 @@
+html, body, #root {
+    height: 100%;
+} 
+
+.page {
+    height: 100%;
+}
+
+.search-button {
+    background-color: #61B16F;
+    color: white;
+    border: 1px solid #61A06C;
+    padding: 4px 9px;
+    font-size: 1rem;
+    font-weight: normal;
+    border-radius: 0.25rem;
+    display: block;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.crm-page {
+    min-height: 600px;
+    padding-top: 36px;
+
+    
+}
+
+.add-deal-button {
+    line-height: 1rem;
+    padding: 0.375rem 1rem;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    position: relative;
+    min-width: 4rem;
+    -webkit-transition: all .2s ease-in;
+    transition: all .2s ease-in;
+    background: transparent;
+    color: #333;
+    outline: none;
+    border: none;
+    font-family: Proxima Nova;
+    background: #61B16F;
+    border: 1px solid #61A06C;
+    color: white;
+    padding: 10px 5px;
+    min-width: 50px;
+    display: block;
+    text-align: center;
+    width: 100px;
+    height: 36px;
+    box-sizing: border-box;
+    float: right;
+}
+
+.tab-buttons {
+    display: flex;  
+
+    button {
+        padding: 4px 9px;
+        border: none;
+        max-height: 28px;
+        background-color: #E9EEF2;
+        border: 1px solid #e0dede;
+        color: #333333;
+        cursor: pointer;
+    }
+
+    .left-button {
+        border-top-left-radius: 0.25rem;
+        border-bottom-left-radius: 0.25rem;
+    }
+
+    .right-button {
+        border-top-right-radius: 0.25rem;
+        border-bottom-right-radius: 0.25rem;
+    }
+
+    .active {
+        color: white;
+        background-color: #61B16F;
+        border: 1px solid #61A06C;
+    }
+}
+
+.fz-16 {
+    font-size: 16px !important;
+    * {
+        font-size: 16px;
+    }
+}

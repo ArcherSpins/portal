@@ -1,5 +1,6 @@
 // @flow
-import { gql } from 'apollo-boost';
+// $FlowFixMe
+import gql from 'graphql-tag';
 
 export const SIGN_IN = gql`
   mutation signIn($login: String!, $password: String!) {
