@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component, Suspense, lazy } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 import ProtectedRoute from 'main/containers/ProtectedRoute';
 
 import Auth from 'main/containers/Auth';
-// apps
-import SalesApp from 'subApps/sales';
 import MainApp from 'main/containers/MainApp';
 import './App.module.scss';
+// apps
+const SalesApp = lazy(() => import('subApps/sales'));
 
 class App extends Component<Props> {
   render() {
@@ -17,13 +17,16 @@ class App extends Component<Props> {
           <Route path="/auth" component={Auth} />
           <ProtectedRoute path="/" component={MainApp} />
         </Switch>
-        <Switch>
-          <ProtectedRoute path="/sales" component={SalesApp} />
-          <ProtectedRoute path="/admin" component={() => <div>Here is admin</div>} />
-          <ProtectedRoute exact path="/">
-            <Redirect to="/sales" />
-          </ProtectedRoute>
-        </Switch>
+
+        <Suspense fallback={<div>Loading...</div>}>
+          <Switch>
+            <ProtectedRoute path="/sales" component={SalesApp} />
+            <ProtectedRoute path="/admin" component={() => <div>Here is admin</div>} />
+            <ProtectedRoute exact path="/">
+              <Redirect to="/sales" />
+            </ProtectedRoute>
+          </Switch>
+        </Suspense>
       </div>
     );
   }
