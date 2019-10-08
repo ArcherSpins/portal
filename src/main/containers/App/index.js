@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 import ProtectedRoute from 'main/containers/ProtectedRoute';
 
@@ -19,6 +19,9 @@ class App extends Component<Props> {
         </Switch>
         <Switch>
           <ProtectedRoute exact path="/sales" component={SalesApp} />
+          <ProtectedRoute exact path="/">
+            <Redirect to="/sales" />
+          </ProtectedRoute>
         </Switch>
       </div>
     );
