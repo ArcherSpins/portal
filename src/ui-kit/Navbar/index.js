@@ -2,16 +2,18 @@
 
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import classNames from 'classnames';
 import { Container } from 'ui-kit';
 import logo from './logo.png';
 import styles from './Navbar.module.scss';
 
 type Props = {
-  username: string
+  username: string,
+  className?: string
 }
 
-const Navbar = ({ username }: Props) => (
-  <nav className={styles.nav}>
+const Navbar = ({ username, className }: Props) => (
+  <nav className={classNames(styles.nav, className)}>
     <Container
       className={styles.container}
     >
@@ -44,5 +46,9 @@ const Navbar = ({ username }: Props) => (
     </Container>
   </nav>
 );
+
+Navbar.defaultProps = {
+  className: '',
+};
 
 export default Navbar;

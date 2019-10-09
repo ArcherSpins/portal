@@ -4,6 +4,7 @@ import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { Navbar } from 'ui-kit';
 import { GET_SELF_INFO } from 'graphql/auth';
+import styles from './Header.module.scss';
 
 function Header() {
   // TODO: fix employee typing
@@ -13,7 +14,7 @@ function Header() {
     username = data.selfInfo.name;
   }
   return (
-    <Navbar username={username} />
+    <Navbar className={styles.navigation} username={username} />
   );
 }
 

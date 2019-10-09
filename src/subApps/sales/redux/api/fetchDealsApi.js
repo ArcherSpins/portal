@@ -21,6 +21,7 @@ export async function fetchDeleteDeals(data: { id: string }): Promise<FetchResul
     const response = await client.mutate({
       mutation: deleteDeal,
       variables: data,
+      fetchPolicy: 'no-cache',
     });
     return response.data.deleteDeal;
   } catch (err) {
@@ -37,6 +38,7 @@ export async function fetchDeals(props: PropsFilterDeals): Promise<FetchResult<R
         limit: '30',
         offset: '0',
       },
+      fetchPolicy: 'no-cache',
     });
     return response.data.deals;
   } catch (err) {
