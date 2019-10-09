@@ -7,7 +7,7 @@
   border: 1px solid $border-color;
   box-sizing: border-box;
   border-radius: 4px;
-  padding: 2px 4px 2px 4px;
+  padding: 0.1em 0.2em 0.1em 0.1em;
 
   .chips-list {
     display: flex;
@@ -27,8 +27,8 @@
   .chip {
     background-color: $chip-green;
     border-radius: 2px;
-    padding: 2px 2px 1px 5px;
-    margin: 3px;
+    padding: 0.1em 0.3em 0.1em 0.5em;
+    margin: 0.15em;
     color: $main-color;
     font-family: Proxima Nova;
     font-size: 14px;
@@ -36,10 +36,10 @@
     .close-button {
       background-color: transparent;
       border: none;
-      margin-left: 3px;
+      margin-left: 0.1em;
       vertical-align: middle;
       cursor: pointer;
-      padding-top: 1px;
+      padding-top: 0.1em;
       outline: none;
     }
   }
