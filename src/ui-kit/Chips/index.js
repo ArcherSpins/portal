@@ -54,7 +54,7 @@ export default class Chips extends Component<Props, State> {
         <div {...this.props} className={classNames(styles['chip-container'], className)}>
           <div className={styles['chips-list']}>
             {
-              !chips && [{ id: '1', title: 'sdsd' }].map((item) => (
+              Array.isArray(chips) && chips.map((item) => (
                 <Chip key={item.id} onDeletedChips={this.onDeletedChips} {...item} />
               ))
             }
