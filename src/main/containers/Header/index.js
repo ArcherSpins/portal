@@ -8,7 +8,7 @@ import styles from './Header.module.scss';
 
 function Header() {
   // TODO: fix employee typing
-  const { data } = useQuery<{selfInfo: { name: string } }, void>(GET_SELF_INFO);
+  const { data } = useQuery<{selfInfo: { name: string } }, void>(GET_SELF_INFO, { fetchPolicy: 'network-only' });
   let username = '';
   if (data) {
     username = data.selfInfo.name;
