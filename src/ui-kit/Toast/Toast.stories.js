@@ -14,7 +14,7 @@ storiesOf('Toast', module)
             title: 'Toast type=danger',
             sectionFn: () => {
               return (
-                <button onClick={() => Toast.push({ message: "Some error text", type: "danger" })}>Click me!</button>
+                <button onClick={() => Toast.push({ message: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.", type: "danger" })}>Click me!</button>
               );
             },
           },

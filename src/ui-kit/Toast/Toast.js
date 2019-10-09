@@ -34,15 +34,23 @@ class Toast extends Component<Props, State> {
   }
 
   TIMEOUT: number = 5;
+  ANIMATION_TIMEOUT: number = 500;
   timeout: ?TimeoutID = null;
 
   push = (newNotification: Notification) => {
     const { notification } = this.state;
     if (notification) {
       this.close();
+      setTimeout(() => {
+        this.showNotification(newNotification);
+      }, this.ANIMATION_TIMEOUT);
+    } else {
+      this.showNotification(newNotification);
     }
+  }
 
-    this.setState({ notification: newNotification }, this.setTimer);
+  showNotification(notification: Notification) {
+    this.setState({ notification }, this.setTimer);
   }
 
   clearTimer = () => {
@@ -78,7 +86,10 @@ class Toast extends Component<Props, State> {
         }}
       >
         <div className={classNames(styles[notification.type])}>
-          {notification.message}
+          <span className={styles.message}>{notification.message}</span>
+          <button onClick={this.close}>
+            <i className="icon-cancel" />
+          </button>
         </div>
       </CSSTransition>
     );
