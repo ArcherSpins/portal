@@ -1,0 +1,47 @@
+@import "../variables";
+@import "../mixins";
+
+
+.chip-container {
+  background: white;
+  border: 1px solid $border-color;
+  box-sizing: border-box;
+  border-radius: 4px;
+  padding: 2px 4px 2px 4px;
+
+  .chips-list {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .chip-input {
+    border: none;
+    background-color: transparent;
+    flex-grow: 1;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .chip {
+    background-color: $chip-green;
+    border-radius: 2px;
+    padding: 2px 2px 1px 5px;
+    margin: 3px;
+    color: $main-color;
+    font-family: Proxima Nova;
+    font-size: 14px;
+
+    .close-button {
+      background-color: transparent;
+      border: none;
+      margin-left: 3px;
+      vertical-align: middle;
+      cursor: pointer;
+      padding-top: 1px;
+      outline: none;
+    }
+  }
+}
+
