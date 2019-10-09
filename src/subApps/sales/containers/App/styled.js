@@ -26,23 +26,6 @@ export const theme = {
 };
 
 export const GlobalStyle = createGlobalStyle`
-  body {
-    font-family: 'Proxima Nova';
-    font-style: normal;
-    * {
-      box-sizing: border-box;
-    }
-  }
-  html {
-    min-width: 1200px;
-    font-size: 16px
-  }
-
-  @media (max-width: 1440px) {
-    html {
-      font-size: 15px;
-    }
-  }
   /* other styles, if u want */
 `;
 
