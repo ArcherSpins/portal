@@ -7,8 +7,6 @@ import CRMDetailsContainer from './CRMDetails';
 import DetailsListContainer from './DetailsList';
 import SearchDealContainer from './SearchDeal';
 
-export * from './Header';
-
 export {
   SidebarContainer,
   App,
