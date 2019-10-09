@@ -38,7 +38,7 @@ export const SearchHeader = ({
       className={`fz-14 filters ${search ? 'none' : ''}`}
     >
       {!search ? 'Show ' : 'Hide '}
-      Filter
+      Filters
       <svg
         style={{ marginLeft: '5px' }}
         width="9"
