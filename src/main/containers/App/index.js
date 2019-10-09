@@ -8,6 +8,7 @@ import MainApp from 'main/containers/MainApp';
 import './App.module.scss';
 // apps
 const SalesApp = lazy(() => import('subApps/sales'));
+const AdminApp = lazy(() => import('subApps/admin'));
 
 class App extends Component<Props> {
   render() {
@@ -21,7 +22,7 @@ class App extends Component<Props> {
         <Suspense fallback={<div>Loading...</div>}>
           <Switch>
             <ProtectedRoute path="/sales" component={SalesApp} />
-            <ProtectedRoute path="/admin" component={() => <div>Here is admin</div>} />
+            <ProtectedRoute path="/admin" component={AdminApp} />
             <ProtectedRoute exact path="/">
               <Redirect to="/sales" />
             </ProtectedRoute>
