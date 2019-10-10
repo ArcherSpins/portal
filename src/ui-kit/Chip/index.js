@@ -1,29 +1,33 @@
 // @flow
 import React, { type Node } from 'react';
 import classNames from 'classnames';
-import styles from './Chips.module.scss';
+import classes from './Chips.module.scss';
 
 type Props = {
   id: string,
   title: string,
   onDelete: (string) => void,
-  className?: string
+  className?: string,
+  styles?: {
+    [string]: number | string
+  }
 }
 
-const Chip = (props: Props): Node => {
+const Chip = (restProps: Props): Node => {
   const {
     title,
     id,
     onDelete,
     className,
-  } = props;
+    styles,
+  } = restProps;
   return (
-    <span {...props} className={classNames(styles.chip, className)}>
+    <span style={styles} className={classNames(classes.chip, className)} {...restProps}>
       {title}
       <button
         type="button"
         onClick={() => onDelete(id)}
-        className={styles['close-button']}
+        className={classes['close-button']}
       >
         <i className="icon-cancel" />
       </button>
@@ -33,6 +37,7 @@ const Chip = (props: Props): Node => {
 
 Chip.defaultProps = {
   className: '',
+  styles: {},
 };
 
 export default Chip;
