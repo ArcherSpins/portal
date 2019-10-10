@@ -1,0 +1,78 @@
+.task-item-wrapper {
+  margin-top: 5px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+  .task-item {
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+
+    .number {
+      flex-basis: 10%;
+    }
+
+    .name-wrapper {
+      flex-basis: 40%;
+      display: flex;
+      flex-direction: column;
+
+      .name {
+        cursor: pointer;
+      }
+    }
+
+    .spent {
+      flex-basis: 20%;
+    }
+
+    .status {
+      flex-basis: 20%;
+    }
+
+    .options-wrapper {
+      flex-basis: 10%;
+      display: flex;
+      // align-items: center;
+      justify-content: flex-end;
+
+      .options {
+        margin-right: 10px;
+        background-color: #fff;
+        border-radius: 4px;
+        border: 1px solid #d7d7d7;
+        padding: 3px;
+        cursor: pointer;
+
+        &:hover {
+          background-color: #ebebeb;
+        }
+      }
+
+      .trash {
+        background-color: #fff;
+        border-radius: 4px;
+        border: 1px solid #d7d7d7;
+        padding: 3px;
+
+        padding-bottom: 1px;
+        cursor: pointer;
+        &:hover {
+          background-color: #ebebeb;
+        }
+      }
+    }
+  }
+
+  .task-item-description {
+    padding-left: 10%;
+
+    .description {
+      color: #79818d;
+      width: 50%;
+      padding-top: 10px;
+      margin-top: 10px;
+      border-top: 1px solid #d7d7d7;
+      overflow-wrap: break-word;
+    }
+  }
+}

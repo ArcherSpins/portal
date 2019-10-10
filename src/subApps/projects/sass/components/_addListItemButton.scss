@@ -1,0 +1,32 @@
+.add-list-item-button {
+  margin-left: 4px;
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: $color-white-1;
+  border: 1px solid #dadada;
+  border-radius: 4px;
+  color: $color-gray-dark-1;
+  transition: all 0.2s;
+
+  svg {
+    width: 1.3rem;
+    height: 1.3rem;
+    margin-bottom: -2px;
+  }
+
+  &:hover {
+    transform: scale(1.1);
+    color: $color-gray-dark-2;
+    cursor: pointer;
+  }
+
+  &:focus {
+    // transform: scale(1.2);
+    outline: none;
+  }
+
+  // &:active {
+  //   transform: scale(1.2);
+  //   outline: none;
+  // }
+}

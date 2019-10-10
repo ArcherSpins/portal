@@ -1,0 +1,21 @@
+.link-button {
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 14px;
+  color: #219653;
+  letter-spacing: 0.5px;
+
+  &::after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 2px;
+    background: #219653;
+    transition: width 0.2s;
+  }
+
+  &:hover::after {
+    width: 100%;
+    transition: width 0.2s;
+  }
+}

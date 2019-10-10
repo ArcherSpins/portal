@@ -1,0 +1,119 @@
+$color-white-1: #ffffff;
+$color-white-2: #eaeaea;
+
+$color-black-opacity: rgba(0, 0, 0, 0.54);
+
+$color-gray-active: #838383;
+$color-gray-inactive: #d1d6de;
+$color-gray-opacity: rgba(51, 51, 51, 0.54);
+$color-gray-dark-2: #333333;
+$color-gray-dark-1: #4b4b4b;
+
+.project-detail__milestone {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.project-detail__button {
+  margin-right: 3rem;
+  cursor: pointer;
+  color: $color-gray-dark-2;
+  text-decoration: none;
+  padding: 0.6rem 2rem 0.6rem 2rem;
+  font-size: 14px;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  transition: all 0.2s ease 0.1s;
+
+  &:hover {
+    background: #1fbf63;
+    color: white;
+    cursor: pointer;
+    transform: translateY(-1px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:active {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transform: translateY(0);
+  }
+}
+
+.project-detail__title {
+  margin-bottom: 6rem;
+  font-family: "proxima_novabold";
+  font-size: 28px;
+  line-height: 40px;
+  color: $color-gray-dark-2;
+}
+
+.pdp-engagement-model__container {
+  margin-bottom: 1.8rem;
+  width: 40rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pdp-type__container {
+  width: 40rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16rem;
+}
+
+.pdp-select {
+  width: 25rem;
+  padding: 0.7rem 1rem 0.7rem 0.8rem;
+  background: $color-white-1;
+  border: 1px solid $color-gray-inactive;
+  border-radius: 4px;
+}
+
+.pdp-label {
+  font-size: 14px;
+  color: $color-gray-dark-2;
+}
+
+.project-detail__project-name {
+  font-family: "proxima_novablack";
+  font-size: 2.8rem;
+  color: $color-gray-dark-2;
+}
+
+.project-details__header {
+  margin-bottom: 2.2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #d5d5d5;
+}
+
+.project-details__title-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.project-details__project {
+  font-size: 28px;
+  margin-right: 5px;
+}
+
+.project-details__sub-header {
+  margin-bottom: 1.8rem;
+}
+
+.project-details__spent {
+  font-size: 14px;
+  margin-right: 3rem;
+}
+
+.project-details__created {
+  font-size: 14px;
+}

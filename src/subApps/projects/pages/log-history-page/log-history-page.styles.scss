@@ -1,0 +1,74 @@
+.log-history {
+  min-width: 1200px;
+  font-size: 14px;
+  color: #333333;
+  .header {
+    display: flex;
+    justify-content: space-between;
+    // border-bottom: 1px solid #eaeaea;
+    // margin-bottom: 30px;
+    padding-bottom: 20px;
+  }
+
+  .header-left {
+    display: flex;
+    align-items: center;
+  }
+  .toggler {
+    cursor: pointer;
+    background: white;
+    border: 1px solid #d7d7d7;
+    border-radius: 4px 0px 0px 4px;
+
+    &:last-of-type {
+      border-radius: 0px 4px 4px 0px;
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    &.active {
+      background-color: #d7d7d7;
+    }
+
+    svg {
+      margin: 5px 5px 1px 5px;
+    }
+  }
+
+  .body {
+    display: flex;
+    flex-direction: column;
+    max-width: 60%;
+    .list-header {
+      color: rgba(51, 51, 51, 0.54);
+      font-weight: bold;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+      display: flex;
+      padding-bottom: 7px;
+      &-item:nth-of-type(1) {
+        flex-basis: 5%;
+      }
+      &-item:nth-of-type(2) {
+        flex-basis: 15%;
+      }
+      &-item:nth-of-type(3) {
+        flex-basis: 20%;
+      }
+      &-item:nth-of-type(4) {
+        flex-basis: 15%;
+      }
+      &-item:nth-of-type(5) {
+        flex-basis: 35%;
+      }
+      &-item:nth-of-type(6) {
+        flex-basis: 10%;
+      }
+    }
+  }
+
+  .list-body {
+    display: inline;
+  }
+}

@@ -1,0 +1,34 @@
+.user-picker-users-field-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  height: 2.5rem;
+  background: #dfdfdf;
+  margin: 3px;
+  padding: 5px;
+  border: 20%;
+
+  &__name {
+    margin-right: 6px;
+    color: #4b4b4b;
+  }
+
+  &__delete-button {
+    background: inherit;
+    border: none;
+    height: 1.2rem;
+    width: 1.2rem;
+    color: #4b4b4b;
+    transition: all 0.2s;
+
+    &:hover {
+      transform: scale(1.1);
+      color: #333333;
+      cursor: pointer;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+}

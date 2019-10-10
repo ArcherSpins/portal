@@ -1,0 +1,26 @@
+.custom-textarea-wrapper {
+  display: flex;
+  flex-direction: column;
+  .custom-textarea {
+    padding-top: 5px;
+    padding-left: 5px;
+    height: 30vh;
+    width: 100%;
+    background: #ffffff;
+    border: 1px solid #d1d6de;
+    border-radius: 4px;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:hover {
+      border: 1px solid #838383;
+    }
+
+    &:focus {
+      outline: none;
+      border: 1px solid #838383;
+    }
+  }
+}
