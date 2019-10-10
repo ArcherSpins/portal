@@ -1,0 +1,25 @@
+.error-boundry {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    padding-top: 60px;
+    justify-content: center;
+    z-index: 1000;
+    background-color: white;
+
+    img {
+        display: block;
+        width: 50%;
+        margin: 0 auto 30px auto;
+    }
+
+    h2 {
+        text-align: center;
+        font-size: 30px;
+    }
+
+
+}

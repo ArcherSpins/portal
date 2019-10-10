@@ -9,6 +9,22 @@
   left: 50%;
   transform: translateX(-50%);
   border-radius: 0.25rem;
+  min-width: 14rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  button {
+    @include default-transition(opacity);
+    opacity: 0.6;
+    outline: none;
+    cursor: pointer;
+    i {
+      font-size: 1rem;
+    }
+    &:hover {
+      opacity: 1;
+    }
+  }
   @include default-font();
 }
 
@@ -20,6 +36,12 @@
 .success {
   @extend .toast;
   background: $main-color;
+}
+
+.message {
+  display: inline-flex;
+  align-items: center;
+  width: 80%;
 }
 
 .info {

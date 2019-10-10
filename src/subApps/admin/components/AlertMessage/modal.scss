@@ -1,0 +1,12 @@
+.animated-modal-top {
+  animation-name: topModaMessage;
+  animation-duration: 0.4s;
+}
+
+@keyframes topModaMessage {
+  from {
+    top: -100%;
+  } to {
+    top: 40px;
+  }
+}

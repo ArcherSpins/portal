@@ -1,0 +1,44 @@
+.not-border-select {
+  .css-bg1rzq-control {
+    border-color: transparent;
+
+    &:hover {
+      border-color: #C6CCD5;
+    }
+
+    
+  }
+
+  .css-1szy77t-control {
+    border-color: #61B16F !important;
+  }
+}
+
+.calendar-button-block {
+  display: flex;
+
+  input {
+    width: 0;
+    height: 15px;
+    padding: 0;
+    min-width: 15px;
+  }
+
+  .data-picker-block, img {
+    position: absolute;
+  }
+
+  .data-picker-block {
+    margin-left: 8px;
+    cursor: pointer;
+
+    input {
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .react-datepicker-popper {
+      left: -43px !important;
+    }
+  }
+}

@@ -1,0 +1,13 @@
+.flex-block {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.employee-form {
+  input {
+    &:focus {
+      box-shadow: none;
+    }
+  }
+}

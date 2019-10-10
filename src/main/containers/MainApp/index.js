@@ -4,10 +4,7 @@ import Header from '../Header';
 class MainApp extends Component {
   render() {
     return (
-      <>
-        <Header />
-        <aside>Sidebar</aside>
-      </>
+      <Header />
     );
   }
 }
