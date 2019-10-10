@@ -13,16 +13,17 @@ type Props = {
   }
 }
 
-const Chip = (restProps: Props): Node => {
+const Chip = (props: Props): Node => {
   const {
     title,
     id,
     onDelete,
     className,
     style,
-  } = restProps;
+    ...restProps
+  } = props;
   return (
-    <span {...restProps} style={style} className={classNames(styles.chip, className)}>
+    <span style={style} className={classNames(styles.chip, className)} {...restProps}>
       {title}
       <button
         type="button"
