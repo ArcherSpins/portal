@@ -4,7 +4,6 @@ import { withRouter } from 'react-router-dom';
 import type { RouterHistory, Match } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
-
 import './task-item.styles.scss';
 
 import { logEditHours, logEditMinutes } from '../../helpers/sumTime';

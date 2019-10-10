@@ -1,5 +1,5 @@
 /*eslint-disable */
-export default function removeSpecial(text) {
+export default function emoveSpecial(text) {
   const splittedText = text.split("");
   const newText = [];
 

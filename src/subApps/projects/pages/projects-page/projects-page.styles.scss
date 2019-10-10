@@ -6,24 +6,24 @@ $color-gray-inactive: #d1d6de;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 2.6rem;
+  padding-top: 2.6em;
 
   // &__buttons-field {
   //   display: flex;
   //   justify-content: center;
   //   width: 60%;
-  //   margin-bottom: 1.5rem;
+  //   margin-bottom: 1.5em;
   // }
 
   // &__button {
   //   flex: 0 0 0;
   //   background: $color-white-1;
   //   border: 1px solid #dfdfdf;
-  //   font-size: 2rem;
+  //   font-size: 2em;
   //   font-weight: 700;
-  //   line-height: 4rem;
+  //   line-height: 4em;
   //   min-width: 33.33333%;
-  //   height: 6.3rem;
+  //   height: 6.3em;
   //   color: color-gray-dark-2;
   //   transition: all 0.01s;
 
@@ -40,7 +40,7 @@ $color-gray-inactive: #d1d6de;
 
   // &__create-project-button {
   //   cursor: pointer;
-  //   padding-left: 2rem;
+  //   padding-left: 2em;
   //   display: flex;
   //   align-items: center;
   //   justify-content: center;
@@ -48,14 +48,14 @@ $color-gray-inactive: #d1d6de;
   //   border: 1px solid $color-white-2;
   //   border-radius: 4px;
   //   width: 60%;
-  //   height: 3.3rem;
-  //   margin-bottom: 1rem;
+  //   height: 3.3em;
+  //   margin-bottom: 1em;
   // }
 
   // &__button-text {
   //   font-family: "proxima_novabold";
-  //   font-size: 1.4rem;
-  //   line-height: 2rem;
+  //   font-size: 1.4em;
+  //   line-height: 2em;
   // }
 
   //////////////////////////////
@@ -79,12 +79,12 @@ $color-gray-inactive: #d1d6de;
     height: 310px;
     background-color: #f0f2f4;
     // box-shadow: 0px 2px 3px #f4f4f4;
-    margin-bottom: 1rem;
+    margin-bottom: 1em;
   }
 
   &__search-container {
     position: relative;
-    margin-bottom: 1.6rem;
+    margin-bottom: 1.6em;
 
     & > svg {
       position: absolute;
@@ -95,7 +95,7 @@ $color-gray-inactive: #d1d6de;
 
   &__search-field {
     width: 100%;
-    height: 2.9rem;
+    height: 2.9em;
     border-radius: 4px;
     border: 1px solid $color-gray-inactive;
     transition: all 0.2s;
@@ -111,7 +111,7 @@ $color-gray-inactive: #d1d6de;
     }
 
     &::placeholder {
-      font-size: 1.4rem;
+      font-size: 1.4em;
       color: $color-gray-inactive;
     }
   }
@@ -120,7 +120,7 @@ $color-gray-inactive: #d1d6de;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 2.5rem;
+    margin-bottom: 2.5em;
   }
 
   &__checkbox-wrapper {
@@ -146,7 +146,7 @@ $color-gray-inactive: #d1d6de;
   &__participant-select {
     cursor: pointer;
     width: 100%;
-    height: 3.8rem;
+    height: 3.8em;
     border: 1px solid $color-gray-inactive;
     border-radius: 4px;
     transition: all 0.2s;
@@ -193,7 +193,7 @@ $color-gray-inactive: #d1d6de;
   &__select-type {
     width: 95%;
     cursor: pointer;
-    height: 3.8rem;
+    height: 3.8em;
     border: 1px solid $color-gray-inactive;
     border-radius: 4px;
     transition: all 0.2s;
@@ -215,7 +215,7 @@ $color-gray-inactive: #d1d6de;
   &__select-engagement {
     width: 100%;
     cursor: pointer;
-    height: 3.8rem;
+    height: 3.8em;
     border: 1px solid $color-gray-inactive;
     border-radius: 4px;
     transition: all 0.2s;
@@ -244,8 +244,8 @@ $color-gray-inactive: #d1d6de;
 
   &__apply-button {
     cursor: pointer;
-    width: 13.6rem;
-    height: 3.6rem;
+    width: 13.6em;
+    height: 3.6em;
     font-weight: bold;
     border-radius: 4px;
     background-color: #fff;
@@ -272,11 +272,11 @@ $color-gray-inactive: #d1d6de;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1rem;
+    margin-bottom: 1em;
   }
 
   &__count {
-    font-size: 1.4rem;
+    font-size: 1.4em;
     font-weight: bold;
   }
 }

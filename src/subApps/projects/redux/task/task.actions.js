@@ -6,7 +6,7 @@ import { clearErrors } from '../error/error.actions';
 import {
   createTask as CreateTask,
   updateTask,
-  deleteTask as removeTask,
+  deleteTask as emoveTask,
 } from '../../graphql/mutations/task.mutations';
 import { getAllTasks } from '../../graphql/queries/task.queries';
 
@@ -72,7 +72,7 @@ export const deleteTask = (taskId: string, history: RouterHistory) => (
 ) => {
   dispatch(clearErrors());
   dispatch(setTaskLoading());
-  removeTask(taskId)
+  emoveTask(taskId)
     .then((response) => {
       dispatch({
         type: 'DELETE_TASK',

@@ -3,6 +3,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 
 import type { Location, RouterHistory } from 'react-router-dom';
+import { ROOT } from '../../routes';
 
 import './back-button.styles.scss';
 
@@ -12,7 +13,7 @@ type Props = {
 };
 
 const BackButton = ({ location, history }: Props) => {
-  if (location.pathname === '/') {
+  if (location.pathname === ROOT) {
     return <div />;
   }
   return (

@@ -8,6 +8,7 @@
 import React from 'react';
 import type { RouterHistory, Match } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
+// import { ROOT } from 'subApps/projects/routes';
 import { spentTimeInHours } from '../../helpers/sumTime';
 
 import './milestone-item.styles.scss';

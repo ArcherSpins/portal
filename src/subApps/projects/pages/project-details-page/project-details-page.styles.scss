@@ -16,11 +16,11 @@ $color-gray-dark-1: #4b4b4b;
 }
 
 .project-detail__button {
-  margin-right: 3rem;
+  margin-right: 3em;
   cursor: pointer;
   color: $color-gray-dark-2;
   text-decoration: none;
-  padding: 0.6rem 2rem 0.6rem 2rem;
+  padding: 0.6em 2em 0.6em 2em;
   font-size: 14px;
   background: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -46,7 +46,7 @@ $color-gray-dark-1: #4b4b4b;
 }
 
 .project-detail__title {
-  margin-bottom: 6rem;
+  margin-bottom: 6em;
   font-family: "proxima_novabold";
   font-size: 28px;
   line-height: 40px;
@@ -54,24 +54,24 @@ $color-gray-dark-1: #4b4b4b;
 }
 
 .pdp-engagement-model__container {
-  margin-bottom: 1.8rem;
-  width: 40rem;
+  margin-bottom: 1.8em;
+  width: 40em;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 .pdp-type__container {
-  width: 40rem;
+  width: 40em;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16rem;
+  margin-bottom: 16em;
 }
 
 .pdp-select {
-  width: 25rem;
-  padding: 0.7rem 1rem 0.7rem 0.8rem;
+  width: 25em;
+  padding: 0.7em 1em 0.7em 0.8em;
   background: $color-white-1;
   border: 1px solid $color-gray-inactive;
   border-radius: 4px;
@@ -84,13 +84,13 @@ $color-gray-dark-1: #4b4b4b;
 
 .project-detail__project-name {
   font-family: "proxima_novablack";
-  font-size: 2.8rem;
+  font-size: 2.8em;
   color: $color-gray-dark-2;
 }
 
 .project-details__header {
-  margin-bottom: 2.2rem;
-  padding-bottom: 1rem;
+  margin-bottom: 2.2em;
+  padding-bottom: 1em;
   border-bottom: 1px solid #d5d5d5;
 }
 
@@ -106,12 +106,12 @@ $color-gray-dark-1: #4b4b4b;
 }
 
 .project-details__sub-header {
-  margin-bottom: 1.8rem;
+  margin-bottom: 1.8em;
 }
 
 .project-details__spent {
   font-size: 14px;
-  margin-right: 3rem;
+  margin-right: 3em;
 }
 
 .project-details__created {

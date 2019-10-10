@@ -1,9 +1,9 @@
 .project__item {
   cursor: pointer;
   width: 100%;
-  padding: 2rem;
-  margin-bottom: 1rem;
-  height: 13.6rem;
+  padding: 2em;
+  margin-bottom: 1em;
+  height: 13.6em;
   background: #ffffff;
   border: 1px solid #eaeaea;
   // box-shadow: 0px 2px 3px #f4f4f4;
@@ -20,24 +20,24 @@
   }
 
   &-header {
-    font-size: 2rem;
-    line-height: 2rem;
+    font-size: 2em;
+    line-height: 2em;
     display: inline-block;
-    margin-bottom: 1rem;
+    margin-bottom: 1em;
     color: #333333;
   }
 
   &-description {
-    font-size: 1.4rem;
-    line-height: 2rem;
+    font-size: 1.4em;
+    line-height: 2em;
     color: #333333;
-    margin-bottom: 1rem;
+    margin-bottom: 1em;
     overflow-wrap: break-word;
   }
 
   &-manager {
-    font-size: 1.4rem;
-    line-height: 2rem;
+    font-size: 1.4em;
+    line-height: 2em;
     color: #333333;
   }
 
@@ -65,12 +65,12 @@
   }
 
   &-icon {
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 1.5em;
+    height: 1.5em;
     color: #c1c1c1;
   }
 
   &-hours {
-    margin-left: 0.5rem;
+    margin-left: 0.5em;
   }
 }

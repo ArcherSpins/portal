@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
+import { CREATE_PROJECT_ROUTE } from 'subApps/projects/routes';
 import ProjectItem from '../../components/project-item/project-item.component';
 
 import type { Project } from '../../redux/project/project.flow-types';
@@ -80,7 +80,7 @@ class Projects extends Component<Props, State> {
         <div className="projects">
           <header className="projects__header">
             <h1 className="heading-primary">Projects</h1>
-            <LinkButton to="/create">Create new project</LinkButton>
+            <LinkButton to={CREATE_PROJECT_ROUTE}>Create new project</LinkButton>
           </header>
           <div className="projects__middle">
             {filtered.length >= 1 && (

@@ -27,8 +27,8 @@ $color-gray-dark-1: #4b4b4b;
     border: 1px solid $color-gray-inactive;
     border-radius: 4px;
     width: 55%;
-    padding-bottom: 0.7rem;
-    padding-top: 0.7rem;
+    padding-bottom: 0.7em;
+    padding-top: 0.7em;
     transition: all 0.1s;
 
     &:focus {
@@ -43,7 +43,7 @@ $color-gray-dark-1: #4b4b4b;
 
   .url-link {
     position: absolute;
-    font-size: 1.4rem;
+    font-size: 1.4em;
     top: 7px;
     left: 6px;
   }
@@ -54,13 +54,13 @@ $color-gray-dark-1: #4b4b4b;
     border: 1px solid $color-gray-inactive;
     border-radius: 4px;
     width: 100%;
-    padding-bottom: 0.7rem;
-    padding-top: 0.7rem;
+    padding-bottom: 0.7em;
+    padding-top: 0.7em;
     transition: all 0.1s;
 
     &::placeholder {
       color: $color-gray-opacity;
-      font-size: 1.4rem;
+      font-size: 1.4em;
     }
 
     &:focus {
@@ -76,25 +76,25 @@ $color-gray-dark-1: #4b4b4b;
   &__form-label {
     font-size: 14px;
     line-height: 20px;
-    padding-left: 2.1rem;
+    padding-left: 2.1em;
     position: relative;
   }
 
   &__radio-button {
-    height: 1.6rem;
-    width: 1.6rem;
+    height: 1rem;
+    width: 1rem;
     border: 1px solid $color-gray-inactive;
     border-radius: 50%;
     display: inline-block;
     position: absolute;
-    top: -0.2rem;
+    top: -0.2em;
     left: 0;
 
     &::after {
       content: "";
       display: block;
-      height: 1rem;
-      width: 1rem;
+      height: 0.625rem;
+      width: 0.625rem;
       border-radius: 50%;
       position: absolute;
       top: 50%;
@@ -137,7 +137,7 @@ $color-gray-dark-1: #4b4b4b;
   }
 
   &__manager-field {
-    padding: 0.7rem 1rem 0.7rem 0.8rem;
+    padding: 0.7em 1em 0.7em 0.8em;
     background: $color-white-1;
     border: 1px solid $color-gray-inactive;
     border-radius: 4px;
@@ -151,7 +151,7 @@ $color-gray-dark-1: #4b4b4b;
   }
 
   &__participants-section {
-    min-height: 3.7rem;
+    min-height: 3.7em;
     background: $color-white-1;
     border: 1px solid $color-gray-inactive;
     border-top: none;
@@ -175,7 +175,7 @@ $color-gray-dark-1: #4b4b4b;
   }
 
   &__watcher-section {
-    min-height: 3.7rem;
+    min-height: 3.7em;
     background: $color-white-1;
     border: 1px solid $color-gray-inactive;
     border-radius: 4px;

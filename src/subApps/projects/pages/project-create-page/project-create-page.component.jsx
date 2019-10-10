@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import type { RouterHistory } from 'react-router-dom';
 import { saveProject } from '../../redux/project/project.actions';
 import translate from '../../helpers/translator';
-import removeSpecial from '../../helpers/removeSpecial';
+import emoveSpecial from '../../helpers/removeSpecial';
 import translateTitle from '../../helpers/translateTitle';
 
 import {
@@ -162,7 +162,7 @@ class CreateProjectPage extends Component<Props, State> {
       event.target.name === 'participantName'
       || event.target.name === 'watcherName'
     ) {
-      this.setState({ [event.target.name]: removeSpecial(event.target.value) });
+      this.setState({ [event.target.name]: emoveSpecial(event.target.value) });
     } else {
       this.setState({ [event.target.name]: event.target.value });
     }

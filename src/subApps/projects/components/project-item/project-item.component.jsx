@@ -2,6 +2,7 @@
 // TODO: ADD FLOW TYPING
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import { ROOT } from '../../routes';
 
 import capitalize from '../../helpers/capitalize';
 
@@ -29,7 +30,7 @@ class ProjectItem extends React.Component {
       // eslint-disable-next-line
       <div
         className="project__item"
-        onClick={() => history.push(`/${url.substring(34)}`)}
+        onClick={() => history.push(`${ROOT}/${url.substring(34)}`)}
       >
         <div className="project__item-left">
           <h2 className="project__item-header">

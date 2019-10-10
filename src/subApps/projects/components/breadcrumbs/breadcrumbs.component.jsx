@@ -1,8 +1,10 @@
 /*eslint-disable */
+// TODO: FIX THIS
 import React from "react";
 import Breadcrumbs from "react-router-dynamic-breadcrumbs";
 import { connect } from "react-redux";
 import capitalize from "../../helpers/capitalize";
+import * as routes from '../../routes';
 
 import "./breadcrumbs.styles.scss";
 
@@ -44,28 +46,37 @@ const returnTaskTitle = (tasks, id) => {
   }
 };
 
-const routes = (projects, tasks, milestones) => ({
-  "/": "Projects",
-  "/create": "Create new project",
-  "/:projectId": (url, match) =>
+const mapRoutes = (projects, tasks, milestones) => ({
+  [routes.ROOT]: "Projects",
+
+  [routes.CREATE_PROJECT_ROUTE]: "Create new project",
+
+  [routes.PROJECT_DETAILS_ROUTE]: (url, match) =>
     returnProjectTitle(projects, match[":projectId"]),
-  "/:projectId/milestones": "Milestones",
-  "/:projectId/milestones/:milestoneId": (url, match) =>
+    
+  [routes.MILESTONES_ROUTE]: "Milestones",
+
+  [routes.MILESTONE_DETAILS_ROUTE]: (url, match) =>
     returnMilestoneTitle(milestones, match[":milestoneId"]),
-  "/:projectId/milestones/create": "Create new milestone",
-  "/:projectId/milestones/:id/tasks": "Tasks",
-  "/:projectId/milestones/:id/tasks/create": "Create Task",
-  "/:projectId/milestones/:id/tasks/:taskId": (url, match) =>
+    
+  [routes.MILESTONE_ADD_ROUTE]: "Create new milestone",
+
+  [routes.TASKS_ROUTE]: "Tasks",
+
+  [routes.TASK_ADD_ROUTE]: "Create Task",
+
+  [routes.TASK_DETAILS_ROUTE]: (url, match) =>
     returnTaskTitle(tasks, match[":taskId"]),
-  "/:projectId/milestones/:milestoneId/tasks/:taskId/logs": "Log history",
-  "/:projectId/milestones/:milestoneId/tasks/:taskId/logs/:logId": ":logId",
-  "/:projectId/milestones/:milestoneId/tasks/:taskId/logcreate": "Create log"
+    
+  [routes.LOG_HISTORY_ROUTE]: "Log history",
+  [routes.LOG_EDIT_ROUTE]: ":logId",
+  [routes.LOG_CREATE_ROUTE]: "Create log"
 });
 
 const StyledBreadcrumbs = ({ projects, tasks, milestones }) => {
   return (
     <Breadcrumbs
-      mappedRoutes={routes(projects, tasks, milestones)}
+      mappedRoutes={mapRoutes(projects, tasks, milestones)}
       WrapperComponent={props => (
         <ul className="breadcrumbs">{props.children}</ul>
       )}

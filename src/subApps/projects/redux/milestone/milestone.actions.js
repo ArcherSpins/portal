@@ -6,7 +6,7 @@ import { getMilestones } from '../../graphql/queries/milestone.queries';
 import {
   createMilestone as saveMilestone,
   updateMilestone,
-  deleteMilestone as removeMilestone,
+  deleteMilestone as emoveMilestone,
 } from '../../graphql/mutations/milestones.mutation';
 import type { MilestoneCreation, Dispatch } from './milestone.flow-types';
 
@@ -71,7 +71,7 @@ export const editMilestone = (
 export const deleteMilestone = (id: string, pushTo: () => void) => (
   dispatch: Dispatch,
 ) => {
-  removeMilestone(id).then((response) => {
+  emoveMilestone(id).then((response) => {
     dispatch({
       type: milestoneActionTypes.DELETE_MILESTONE,
       payload: response.data.deleteMilestone,

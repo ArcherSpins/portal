@@ -1,8 +1,9 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
-import type { Match } from 'react-router-dom';
+// import type { Match } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
+import { TASK_ADD_ROUTE } from 'subApps/projects/routes';
 
 import './tasks-page.styles.scss';
 
@@ -29,7 +30,7 @@ type Props = {
   milestone: Milestone,
   project: Project,
   tasks: Array<Task>,
-  match: Match,
+  // match: Match,
   getTasks: (id: string) => Array<Task>
 };
 
@@ -55,7 +56,7 @@ class TasksPage extends React.Component<Props, State> {
 
   render() {
     const { openDescription, activePage } = this.state;
-    const { project, milestone, match } = this.props;
+    const { project, milestone } = this.props;
     const { tasks } = this.props;
     return (
       <div className="tasks">
@@ -122,7 +123,7 @@ class TasksPage extends React.Component<Props, State> {
               </div>
             </div>
             <div className="tasks__subheader-right">
-              <LinkButton to={`${match.url || ''}/create`}>
+              <LinkButton to={TASK_ADD_ROUTE}>
                 Add Task
               </LinkButton>
             </div>

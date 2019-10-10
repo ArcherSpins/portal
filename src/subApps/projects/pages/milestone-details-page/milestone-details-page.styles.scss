@@ -5,17 +5,17 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-bottom: 1rem;
+    padding-bottom: 1em;
     border-bottom: 1px solid #d5d5d5;
-    margin-bottom: 1.2rem;
+    margin-bottom: 1.2em;
   }
 
   .delete-button {
-    margin-right: 3rem;
+    margin-right: 3em;
     cursor: pointer;
     color: #333333;
     text-decoration: none;
-    padding: 0.6rem 2rem 0.6rem 2rem;
+    padding: 0.6em 2em 0.6em 2em;
     background: #ffffff;
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 4px;
@@ -40,7 +40,7 @@
   }
 
   .sub-header {
-    margin-bottom: 1.2rem;
+    margin-bottom: 1.2em;
     display: flex;
     align-items: center;
     .estimation-type-wrapper {
@@ -56,8 +56,8 @@
       }
       .estimation-input {
         padding-left: 5px;
-        width: 4.8rem;
-        height: 2.4rem;
+        width: 4.8em;
+        height: 2.4em;
         border: 1px solid #d1d6de;
         border-radius: 4px;
 
@@ -70,11 +70,11 @@
   }
 
   .tasks-button {
-    margin-right: 3rem;
+    margin-right: 3em;
     cursor: pointer;
     color: #333333;
     text-decoration: none;
-    padding: 0.6rem 2rem 0.6rem 2rem;
+    padding: 0.6em 2em 0.6em 2em;
     background: #ffffff;
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 4px;
@@ -108,8 +108,8 @@
     background: #219653;
     border-radius: 4px;
     border: none;
-    margin-right: 1.4rem;
-    padding: 0.6rem 3.6rem;
+    margin-right: 1.4em;
+    padding: 0.6em 3.6em;
     transition: all 0.2s ease 0.1s;
 
     &:hover {

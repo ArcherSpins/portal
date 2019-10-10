@@ -4,8 +4,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import type { Match } from 'react-router-dom';
-
+// import type { Match } from 'react-router-dom';
+import { MILESTONE_ADD_ROUTE } from 'subApps/projects/routes';
 import { selectProjectsMolestones } from '../../redux/milestone/milestone.selectors';
 import { selectProjectItem } from '../../redux/project/project.selectors';
 import { getAllMilestones } from '../../redux/milestone/milestone.actions';
@@ -27,7 +27,7 @@ type State = {
 type Props = {
   milestones: Array<Milestone>,
   project: Project,
-  match: Match,
+  // match: Match,
   getAllMilestones: (id: string) => Array<Milestone>
 };
 
@@ -51,7 +51,7 @@ class MilestonePage extends React.Component<Props, State> {
 
   render() {
     const { openDescription, activePage } = this.state;
-    const { milestones, project, match } = this.props;
+    const { milestones, project } = this.props;
     return (
       <div className="milestones">
         <header className="milestones__header">
@@ -65,7 +65,7 @@ class MilestonePage extends React.Component<Props, State> {
           <div className="milestones__subheader">
             <div className="milestones__subheader-left">
               <h3
-                style={{ fontSize: '2rem' }}
+                style={{ fontSize: '2em' }}
                 className="milestones__subheader-title"
               >
                 Milestone
@@ -113,7 +113,7 @@ class MilestonePage extends React.Component<Props, State> {
                 </button>
               </div>
             </div>
-            <LinkButton to={`${match.url || ''}/create`}>
+            <LinkButton to={MILESTONE_ADD_ROUTE}>
               Add Milestone
             </LinkButton>
           </div>

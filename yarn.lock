@@ -11538,6 +11538,13 @@ react-router-dom@^5.0.1:
     tiny-invariant "^1.0.2"
     tiny-warning "^1.0.0"
 
+react-router-dynamic-breadcrumbs@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/react-router-dynamic-breadcrumbs/-/react-router-dynamic-breadcrumbs-2.2.0.tgz#096c7a1d94190ecf5f3619d8fcec3091870f079f"
+  integrity sha512-w5vjWnQDbXZ07WNardqhje1Gf3VvGkB6Bv1IKCu3d/opQC9X2mU0P6n031lL35sxknONlEz6aZ2YQb6AU9yYSQ==
+  dependencies:
+    prop-types "^15.5.10"
+
 react-router@5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/react-router/-/react-router-5.0.1.tgz#04ee77df1d1ab6cb8939f9f01ad5702dbadb8b0f"

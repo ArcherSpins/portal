@@ -1,10 +1,15 @@
+/* eslint-disable react/no-access-state-in-setstate */
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable react/no-unused-prop-types */
+// TODO: FIX
 // @flow
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import type { RouterHistory } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
-// TODO: refactor this, move date logic from moment+react-moment to date-fns
 import Moment from 'react-moment';
+
+import { ROOT } from 'subApps/projects/routes';
 
 import { editProject } from '../../redux/project/project.actions';
 import {
@@ -16,7 +21,7 @@ import { selectProjectsMolestones } from '../../redux/milestone/milestone.select
 
 import { getEstimation } from '../../graphql/queries/project.queries';
 
-// import type { Milestone } from '../../redux/milestone/milestone.flow-types';
+import type { Milestone } from '../../redux/milestone/milestone.flow-types';
 import type {
   Project,
   ProjectCreation,
@@ -64,16 +69,16 @@ type Props = {
   id: string,
   createdAt: string,
   title: string,
-  // url: string,
+  url: string,
   type: string,
-  // engagement: string,
+  engagement: string,
   manager: string,
   description: string,
   participants: Array<Employee>,
-  // watcher: Array<Employee>,
+  watcher: Array<Employee>,
   projects: Array<Project>,
   history: RouterHistory,
-  // milestones: Array<Milestone>,
+  milestones: Array<Milestone>,
   editProject: (editProject: ProjectCreation, history: RouterHistory) => Project
 };
 
@@ -114,8 +119,7 @@ class ProjectDetailPage extends Component<Props, State> {
   }
 
   componentDidMount = () => {
-    const { project } = this.props;
-    getEstimation(project.id).then((response) => {
+    getEstimation(this.props.project.id).then((response) => {
       const { estimatedTime, spentTime } = response.data.project;
       this.setState({ estimatedTime, spentTime });
     });
@@ -125,7 +129,6 @@ class ProjectDetailPage extends Component<Props, State> {
     const {
       title, url, participants, watcher, type, engagement,
     } = this.state;
-    const { projects, project } = this.props;
     const errors = [];
 
     if (!title) {
@@ -152,9 +155,9 @@ class ProjectDetailPage extends Component<Props, State> {
       errors.push('Engagement Model');
     }
 
-    projects.forEach((proj) => {
-      if (proj.id !== project.id) {
-        if (proj.title.toLowerCase() === title.toLowerCase()) {
+    this.props.projects.forEach((project) => {
+      if (project.id !== this.props.project.id) {
+        if (project.title.toLowerCase() === title.toLowerCase()) {
           errors.push('Title already exists');
         }
       }
@@ -196,20 +199,19 @@ class ProjectDetailPage extends Component<Props, State> {
   };
 
   deleteParticipant = (id: string) => {
-    this.setState((state) => ({
-      participants: state.participants.filter((p) => p.id !== id),
-    }));
+    this.setState({
+      participants: this.state.participants.filter((p) => p.id !== id),
+    });
   };
 
   deleteWatcher = (id: string) => {
-    this.setState((state) => ({
-      watcher: state.watcher.filter((p) => p.id !== id),
-    }));
+    this.setState({
+      watcher: this.state.watcher.filter((p) => p.id !== id),
+    });
   };
 
   showLogTime = () => {
-    const { estimatedTime } = this.state;
-    const hours = estimatedTime / 60;
+    const hours = this.state.estimatedTime / 60;
     return Math.floor(hours);
   };
 
@@ -230,11 +232,9 @@ class ProjectDetailPage extends Component<Props, State> {
         description,
         id,
       } = this.state;
-      // TODO: FIX THIS
-      // eslint-disable-next-line no-shadow
-      const { project, editProject, history } = this.props;
-      const watcherPropsIDs = project.watchers.map((w) => w.id.toString());
-      const participantsPropsIDs = project.participants.map((p) => p.id.toString());
+
+      const watcherPropsIDs = this.props.project.watchers.map((w) => w.id.toString());
+      const participantsPropsIDs = this.props.project.participants.map((p) => p.id.toString());
       const watcherIDs = watcher.map((w) => w.id.toString());
 
       const participantsIDs = participants.map((p) => p.id.toString());
@@ -251,7 +251,7 @@ class ProjectDetailPage extends Component<Props, State> {
         unbindParticipants: unbindUserId(participantsPropsIDs, participantsIDs),
         bindParticipants: bindUserId(participantsPropsIDs, participantsIDs),
       };
-      editProject(editedProject, history);
+      this.props.editProject(editedProject, this.props.history);
       this.setState(initialState);
     }
   };
@@ -267,10 +267,8 @@ class ProjectDetailPage extends Component<Props, State> {
       createdAt,
       type,
       spentTime,
-      errors,
       engagement,
     } = this.state;
-    const { history } = this.props;
     return (
       <div className="cpp">
         <div className="project-details__header">
@@ -285,7 +283,7 @@ class ProjectDetailPage extends Component<Props, State> {
           <InverseButtom
             type="button"
             color="success"
-            onClick={() => history.push(`/${url}/milestones`)}
+            onClick={() => this.props.history.push(`${ROOT}/${url}/milestones`)}
           >
             Milestones
           </InverseButtom>
@@ -293,9 +291,9 @@ class ProjectDetailPage extends Component<Props, State> {
             <b>Spent</b>
             {' '}
             {spentTimeInHours(spentTime)}
-            /
+/
             {this.showLogTime()}
-            h
+h
           </span>
           <span className="project-details__created">
             <b>Created </b>
@@ -433,7 +431,7 @@ class ProjectDetailPage extends Component<Props, State> {
               deleteUser={this.deleteWatcher}
               users={watcher}
             />
-            {errors.length >= 1 && (
+            {this.state.errors.length >= 1 && (
               <div
                 style={{
                   color: 'red',
@@ -443,7 +441,7 @@ class ProjectDetailPage extends Component<Props, State> {
               >
                 Sorry, something went wrong please check
                 {' '}
-                {errors.join(', ')}
+                {this.state.errors.join(', ')}
 .
               </div>
             )}
@@ -453,7 +451,7 @@ class ProjectDetailPage extends Component<Props, State> {
               </CustomButton>
               <CustomButton
                 type="button"
-                onClick={() => history.goBack()}
+                onClick={() => this.props.history.goBack()}
                 color="gray"
               >
                 Cancel
