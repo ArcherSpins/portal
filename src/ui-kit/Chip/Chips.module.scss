@@ -2,9 +2,9 @@
 @import "../mixins";
 
 .chip {
-  background-color: $chip-green;
-  border-radius: 2px;
-  padding: 0.1em 0.3em 0.1em 0.5em;
+  background-color: rgba($main-color, 0.2);
+  border-radius: 0.15rem;
+  padding: 0.16em 0.3em 0.16em 0.5em;
   margin: 0.15em;
   color: $main-color;
   font-family: Proxima Nova;
@@ -13,7 +13,7 @@
   .close-button {
     background-color: transparent;
     border: none;
-    margin-left: 0.1em;
+    margin-left: 0.15em;
     vertical-align: middle;
     cursor: pointer;
     padding-top: 0.1em;

@@ -1,29 +1,36 @@
 // @flow
 import React, { type Node } from 'react';
+import classNames from 'classnames';
 import styles from './Chips.module.scss';
 import icon from './closeIcon.svg';
 
-type ChipComponentType = {
+type Props = {
   id: string,
   title: string,
-  onClick: (string) => void
+  onDelete: (string) => void,
+  className?: string
 }
 
 const Chip = ({
   title,
   id,
-  onClick,
-}: ChipComponentType): Node => (
-  <span className={styles.chip}>
+  onDelete,
+  className,
+}: Props): Node => (
+  <span className={classNames(styles.chip, className)}>
     {title}
     <button
       type="button"
-      onClick={() => onClick(id)}
+      onClick={() => onDelete(id)}
       className={styles['close-button']}
     >
       <img src={icon} alt="close-icon" />
     </button>
   </span>
 );
+
+Chip.defaultProps = {
+  className: '',
+};
 
 export default Chip;
