@@ -8,6 +8,9 @@ type Props = {
   title: string,
   onDelete: (string) => void,
   className?: string,
+  style?: {
+    [string]: number | string
+  }
 }
 
 const Chip = (restProps: Props): Node => {
@@ -16,9 +19,10 @@ const Chip = (restProps: Props): Node => {
     id,
     onDelete,
     className,
+    style,
   } = restProps;
   return (
-    <span className={classNames(styles.chip, className)} {...restProps}>
+    <span style={style} className={classNames(styles.chip, className)} {...restProps}>
       {title}
       <button
         type="button"
@@ -33,6 +37,7 @@ const Chip = (restProps: Props): Node => {
 
 Chip.defaultProps = {
   className: '',
+  style: {},
 };
 
 export default Chip;
