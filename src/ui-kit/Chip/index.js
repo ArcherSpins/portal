@@ -1,28 +1,27 @@
-/* eslint-disable */
 // @flow
-import React, { Component, type Node } from 'react';
-import type { Chip as ChipType } from './types';
+import React, { type Node } from 'react';
 import styles from './Chips.module.scss';
 import icon from './closeIcon.svg';
 
 type ChipComponentType = {
-  ...ChipType,
-  onDeletedChips: (string) => void
+  id: string,
+  title: string,
+  onClick: (string) => void
 }
 
 const Chip = ({
   title,
   id,
-  onDeletedChips
+  onClick,
 }: ChipComponentType): Node => (
   <span className={styles.chip}>
-    { title }
+    {title}
     <button
       type="button"
-      onClick={() => onDeletedChips(id)}
+      onClick={() => onClick(id)}
       className={styles['close-button']}
     >
-      <img src={icon} />
+      <img src={icon} alt="close-icon" />
     </button>
   </span>
 );
