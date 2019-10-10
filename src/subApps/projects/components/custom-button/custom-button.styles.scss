@@ -1,0 +1,38 @@
+.custom-button {
+  text-align: center;
+  border: none;
+  color: black;
+  border-radius: 4px;
+  padding: 0.6em 3.6em;
+  transition: all 0.2s;
+
+  &:hover {
+    cursor: pointer;
+    transform: translateY(-1px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+  }
+
+  &.gray {
+    background: #f5f6f7;
+  }
+
+  &.dark-gray {
+    background: #5c5c5c;
+    color: white;
+  }
+
+  &.success {
+    margin-right: 5px;
+    color: white;
+    background: #1fbf63;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:active {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transform: translateY(0);
+  }
+}

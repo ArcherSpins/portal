@@ -1,0 +1,27 @@
+.select-input {
+  .manager-field {
+    padding: 0.7em 1em 0.7em 0.8em;
+    background: #ffffff;
+    border: 1px solid #d1d6de;
+    border-radius: 4px;
+    width: 100%;
+    transition: all 0.1s;
+
+    &:required:invalid {
+      padding-left: 7px;
+      color: rgba(#333333, 0.4);
+    }
+
+    option[value=""][disabled] {
+      display: none;
+    }
+    option {
+      color: black;
+    }
+
+    &:focus {
+      outline: none;
+      border: 1px solid #838383;
+    }
+  }
+}

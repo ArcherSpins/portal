@@ -1,0 +1,20 @@
+.user-picker-input {
+  min-height: 3.7em;
+  margin-bottom: -6px;
+  background: $color-white-1;
+  border: 1px solid $color-gray-inactive;
+  border-bottom: none;
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: none;
+  border-bottom-right-radius: none;
+  padding: 2px;
+  padding-left: 6px;
+  width: 100%;
+
+  &:focus {
+    outline: none;
+    // border: 1px solid $color-gray-active;
+    border-bottom: none;
+  }
+}

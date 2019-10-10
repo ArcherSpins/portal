@@ -1,0 +1,138 @@
+.task-details {
+  font-size: 14px;
+  min-width: 1200px;
+
+  .header {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+    margin-bottom: 2em;
+    padding-bottom: 1em;
+    display: flex;
+    justify-content: space-between;
+
+    // .header-buttons {
+    //   display: flex;
+    //   flex-direction: column;
+    //   align-content: space-between;
+    // }
+  }
+
+  .body {
+    display: flex;
+    justify-content: space-between;
+
+    &__left {
+      width: 45%;
+
+      .textarea-wrapper {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 24px;
+
+        textarea {
+          padding-top: 5px;
+          padding-left: 5px;
+          height: 30vh;
+          width: 100%;
+          background: #ffffff;
+          border: 1px solid #d1d6de;
+          border-radius: 4px;
+
+          &:focus {
+            outline: none;
+          }
+        }
+      }
+
+      .status-wrapper {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 15px;
+        .status-field {
+          cursor: pointer;
+          width: 100%;
+          height: 3.8em;
+          border: 1px solid #d1d6de;
+          border-radius: 4px;
+          transition: all 0.2s;
+
+          &:required:invalid {
+            padding-left: 7px;
+            font-size: 14px;
+            color: rgba(#333333, 0.4);
+          }
+
+          option[value=""][disabled] {
+            display: none;
+          }
+
+          option {
+            color: black;
+          }
+
+          &:hover {
+            border: 1px solid #838383;
+          }
+
+          &:focus {
+            outline: none;
+            border: 1px solid #838383;
+          }
+        }
+      }
+
+      .select-wrapper {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 45px;
+        .select {
+          cursor: pointer;
+          width: 100%;
+          height: 3.8em;
+          border: 1px solid #d1d6de;
+          border-radius: 4px;
+          transition: all 0.2s;
+
+          &:required:invalid {
+            padding-left: 7px;
+            font-size: 14px;
+            color: rgba(#333333, 0.4);
+          }
+
+          option[value=""][disabled] {
+            display: none;
+          }
+
+          option {
+            color: black;
+          }
+
+          &:hover {
+            border: 1px solid #838383;
+          }
+
+          &:focus {
+            outline: none;
+            border: 1px solid #838383;
+          }
+        }
+      }
+    }
+
+    &__right {
+      width: 45%;
+    }
+
+    .body-buttons {
+      display: flex;
+      justify-content: space-between;
+
+      .inverse-button:hover {
+        background: #1fbf63;
+      }
+
+      .inverse-button:nth-last-of-type(1) {
+        margin-right: 0;
+      }
+    }
+  }
+}

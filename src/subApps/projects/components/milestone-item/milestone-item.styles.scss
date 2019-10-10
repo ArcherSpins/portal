@@ -1,0 +1,76 @@
+.milestone-item-wrapper {
+  padding-top: 5px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+  .milestone-item {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    &__number {
+      flex-basis: 5%;
+      font-size: 12px;
+    }
+
+    &__title {
+      flex-basis: 45%;
+      cursor: pointer;
+    }
+
+    &__spent {
+      flex-basis: 20%;
+    }
+
+    &__status {
+      flex-basis: 20%;
+    }
+
+    &__details-wrapper {
+      flex-basis: 10%;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    &__tasks {
+      margin-right: 10px;
+      background-color: #fff;
+      border-radius: 4px;
+      border: 1px solid #d7d7d7;
+      padding: 3px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #ebebeb;
+      }
+
+      svg {
+        margin-bottom: -3px;
+      }
+    }
+
+    &__details {
+      background-color: #fff;
+      border-radius: 4px;
+      border: 1px solid #d7d7d7;
+      padding: 3px;
+
+      padding-bottom: 1px;
+      cursor: pointer;
+      &:hover {
+        background-color: #ebebeb;
+      }
+    }
+  }
+  .milestone-item-description {
+    padding-left: 5%;
+
+    .description {
+      overflow-wrap: break-word;
+      width: 50%;
+      font-size: 14px;
+      color: #79818d;
+      flex-basis: 45%;
+      padding-top: 5px;
+      margin-top: 10px;
+    }
+  }
+}

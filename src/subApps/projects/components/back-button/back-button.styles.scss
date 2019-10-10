@@ -1,0 +1,12 @@
+.back-button {
+  background: white;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  top: 87px;
+  left: 37px;
+
+  &:focus {
+    outline: none;
+  }
+}

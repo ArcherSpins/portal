@@ -1,0 +1,11 @@
+.custom-spinner {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  background: #ffffff;
+  .spinner {
+    position: absolute;
+    top: 30vh;
+    left: 50%;
+  }
+}
