@@ -22,7 +22,7 @@ const Chip = (restProps: Props): Node => {
     style,
   } = restProps;
   return (
-    <span style={style} className={classNames(styles.chip, className)} {...restProps}>
+    <span {...restProps} style={style} className={classNames(styles.chip, className)}>
       {title}
       <button
         type="button"
