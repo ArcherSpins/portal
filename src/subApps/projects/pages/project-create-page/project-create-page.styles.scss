@@ -1,0 +1,219 @@
+$color-white-1: #ffffff;
+$color-white-2: #eaeaea;
+
+$color-black-opacity: rgba(0, 0, 0, 0.54);
+
+$color-gray-active: #838383;
+$color-gray-inactive: #d1d6de;
+$color-gray-opacity: rgba(51, 51, 51, 0.54);
+$color-gray-dark-2: #333333;
+$color-gray-dark-1: #4b4b4b;
+
+.cpp {
+  display: flex;
+  min-width: 1200px;
+
+  flex-direction: column;
+
+  &__form {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+  }
+
+  &__titleInput {
+    padding-left: 5px;
+    background: $color-white-1;
+    border: 1px solid $color-gray-inactive;
+    border-radius: 4px;
+    width: 55%;
+    padding-bottom: 0.7em;
+    padding-top: 0.7em;
+    transition: all 0.1s;
+
+    &:focus {
+      outline: none;
+      border: 1px solid $color-gray-active;
+    }
+  }
+
+  .url-wrapper {
+    position: relative;
+  }
+
+  .url-link {
+    position: absolute;
+    font-size: 1.4em;
+    top: 7px;
+    left: 6px;
+  }
+
+  &__url {
+    padding-left: 193px;
+    background: $color-white-1;
+    border: 1px solid $color-gray-inactive;
+    border-radius: 4px;
+    width: 100%;
+    padding-bottom: 0.7em;
+    padding-top: 0.7em;
+    transition: all 0.1s;
+
+    &::placeholder {
+      color: $color-gray-opacity;
+      font-size: 1.4em;
+    }
+
+    &:focus {
+      outline: none;
+      border: 1px solid $color-gray-active;
+    }
+  }
+
+  &__radio-input {
+    display: none;
+  }
+
+  &__form-label {
+    font-size: 14px;
+    line-height: 20px;
+    padding-left: 2.1em;
+    position: relative;
+  }
+
+  &__radio-button {
+    height: 1rem;
+    width: 1rem;
+    border: 1px solid $color-gray-inactive;
+    border-radius: 50%;
+    display: inline-block;
+    position: absolute;
+    top: -0.2em;
+    left: 0;
+
+    &::after {
+      content: "";
+      display: block;
+      height: 0.625rem;
+      width: 0.625rem;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: $color-gray-dark-2;
+      opacity: 0;
+      transition: opacity 0.1s;
+    }
+  }
+
+  &__radio-input:checked ~ &__form-label &__radio-button::after {
+    opacity: 1;
+  }
+
+  &__typesAndEngagement {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  &__types {
+    width: 50%;
+    display: flex;
+  }
+
+  &__types-inputs {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__engagement {
+    width: 50%;
+    display: flex;
+  }
+
+  &__engagement-inputs {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__manager-field {
+    padding: 0.7em 1em 0.7em 0.8em;
+    background: $color-white-1;
+    border: 1px solid $color-gray-inactive;
+    border-radius: 4px;
+    width: 100%;
+    transition: all 0.1s;
+
+    &:focus {
+      outline: none;
+      border: 1px solid $color-gray-active;
+    }
+  }
+
+  &__participants-section {
+    min-height: 3.7em;
+    background: $color-white-1;
+    border: 1px solid $color-gray-inactive;
+    border-top: none;
+    border-top-right-radius: none;
+    border-top-left-radius: none;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    padding: 2px;
+    padding-right: 0px;
+    width: 100%;
+    height: auto;
+    transition: all 0.1s;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  &__participant-input {
+    width: 90%;
+  }
+
+  &__watcher-section {
+    min-height: 3.7em;
+    background: $color-white-1;
+    border: 1px solid $color-gray-inactive;
+    border-radius: 4px;
+    padding: 2px;
+    width: 100%;
+    transition: all 0.1s;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  &__watcher-field {
+    font-size: 14px;
+    height: 48%;
+    background: #dfdfdf;
+    padding: 2px;
+    padding-right: 15px;
+  }
+
+  &__description-input {
+    padding-top: 5px;
+    padding-left: 5px;
+    height: 100%;
+    width: 100%;
+    resize: none;
+    background: $color-white-1;
+    border: 1px solid $color-gray-inactive;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &__buttons-group {
+    display: flex;
+    justify-content: flex-start;
+  }
+}

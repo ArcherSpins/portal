@@ -1,0 +1,96 @@
+.log-create {
+  min-width: 1200px;
+  font-size: 14px;
+  color: #333333;
+  .header-wrapper {
+    border-bottom: 1px solid #d5d5d5;
+    margin-bottom: 10px;
+  }
+
+  .body {
+    max-width: 50%;
+    .sub-header {
+      padding-bottom: 15px;
+      margin-bottom: 14px;
+      border-bottom: 1px solid #d1d1d1;
+
+      &-title {
+        font-family: "proxima_novablack";
+        font-size: 18px;
+      }
+
+      .project-wrapper {
+        color: #7a7a7a;
+        .project-label {
+          margin-right: 3px;
+        }
+        .project-title {
+          font-weight: bold;
+        }
+      }
+      .log-create-milestone {
+        color: #7a7a7a;
+        font-weight: bold;
+      }
+    }
+    .time-wrapper {
+      display: flex;
+      align-items: center;
+      width: 50%;
+      // justify-content: space-between;
+      margin-bottom: 7px;
+
+      .time-header {
+        display: inline-block;
+        font-size: 1.4em;
+        color: #333333;
+        font-weight: bolder;
+        font-family: "proxima_novabold";
+      }
+
+      .text-input {
+        width: 90%;
+      }
+      .time-note {
+        color: rgba(0, 0, 0, 0.3);
+        margin-bottom: -15px;
+      }
+    }
+    .date-wrapper {
+      margin-bottom: 11px;
+      .date-input-wrapper {
+        display: flex;
+        align-items: center;
+      }
+
+      .react-datepicker {
+        transform: scale(1.3) translate(18px, 18px);
+      }
+
+      .date-input {
+        border-radius: 4px 0 0 4px;
+        border: 1px solid #d5d5d5;
+        padding: 4px;
+        width: 84px;
+        height: 32px;
+        font-size: 14px;
+      }
+      .date-label {
+        cursor: pointer;
+        border: 1px solid #bbbbbb;
+        border-left: none;
+        border-radius: 0 4px 4px 0;
+        padding: 4px 6px 4px 6px;
+        background: #f7f7f7;
+
+        svg {
+          transform: translate(0px, 1px);
+        }
+      }
+    }
+
+    .custom-textarea-wrapper {
+      padding-bottom: 30px;
+    }
+  }
+}

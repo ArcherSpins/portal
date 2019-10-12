@@ -1,0 +1,35 @@
+.inverse-button {
+  margin-right: 3em;
+  cursor: pointer;
+  color: #333333;
+  text-decoration: none;
+  padding: 0.6em 2em 0.6em 2em;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  transition: all 0.2s ease-in;
+
+  &:hover {
+    color: white;
+    cursor: pointer;
+    transform: translateY(-1px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+  }
+
+  &:hover.danger {
+    background: red;
+  }
+
+  &:hover.success {
+    background: #1fbf63;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:active {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transform: translateY(0);
+  }
+}

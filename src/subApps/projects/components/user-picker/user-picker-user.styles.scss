@@ -1,0 +1,29 @@
+.user-picker-user {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 6px 0 6px 12px;
+  border-bottom: 1px solid rgba(#d1d6de, 0.6);
+
+  &:hover {
+    background-color: #2f80ed;
+    cursor: pointer;
+
+    .user__name {
+      color: white;
+    }
+  }
+
+  &__avatar {
+    background-position: center;
+    width: 28px;
+    height: 25px;
+    background-size: cover;
+    border-radius: 50%;
+    margin-right: 12px;
+  }
+
+  &__name {
+    font-size: 14px;
+  }
+}
