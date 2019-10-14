@@ -10,6 +10,7 @@ import styles from './Dropdown.module.scss';
 type Props = {
   label?: string,
   placeholder?: string,
+  use?: string,
   disabled?: boolean,
   borderless?: boolean,
   options?: Array<{value: string, label: string}>,
@@ -20,13 +21,11 @@ type Props = {
 
 const DropdownIndicator = (props) => (
   <components.DropdownIndicator {...props}>
-    <svg color="black" width="8" height="5" viewBox="0 0 8 5" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M3.99999 5L8 0H0L3.99999 5Z" fill="#333333" />
-    </svg>
+    <i className="icon-down-dir" />
   </components.DropdownIndicator>
 );
 
-
+// TODO: move styles to separate scss file
 const Dropdown = ({
   label,
   placeholder,
@@ -36,6 +35,7 @@ const Dropdown = ({
   value,
   name,
   onChange,
+  use,
 }: Props) => {
   const customStyles = {
     indicatorSeparator: () => {},
@@ -60,7 +60,7 @@ const Dropdown = ({
 
   return (
     <div className={styles.wrapper}>
-      <label className={borderless ? styles.borderless : styles.label} htmlFor="select">{label}</label>
+      <label className={styles[use]} htmlFor="select">{label}</label>
       <Select
         className="select-component"
         isSearchable={false}
@@ -86,6 +86,7 @@ Dropdown.defaultProps = {
   onChange: noop,
   name: '',
   value: '',
+  use: '',
 };
 
 

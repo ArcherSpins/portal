@@ -20,15 +20,15 @@ storiesOf('Dropdown', module).addWithChapters('Just Dropdown', {
             sections: [
                 {
                     title: 'Default',
-                    sectionFn: withDecorator(<Dropdown options={optionsArray} value={optionsArray[1]} onChange={onChange} label='Title' />)
+                    sectionFn: withDecorator(<Dropdown options={optionsArray} use='label' value={optionsArray[1]} onChange={onChange} label='Title' />)
                 },
                 {
                     title: 'Borderless',
-                    sectionFn: withDecorator(<Dropdown options={optionsArray} value={optionsArray[1]} onChange={onChange} label='Title' borderless={true} />)
+                    sectionFn: withDecorator(<Dropdown options={optionsArray} use='borderless' value={optionsArray[1]} onChange={onChange} label='Title' borderless={true} />)
                 },
                 {
                     title: 'Disabled',
-                    sectionFn: withDecorator(<Dropdown options={optionsArray} value={optionsArray[1]} onChange={onChange} label='Title' disabled={true} />)
+                    sectionFn: withDecorator(<Dropdown options={optionsArray} use='label' value={optionsArray[1]} onChange={onChange} label='Title' disabled={true} />)
                 }
             ]
         }

@@ -20,12 +20,9 @@
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
-  "plugins": [
-    "react",
-    "flowtype",
-    "jest"
-  ],
+  "plugins": ["react", "flowtype", "jest"],
   "rules": {
+    "linebreak-style": 0,
     "react/prefer-stateless-function": 0,
     "react/jsx-filename-extension": 0,
     "react/jsx-props-no-spreading": 0,
