@@ -13,7 +13,8 @@ const DEFAULT_FORMAT = 'DD.MM.YYYY';
 type Props = {
   onDayChange: Date => void,
   format?: string,
-  placeholder?: string
+  placeholder?: string,
+  value?: Date
 };
 
 type NavbarElementProps = {
@@ -58,6 +59,7 @@ const Datepicker = ({
   onDayChange,
   format = DEFAULT_FORMAT,
   placeholder = DEFAULT_FORMAT,
+  value,
 }: Props) => (
   <div className={styles.datepicker}>
     <DayPickerInput
@@ -72,6 +74,7 @@ const Datepicker = ({
       placeholder={placeholder}
       formatDate={getDate}
       onDayChange={onDayChange}
+      value={value}
     />
   </div>
 );
@@ -79,6 +82,7 @@ const Datepicker = ({
 Datepicker.defaultProps = {
   format: DEFAULT_FORMAT,
   placeholder: DEFAULT_FORMAT,
+  value: '',
 };
 
 export default Datepicker;
