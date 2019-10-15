@@ -1,7 +1,9 @@
 /* eslint-disable */
 import React from 'react';
-// import { action } from '@storybook/addon-actions';
+import { action } from '@storybook/addon-actions';
 import Combobox from 'ui-kit/Combobox';
+import { storiesOf } from '@storybook/react';
+
 
 export default {
   title: 'Combobox',
@@ -11,14 +13,17 @@ const options = [
   {
     id: '1',
     label: 'Option 1',
+    value: 'Option 1'
   },
   {
     id: '2',
     label: 'Option 2',
+    value: 'Option 2'
   },
   {
     id: '3',
     label: 'Option 3',
+    value: 'Option 3'
   }
 ];
 
@@ -34,11 +39,34 @@ const loadOptions = (inputValue, callback) => new Promise((res) => {
   }, 1500);
 });
 
-const onChange = (...args) => console.log(args)
+const onChange = action('Selected option');
 
 
-export const defaultStory = () => (
-  <div>
-    <Combobox onChange={onChange} loadOptions={loadOptions} />
-  </div>
-);
+storiesOf('Combobox', module)
+  .addWithChapters('Combobox', {
+    chapters: [
+      {
+        info: "Combobox",
+        sections: [
+          {
+            title: 'Обычный Combobox',
+            sectionFn: () => {
+              return <Combobox
+                        onChange={onChange}
+                        loadOptions={loadOptions}
+                        label="Title"
+                        selectedOption={options[0]}
+                      />
+            },
+          },
+          {
+            title: 'Combobox с ошибкой',
+            sectionFn: () => {
+              return <Combobox onChange={onChange} loadOptions={loadOptions} label="Title" error="Error text" />
+            },
+          },
+        ],
+      },
+    ],
+  });
+
