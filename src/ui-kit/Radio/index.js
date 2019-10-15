@@ -1,15 +1,14 @@
 // @flow
 import React from 'react';
-import noop from 'lodash.noop';
 
 import styles from './Radio.module.scss';
 
 type Props = {
-    type?: string,
+    type: string,
     id?: string,
     name?: string,
-    onChange?: (e: SyntheticEvent<HTMLInputElement>) => void,
-    value?: string,
+    onChange: (e: SyntheticEvent<HTMLInputElement>) => void,
+    value: string,
     htmlFor?: string,
     spanText?: string,
     checked?: boolean
@@ -44,11 +43,8 @@ const RadioButton = ({
 
 
 RadioButton.defaultProps = {
-  type: 'radio',
   id: '',
   name: '',
-  onChange: noop,
-  value: '',
   htmlFor: '',
   spanText: '',
   checked: false,

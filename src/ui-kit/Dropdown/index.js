@@ -3,20 +3,20 @@
 // @flow
 import React from 'react';
 import Select, { components } from 'react-select';
-import noop from 'lodash.noop';
 import styles from './Dropdown.module.scss';
 
 
+type DropdownType = 'borderless' | 'default';
+
 type Props = {
-  label?: string,
+  label: string,
   placeholder?: string,
-  use?: string,
+  use: DropdownType,
   disabled?: boolean,
-  borderless?: boolean,
-  options?: Array<{value: string, label: string}>,
+  options: Array<{value: string, label: string}>,
   value?: string,
   name?: string,
-  onChange?: (e: SyntheticEvent<HTMLInputElement>) => void,
+  onChange: (e: SyntheticEvent<HTMLInputElement>) => void,
 }
 
 const DropdownIndicator = (props) => (
@@ -30,7 +30,6 @@ const Dropdown = ({
   label,
   placeholder,
   disabled,
-  borderless,
   options,
   value,
   name,
@@ -44,7 +43,8 @@ const Dropdown = ({
       borderColor: state.isFocused ? '#61B16F' : '#D1D6DE',
       '&:hover': {},
       '&:focus': { borderColor: 'red' },
-      border: borderless ? 'none' : base.border,
+      border: use === 'borderless' ? 'none' : base.border,
+      transition: 'all 0.3s',
       boxShadow: 'none',
     }),
     container: (base) => ({
@@ -80,13 +80,8 @@ const Dropdown = ({
 Dropdown.defaultProps = {
   placeholder: '',
   disabled: false,
-  borderless: false,
-  options: [],
-  label: '',
-  onChange: noop,
   name: '',
   value: '',
-  use: '',
 };
 
 

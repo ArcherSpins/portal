@@ -5,13 +5,14 @@
   display: flex;
   flex-direction: column;
 }
-.label {
-  font-size: 16px;
+
+.default {
+  font-size: 1rem;
   color: #818a95;
-  margin-bottom: 3px;
+  margin-bottom: 0.2rem;
 }
 
 .borderless {
-  @extend .label;
-  padding-left: 10px;
+  @extend .default;
+  padding-left: 0.625rem;
 }

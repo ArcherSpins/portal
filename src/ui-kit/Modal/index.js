@@ -6,8 +6,8 @@ import styles from './Modal.module.scss';
 
 type Props = {
     show?: boolean,
-    children?: string,
-    object?: string,
+    children: string,
+    object: string,
     close?: () => void,
     func?: () => void
 };
@@ -47,8 +47,6 @@ const Modal = ({
 
 Modal.defaultProps = {
   show: false,
-  children: '',
-  object: '',
   close: noop,
   func: noop,
 };
