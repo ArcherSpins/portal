@@ -4,16 +4,23 @@ import noop from 'lodash.noop';
 
 import styles from './Modal.module.scss';
 
+type ButtonClasses = 'btn-cancel' | 'btn-continue';
+
 type Props = {
     show?: boolean,
     children: string,
     object: string,
+    use1: ButtonClasses,
+    use2: ButtonClasses,
+    secondButtonText: string,
+    firstButtonText: string,
+    headerText: string,
     close?: () => void,
     func?: () => void
 };
 
 const Modal = ({
-  show, children, object, close, func,
+  show, children, object, close, func, use1, use2, headerText, secondButtonText, firstButtonText,
 }: Props) => (
   <div>
     <div
@@ -25,7 +32,7 @@ const Modal = ({
     >
       <div className={styles['modal-header']}>
         <h3>
-            Delete
+          {headerText}
           {' '}
           {object}
         </h3>
@@ -34,11 +41,11 @@ const Modal = ({
         <p>{children}</p>
       </div>
       <div className={styles['modal-footer']}>
-        <button type="button" className={styles['btn-cancel']} onClick={close}>
-            Close
+        <button type="button" className={styles[use1]} onClick={close}>
+          {firstButtonText}
         </button>
-        <button type="button" className={styles['btn-continue']} onClick={() => func()}>
-            Delete
+        <button type="button" className={styles[use2]} onClick={() => func()}>
+          {secondButtonText}
         </button>
       </div>
     </div>
