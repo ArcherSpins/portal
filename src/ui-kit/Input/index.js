@@ -70,6 +70,7 @@ const Input = ({
           disabled={disabled}
           value={value}
         />
+        {/* TODO: REPLACE SVG TO <i /> */}
         {clearable && <button onClick={onClearClick} className={styles.clear} type="button"><img src={xmark} alt="clear" /></button>}
       </div>
     </label>
