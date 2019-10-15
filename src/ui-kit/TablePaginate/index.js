@@ -4,6 +4,18 @@ import classNames from 'classnames';
 import Paginate from './Paginate';
 import ItemTable from './Item';
 import styles from './TablePaginate.module.scss';
+import type { ItemTableType } from './types';
+
+const chunkArray = (array, chunkSize) => {
+  const result = [];
+  const maxLength = array.length;
+
+  for (let item = 0; item < maxLength; item += chunkSize) {
+    result.push(array.slice(item, item + chunkSize));
+  }
+
+  return result;
+};
 
 type Props = {
   classNamePaginate?: string,
@@ -14,14 +26,33 @@ type Props = {
     [string]: number | string,
   },
   className?: string,
+  items: Array<ItemTableType>,
+  activeIndex?: number,
 };
 
-export default class TablePaginate extends Component<Props> {
+type State = {
+  index: number
+}
+
+export default class TablePaginate extends Component<Props, State> {
   static defaultProps = {
     classNamePaginate: '',
     className: '',
     stylePaginate: {},
     style: {},
+    activeIndex: 1,
+  }
+
+  constructor(props: Props) {
+    super(props);
+
+    this.state = {
+      index: props.activeIndex || 1,
+    };
+  }
+
+  togglePaginate = (idx: number) => {
+    this.setState({ index: idx });
   }
 
   render() {
@@ -30,15 +61,17 @@ export default class TablePaginate extends Component<Props> {
       className,
       style,
       stylePaginate,
+      items,
     } = this.props;
+    const { index } = this.state;
     return (
       <div>
         <Paginate
           className={classNamePaginate}
           style={stylePaginate}
-          count={5}
-          togglePaginate={() => {}}
-          activeNum={1}
+          count={Math.ceil(items.length / 3)}
+          togglePaginate={this.togglePaginate}
+          activeNum={index}
         />
         <table style={style} className={classNames(styles.table_paginate, className)}>
           <thead>
@@ -51,9 +84,11 @@ export default class TablePaginate extends Component<Props> {
             </tr>
           </thead>
           <tbody>
-            <ItemTable />
-            <ItemTable />
-            <ItemTable />
+            {
+              chunkArray(items, 3)[index - 1].map((item, i) => (
+                <ItemTable index={i + 1} key={item.id} {...item} />
+              ))
+            }
           </tbody>
         </table>
       </div>

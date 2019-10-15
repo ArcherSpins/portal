@@ -1,18 +1,26 @@
 // @flow
 import React from 'react';
 import styles from './TablePaginate.module.scss';
+import type { ItemTableType } from './types';
 
-export default () => (
+export default ({
+  index,
+  assignee,
+  timespent,
+  spentTime,
+  comment,
+}: {...ItemTableType, index: number}) => (
   <tr>
-    <td>1</td>
-    <td>Konstantin Konstantinopolsky</td>
-    <td>22:38 19/08/30</td>
-    <td>8:00</td>
-    <td title="Ius dicat feugiat no, vix cu modo dicat" className={styles['comment-table_paginate']}>
-      Ius dicat feugiat no, vix cu modo dicat
-      Ius dicat feugiat no, vix cu modo dicat
-      Ius dicat feugiat no, vix cu modo dicat
-      Ius dicat feugiat no, vix cu modo dicat
+    <td>{index}</td>
+    <td>{assignee}</td>
+    <td>
+      {timespent.time}
+      &nbsp;
+      {timespent.date}
+    </td>
+    <td>{spentTime}</td>
+    <td title={comment} className={styles['comment-table_paginate']}>
+      {comment}
     </td>
   </tr>
 );
