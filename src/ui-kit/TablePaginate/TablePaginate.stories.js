@@ -1,7 +1,8 @@
 /* eslint-disable */
 import React from 'react';
-// import { action } from '@storybook/addon-actions';
+import { action } from '@storybook/addon-actions';
 import TablePaginate from 'ui-kit/TablePaginate';
+import { storiesOf } from '@storybook/react';
 
 
 const data = [
@@ -77,8 +78,21 @@ const data = [
   },
 ];
 
-export default {
-  title: 'TablePaginate',
-};
+const getNumberPaginate = action('Change paginate')
 
-export const defaultStory = () => <TablePaginate items={data} />;
+storiesOf('TablePaginate', module)
+  .addWithChapters('TablePaginate', {
+    chapters: [
+      {
+        info: "TablePaginate component",
+        sections: [
+          {
+            title: 'TablePaginate',
+            sectionFn: () => {
+              return <TablePaginate items={data} pageSize={3} getNumberPaginate={getNumberPaginate} />;
+            },
+          },
+        ],
+      },
+    ],
+  });

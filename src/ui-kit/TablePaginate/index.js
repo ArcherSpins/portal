@@ -28,6 +28,8 @@ type Props = {
   className?: string,
   items: Array<ItemTableType>,
   activeIndex?: number,
+  pageSize?: number,
+  getNumberPaginate?: (number) => void
 };
 
 type State = {
@@ -41,6 +43,8 @@ export default class TablePaginate extends Component<Props, State> {
     stylePaginate: {},
     style: {},
     activeIndex: 1,
+    pageSize: 1,
+    getNumberPaginate: () => {},
   }
 
   constructor(props: Props) {
@@ -52,6 +56,10 @@ export default class TablePaginate extends Component<Props, State> {
   }
 
   togglePaginate = (idx: number) => {
+    const { getNumberPaginate } = this.props;
+    if (typeof getNumberPaginate === 'function') {
+      getNumberPaginate(idx);
+    }
     this.setState({ index: idx });
   }
 
@@ -62,6 +70,7 @@ export default class TablePaginate extends Component<Props, State> {
       style,
       stylePaginate,
       items,
+      pageSize,
     } = this.props;
     const { index } = this.state;
     return (
@@ -69,7 +78,7 @@ export default class TablePaginate extends Component<Props, State> {
         <Paginate
           className={classNamePaginate}
           style={stylePaginate}
-          count={Math.ceil(items.length / 3)}
+          count={Math.ceil(items.length / Number(pageSize))}
           togglePaginate={this.togglePaginate}
           activeNum={index}
         />
@@ -85,7 +94,7 @@ export default class TablePaginate extends Component<Props, State> {
           </thead>
           <tbody>
             {
-              chunkArray(items, 3)[index - 1].map((item, i) => (
+              chunkArray(items, Number(pageSize))[index - 1].map((item, i) => (
                 <ItemTable index={i + 1} key={item.id} {...item} />
               ))
             }
