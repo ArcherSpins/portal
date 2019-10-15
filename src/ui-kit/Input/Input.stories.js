@@ -57,4 +57,38 @@ storiesOf('Input', module)
       }
     ]
   })
+  .addWithChapters('Clearable', {
+    chapters: [
+      {
+        sections: [
+          {
+            title: "Idle",
+            sectionFn: withDecorator(<Input placeholder="Placeholder text" onClearClick={action('clear clicked!')} clearable onChange={onChange}>Add Employee</Input>),
+          },
+        ]
+      }
+    ]
+  })
+  .addWithChapters('With icon', {
+    chapters: [
+      {
+        sections: [
+          {
+            title: "Idle",
+            sectionFn: withDecorator(
+              <Input 
+                placeholder="Placeholder text" 
+                icon={<i className="icon-search" />}
+                onClearClick={action('clear clicked!')} 
+                clearable 
+                onChange={onChange}
+              >
+                Add Employee
+              </Input>
+            ),
+          },
+        ]
+      }
+    ]
+  })
 
