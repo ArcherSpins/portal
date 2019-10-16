@@ -31,6 +31,10 @@ type Props = {
 
 const LoadingIndicator = () => null;
 
+const NoOptionsMessage = () => (
+  <p className="no-results">No results</p>
+);
+
 const LoadingMessage = () => (
   <div className="cbx__loader container-loader_combobox">
     <Spinner use="dark" style={{ width: '1rem', height: '1rem' }} />
@@ -73,6 +77,8 @@ const Combobox = ({
       components={{
         LoadingIndicator,
         LoadingMessage,
+        DropdownIndicator: () => (<i className="icon-down-dir"></i>),
+        NoOptionsMessage,
       }}
       {...restProps}
     />

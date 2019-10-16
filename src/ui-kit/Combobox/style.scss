@@ -4,6 +4,18 @@
 .cbx__wrap {
   height: 2rem;
 
+  .no-results {
+    color: $text-color-200;
+    padding: 1rem;
+    font-size: 1rem;
+  }
+
+  .cbx__dropdown-indicator {
+    svg {
+      display: none;
+    }
+  }
+
   .cbx__option {
     &:hover {
       background-color: rgba($main-color, .6) !important;
