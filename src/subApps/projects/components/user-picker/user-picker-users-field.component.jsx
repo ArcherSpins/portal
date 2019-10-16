@@ -1,7 +1,7 @@
 // @flow
 // TODO: FIX THIS
 import React from 'react';
-import FieldItem from './user-picker-users-field-item.component';
+import { Chip } from 'ui-kit';
 
 import './user-picker-users-field.styles.scss';
 
@@ -19,12 +19,11 @@ const UsersField = ({ users, deleteUser }: Props) => (
   <div className="user-picker-users-field">
     {users
       && users.map((user) => (
-        <FieldItem
-          firstName={user.firstName}
-          lastName={user.lastName}
-          id={user.id}
+        <Chip
+          title={`${user.firstName} ${user.lastName}`}
           key={user.id}
-          deleteUser={deleteUser}
+          id={user.id}
+          onDelete={deleteUser}
         />
       ))}
   </div>
