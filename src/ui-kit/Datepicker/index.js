@@ -60,24 +60,34 @@ const Datepicker = ({
   format = DEFAULT_FORMAT,
   placeholder = DEFAULT_FORMAT,
   value,
-}: Props) => (
-  <div className={styles.datepicker}>
-    <DayPickerInput
-      dayPickerProps={{
-        classNames: overlayStyles,
-        weekdaysShort,
-        navbarElement: Navbar,
-      }}
-      component={DateInput}
-      classNames={styles}
-      format={format}
-      placeholder={placeholder}
-      formatDate={getDate}
-      onDayChange={onDayChange}
-      value={value}
-    />
-  </div>
-);
+}: Props) => {
+  const inputRef = React.createRef();
+  return (
+    <div className={styles.datepicker}>
+      <DayPickerInput
+        dayPickerProps={{
+          classNames: overlayStyles,
+          weekdaysShort,
+          navbarElement: Navbar,
+          onBlur: () => {
+            if (inputRef && inputRef.current) {
+              inputRef.current.hideAfterDayClick();
+            }
+          },
+        }}
+        ref={inputRef}
+        inputProps={{ ref: null }}
+        component={DateInput}
+        classNames={styles}
+        format={format}
+        placeholder={placeholder}
+        formatDate={getDate}
+        onDayChange={onDayChange}
+        value={value}
+      />
+    </div>
+  );
+};
 
 Datepicker.defaultProps = {
   format: DEFAULT_FORMAT,
