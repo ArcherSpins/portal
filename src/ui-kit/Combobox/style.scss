@@ -4,6 +4,23 @@
 .cbx__wrap {
   height: 2rem;
 
+  .cbx__option {
+    &:hover {
+      background-color: rgba($main-color, .6) !important;
+      color: white;
+    }
+
+    &.cbx__option--is-focused {
+      background-color: $main-color-hovered !important;
+      color: white;
+    }
+
+    &.cbx__option--is-selected {
+      background-color: $main-color-focused !important;
+      color: white;
+    }
+  }
+
   .label-combobox {
     color: $text-color-200;
     margin-bottom: 0.2rem;

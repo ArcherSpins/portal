@@ -49,7 +49,17 @@ storiesOf('Combobox', module)
         info: "Combobox",
         sections: [
           {
-            title: 'Обычный Combobox',
+            title: 'Combobox без выбранного элемента',
+            sectionFn: () => {
+              return <Combobox
+                        onChange={onChange}
+                        loadOptions={loadOptions}
+                        label="Title"
+                      />
+            },
+          },
+          {
+            title: 'Combobox с выбранным элементом',
             sectionFn: () => {
               return <Combobox
                         onChange={onChange}

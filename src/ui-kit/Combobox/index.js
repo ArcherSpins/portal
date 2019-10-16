@@ -1,4 +1,5 @@
 // @flow
+/* eslint-disable */
 import React from 'react';
 import Spinner from 'ui-kit/Spinner';
 import classNames from 'classnames';
