@@ -1,0 +1,16 @@
+@import '../variables.scss';
+
+.description {
+  border: 1px solid $border-color;
+  border-radius: 0.25rem;
+  width: 30%;
+  min-width: 20rem;
+  font-size: 1rem;
+  resize: vertical;
+  transition: 0.2s all;
+
+  &:focus {
+    outline: none;
+    border: 1px solid $main-color;
+  }
+}
