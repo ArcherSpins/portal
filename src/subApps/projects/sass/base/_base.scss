@@ -10,4 +10,10 @@
 .projects__app {
   font-size: 62.5%;
   padding: 50px 6em 0 6em;
+  * {
+    box-sizing: border-box;
+  }
+  button {
+    font-size: 0.8rem;
+  }
 }
