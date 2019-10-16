@@ -31,40 +31,6 @@
   justify-content: space-around;
 }
 
-.close-modal-btn {
-  color: white;
-  cursor: pointer;
-  float: right;
-  font-size: 1.87rem;
-  margin: 0;
-}
-
-.close-modal-btn:hover {
-  color: black;
-}
-
-.btn-cancel,
-.btn-continue {
-  border-radius: 0.25rem;
-  font-size: 1rem;
-  color: white;
-  cursor: pointer;
-  padding: 0.625rem 1.562rem;
-  width: 45%;
-}
-
-.btn-cancel {
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  background: white;
-  color: black;
-  float: left;
-}
-
-.btn-continue {
-  background: #eb5757;
-  border: 1px solid rgba(0, 0, 0, 0.05);
-}
-
 .back-drop {
   background-color: rgba(48, 49, 48, 0.42);
   z-index: 1000;
@@ -74,10 +40,4 @@
   left: 0%;
   position: absolute;
   transition: all 1.3s;
-}
-
-.open-modal-btn {
-  margin: 0.937rem;
-  padding: 0.625rem;
-  font-weight: bold;
 }
