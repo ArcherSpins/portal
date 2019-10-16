@@ -2,9 +2,7 @@
 @import "../mixins.scss";
 
 .cbx__wrap {
-  display: inline-block;
   height: 2rem;
-  min-width: 15rem;
 
   .label-combobox {
     color: $text-color-200;
@@ -12,7 +10,7 @@
   }
 
   &.error-select {
-    .css-bg1rzq-control, .css-1szy77t-constrol, .cbx__control {
+    .cbx__control {
       border-style: solid !important;
       border-color: $danger-400 !important;
     }
@@ -24,7 +22,7 @@
   }
 
   &.selected {
-    .css-bg1rzq-control, .css-1szy77t-constrol, .cbx__control {
+    .cbx__control {
       border-style: solid !important;
     }
   }
@@ -42,12 +40,7 @@
     }
   }
 
-
-  .css-16pqwjk-indicatorContainer {
-    padding: 0;
-  }
-
-  .css-1wy0on6 {
+  .cbx__indicators {
     span {
       display: none;
     }
@@ -57,25 +50,12 @@
     padding: 0;
   }
 
-  .css-1pcexqc-container {
-    height: 100%;
-
-    .css-bg1rzq-control, .css-1szy77t-constrol, .cbx__control {
-      height: 100%;
-      min-height: 2rem;
-      border-color: $main-color;
-      border-style: dashed;
-      box-shadow: none;
-    }
-  }
-}
-
-.select {
-
   .cbx__control {
-    color: red;
     height: 100%;
+    min-height: 2rem;
+    border-color: $main-color !important;
+    border-style: dashed;
+    box-shadow: none;
   }
-
-/* TODO: Place your component styles here */
 }
+
