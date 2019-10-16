@@ -1,9 +1,9 @@
 // @flow
-import React from 'react';
+import React, { type Node } from 'react';
 import styles from './Modal.module.scss';
 
 type Props = {
-    children?: React.Node
+    children?: Node
 }
 
 

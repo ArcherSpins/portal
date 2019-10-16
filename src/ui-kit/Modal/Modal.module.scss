@@ -1,13 +1,16 @@
+@import '../variables';
+
 .modal-wrapper {
   position: relative;
   z-index: 2000;
   background: #ffffff;
-  border: 1px solid #d0cccc;
+  border: 1px solid $border-color;
   box-shadow: 0 0.312rem 0.5rem 0 rgba(0, 0, 0, 0.2),
     0 0.437rem 1.25rem 0 rgba(0, 0, 0, 0.17);
   margin: 0% auto;
   transition: all 0.8s;
-  width: 20%;
+  min-width: 20rem;
+  max-width: 20rem;
   border-radius: 0.25rem;
   padding: 1.625rem;
 }

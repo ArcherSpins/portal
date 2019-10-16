@@ -1,6 +1,6 @@
 /* eslint-disable no-lone-blocks */
 // @flow
-import React from 'react';
+import React, { type Node } from 'react';
 
 import styles from './Modal.module.scss';
 
@@ -8,7 +8,7 @@ import styles from './Modal.module.scss';
 
 type Props = {
     show?: boolean,
-    children: string,
+    children: Node,
 };
 
 const Modal = ({
