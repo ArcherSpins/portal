@@ -1,0 +1,43 @@
+@import '../variables';
+@import '../mixins';
+
+.radio-input {
+  display: none;
+}
+
+.form-label {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  padding-left: 1.312rem;
+  position: relative;
+}
+
+.radio-button {
+  height: 1rem;
+  width: 1rem;
+  border: 1px solid $border-color;
+  border-radius: 50%;
+  display: inline-block;
+  position: absolute;
+  top: -2px;
+  left: 0;
+
+  &::after {
+    content: '';
+    display: block;
+    height: 0.625rem;
+    width: 0.625rem;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: $color-gray-dark-2;
+    opacity: 0;
+    transition: opacity 0.1s;
+  }
+}
+
+.radio-input:checked ~ .form-label .radio-button::after {
+  opacity: 1;
+}

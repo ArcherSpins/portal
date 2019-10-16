@@ -47,7 +47,8 @@ $color-gray-dark-1: #4b4b4b;
 
 .project-detail__title {
   margin-bottom: 6em;
-  font-family: "proxima_novabold";
+  font-family: "Proxima Nova";
+  font-weight: bold;
   font-size: 28px;
   line-height: 40px;
   color: $color-gray-dark-2;
@@ -83,7 +84,7 @@ $color-gray-dark-1: #4b4b4b;
 }
 
 .project-detail__project-name {
-  font-family: "proxima_novablack";
+  font-family: "Proxima Nova Black";
   font-size: 2.8em;
   color: $color-gray-dark-2;
 }

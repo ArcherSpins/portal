@@ -1,5 +1,5 @@
 @mixin default-transition($property) {
-  transition: $property .2s ease-in;
+  transition: $property 0.2s ease-in;
 }
 
 @mixin default-font() {

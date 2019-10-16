@@ -63,3 +63,39 @@
     }
   }
 }
+
+.wrap {
+  position: relative;
+}
+
+.clear {
+  @include default-transition(background);
+  position: absolute;
+  right: 0.3rem;
+  cursor: pointer;
+  display: inline-flex;
+  width: 1.5rem;
+  height: 1.5rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.25rem;
+  top: 0.45rem;
+
+  &:hover {
+    background: rgba($grey, .5);
+  }
+}
+
+.icon {
+  position: absolute;
+  color: $grey;
+  font-size: 1.25rem;
+  left: 0.25rem;
+  top: 0.45rem;
+}
+
+.paddingLeft {
+  input {
+    padding-left: 2.25rem;
+  }
+}

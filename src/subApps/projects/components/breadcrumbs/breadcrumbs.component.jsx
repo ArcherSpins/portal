@@ -1,6 +1,8 @@
 /*eslint-disable */
 // TODO: FIX THIS
 import React from "react";
+import { withRouter } from 'react-router-dom';
+import { compose } from 'redux';
 import Breadcrumbs from "react-router-dynamic-breadcrumbs";
 import { connect } from "react-redux";
 import capitalize from "../../helpers/capitalize";
@@ -73,7 +75,11 @@ const mapRoutes = (projects, tasks, milestones) => ({
   [routes.LOG_CREATE_ROUTE]: "Create log"
 });
 
-const StyledBreadcrumbs = ({ projects, tasks, milestones }) => {
+const StyledBreadcrumbs = ({ projects, tasks, milestones, location }) => {
+  console.log(location);
+  if (location.pathname === routes.ROOT) {
+    return null;
+  }
   return (
     <Breadcrumbs
       mappedRoutes={mapRoutes(projects, tasks, milestones)}
@@ -113,4 +119,7 @@ const mapStateToProps = state => ({
   projects: state.project.projects
 });
 
-export default connect(mapStateToProps)(StyledBreadcrumbs);
+export default compose(
+  withRouter, 
+  connect(mapStateToProps)
+)(StyledBreadcrumbs);

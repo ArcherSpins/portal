@@ -2,6 +2,7 @@
 import React, { type Node } from 'react';
 import noop from 'lodash.noop';
 import classNames from 'classnames';
+import xmark from './xmark.svg';
 import styles from './Input.module.scss';
 
 type ValueType = 'password' | 'text';
@@ -20,6 +21,9 @@ type Props = {
   value?: string,
   label?: string,
   name: string,
+  icon?: Node,
+  clearable?: boolean,
+  onClearClick?: () => void,
   /** onChange */
   onChange?: (e: SyntheticEvent<HTMLInputElement>) => void,
   /** Срабатывает при потере фокуса */
@@ -38,23 +42,37 @@ const Input = ({
   use = 'default',
   label,
   onBlur,
+  clearable,
+  onClearClick,
+  icon,
   ...restProps
 }: Props): Node => (
   <div
     {...restProps}
-    className={classNames(styles[use], { [styles.error]: error }, className)}
+    className={
+      classNames(
+        styles[use],
+        { [styles.error]: error, [styles.paddingLeft]: icon },
+        className,
+      )
+    }
   >
     <label htmlFor={name}>
       {label}
-      <input
-        name={name}
-        type={type}
-        placeholder={placeholder}
-        onChange={onChange}
-        onBlur={onBlur}
-        disabled={disabled}
-        value={value}
-      />
+      <div className={styles.wrap}>
+        <span className={styles.icon}>{icon && icon}</span>
+        <input
+          name={name}
+          type={type}
+          placeholder={placeholder}
+          onChange={onChange}
+          onBlur={onBlur}
+          disabled={disabled}
+          value={value}
+        />
+        {/* TODO: REPLACE SVG TO <i /> */}
+        {clearable && <button onClick={onClearClick} className={styles.clear} type="button"><img src={xmark} alt="clear" /></button>}
+      </div>
     </label>
 
   </div>
@@ -71,6 +89,9 @@ Input.defaultProps = {
   value: '',
   className: '',
   label: '',
+  clearable: false,
+  onClearClick: noop,
+  icon: null,
 };
 
 export default Input;
