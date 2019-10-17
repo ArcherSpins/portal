@@ -1,7 +1,6 @@
-/* eslint-disable jsx-a11y/control-has-associated-label */
-/* eslint-disable jsx-a11y/label-has-associated-control */
 // @flow
 import React from 'react';
+import classNames from 'classnames';
 import styles from './TextArea.module.scss';
 
 type Props = {
@@ -10,17 +9,47 @@ type Props = {
   onChange: (e: SyntheticEvent<HTMLInputElement>) => void,
   id: string,
   placeholder?: string,
-  className: string,
+  className?: string,
   style?: {
     [string]: number | string
-  }
+  },
+  cols?: string,
+  rows?: string,
+  use?: string,
+  label?: string,
+  disabled?: boolean
 }
 
 
 const TextArea = ({
-  name, value, onChange, id, placeholder, className, style,
+  name,
+  value,
+  onChange,
+  id,
+  placeholder,
+  className,
+  style,
+  cols,
+  rows,
+  use,
+  label,
+  disabled,
 }: Props) => (
-  <textarea style={style} className={styles[className]} placeholder={placeholder} name={name} id={id} onChange={onChange} value={value} cols="30" rows="10" />
+  <label htmlFor={name}>
+    {label}
+    <textarea
+      style={style}
+      className={classNames(styles[className], { [styles.use]: use })}
+      placeholder={placeholder}
+      name={name}
+      id={id}
+      onChange={onChange}
+      value={value}
+      cols={cols}
+      rows={rows}
+      disabled={disabled}
+    />
+  </label>
 );
 
 TextArea.defaultProps = {
@@ -28,6 +57,12 @@ TextArea.defaultProps = {
   placeholder: '',
   value: '',
   style: {},
+  cols: '30',
+  rows: '10',
+  className: '',
+  use: '',
+  label: 'Title',
+  disabled: false,
 };
 
 export default TextArea;

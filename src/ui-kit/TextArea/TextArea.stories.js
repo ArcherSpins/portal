@@ -19,7 +19,7 @@ storiesOf('TextArea', module).addWithChapters('Just TextArea', {
                         <TextArea 
                             onChange={onChange} 
                             placeholder='Please describe the work you have done'
-                            className='description'
+                            className='textarea'
                         />
                         
                     )
