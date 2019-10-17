@@ -6,7 +6,7 @@ import styles from './Modal.module.scss';
 
 import Input from 'ui-kit/Input';
 import {Button} from 'ui-kit/Button';
-import Modal from 'ui-kit/Modal';
+import Modal from './Modal';
 import ModalBody from './ModalBody';
 import ModalHeader from './ModalHeader';
 import ModalFooter from './ModalFooter';
