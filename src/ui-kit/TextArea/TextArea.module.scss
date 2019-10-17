@@ -10,9 +10,15 @@
   transition: 0.2s all;
   padding-top: 0.5rem;
   padding-left: 0.6rem;
+  &::placeholder {
+    color: $disabled-color;
+  }
 
   &:focus {
     outline: none;
     border: 1px solid $main-color;
+    &::placeholder {
+      color: lighten($disabled-color, 5%);
+    }
   }
 }
