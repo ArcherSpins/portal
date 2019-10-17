@@ -1,5 +1,6 @@
 @import '../variables.scss';
 .add-button {
+  position: relative;
   width: 2rem;
   height: 2rem;
   cursor: pointer;
@@ -17,13 +18,26 @@
   }
 
   div {
+    position: absolute;
+    left: 3rem;
     font-size: 0.85rem;
     color: #fff;
-    display: inline-block;
+    align-items: center;
+    justify-content: center;
+    display: flex;
     border-radius: 4px;
     background-color: $main-color;
     height: 2rem;
-    min-width: 5rem;
-    // padding: 0 1rem 0 1rem;
+    min-width: 6rem;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(3px);
+    transition: all 0.4s;
+  }
+
+  &:hover div {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0px);
   }
 }
