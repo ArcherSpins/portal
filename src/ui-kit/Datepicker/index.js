@@ -2,6 +2,7 @@
 import React from 'react';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import { format as formatDate } from 'date-fns';
+import classNames from 'classnames';
 // $FlowFixMe
 import 'react-day-picker/lib/style.css';
 
@@ -14,7 +15,11 @@ type Props = {
   onDayChange: Date => void,
   format?: string,
   placeholder?: string,
-  value?: Date
+  value?: Date,
+  className?: string,
+  style?: {
+    [string]: mixed
+  }
 };
 
 type NavbarElementProps = {
@@ -60,10 +65,12 @@ const Datepicker = ({
   format = DEFAULT_FORMAT,
   placeholder = DEFAULT_FORMAT,
   value,
+  className,
+  style,
 }: Props) => {
   const inputRef = React.createRef();
   return (
-    <div className={styles.datepicker}>
+    <div style={style} className={classNames(styles.datepicker, className)}>
       <DayPickerInput
         dayPickerProps={{
           classNames: overlayStyles,
@@ -93,6 +100,8 @@ Datepicker.defaultProps = {
   format: DEFAULT_FORMAT,
   placeholder: DEFAULT_FORMAT,
   value: '',
+  className: '',
+  style: {},
 };
 
 export default Datepicker;
