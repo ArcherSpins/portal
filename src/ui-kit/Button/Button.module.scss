@@ -34,6 +34,21 @@
   }
 }
 
+
+.contentVisible {
+  visibility: visible;
+}
+
+.contentHidden {
+  visibility: hidden;
+}
+
+.sm {
+  font-size: 0.875rem;
+  padding: 0.2rem 0.75rem;
+  border-radius: 0.2rem;
+}
+
 .default {
   @extend .button;
   background: $main-color;
@@ -197,6 +212,55 @@
   }
 }
 
+.grey-filled {
+  @extend .button;
+  background: $grey-hovered;
+  color: $text-color;
+  border: 1px solid $grey-hovered;
+
+  div[type="spinner"] {
+    background: linear-gradient(to right,  rgba($text-color,1) 10%,rgba($text-color,0) 65%);
+    &:before { 
+      background: $text-color;
+    }
+
+    &:after {
+      background: $grey-hovered;
+    }
+  }
+
+  &:hover {
+    background: $grey;
+
+    div[type="spinner"] {
+      &:after {
+        background: $grey;
+      }
+    }
+  }
+
+  &:focus {
+    background: $grey;
+    border: 1px solid $grey;
+
+    div[type="spinner"] {
+      &:after {
+        background: $grey;
+      }
+    }
+  }
+
+  &:disabled {
+    background: $grey-disabled;
+    color: $disabled-color;
+    div[type="spinner"] {
+      &:after {
+        background: $grey-hovered;
+      }
+    }
+  }
+}
+
 .danger {
   @extend .button;
   background: $danger-400;
@@ -280,18 +344,4 @@
       height: 0;
     }
   }
-}
-
-.contentVisible {
-  visibility: visible;
-}
-
-.contentHidden {
-  visibility: hidden;
-}
-
-.sm {
-  font-size: 0.875rem;
-  padding: 0.2rem 0.75rem;
-  border-radius: 0.2rem;
 }
