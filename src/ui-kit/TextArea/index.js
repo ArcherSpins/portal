@@ -27,7 +27,7 @@ TextArea.defaultProps = {
   name: '',
   placeholder: '',
   value: '',
-  style: '',
+  style: {},
 };
 
 export default TextArea;
