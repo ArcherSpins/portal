@@ -1,18 +1,19 @@
 /* eslint-disable linebreak-style */
 /* eslint-disable react/button-has-type */
 // @flow
-import React, { type Node } from 'react';
+import React from 'react';
 import styles from './AddButton.module.scss';
 
 type Props = {
     type?: string,
-    className: string,
-    children: Node
+    className: string
 }
 
 
-const AddButton = ({ type, className, children }: Props) => (
-  <button type={type} className={styles[className]}>{children}</button>
+const AddButton = ({ type, className }: Props) => (
+  <button type={type} className={styles[className]}>
+    <div>Add Task</div>
+  </button>
 );
 
 AddButton.defaultProps = {
