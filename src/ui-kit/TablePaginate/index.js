@@ -1,20 +1,17 @@
+
 // @flow
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import classNames from 'classnames';
+// $FlowFixMe
+import { useTable, useBlockLayout, useResizeColumns } from 'react-table';
 import Paginate from './Paginate';
-import ItemTable from './Item';
 import styles from './TablePaginate.module.scss';
 import type { ItemTableType } from './types';
 
-const chunkArray = (array, chunkSize) => {
-  const result = [];
-  const maxLength = array.length;
-
-  for (let item = 0; item < maxLength; item += chunkSize) {
-    result.push(array.slice(item, item + chunkSize));
-  }
-
-  return result;
+type ColumnType = {
+  Header: string,
+  accessor?: string,
+  columns?: Array<{ Header?: string, accessor?: string }>
 };
 
 type Props = {
@@ -29,78 +26,133 @@ type Props = {
   items: Array<ItemTableType>,
   activeIndex?: number,
   pageSize?: number,
-  getNumberPaginate?: (number) => void
+  getNumberPaginate?: (number) => void,
+  columns: Array<ColumnType>
 };
 
-type State = {
-  index: number
+const chunkArray = (array: Array<any>, chunkSize: number): Array<any> => {
+  const result = [];
+  const maxLength = array.length;
+
+  for (let item = 0; item < maxLength; item += chunkSize) {
+    result.push(array.slice(item, item + chunkSize));
+  }
+
+  return result;
+};
+
+function deleteStyle(props: { [string]: mixed }) {
+  const { style, ...data } = props;
+  return data;
 }
 
-export default class TablePaginate extends Component<Props, State> {
-  static defaultProps = {
-    classNamePaginate: '',
-    className: '',
-    stylePaginate: {},
-    style: {},
-    activeIndex: 1,
-    pageSize: 1,
-    getNumberPaginate: () => {},
-  }
+const Table = (
+  { columns, data, ...restProps }: { columns: Array<ColumnType>, data: Array<any> },
+) => {
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    rows,
+    prepareRow,
+  } = useTable(
+    {
+      columns,
+      data,
+    },
+    useBlockLayout,
+    useResizeColumns,
+  );
+  return (
+    <table {...getTableProps()} {...restProps} className={styles.table_paginate}>
+      <thead className={styles.thead}>
+        {headerGroups.map((headerGroup) => {
+          const { style, ...dataHead } = headerGroup.getHeaderGroupProps();
+          return (
+            <tr {...dataHead} className={styles.tr}>
+              {headerGroup.headers.map((column) => (
+                <th {...deleteStyle(column.getHeaderProps())} className={styles.th}>
+                  {column.render('Header')}
+                  {/* {...column.getResizerProps()} */}
+                  <div
+                    className={
+                      classNames(styles.resizer, { [styles.isResizing]: column.isResizing })
+                    }
+                  />
+                </th>
+              ))}
+            </tr>
+          );
+        })}
+      </thead>
 
-  constructor(props: Props) {
-    super(props);
+      <tbody {...getTableBodyProps()}>
+        {rows.map(
+          (row) => prepareRow(row) || (
+            <tr {...deleteStyle(row.getRowProps())} className={styles.tr}>
+              {row.cells.map((cell) => (
+                <td {...deleteStyle(cell.getCellProps())} className={classNames(styles.td, styles['comment-table_paginate'])}>
+                  {cell.render('Cell')}
+                </td>
+              ))}
+            </tr>
+          ),
+        )}
+      </tbody>
+    </table>
+  );
+};
 
-    this.state = {
-      index: props.activeIndex || 1,
-    };
-  }
 
-  togglePaginate = (idx: number) => {
-    const { getNumberPaginate } = this.props;
+const TablePaginate = ({
+  classNamePaginate,
+  className,
+  style,
+  stylePaginate,
+  activeIndex,
+  items,
+  getNumberPaginate,
+  pageSize,
+  columns,
+  ...restProps
+}: Props) => {
+  const [index, toggleIndex] = useState(activeIndex || 1);
+
+  const togglePaginate = (idx: number) => {
     if (typeof getNumberPaginate === 'function') {
       getNumberPaginate(idx);
     }
-    this.setState({ index: idx });
-  }
+    toggleIndex(idx);
+  };
 
-  render() {
-    const {
-      classNamePaginate,
-      className,
-      style,
-      stylePaginate,
-      items,
-      pageSize,
-    } = this.props;
-    const { index } = this.state;
-    return (
-      <div>
-        <Paginate
-          className={classNamePaginate}
-          style={stylePaginate}
-          count={Math.ceil(items.length / Number(pageSize))}
-          togglePaginate={this.togglePaginate}
-          activeNum={index}
-        />
-        <table style={style} className={classNames(styles.table_paginate, className)}>
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Assignee</th>
-              <th>Timespent</th>
-              <th>Spent Time</th>
-              <th>Comment</th>
-            </tr>
-          </thead>
-          <tbody>
-            {
-              chunkArray(items, Number(pageSize))[index - 1].map((item, i) => (
-                <ItemTable index={i + 1} key={item.id} {...item} />
-              ))
-            }
-          </tbody>
-        </table>
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <Paginate
+        className={classNamePaginate}
+        style={stylePaginate}
+        count={Math.ceil(items.length / Number(pageSize))}
+        togglePaginate={togglePaginate}
+        activeNum={index}
+      />
+      <Table
+        style={style}
+        className={className}
+        columns={columns}
+        data={chunkArray(items, Number(pageSize))[index - 1]}
+        {...restProps}
+      />
+    </div>
+  );
+};
+
+TablePaginate.defaultProps = {
+  classNamePaginate: '',
+  className: '',
+  stylePaginate: {},
+  style: {},
+  activeIndex: 1,
+  pageSize: 1,
+  getNumberPaginate: () => {},
+};
+
+export default TablePaginate;

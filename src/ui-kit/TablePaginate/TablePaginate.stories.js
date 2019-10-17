@@ -4,35 +4,48 @@ import { action } from '@storybook/addon-actions';
 import TablePaginate from 'ui-kit/TablePaginate';
 import { storiesOf } from '@storybook/react';
 
+const columns = [
+  {
+    Header: '#',
+    accessor: 'id',
+  },
+  {
+    Header: 'Assignee',
+    accessor: 'assignee',
+  },
+  {
+    Header: 'Timespent',
+    accessor: 'timespent',
+  },
+  {
+    Header: 'Spent Time',
+    accessor: 'spentTime',
+  },
+  {
+    Header: 'Comment',
+    accessor: 'comment',
+  },
+];
 
 const data = [
   {
     id: '1',
     assignee: 'Konstantin Konstantinopolsky 1',
-    timespent: {
-      time: '22:38',
-      date: '19/08/30',
-    },
+    timespent: '22:38 19/08/30',
     spentTime: '8:00',
     comment: 'Ius dicat feugiat no, vix cu modo dicat Ius dicat Ius dicat feugiat no, vix cu modo dicat',
   },
   {
     id: '2',
     assignee: 'Konstantin Konstantinopolsky 1',
-    timespent: {
-      time: '22:38',
-      date: '19/08/30',
-    },
+    timespent: '22:38 19/08/30',
     spentTime: '8:00',
     comment: 'Ius dicat feugiat no, vix cu modo dicat Ius dicat Ius dicat feugiat no, vix cu modo dicat',
   },
   {
     id: '3',
     assignee: 'Konstantin Konstantinopolsky 1',
-    timespent: {
-      time: '22:38',
-      date: '19/08/30',
-    },
+    timespent: '22:38 19/08/30',
     spentTime: '8:00',
     comment: 'Ius dicat feugiat no, vix cu modo dicat Ius dicat Ius dicat feugiat no, vix cu modo dicat',
   },
@@ -89,7 +102,12 @@ storiesOf('TablePaginate', module)
           {
             title: 'TablePaginate',
             sectionFn: () => {
-              return <TablePaginate items={data} pageSize={3} getNumberPaginate={getNumberPaginate} />;
+              return <TablePaginate
+                        items={data}
+                        pageSize={3}
+                        getNumberPaginate={getNumberPaginate}
+                        columns={columns}
+                      />;
             },
           },
         ],

@@ -3,15 +3,32 @@
 
 
 .table_paginate {
-  max-width: 70rem;
+  max-width: 55rem;
   display: block;
   font-size: .88rem;
+
+  .resizer {
+    display: inline-block;
+    background: blue;
+    width: 5px;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform: translateX(50%);
+    z-index: 1;
+
+    &.isResizing {
+      background: red;
+    }
+  }
 
   th {
     color: $text-color-200;
     text-align: left;
     padding-right: 1.5rem;
     padding-bottom: .5rem;
+    flex-grow: 1;
 
     &:nth-last-child() {
       padding-right: 0;
@@ -33,11 +50,14 @@
   }
 
   tr {
-    box-shadow: inset 0 -.1rem 0 rgba(48, 48, 48, 0.07);
+    box-shadow: inset 0 -.1rem 0 rgba($black-200, 0.07);
 
     td {
+      flex-grow: 1;
+    
       &:nth-child(1) {
         padding-left: .1rem;
+        width: .5rem !important;
       }
     }
   }
