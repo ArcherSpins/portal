@@ -1,27 +1,32 @@
 // @flow
 import React, { type Node } from 'react';
-
+import classNames from 'classnames';
 import styles from './Modal.module.scss';
 
 type Props = {
     show?: boolean,
     children: Node,
+    onRequestClose: () => void
 };
 
 const Modal = ({
-  show, children,
+  show, children, onRequestClose,
 }: Props) => (
-  <div>
+  <>
+    <button
+      type="button"
+      className={classNames(styles.backdrop, { [styles.backdrop__visible]: show })}
+      onClick={onRequestClose}
+    >
+      {' '}
+    </button>
     <div
-      className={styles['modal-wrapper']}
-      style={{
-        transform: show ? 'translateY(0vh)' : 'translateY(-100vh)',
-        opacity: show ? '1' : '0',
-      }}
+      className={classNames(styles['modal-wrapper'], { [styles.visible]: show })}
     >
       {children}
     </div>
-  </div>
+  </>
+
 );
 
 
