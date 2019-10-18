@@ -4,7 +4,7 @@ import React from 'react';
 import classNames from 'classnames';
 import noop from 'lodash.noop';
 import styles from './PopoverButton.module.scss';
-import Spinner from '../Spinner';
+import { ButtonWithProgress } from '../Button';
 
 type Props = {
     type?: string,
@@ -28,16 +28,17 @@ const PopoverButton = ({
   popover,
   style,
 }: Props) => (
-  <button
+  <ButtonWithProgress
     style={style}
-    type={type}
-    className={classNames(styles.button, className)}
-    disabled={disabled}
     onClick={onClick}
+    className={classNames(styles.button, className)}
+    type={type}
+    loading={loading}
+    disabled={disabled}
   >
     {!loading && !disabled && (<div className={styles.popover}>{popover}</div>)}
-    {loading ? <Spinner data-type="spinner" /> : <span>+</span>}
-  </button>
+    <span>+</span>
+  </ButtonWithProgress>
 );
 
 PopoverButton.defaultProps = {

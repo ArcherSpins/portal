@@ -4,6 +4,10 @@
   position: relative;
   width: 2rem;
   height: 2rem;
+  min-width: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
   color: #1a1a1a;
   background: $main-color;
@@ -12,7 +16,6 @@
   span {
     color: #fff;
     font-size: 2rem;
-    line-height: 1.1em;
   }
 
   &:focus {
@@ -24,7 +27,6 @@
   }
 
   div[type='spinner'] {
-    top: 2px;
     background: linear-gradient(
       to right,
       rgba(white, 1) 10%,
@@ -40,8 +42,9 @@
   }
 
   &:disabled {
-    background: $grey-focused;
+    background: $grey-disabled;
     cursor: not-allowed;
+    border: 1px solid $grey-disabled;
     color: $grey-disabled;
     div[type='spinner'] {
       background: linear-gradient(
@@ -63,6 +66,7 @@
 .popover {
   @include default-transition(all);
   position: absolute;
+  top: 0;
   left: 3rem;
   font-size: 0.85rem;
   color: #fff;
