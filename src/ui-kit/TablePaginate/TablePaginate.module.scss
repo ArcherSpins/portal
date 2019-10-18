@@ -7,21 +7,21 @@
   display: block;
   font-size: .88rem;
 
-  .resizer {
-    display: inline-block;
-    background: blue;
-    width: 5px;
-    height: 100%;
-    position: absolute;
-    right: 0;
-    top: 0;
-    transform: translateX(50%);
-    z-index: 1;
+  // .resizer {
+  //   display: inline-block;
+  //   background: blue;
+  //   width: 5px;
+  //   height: 100%;
+  //   position: absolute;
+  //   right: 0;
+  //   top: 0;
+  //   transform: translateX(50%);
+  //   z-index: 1;
 
-    &.isResizing {
-      background: red;
-    }
-  }
+  //   &.isResizing {
+  //     background: red;
+  //   }
+  // }
 
   th {
     color: $text-color-200;
@@ -76,7 +76,7 @@
     background-color: white;
     color: $text-color;
     font-size: .88rem;
-    border: 1px solid $grey;
+    border: calculateRem(1px) solid $grey;
     box-sizing: border-box;
     cursor: pointer;
     min-width: 2rem;
@@ -92,33 +92,33 @@
     }
 
     &.first {
-      border-top-left-radius: 4px;
-      border-bottom-left-radius: 4px;
+      border-top-left-radius: calculateRem(4px);
+      border-bottom-left-radius: calculateRem(4px);
     }
 
     &.last {
-      border-top-right-radius: 4px;
-      border-bottom-right-radius: 4px;
+      border-top-right-radius: calculateRem(4px);
+      border-bottom-right-radius: calculateRem(4px);
     }
 
     &.next-button {
-      border: 1px solid $grey;
+      border: calculateRem(1px) solid $grey;
       box-sizing: border-box;
       background-color: white;
       border-left: none;
       cursor: pointer;
-      border-top-right-radius: 4px;
-      border-bottom-right-radius: 4px;
+      border-top-right-radius: calculateRem(4px);
+      border-bottom-right-radius: calculateRem(4px);
       padding: 0 0.9rem;
     }
 
     &.prev-button {
-      border: 1px solid $grey;
+      border: calculateRem(1px) solid $grey;
       box-sizing: border-box;
       background-color: white;
       cursor: pointer;
-      border-top-left-radius: 4px;
-      border-bottom-left-radius: 4px;
+      border-top-left-radius: calculateRem(4px);
+      border-bottom-left-radius: calculateRem(4px);
       padding: 0 0.9rem;
     }
   }
