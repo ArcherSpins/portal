@@ -1,65 +1,19 @@
 @import '../variables.scss';
 @import '../mixins.scss';
 .button {
-  position: relative;
   width: 2rem;
   height: 2rem;
   min-width: 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  cursor: pointer;
-  color: #1a1a1a;
-  background: $main-color;
   border-radius: 50%;
-  border: none;
   span {
     color: #fff;
     font-size: 2rem;
   }
-
-  &:focus {
-    outline: none;
-  }
-
-  &:active {
-    background: $main-color-focused;
-  }
-
-  div[type='spinner'] {
-    background: linear-gradient(
-      to right,
-      rgba(white, 1) 10%,
-      rgba(white, 0) 65%
-    );
-    &:before {
-      background: white;
-    }
-
-    &:after {
-      background: $main-color;
-    }
-  }
-
   &:disabled {
-    background: $grey-disabled;
-    cursor: not-allowed;
-    border: 1px solid $grey-disabled;
-    color: $grey-disabled;
-    div[type='spinner'] {
-      background: linear-gradient(
-        to right,
-        rgba($grey-disabled, 1) 10%,
-        rgba($grey-disabled, 0) 65%
-      );
-      &:before {
-        background: $grey-disabled;
-      }
-
-      &:after {
-        background: white;
-      }
-    }
+    padding: 0 0;
   }
 }
 
