@@ -26,11 +26,13 @@ type Props = {
   items: Array<ItemTableType>,
   activeIndex?: number,
   pageSize?: number,
-  getNumberPaginate?: (number) => void,
-  columns: Array<ColumnType>
+  getNumber?: (number) => void,
+  columns: Array<ColumnType>,
+  manual?: boolean,
+  count?: number
 };
 
-const chunkArray = (array: Array<any>, chunkSize: number): Array<any> => {
+const getPageItems = (array: Array<any>, chunkSize: number): Array<any> => {
   const result = [];
   const maxLength = array.length;
 
@@ -111,34 +113,40 @@ const TablePaginate = ({
   stylePaginate,
   activeIndex,
   items,
-  getNumberPaginate,
+  getNumber,
   pageSize,
   columns,
+  manual,
+  count,
   ...restProps
 }: Props) => {
-  const [index, toggleIndex] = useState(activeIndex || 1);
+  const [index, setIndex] = useState(activeIndex || 1);
 
-  const togglePaginate = (idx: number) => {
-    if (typeof getNumberPaginate === 'function') {
-      getNumberPaginate(idx);
+  const togglePage = (idx: number) => {
+    if (typeof getNumber === 'function') {
+      getNumber(idx);
     }
-    toggleIndex(idx);
+    if (!manual) {
+      setIndex(idx);
+    }
   };
+
+  const data = manual ? items : getPageItems(items, Number(pageSize))[index - 1];
 
   return (
     <div>
       <Paginate
         className={classNamePaginate}
         style={stylePaginate}
-        count={Math.ceil(items.length / Number(pageSize))}
-        togglePaginate={togglePaginate}
+        count={count || Math.ceil(items.length / Number(pageSize))}
+        togglePage={togglePage}
         activeNum={index}
       />
       <Table
         style={style}
         className={className}
         columns={columns}
-        data={chunkArray(items, Number(pageSize))[index - 1]}
+        data={data}
         {...restProps}
       />
     </div>
@@ -152,7 +160,9 @@ TablePaginate.defaultProps = {
   style: {},
   activeIndex: 1,
   pageSize: 1,
-  getNumberPaginate: () => {},
+  getNumber: () => {},
+  manual: false,
+  count: null,
 };
 
 export default TablePaginate;

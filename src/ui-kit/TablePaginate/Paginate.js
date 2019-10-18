@@ -6,7 +6,7 @@ import styles from './TablePaginate.module.scss';
 
 type Props = {
   count: number,
-  togglePaginate: (number) => void,
+  togglePage: (number) => void,
   activeNum: number,
   className?: string,
   style?: {
@@ -35,12 +35,12 @@ class Paginate extends React.Component<Props, State> {
     };
   }
 
-  togglePaginate = (idx: number) => {
-    const { togglePaginate } = this.props;
+  togglePage = (idx: number) => {
+    const { togglePage } = this.props;
     this.setState({
       active: idx,
     });
-    togglePaginate(idx);
+    togglePage(idx);
   }
 
   getButtons = () => {
@@ -56,7 +56,7 @@ class Paginate extends React.Component<Props, State> {
   render() {
     const { active } = this.state;
     const {
-      count, className, style, ...restProps
+      count, className, togglePage, activeNum, style, ...restProps
     } = this.props;
     return (
       <div
@@ -70,7 +70,7 @@ class Paginate extends React.Component<Props, State> {
               <button
                 type="button"
                 className={styles['prev-button']}
-                onClick={() => this.togglePaginate(active - 1)}
+                onClick={() => this.togglePage(active - 1)}
               >
                 Prev
               </button>
@@ -88,7 +88,7 @@ class Paginate extends React.Component<Props, State> {
                 )}
                 type="button"
                 key={item}
-                onClick={() => this.togglePaginate(i + 1)}
+                onClick={() => this.togglePage(i + 1)}
               >
                 { item }
               </button>
@@ -99,7 +99,7 @@ class Paginate extends React.Component<Props, State> {
               <button
                 type="button"
                 className={styles['next-button']}
-                onClick={() => this.togglePaginate(active + 1)}
+                onClick={() => this.togglePage(active + 1)}
               >
                 Next
               </button>
