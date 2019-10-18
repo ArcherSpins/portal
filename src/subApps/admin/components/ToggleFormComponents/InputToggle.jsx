@@ -46,7 +46,7 @@ export default ({
       toggleShow(showInput);
       changeValue(title);
     }
-  }, [showInput, title]);
+  });
 
   const change = (_value: string): void => {
     changeValue(_value);

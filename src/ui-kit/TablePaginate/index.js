@@ -2,6 +2,7 @@
 // @flow
 import React, { useState } from 'react';
 import classNames from 'classnames';
+import history from 'utils/history';
 // $FlowFixMe
 import { useTable, useBlockLayout, useResizeColumns } from 'react-table';
 import Paginate from './Paginate';
@@ -91,7 +92,12 @@ const Table = (
       <tbody {...getTableBodyProps()}>
         {rows.map(
           (row) => prepareRow(row) || (
-            <tr {...deleteStyle(row.getRowProps())} className={styles.tr}>
+            <tr
+              onClick={() => { row.original.url ? history.push(row.original.url) : void 0 }}
+              {...deleteStyle(row.getRowProps())}
+              className={styles.content}
+            >
+              {console.log(row)}
               {row.cells.map((cell) => (
                 <td {...deleteStyle(cell.getCellProps())} className={classNames(styles.td, styles['comment-table_paginate'])}>
                   {cell.render('Cell')}
