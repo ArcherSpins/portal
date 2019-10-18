@@ -30,7 +30,7 @@ export const ItemLink = ({
   <NavLink
     exact
     to={to}
-    activeClassName="active-link"
+    activeClassName="navbar-active-link"
     style={LinkStyles}
     activeStyle={{
       backgroundColor: '#509A5D',

@@ -1,0 +1,56 @@
+@import '../variables.scss';
+@import '../mixins.scss';
+
+.modal-wrapper {
+  position: relative;
+  z-index: 2000;
+  background: #ffffff;
+  border: 1px solid $border-color;
+  margin: 0% auto;
+  min-width: 20rem;
+  width: 30%;
+  border-radius: 0.25rem;
+  padding: 1.625rem;
+  opacity: 0;
+  transform: scale(0.9);
+  @include default-transition(all);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.modal-body {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: space-around;
+}
+
+.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.backdrop {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+  width: 100%;
+  outline: none;
+  height: 100%;
+  z-index: -1;
+  @include default-transition(all);
+}
+
+.backdrop__visible {
+  z-index: 1;
+  background: rgba($text-color, .3);
+}

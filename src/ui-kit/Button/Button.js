@@ -8,7 +8,7 @@ import { type ButtonUse } from './types';
 
 export const DEFAULT = 'default';
 
-type Size = 'md' | 'sm';
+export type ButtonSize = 'md' | 'sm';
 type ButtonType = 'button' | 'submit' | 'reset';
 
 export type ButtonProps = {
@@ -19,7 +19,7 @@ export type ButtonProps = {
   children: Node,
   disabled?: boolean,
   className?: string,
-  size?: Size,
+  size?: ButtonSize,
   type?: ButtonType
 };
 

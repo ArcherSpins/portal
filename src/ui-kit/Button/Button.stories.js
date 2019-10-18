@@ -106,6 +106,30 @@ const stories = storiesOf('Button', module)
       }
     ]
   })
+  .addWithChapters('Grey Filled', {
+    chapters: [
+      {
+        sections: [
+          {
+            title: "Idle",
+            sectionFn: () => <Button use="grey-filled" onClick={onClick}>Add Employee</Button>,
+          },
+          {
+            title: "Small",
+            sectionFn: () => <Button use="grey-filled" size="sm" onClick={onClick}>Add Employee</Button>,
+          },
+          {
+            title: "With spinner",
+            sectionFn: () => <ButtonWithProgress use="grey-filled" loading={boolean('loading', true)} onClick={onClick}>Add Employee</ButtonWithProgress>,
+          },
+          {
+            title: "Disabled",
+            sectionFn: () => <Button use="grey-filled" disabled onClick={onClick}>Add Employee</Button>
+          }
+        ],
+      }
+    ]
+  })
   .addWithChapters('Simple (small)', {
     chapters: [
       {

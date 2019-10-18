@@ -1,0 +1,44 @@
+@import '../variables.scss';
+@import '../mixins.scss';
+
+.datepicker {
+  display: inline-block;
+  width: 100%;
+  position: relative;
+}
+
+.input {
+  display: flex;
+  position: relative;
+  input {
+    border: 1px solid $text-color-50;
+    border-radius: 0.25em;
+    padding: 0.35em 0.5em;
+    font-size: 0.875em;
+    flex: 1;
+  }
+}
+
+
+
+.icon__wrap {
+  background: rgba($text-color-50, .2);
+  align-items: center;
+  display: inline-flex;
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: 1px;
+  border-left: 1px solid $text-color-50;
+  i {
+    font-size: 1em;
+    color: $text-color-200;
+    padding: 0 0.25em;
+  }
+}
+
+
+.overlay {
+  font: inherit;
+}

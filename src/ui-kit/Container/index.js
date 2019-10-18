@@ -5,17 +5,21 @@ import styles from './Container.module.scss';
 
 type Props = {
   children: Node,
-  className?: string
+  className?: string,
+  style?: {
+    [string]: mixed
+  }
 }
 
-const Container = ({ children, className }: Props) => (
-  <div className={classNames(styles.container, className)}>
+const Container = ({ children, className, style }: Props) => (
+  <div style={style} className={classNames(styles.container, className)}>
     {children}
   </div>
 );
 
 Container.defaultProps = {
   className: '',
+  style: {},
 };
 
 export default Container;
