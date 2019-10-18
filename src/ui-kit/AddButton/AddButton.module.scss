@@ -1,5 +1,6 @@
 @import '../variables.scss';
-.add-button {
+@import '../mixins.scss';
+.button {
   position: relative;
   width: 2rem;
   height: 2rem;
@@ -8,13 +9,18 @@
   background: $main-color;
   border-radius: 50%;
   border: none;
-  // transition: box-shadow 400ms cubic-bezier(0.2, 0, 0.7, 1),
-  //   transform 200ms cubic-bezier(0.2, 0, 0.7, 1);
   span {
-    // content: '+';
     color: #fff;
     font-size: 2rem;
     line-height: 1.1em;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:active {
+    background: $main-color-focused;
   }
 
   div[type='spinner'] {
@@ -34,8 +40,8 @@
   }
 
   &:disabled {
-    background: white;
-    border: 1px solid $grey-disabled;
+    background: $grey-focused;
+    cursor: not-allowed;
     color: $grey-disabled;
     div[type='spinner'] {
       background: linear-gradient(
@@ -55,6 +61,7 @@
 }
 
 .popover {
+  @include default-transition(all);
   position: absolute;
   left: 3rem;
   font-size: 0.85rem;
@@ -69,7 +76,6 @@
   opacity: 0;
   visibility: hidden;
   transform: translateY(3px);
-  transition: all 0.4s;
 
   &:before {
     transform: rotate(-90deg);
@@ -81,9 +87,13 @@
     top: 8px;
     left: -21px;
   }
+
+  &:focus {
+    outline: none;
+  }
 }
 
-.add-button:hover .popover {
+.button:hover .popover {
   opacity: 1;
   visibility: visible;
   transform: translateY(0px);

@@ -14,8 +14,16 @@ storiesOf('AddButton', module).addWithChapters('Just AddButton', {
             sections: [
                 {
                     title: 'Default',
-                    sectionFn: withDecorator(<AddButton className='add-button' onClick={onClick}></AddButton>)
-                }
+                    sectionFn: withDecorator(<AddButton popover='Add Task' onClick={onClick}></AddButton>)
+                },
+                {
+                    title: 'Disabled',
+                    sectionFn: withDecorator(<AddButton disabled={true} onClick={onClick}></AddButton>)
+                },
+                {
+                    title: 'widthSpinner',
+                    sectionFn: withDecorator(<AddButton loading={true} onClick={onClick}></AddButton>)
+                },
             ]
         }
     ]
