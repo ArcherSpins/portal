@@ -48,16 +48,18 @@ storiesOf('TablePaginate', module)
           {
             title: 'TablePaginate',
             sectionFn: () => {
-              return <TablePaginate
-                        items={defaultData}
-                        pageSize={3}
-                        getNumber={getNumber}
-                        columns={columns}
-                      />;
+              return (
+                <TablePaginate
+                  items={defaultData}
+                  pageSize={3}
+                  getNumber={getNumber}
+                  columns={columns}
+                />
+              )
             },
           },
           {
-            title: 'TablePaginate рендер с пропсов с флагом malual',
+            title: 'TablePaginate рендер с пропсов с флагом manual (используется для server-side pagination)',
             sectionFn: () => {
               return <RenderTableManual pageSize={3} />;
             },
