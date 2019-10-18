@@ -15,9 +15,9 @@ type Props = {
   },
   cols?: string,
   rows?: string,
-  use?: string,
   label?: string,
-  disabled?: boolean
+  disabled?: boolean,
+  labelClassName?: string
 }
 
 
@@ -31,15 +31,15 @@ const TextArea = ({
   style,
   cols,
   rows,
-  use,
   label,
   disabled,
+  labelClassName,
 }: Props) => (
-  <label htmlFor={name}>
+  <label htmlFor={name} className={classNames(styles.label, labelClassName)}>
     {label}
     <textarea
       style={style}
-      className={classNames(styles.textarea, { [styles.use]: use }, className)}
+      className={classNames(styles.textarea, className)}
       placeholder={placeholder}
       name={name}
       id={id}
@@ -60,9 +60,9 @@ TextArea.defaultProps = {
   cols: '30',
   rows: '10',
   className: '',
-  use: '',
   label: '',
   disabled: false,
+  labelClassName: '',
 };
 
 export default TextArea;
