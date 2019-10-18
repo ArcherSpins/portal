@@ -8,12 +8,10 @@
   justify-content: center;
   align-items: center;
   border-radius: 50%;
+  border: none;
   span {
     color: #fff;
     font-size: 2rem;
-  }
-  &:disabled {
-    padding: 0 0;
   }
 }
 

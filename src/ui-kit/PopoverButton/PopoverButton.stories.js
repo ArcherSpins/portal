@@ -8,7 +8,7 @@ const onClick = action('add button clicked!');
 
 const withDecorator = (node) => () => <div>{node}</div>;
 
-storiesOf('PopoverButton', module).addWithChapters('Just PopoverButton', {
+storiesOf('PopoverButton', module).addWithChapters('Popover Button', {
     chapters: [
         {
             sections: [
@@ -21,8 +21,8 @@ storiesOf('PopoverButton', module).addWithChapters('Just PopoverButton', {
                     sectionFn: withDecorator(<PopoverButton disabled={true} onClick={onClick}></PopoverButton>)
                 },
                 {
-                    title: 'widthSpinner',
-                    sectionFn: withDecorator(<PopoverButton loading={true} onClick={onClick}></PopoverButton>)
+                    title: 'With Spinner',
+                    sectionFn: withDecorator(<PopoverButton popover='Add Task' loading={true} onClick={onClick}></PopoverButton>)
                 },
             ]
         }
