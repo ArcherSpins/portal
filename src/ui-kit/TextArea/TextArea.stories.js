@@ -19,9 +19,20 @@ storiesOf('TextArea', module).addWithChapters('Just TextArea', {
                         <TextArea 
                             onChange={onChange} 
                             placeholder='Please describe the work you have done'
-                            className='textarea'
                         />
                         
+                    )
+                },
+                {
+                    title: 'Disabled',
+                    sectionFn: withDecorator(
+                        <TextArea
+                            onChange={onChange}
+                            placeholder='Please describe the work you have done'
+                            disabled={true}
+                            label='Title'
+                        />
+
                     )
                 },
             ]

@@ -11,7 +11,7 @@ type Props = {
   placeholder?: string,
   className?: string,
   style?: {
-    [string]: number | string
+    [string]: mixed
   },
   cols?: string,
   rows?: string,
@@ -39,7 +39,7 @@ const TextArea = ({
     {label}
     <textarea
       style={style}
-      className={classNames(styles[className], { [styles.use]: use })}
+      className={classNames(styles.textarea, { [styles.use]: use }, className)}
       placeholder={placeholder}
       name={name}
       id={id}
@@ -61,7 +61,7 @@ TextArea.defaultProps = {
   rows: '10',
   className: '',
   use: '',
-  label: 'Title',
+  label: '',
   disabled: false,
 };
 
