@@ -65,24 +65,18 @@ class Paginate extends React.Component<Props, State> {
         {...restProps}
       >
         <div className={styles.buttons_list}>
-          {
-            active > 1 && (
-              <button
-                type="button"
-                className={styles['prev-button']}
-                onClick={() => this.togglePage(active - 1)}
-              >
-                Prev
-              </button>
-            )
-          }
+          <button
+            type="button"
+            className={classNames(styles['prev-button'], { [styles.disabled]: active <= 1 })}
+            onClick={() => active > 1 && this.togglePage(active - 1)}
+          >
+            Prev
+          </button>
           {
             this.getButtons().map((item: number, i) => (
               <button
                 className={classNames(
                   {
-                    [styles.first]: active === i + 1 && i === 0,
-                    [styles.last]: i + 1 === active && active === count,
                     [styles.active]: active === i + 1,
                   },
                 )}
@@ -94,17 +88,13 @@ class Paginate extends React.Component<Props, State> {
               </button>
             ))
           }
-          {
-            active < count && (
-              <button
-                type="button"
-                className={styles['next-button']}
-                onClick={() => this.togglePage(active + 1)}
-              >
-                Next
-              </button>
-            )
-          }
+          <button
+            type="button"
+            className={classNames(styles['next-button'], { [styles.disabled]: active === count })}
+            onClick={() => active < count && this.togglePage(active + 1)}
+          >
+            Next
+          </button>
         </div>
       </div>
     );

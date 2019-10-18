@@ -7,28 +7,17 @@
   display: block;
   font-size: .88rem;
 
-  // .resizer {
-  //   display: inline-block;
-  //   background: blue;
-  //   width: 5px;
-  //   height: 100%;
-  //   position: absolute;
-  //   right: 0;
-  //   top: 0;
-  //   transform: translateX(50%);
-  //   z-index: 1;
-
-  //   &.isResizing {
-  //     background: red;
-  //   }
-  // }
-
   th {
     color: $text-color-200;
     text-align: left;
     padding-right: 1.5rem;
     padding-bottom: .5rem;
     flex-grow: 1;
+
+    &:nth-child(1) {
+      padding-left: .5rem;
+      width: .5rem;
+    }
 
     &:nth-last-child() {
       padding-right: 0;
@@ -56,8 +45,8 @@
       flex-grow: 1;
     
       &:nth-child(1) {
-        padding-left: .1rem;
-        width: .5rem !important;
+        padding-left: .5rem;
+        width: .5rem;
       }
     }
   }
@@ -66,7 +55,8 @@
 }
 
 .container_paginate {
-  padding: 1rem;
+  padding: .5rem;
+  margin-bottom: 1rem;
 
   .buttons_list {
     display: flex;
@@ -91,16 +81,6 @@
       background-color: $grey-200;
     }
 
-    &.first {
-      border-top-left-radius: calculateRem(4px);
-      border-bottom-left-radius: calculateRem(4px);
-    }
-
-    &.last {
-      border-top-right-radius: calculateRem(4px);
-      border-bottom-right-radius: calculateRem(4px);
-    }
-
     &.next-button {
       border: calculateRem(1px) solid $grey;
       box-sizing: border-box;
@@ -120,6 +100,12 @@
       border-top-left-radius: calculateRem(4px);
       border-bottom-left-radius: calculateRem(4px);
       padding: 0 0.9rem;
+    }
+
+    &.disabled {
+      color: $text-color-disabled;
+      cursor: not-allowed;
+      background-color: whitesmoke;
     }
   }
 
