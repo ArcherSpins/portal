@@ -4,10 +4,26 @@
   align-items: center;
 }
 
+.dropdown-field-block {
+  display: flex;
+
+  .block {
+    flex-grow: 1;
+    
+    .select-component {
+      width: 100%;
+    }
+  }
+}
+
 .employee-form {
   input {
     &:focus {
       box-shadow: none;
     }
   }
+}
+
+.col-6 {
+  width: 50%;
 }

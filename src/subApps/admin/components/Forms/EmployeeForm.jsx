@@ -8,10 +8,10 @@
 import React from 'react';
 import { compose } from 'redux';
 import { graphql } from 'react-apollo';
+import { Dropdown, Combobox } from 'ui-kit';
 import {
   InputToggle,
   PickerToggle,
-  SelectToggle,
 } from '..';
 import { getCities } from '../../graphql/queries';
 import type { Employee, CityType } from '../../types';
@@ -39,7 +39,7 @@ type EmployeeFormProps = {
 
 type EmployeeFormState = {
   formData: {
-    [string]: mixed
+    [string]: any
   },
   errorBoundry: {
     city: boolean,
@@ -74,7 +74,9 @@ class EmployeeForm extends React.Component<
         middleName: false,
         phoneNumber: false,
       },
-      formData: {},
+      formData: {
+        department: true
+      },
     };
   }
 
@@ -95,7 +97,7 @@ class EmployeeForm extends React.Component<
     });
   }
 
-  onChange = (idx: number | string, value: string | { id: mixed, [string]: mixed }): void => {
+  onChange = (idx: number | string, value: mixed): void => {
     const { formData, errorBoundry } = this.state;
     this.setState({
       formData: {
@@ -163,12 +165,14 @@ class EmployeeForm extends React.Component<
       return {
         ...item,
         label: item.title,
+        value: item.title,
         active: true,
       };
     }
     return {
       ...item,
       label: item.title,
+      value: item.title,
     };
   })
 
@@ -190,17 +194,13 @@ class EmployeeForm extends React.Component<
     };
   })
 
-  searchCity = async (
-    defaultData: { ...Employee, cities: Array<CityType> },
-    inputValue: string | null,
-    callback: (Array<CityType>) => void | null,
-  ) => {
+  searchCity = async (inputValue: string) => {
     const { fetchSearchCities } = this.props;
     // $FlowFixMe
     const response = await fetchSearchCities.refetch({
       search: inputValue,
     });
-    callback(response.data.cities.map((item) => {
+    return response.data.cities.map((item) => {
       if (item) {
         return {
           ...item,
@@ -209,7 +209,7 @@ class EmployeeForm extends React.Component<
         };
       }
       return item;
-    }));
+    });
   }
 
   getCity = (
@@ -217,11 +217,21 @@ class EmployeeForm extends React.Component<
   ) => {
     // @FlowFixMe
     if (defaultData.cities && defaultData.cities.length > 0) {
-      return defaultData.cities.map((item) => ({
-        ...item,
-        label: String(`${item.name}, ${item.country}`),
-        value: String(`${item.name}, ${item.country}`),
-      }));
+      return defaultData.cities.map((item) => {
+        if (defaultData.city && defaultData.city.id === item.id) {
+          return {
+            ...item,
+            label: String(`${item.name}, ${item.country}`),
+            value: String(`${item.name}, ${item.country}`),
+            active: true,
+          };
+        }
+        return {
+          ...item,
+          label: String(`${item.name}, ${item.country}`),
+          value: String(`${item.name}, ${item.country}`),
+        }
+      });
     }
 
     return [];
@@ -245,8 +255,12 @@ class EmployeeForm extends React.Component<
   }
 
   render() {
-    const { showEdit, errorBoundry } = this.state;
+    const { showEdit, errorBoundry, formData } = this.state;
     const { defaultData } = this.props;
+    const departments = this.getDepartment(defaultData);
+    const positions = this.getPosition(defaultData);
+    const cities = this.getCity(defaultData);
+    const timeZones = this.getTimeZone();
 
     if (!defaultData) {
       return null;
@@ -312,21 +326,36 @@ class EmployeeForm extends React.Component<
           />
         </FieldBlock>
 
-        <FieldBlock className="flex-block">
-          <SelectToggle
-            options={this.getDepartment(defaultData)}
-            onChange={this.onChange}
+        <FieldBlock className="flex-block dropdown-field-block">
+          <Dropdown
+            className="block col-6"
+            use="borderless"
+            options={departments}
+            onChange={(value) => {
+              this.onChange('department', value);
+              this.toggleEdit(true);
+            }}
+            value={
+              formData.department ||
+                (departments.length > 0 ? departments.find((item) => item.active) || departments[0] : '')
+            }
             idx="department"
             label="Department"
-            toggleEdit={this.toggleEdit}
           />
-          <SelectToggle
-            options={this.getPosition(defaultData)}
-            onChange={this.onChange}
-            error={errorBoundry.position}
+          <Dropdown
+            className="block col-6"
+            use="borderless"
+            options={positions}
+            onChange={(value) => {
+              this.onChange('position', value);
+              this.toggleEdit(true);
+            }}
+            value={
+              formData.position ||
+                (positions.length > 0 ? positions.find((item) => item.active) || positions[0] : '')
+            }
             idx="position"
             label="Position"
-            toggleEdit={this.toggleEdit}
           />
         </FieldBlock>
 
@@ -343,39 +372,39 @@ class EmployeeForm extends React.Component<
           />
         </FieldBlock>
 
-        <FieldBlock className="flex-block">
-          <SelectToggle
-            // $FlowFixMe
-            loadOptions={
-              (inputValue, callback) => this.searchCity(defaultData, inputValue, callback)
-            }
-            // $FlowFixMe
-            defaultOptions={this.getCity(defaultData)}
-            options={this.getCity(defaultData)}
-            isSearch
-            value={{
-              label: defaultData.city ? defaultData.city.name : null,
-              value: defaultData.city ? defaultData.city.name : null,
-            }}
-            onChange={(name, obj) => {
-              // TODO: FIX THIS
-              // $FlowFixMe
-              this.onChange(name, obj);
+        <FieldBlock className="flex-block dropdown-field-block">
+          <Combobox
+            className="block col-6"
+            use="borderless"
+            loadOptions={this.searchCity}
+            onChange={(value) => {
+              this.onChange('city', value);
               this.toggleEdit(true);
             }}
-            idx="city"
+            selectedOption={
+              formData.city ?
+              {
+                ...formData.city,
+                label: String(`${formData.city.name}, ${formData.city.country}`),
+                value: String(`${formData.city.name}, ${formData.city.country}`),
+              } : (cities.length > 0 ? cities.find((item) => item.active) || cities[0] : null)
+            }
             label="City"
-            onBlur={() => {}}
-            placeholder="Enter or select city"
-            async
-            toggleEdit={this.toggleEdit}
+            error={errorBoundry.city}
           />
-          <SelectToggle
-            options={this.getTimeZone()}
-            onChange={this.onChange}
-            idx="timeZone"
+          <Dropdown
+            className="block col-6"
+            use="borderless"
+            options={timeZones}
+            onChange={(value) => {
+              this.onChange('timeZone', value);
+              this.toggleEdit(true);
+            }}
+            value={
+              formData.timeZone ||
+                (timeZones.length > 0 ? timeZones.find((item) => item.active) || timeZones[0] : '')
+            }
             label="Time zone"
-            toggleEdit={this.toggleEdit}
           />
         </FieldBlock>
 
@@ -390,15 +419,25 @@ class EmployeeForm extends React.Component<
           />
         </FieldBlock>
 
-        <FieldBlock className="flex-block">
-          <SelectToggle
+        <FieldBlock className="flex-block dropdown-field-block">
+          <Dropdown
+            className="block col-6"
+            use="borderless"
             options={defaultData.workDayStart}
-            onChange={this.onChange}
-            idx="workDayStart"
+            onChange={(value) => {
+              this.onChange('workDayStart', value);
+              this.toggleEdit(true);
+            }}
+            value={
+              formData.workDayStart ||
+                (defaultData.workDayStart.length > 0 ?
+                  defaultData.workDayStart.find((item) => item.active) ||
+                  defaultData.workDayStart[0] : '')
+            }
             label="Working day starts at"
-            toggleEdit={this.toggleEdit}
           />
           <InputToggle
+            className="block col-6"
             showInput={false}
             title={`Working day ends at ${(defaultData.workDayEnd && String(defaultData.workDayEnd.hours).padStart(2, '0')) || 18}
             :${(defaultData.workDayEnd && String(defaultData.workDayEnd.minutes || 0).padStart(2, '0')) || '00'}`}
@@ -410,12 +449,20 @@ class EmployeeForm extends React.Component<
         </FieldBlock>
 
         <FieldBlock>
-          <SelectToggle
+          <Dropdown
+            use="borderless"
             options={defaultData.lunchStart}
-            onChange={this.onChange}
-            idx="lunchStart"
+            onChange={(value) => {
+              this.onChange('lunchStart', value);
+              this.toggleEdit(true);
+            }}
+            value={
+              formData.lunchStart ||
+                (defaultData.lunchStart.length > 0 ?
+                  defaultData.lunchStart.find((item) => item.active) ||
+                  defaultData.lunchStart[0] : '')
+            }
             label="Lunch starts at"
-            toggleEdit={this.toggleEdit}
           />
         </FieldBlock>
 

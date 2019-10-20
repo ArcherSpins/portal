@@ -2,6 +2,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 // @flow
 import React from 'react';
+import classNames from 'classnames';
 import Select, { components } from 'react-select';
 import styles from './Dropdown.module.scss';
 
@@ -12,6 +13,7 @@ type Props = {
   label: string,
   placeholder?: string,
   use: DropdownType,
+  className?: string,
   disabled?: boolean,
   options: Array<{value: string, label: string}>,
   value?: string,
@@ -35,6 +37,7 @@ const Dropdown = ({
   name,
   onChange,
   use,
+  className,
 }: Props) => {
   const customStyles = {
     indicatorSeparator: () => {},
@@ -59,7 +62,7 @@ const Dropdown = ({
   };
 
   return (
-    <div className={styles.wrapper}>
+    <div className={classNames(styles.wrapper, className)}>
       <label className={styles[use]} htmlFor="select">{label}</label>
       <Select
         className="select-component"
@@ -82,6 +85,7 @@ Dropdown.defaultProps = {
   disabled: false,
   name: '',
   value: '',
+  className: '',
 };
 
 
