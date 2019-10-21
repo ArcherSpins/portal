@@ -3,6 +3,8 @@ import { createSelector } from 'reselect';
 import type { State } from '../flow-state';
 import type { Project } from './project.flow-types';
 
+import { getUrlFromProject } from '../../helpers';
+
 type Props = {
   match: Object
 };
@@ -29,7 +31,7 @@ export const selectProjectLoadingBool = createSelector<
 export const selectProjectItem = createSelector<State, *, *, *, *, *, *, *, *>(
   [selectProject, selectProjectId],
   (projects: Array<Project>, projectId: string) => projects.find(
-    (project) => project.URL === `http://projects.internal.sfxdx.ru/${projectId}`,
+    (project) => getUrlFromProject(project.URL) === projectId,
   ),
 );
 

@@ -3,7 +3,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { ROOT } from '../../routes';
-
+import { getUrlFromProject } from '../../helpers';
 import capitalize from '../../helpers/capitalize';
 
 import './project-item.styles.scss';
@@ -30,7 +30,7 @@ class ProjectItem extends React.Component {
       // eslint-disable-next-line
       <div
         className="project__item"
-        onClick={() => history.push(`${ROOT}/${url.substring(34)}`)}
+        onClick={() => history.push(`${ROOT}/${getUrlFromProject(url)}`)}
       >
         <div className="project__item-left">
           <h2 className="project__item-header">

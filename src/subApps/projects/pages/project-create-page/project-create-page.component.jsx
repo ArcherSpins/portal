@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import type { RouterHistory } from 'react-router-dom';
-import { Input } from 'ui-kit';
+import { Input, TextArea, Button } from 'ui-kit';
 import { saveProject } from '../../redux/project/project.actions';
 import translate from '../../helpers/translator';
 import emoveSpecial from '../../helpers/removeSpecial';
@@ -21,10 +21,8 @@ import type {
   ProjectCreation,
 } from '../../redux/project/project.flow-types';
 
-import TextInput from '../../components/forms/text-input/text-input.component';
 import UserPicker from '../../components/user-picker/user-picker.component';
 import RadioInputGroup from '../../components/forms/RadioInputGroup';
-import CustomButton from '../../components/custom-button/custom-button.component';
 import SelectInput from '../../components/forms/select-input/select-input.component';
 
 import './project-create-page.styles.scss';
@@ -212,7 +210,7 @@ class CreateProjectPage extends Component<Props, State> {
       const participantsIDs = participants.map((p) => p.id.toString());
       const newProject = {
         title,
-        URL: `http://projects.internal.sfxdx.ru/${URL}`,
+        URL,
         description,
         managerID: managerID.toString(),
         engagementModel,
@@ -247,38 +245,44 @@ class CreateProjectPage extends Component<Props, State> {
     const { history } = this.props;
     return (
       <div className="cpp">
+        <div className="project-details__header">
+          <div className="project-details__title-container">
+            <h1 style={{ marginBottom: 0 }} className="heading-primary">
+              Create New Project
+            </h1>
+          </div>
+        </div>
         <form className="cpp__form" onSubmit={this.handleSumbit}>
           <div style={{ width: '40%' }}>
-            <h3 className="heading-tertiarry">Description</h3>
-            <textarea
-              className="cpp__description-input"
+            <TextArea
+              label="Description"
               value={description}
               name="description"
               onChange={this.handleChange}
+              className="cpp__description-input"
             />
           </div>
           <div style={{ marginRight: '5%', width: '40%' }}>
-            <h1 className="heading-primary ">Create New Project</h1>
             <Input
               name="title"
               type="text"
+              label="Title"
+              className="project__input"
               value={title}
               onChange={this.handleTitleChange}
               required
               maxLength="100"
               pattern="(?=.*[\p{L}]).{2,}"
             />
-            <h3 className="heading-tertiarry">Project URL</h3>
             <div className="url-wrapper">
-              <span className="url-link">
-                http://projects.internal.sfxdx.ru/
-              </span>
-              <TextInput
+              <Input
                 name="URL"
+                label="Project URL"
                 type="text"
+                className="project__input"
+                prefix={`${window.location.origin}/projects/`}
                 value={URL}
                 onChange={this.handleUrlChange}
-                className="cpp__url"
                 required
                 maxLength="66"
               />
@@ -347,7 +351,7 @@ class CreateProjectPage extends Component<Props, State> {
                     value="0bea1179-488d-4018-a200-1176bf9fd959"
                     onChange={this.handleChange}
                     htmlFor="fulltime"
-                    spanText="Fulltime"
+                    spanText="Fixed Price + Hourly"
                   />
                 </div>
               </div>
@@ -385,15 +389,18 @@ class CreateProjectPage extends Component<Props, State> {
               </div>
             )}
             <div className="cpp__buttons-group">
-              <CustomButton type="submit" color="success">
+              <Button
+                type="submit"
+              >
                 Create
-              </CustomButton>
-              <CustomButton
+              </Button>
+              <Button
                 type="button"
+                use="transparent"
                 onClick={() => history.goBack()}
               >
                 Cancel
-              </CustomButton>
+              </Button>
             </div>
           </div>
         </form>

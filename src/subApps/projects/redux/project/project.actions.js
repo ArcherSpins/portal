@@ -6,6 +6,7 @@ import {
   createProject,
 } from '../../graphql/mutations/project.mutations';
 import { projects } from '../../graphql/queries/project.queries';
+import * as routes from '../../routes';
 
 export const setProjectLoading = () => ({
   type: 'SET_PROJECT_LOADING',
@@ -38,7 +39,7 @@ export const editProject = (
       type: 'EDIT_PROJECT',
       payload: response.data.updateProject,
     });
-    history.push('/');
+    history.push(routes.ROOT);
   });
   // .catch(() => {
   //   return dispatch({
@@ -58,7 +59,7 @@ export const saveProject = (
       type: 'SAVE_PROJECT',
       payload: response.data.createProject,
     });
-    history.push('/');
+    history.push(routes.ROOT);
   });
   // .catch(() =>
   //   dispatch({
