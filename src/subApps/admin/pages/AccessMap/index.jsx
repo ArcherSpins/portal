@@ -28,7 +28,7 @@ class AccessMap extends React.Component<State> {
             marginLeft: `${220}px`,
           }}
         >
-          <HeaderEmployees noSearch title="Access map" />
+          <HeaderEmployees noSearch title="Access management" />
           <Main style={{ fontSize: `${14}px` }}>
             <div>
               <Paginate

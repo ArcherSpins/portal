@@ -4,8 +4,18 @@
   align-items: center;
 }
 
+.pr-1 {
+  padding-right: 1rem;
+}
+
 .dropdown-field-block {
   display: flex;
+
+  &.padding-right-1 {
+    .block {
+      padding-right: 1rem;
+    }
+  }
 
   .block {
     flex-grow: 1;
@@ -17,7 +27,15 @@
 }
 
 .employee-form {
+  label {
+    padding-left: .5rem;
+    color: #333333;
+    font-size: 16px;
+  }
+
   input {
+    color: #333333;
+    font-size: 16px;
     &:focus {
       box-shadow: none;
       border: none;

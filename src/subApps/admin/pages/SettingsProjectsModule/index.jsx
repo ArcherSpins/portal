@@ -169,12 +169,9 @@ class SittingsProjectsModulePage extends React.Component<Props, State> {
             loading ? <LoadingContainer /> : (
               <div>
                 <HeaderEmployees
-                  style={{ width: '45%' }}
-                  styleTitle={{ fontSize: '18px', lineHeight: '22px' }}
                   noBorder
                   noSearch
-                  title={`Time before which it is possimble to make labor\n
-                  costs after the end of the working day`}
+                  title="Settings projects module"
                 />
                 <Main>
                   <FieldBlock>

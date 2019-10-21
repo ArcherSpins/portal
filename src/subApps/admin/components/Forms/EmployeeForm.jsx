@@ -95,7 +95,7 @@ class EmployeeForm extends React.Component<
     this.setState({
       formData: {
         ...data,
-        position: this.getPosition(defaultData),
+        position: this.getPosition(defaultData).find((item) => item.active),
       },
     });
   }
@@ -180,7 +180,7 @@ class EmployeeForm extends React.Component<
   })
 
   getPosition = (defaultData: { ...Employee, cities: Array<CityType> }) => [
-    { title: 'Not selected', id: null },
+    { title: 'Not selected', id: null, value: 'Not selected' },
     ...defaultData.positions,
   ].map((item) => {
     if (defaultData.position && defaultData.position.id === item.id) {
@@ -277,9 +277,12 @@ class EmployeeForm extends React.Component<
         onSubmit={this.submitForm}
         style={{ maxWidth: 600 }}
       >
-        <FieldBlock className="flex-block">
-          {/* <Input
+        <FieldBlock className="flex-block dropdown-field-block padding-right-1">
+          <Input
+            className="block"
             label="Name"
+            value={formData.firstName}
+            placeholder="Your firstname"
             error={errorBoundry.firstName}
             use="borderless"
             onChange={(e: SyntheticEvent<HTMLInputElement>) => {
@@ -287,49 +290,52 @@ class EmployeeForm extends React.Component<
               this.onChange('firstName', e.target.value);
               this.toggleEdit(true);
             }}
-          /> */}
-          <InputToggle
-            showInput={showEdit}
-            title={defaultData.firstName}
-            label="Name"
-            idx="firstName"
-            error={errorBoundry.firstName}
-            onChange={this.onChange}
-            toggleEdit={this.toggleEdit}
           />
-          <InputToggle
-            showInput={showEdit}
-            title={defaultData.email}
-            error={errorBoundry.email}
+          <Input
+            className="block"
             label="Login"
+            value={formData.email}
+            placeholder="Your lastname"
+            error={errorBoundry.email}
+            use="borderless"
+            onChange={(e: SyntheticEvent<HTMLInputElement>) => {
+              // $FlowFixMe
+              this.onChange('email', e.target.value);
+              this.toggleEdit(true);
+            }}
             type="email"
-            idx="email"
-            onChange={this.onChange}
-            toggleEdit={this.toggleEdit}
           />
         </FieldBlock>
 
         <FieldBlock>
-          <InputToggle
-            showInput={showEdit}
-            title={defaultData.lastName}
-            error={errorBoundry.lastName}
+          <Input
+            className="pr-1 col-6"
             label="Surname"
-            idx="lastName"
-            onChange={this.onChange}
-            toggleEdit={this.toggleEdit}
+            value={formData.lastName}
+            placeholder="Your surname"
+            error={errorBoundry.lastName}
+            use="borderless"
+            onChange={(e: SyntheticEvent<HTMLInputElement>) => {
+              // $FlowFixMe
+              this.onChange('lastName', e.target.value);
+              this.toggleEdit(true);
+            }}
           />
         </FieldBlock>
 
-        <FieldBlock className="flex-block">
-          <InputToggle
-            showInput={showEdit}
-            title={defaultData.middleName}
+        <FieldBlock className="flex-block dropdown-field-block padding-right-1">
+          <Input
             label="Middle name"
-            idx="middleName"
+            className="block"
+            placeholder="Middle name"
+            value={formData.middleName}
             error={errorBoundry.middleName}
-            onChange={this.onChange}
-            toggleEdit={this.toggleEdit}
+            use="borderless"
+            onChange={(e: SyntheticEvent<HTMLInputElement>) => {
+              // $FlowFixMe
+              this.onChange('middleName', e.target.value);
+              this.toggleEdit(true);
+            }}
           />
           <PickerToggle
             onChange={this.onChange}
@@ -367,7 +373,7 @@ class EmployeeForm extends React.Component<
             }}
             value={
               formData.position
-                || (positions.length > 0 ? positions.find((item) => item.active) || positions[0] : '')
+                || (positions.length > 0 ? positions.find((item) => item.active) || positions[1] : '')
             }
             idx="position"
             label="Position"
@@ -375,15 +381,18 @@ class EmployeeForm extends React.Component<
         </FieldBlock>
 
         <FieldBlock>
-          <InputToggle
-            showInput={showEdit}
-            title={defaultData.phoneNumber}
+          <Input
+            className="pr-1 col-6"
+            mask={['+', '7', ' ', '(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/]}
+            value={formData.phoneNumber}
+            placeholder="Your phone number"
             label="Phone number"
-            idx="phoneNumber"
-            error={errorBoundry.phoneNumber}
-            defaultValue="Not number"
-            onChange={this.onChange}
-            toggleEdit={this.toggleEdit}
+            use="borderless"
+            name="phoneNumber"
+            onChange={(e) => {
+              this.onChange('phoneNumber', e.target.value);
+              this.toggleEdit(true);
+            }}
           />
         </FieldBlock>
 
@@ -425,13 +434,12 @@ class EmployeeForm extends React.Component<
         </FieldBlock>
 
         <FieldBlock>
-          {/* <Datepicker
+          <Datepicker
             onDayChange={(value) => {
-              console.log(value);
               this.onChange('dateOfEmployment', value);
               this.toggleEdit(true);
             }}
-          /> */}
+          />
           <PickerToggle
             onChange={this.onChange}
             showInput={showEdit}
