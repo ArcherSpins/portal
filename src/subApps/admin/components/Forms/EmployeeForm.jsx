@@ -185,6 +185,7 @@ class EmployeeForm extends React.Component<
       return {
         ...item,
         label: item.title,
+        value: item.title,
         active: true,
       };
     }
@@ -192,6 +193,7 @@ class EmployeeForm extends React.Component<
     return {
       ...item,
       label: item.title,
+      value: item.title,
     };
   })
 
@@ -263,11 +265,11 @@ class EmployeeForm extends React.Component<
     const cities = this.getCity(defaultData);
     const timeZones = this.getTimeZone();
 
-    console.log(errorBoundry, formData)
-
     if (!defaultData) {
       return null;
     }
+
+    console.log(positions);
 
     return (
       <AuthForm
@@ -373,7 +375,7 @@ class EmployeeForm extends React.Component<
         </FieldBlock>
 
         <FieldBlock>
-          {/* <Input
+          <Input
             mask={['+', '7', ' ', '(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/]}
             showInput={showEdit}
             title={defaultData.phoneNumber}
@@ -382,11 +384,13 @@ class EmployeeForm extends React.Component<
             use="borderless"
             error={errorBoundry.phoneNumber}
             defaultValue="Not number"
+            value={formData.phoneNumber}
             onChange={(e) => {
+              console.log(e);
               this.onChange('phoneNumber', e.target.value);
               this.toggleEdit(true);
             }}
-          /> */}
+          />
           <InputToggle
             showInput={showEdit}
             title={defaultData.phoneNumber}

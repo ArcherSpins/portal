@@ -135,6 +135,7 @@ class Input extends Component<Props, State> {
                 <MaskedInput
                   mask={mask}
                   placeholder={placeholder}
+                  onChange={onChange}
                   id={name}
                   render={(ref, props) => (
                     <input
@@ -143,7 +144,6 @@ class Input extends Component<Props, State> {
                       name={name}
                       type={type}
                       placeholder={placeholder}
-                      onChange={onChange}
                       onFocus={this.handleFocus}
                       onBlur={this.handleBlur}
                       disabled={disabled}

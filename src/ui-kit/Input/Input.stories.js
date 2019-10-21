@@ -90,4 +90,25 @@ storiesOf('Input', module)
       }
     ]
   })
-
+  .addWithChapters('With mask', {
+    chapters: [
+      {
+        sections: [
+          {
+            title: "Idle",
+            sectionFn: withDecorator(
+              <Input 
+                mask={['+', '7', ' ', '(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/]}
+                placeholder="Placeholder text" 
+                icon={<i className="icon-search" />}
+                onClearClick={action('clear clicked!')} 
+                value="9837777983"
+                clearable 
+                onChange={onChange}
+              />
+            ),
+          },
+        ]
+      }
+    ]
+  })
