@@ -253,128 +253,130 @@ class CreateProjectPage extends Component<Props, State> {
           </div>
         </div>
         <form className="cpp__form" onSubmit={this.handleSumbit}>
-          <div style={{ width: '40%' }}>
-            <TextArea
-              label="Description"
-              value={description}
-              name="description"
-              onChange={this.handleChange}
-              className="cpp__description-input"
-            />
-          </div>
-          <div style={{ marginRight: '5%', width: '40%' }}>
-            <Input
-              name="title"
-              type="text"
-              label="Title"
-              className="project__input"
-              value={title}
-              onChange={this.handleTitleChange}
-              required
-              maxLength="100"
-              pattern="(?=.*[\p{L}]).{2,}"
-            />
-            <div className="url-wrapper">
-              <Input
-                name="URL"
-                label="Project URL"
-                type="text"
+          <div className="cpp__form-inputs">
+            <div style={{ width: '40%' }}>
+              <TextArea
+                label="Description"
+                value={description}
+                name="description"
+                labelClassName="cpp__textarea"
                 className="project__input"
-                prefix={`${window.location.origin}/projects/`}
-                value={URL}
-                onChange={this.handleUrlChange}
-                required
-                maxLength="66"
+                onChange={this.handleChange}
               />
             </div>
-            <p className="text-gray margin-bottom-md" style={{ width: '100%' }}>
+            <div style={{ marginRight: '5%', width: '40%' }}>
+              <Input
+                name="title"
+                type="text"
+                label="Title"
+                className="project__input"
+                value={title}
+                onChange={this.handleTitleChange}
+                required
+                maxLength="100"
+                pattern="(?=.*[\p{L}]).{2,}"
+              />
+              <div className="url-wrapper">
+                <Input
+                  name="URL"
+                  label="Project URL"
+                  type="text"
+                  className="project__input"
+                  prefix={`${window.location.origin}/projects/`}
+                  value={URL}
+                  onChange={this.handleUrlChange}
+                  required
+                  maxLength="66"
+                />
+              </div>
+              <p className="text-gray margin-bottom-md" style={{ width: '100%' }}>
               URL should be 1–100 characters length. Only lower case letters
               (a-z), numbers, dashes and underscores are alowed. Identifier
               should start with lowercase letter. Once saved identifier cannot
               be changed.
-            </p>
-            <div className="cpp__typesAndEngagement margin-bottom-lg">
-              <div className="cpp__types">
-                <h3 className="heading-tertiarry margin-right-md">
+              </p>
+              <div className="cpp__typesAndEngagement margin-bottom-lg">
+                <div className="cpp__types">
+                  <h3 className="heading-tertiarry margin-right-md">
                   Project type
-                </h3>
-                <div className="cpp__types-inputs">
-                  <RadioInputGroup
-                    checked
-                    type="radio"
-                    id="commercial"
-                    name="type"
-                    value="a90ff7a3-37cb-4818-90e0-16c83be6f940"
-                    onChange={this.handleChange}
-                    htmlFor="commercial"
-                    spanText="Commercial"
-                  />
-                  <RadioInputGroup
-                    type="radio"
-                    id="internal"
-                    name="type"
-                    value="26a5c423-e4f1-4194-a543-dd7f6cfbfb99"
-                    onChange={this.handleChange}
-                    htmlFor="internal"
-                    spanText="Internal"
-                  />
+                  </h3>
+                  <div className="cpp__types-inputs">
+                    <RadioInputGroup
+                      checked
+                      type="radio"
+                      id="commercial"
+                      name="type"
+                      value="a90ff7a3-37cb-4818-90e0-16c83be6f940"
+                      onChange={this.handleChange}
+                      htmlFor="commercial"
+                      spanText="Commercial"
+                    />
+                    <RadioInputGroup
+                      type="radio"
+                      id="internal"
+                      name="type"
+                      value="26a5c423-e4f1-4194-a543-dd7f6cfbfb99"
+                      onChange={this.handleChange}
+                      htmlFor="internal"
+                      spanText="Internal"
+                    />
+                  </div>
                 </div>
-              </div>
-              <div className="cpp__engagement">
-                <h3 className="heading-tertiarry margin-right-md">
+                <div className="cpp__engagement">
+                  <h3 className="heading-tertiarry margin-right-md">
                   Engagement Model
-                </h3>
-                <div className="cpp__engagement-inputs">
-                  <RadioInputGroup
-                    checked
-                    type="radio"
-                    id="fixedPrice"
-                    name="engagementModel"
-                    value="7f535dd6-56b1-4979-a5ed-f471a535de21"
-                    onChange={this.handleChange}
-                    htmlFor="fixedPrice"
-                    spanText="Fixed Price"
-                  />
-                  <RadioInputGroup
-                    type="radio"
-                    id="hourly"
-                    name="engagementModel"
-                    value="e4b36752-5acc-4ba5-886f-b5e4d86fe1e1"
-                    onChange={this.handleChange}
-                    htmlFor="hourly"
-                    spanText="Hourly"
-                  />
-                  <RadioInputGroup
-                    type="radio"
-                    id="fulltime"
-                    name="engagementModel"
-                    value="0bea1179-488d-4018-a200-1176bf9fd959"
-                    onChange={this.handleChange}
-                    htmlFor="fulltime"
-                    spanText="Fixed Price + Hourly"
-                  />
+                  </h3>
+                  <div className="cpp__engagement-inputs">
+                    <RadioInputGroup
+                      checked
+                      type="radio"
+                      id="fixedPrice"
+                      name="engagementModel"
+                      value="7f535dd6-56b1-4979-a5ed-f471a535de21"
+                      onChange={this.handleChange}
+                      htmlFor="fixedPrice"
+                      spanText="Fixed Price"
+                    />
+                    <RadioInputGroup
+                      type="radio"
+                      id="hourly"
+                      name="engagementModel"
+                      value="e4b36752-5acc-4ba5-886f-b5e4d86fe1e1"
+                      onChange={this.handleChange}
+                      htmlFor="hourly"
+                      spanText="Hourly"
+                    />
+                    <RadioInputGroup
+                      type="radio"
+                      id="fulltime"
+                      name="engagementModel"
+                      value="0bea1179-488d-4018-a200-1176bf9fd959"
+                      onChange={this.handleChange}
+                      htmlFor="fulltime"
+                      spanText="Fixed Price + Hourly"
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
-            <SelectInput
-              onChange={this.handleChange}
-              name="managerID"
-              value={managerID}
-              setFirstUser={this.setFirstManager}
-            />
-            <UserPicker
-              getUsers={this.getParticipants}
-              title="Participants"
-              deleteUser={this.deleteParticipant}
-              users={participants}
-            />
-            <UserPicker
-              getUsers={this.getWatchers}
-              title="Watchers"
-              deleteUser={this.deleteWatcher}
-              users={watchers}
-            />
-            {Array.isArray(errors) && errors.length >= 1 && (
+              <SelectInput
+                onChange={this.handleChange}
+                name="managerID"
+                value={managerID}
+                setFirstUser={this.setFirstManager}
+              />
+              <UserPicker
+                getUsers={this.getParticipants}
+                title="Participants"
+                deleteUser={this.deleteParticipant}
+                users={participants}
+              />
+              <UserPicker
+                getUsers={this.getWatchers}
+                title="Watchers"
+                deleteUser={this.deleteWatcher}
+                users={watchers}
+              />
+              {Array.isArray(errors) && errors.length >= 1 && (
               <div
                 style={{
                   color: 'red',
@@ -387,21 +389,22 @@ class CreateProjectPage extends Component<Props, State> {
                 {errors.join(', ')}
 .
               </div>
-            )}
-            <div className="cpp__buttons-group">
-              <Button
-                type="submit"
-              >
-                Create
-              </Button>
-              <Button
-                type="button"
-                use="transparent"
-                onClick={() => history.goBack()}
-              >
-                Cancel
-              </Button>
+              )}
             </div>
+          </div>
+          <div className="cpp__buttons-group">
+            <Button
+              type="submit"
+            >
+                Create
+            </Button>
+            <Button
+              type="button"
+              use="transparent"
+              onClick={() => history.goBack()}
+            >
+                Cancel
+            </Button>
           </div>
         </form>
       </div>
