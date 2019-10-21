@@ -6,7 +6,7 @@ import React from 'react';
 import type { Node } from 'react';
 import { Link } from 'react-router-dom';
 import { CREATE_EMPLOYEE_ROUTE } from 'subApps/admin/routes';
-import { Button, InputSearch } from '..';
+import { Input, Button } from 'ui-kit';
 import { TitleAdminPanel } from '../styled';
 import { Header, RightBlock } from './styled';
 
@@ -53,15 +53,20 @@ export default ({
         !noSearch && (
           <RightBlock>
             <form style={{ marginRight: 20 }} onSubmit={onSubmit}>
-              <InputSearch
-                onChange={(e) => {
-                  onChange(e.target.value);
+              <Input
+                name="search-employees"
+                onChange={(e: SyntheticEvent<HTMLInputElement>) => {
+                  // $FlowFixMe
+                  onChange(String(e.target.value));
                 }}
-                onClear={onClear}
+                icon={<i className="icon-search" />}
+                onClearClick={onClear}
                 value={search}
+                placeholder="Search..."
+                clearable
               />
             </form>
-            <Link to={CREATE_EMPLOYEE_ROUTE}>
+            <Link to={CREATE_EMPLOYEE_ROUTE.replace(':', '')}>
               <Button
                 style={{ padding: '5px 10px', minHeight: `${31}px` }}
               >

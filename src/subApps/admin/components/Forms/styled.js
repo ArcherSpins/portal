@@ -19,7 +19,6 @@ export const InputForm = styled.input`
   border-radius: 4px;
 
   &:focus {
-    border: 1px solid #61B16F;
     box-shadow: none;
   }
 `;

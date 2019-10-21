@@ -46,7 +46,7 @@ export default ({
     if (showInput === false) {
       toggleShow(showInput);
     }
-  }, [date, showInput]);
+  });
 
   const handleChange = (_date) => {
     changeDateState(_date);

@@ -1,5 +1,5 @@
-// @flow
 import React, { type Node, Component } from 'react';
+import MaskedInput from 'react-text-mask';
 import noop from 'lodash.noop';
 import classNames from 'classnames';
 import xmark from './xmark.svg';
@@ -29,7 +29,8 @@ type Props = {
   onChange?: (e: SyntheticInputEvent<HTMLInputElement>) => void,
   onFocus?: (e: SyntheticInputEvent<HTMLInputElement>) => void,
   /** Срабатывает при потере фокуса */
-  onBlur?: (e: SyntheticInputEvent<HTMLInputElement>) => void
+  onBlur?: (e: SyntheticInputEvent<HTMLInputElement>) => void,
+  mask?: Array<mixed>
 }
 
 type State = {
@@ -52,6 +53,7 @@ class Input extends Component<Props, State> {
     onClearClick: noop,
     icon: null,
     prefix: '',
+    mask: null,
   };
 
   constructor(props: Props) {
@@ -100,6 +102,7 @@ class Input extends Component<Props, State> {
       prefix,
       onClearClick,
       icon,
+      mask,
       ...restProps
     } = this.props;
 
@@ -127,17 +130,42 @@ class Input extends Component<Props, State> {
           <div className={styles.wrap}>
             {icon && <span className={styles.icon}>{icon}</span>}
             {prefix && <span className={styles.prefix}>{prefix}</span>}
-            <input
-              {...restProps}
-              name={name}
-              type={type}
-              placeholder={placeholder}
-              onChange={onChange}
-              onFocus={this.handleFocus}
-              onBlur={this.handleBlur}
-              disabled={disabled}
-              value={value}
-            />
+            {
+              mask ? (
+                <MaskedInput
+                  mask={mask}
+                  placeholder={placeholder}
+                  id={name}
+                  render={(ref, props) => (
+                    <input
+                      ref={ref}
+                      {...restProps}
+                      name={name}
+                      type={type}
+                      placeholder={placeholder}
+                      onChange={onChange}
+                      onFocus={this.handleFocus}
+                      onBlur={this.handleBlur}
+                      disabled={disabled}
+                      value={value}
+                      {...props}
+                    />
+                  )}
+                />
+              ) : (
+                <input
+                  {...restProps}
+                  name={name}
+                  type={type}
+                  placeholder={placeholder}
+                  onChange={onChange}
+                  onFocus={this.handleFocus}
+                  onBlur={this.handleBlur}
+                  disabled={disabled}
+                  value={value}
+                />
+              )
+            }
             {/* TODO: REPLACE SVG TO <i /> */}
             {clearable && <button onClick={onClearClick} className={styles.clear} type="button"><img src={xmark} alt="clear" /></button>}
           </div>
