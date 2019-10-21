@@ -161,7 +161,7 @@ class EmployeesComponent extends React.Component<EmployeesProps, EmployeesState>
                     employees.length > 0 ? (
                       <div>
                         <TablePaginate
-                          items={employees.map(item => ({
+                          items={employees.map((item) => ({
                             url: `${EMPLOYEES_ROUTE}/${item.id}`,
                             name: item.name,
                             department: item.department ? item.department.title : 'Not department',
