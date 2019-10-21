@@ -93,11 +93,10 @@ const Table = (
         {rows.map(
           (row) => prepareRow(row) || (
             <tr
-              onClick={() => { row.original.url ? history.push(row.original.url) : void 0 }}
+              onClick={() => row.original.url && history.push(row.original.url)}
               {...deleteStyle(row.getRowProps())}
               className={styles.content}
             >
-              {console.log(row)}
               {row.cells.map((cell) => (
                 <td {...deleteStyle(cell.getCellProps())} className={classNames(styles.td, styles['comment-table_paginate'])}>
                   {cell.render('Cell')}

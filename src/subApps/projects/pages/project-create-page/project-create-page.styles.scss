@@ -14,11 +14,9 @@ $color-gray-dark-1: #4b4b4b;
   min-width: 1200px;
 
   flex-direction: column;
-
   &__form {
     display: flex;
-    justify-content: space-between;
-    flex-direction: row-reverse;
+    flex-wrap: wrap;
   }
 
   &__titleInput {
@@ -214,5 +212,30 @@ $color-gray-dark-1: #4b4b4b;
   &__buttons-group {
     display: flex;
     justify-content: flex-start;
+    width: 100%;
+    button {
+      margin-right: 10px;
+    }
+  }
+
+  &__form-inputs {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    border-bottom: 1px solid $color-gray-inactive;
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  &__textarea {
+    display: flex;
+    flex-wrap: wrap;
+    height: 100%;
+    flex-direction: column;
+    textarea {
+      flex: 1;
+    }
   }
 }

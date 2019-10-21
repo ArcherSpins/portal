@@ -36,7 +36,7 @@ const TextArea = ({
   labelClassName,
 }: Props) => (
   <label htmlFor={name} className={classNames(styles.label, labelClassName)}>
-    {label}
+    <span>{label}</span>
     <textarea
       style={style}
       className={classNames(styles.textarea, className)}

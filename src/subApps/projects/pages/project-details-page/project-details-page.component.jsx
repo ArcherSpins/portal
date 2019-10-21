@@ -37,9 +37,6 @@ import { getUrlFromProject } from '../../helpers';
 import UserPicker from '../../components/user-picker/user-picker.component';
 import RadioInputGroup from '../../components/forms/RadioInputGroup';
 import SelectInput from '../../components/forms/select-input/select-input.component';
-import TextInput from '../../components/forms/text-input/text-input.component';
-import InverseButtom from '../../components/inverse-button/inverse-button.component';
-import CustomButton from '../../components/custom-button/custom-button.component';
 
 import './project-details-page.styles.scss';
 
@@ -302,134 +299,136 @@ h
           </span>
         </div>
         <form className="cpp__form" onSubmit={this.handleSumbit}>
-          <div style={{ width: '40%' }}>
-            <TextArea
-              className="cpp__description-input"
-              label="Description"
-              value={description}
-              name="description"
-              onChange={this.handleChange}
-            />
-          </div>
-          <div style={{ marginRight: '5%', width: '40%' }}>
-            <Input
-              label="Title"
-              name="title"
-              type="text"
-              value={title}
-              onChange={this.handleTitleChange}
-              className="project__input"
-              required
-              pattern="(?=.*[\p{L}]).{2,}"
-              maxLength="100"
-            />
-            <Input
-              name="url"
-              type="text"
-              label="Project URL"
-              prefix={`${window.location.origin}/projects/`}
-              value={url}
-              onChange={this.handleUrlChange}
-              className="project__input"
-              required
-              maxLength="66"
-            />
-            <p className="text-gray margin-bottom-md" style={{ width: '100%' }}>
+          <div className="cpp__form-inputs">
+            <div style={{ width: '40%' }}>
+              <TextArea
+                labelClassName="cpp__textarea"
+                className="project__input"
+                label="Description"
+                value={description}
+                name="description"
+                onChange={this.handleChange}
+              />
+            </div>
+            <div style={{ marginRight: '5%', width: '40%' }}>
+              <Input
+                label="Title"
+                name="title"
+                type="text"
+                value={title}
+                onChange={this.handleTitleChange}
+                className="project__input"
+                required
+                pattern="(?=.*[\p{L}]).{2,}"
+                maxLength="100"
+              />
+              <Input
+                name="url"
+                type="text"
+                label="Project URL"
+                prefix={`${window.location.origin}/projects/`}
+                value={url}
+                onChange={this.handleUrlChange}
+                className="project__input"
+                required
+                maxLength="66"
+              />
+              <p className="text-gray margin-bottom-md" style={{ width: '100%' }}>
               URL should be 1–100 characters length. Only lower case letters
               (a-z), numbers, dashes and underscores are alowed. Identifier
               should start with lowercase letter. Once saved identifier cannot
               be changed.
-            </p>
-            <div className="cpp__typesAndEngagement margin-bottom-lg">
-              <div className="cpp__types">
-                <h3 className="heading-tertiarry margin-right-md">
+              </p>
+              <div className="cpp__typesAndEngagement margin-bottom-lg">
+                <div className="cpp__types">
+                  <h3 className="heading-tertiarry margin-right-md">
                   Project type
-                </h3>
-                <div className="cpp__types-inputs">
-                  <RadioInputGroup
-                    checked={type === 'a90ff7a3-37cb-4818-90e0-16c83be6f940'}
-                    type="radio"
-                    id="commercial"
-                    name="type"
-                    value="a90ff7a3-37cb-4818-90e0-16c83be6f940"
-                    onChange={this.handleChange}
-                    htmlFor="commercial"
-                    spanText="Commercial"
-                  />
-                  <RadioInputGroup
-                    checked={type === '26a5c423-e4f1-4194-a543-dd7f6cfbfb99'}
-                    type="radio"
-                    id="internal"
-                    name="type"
-                    value="26a5c423-e4f1-4194-a543-dd7f6cfbfb99"
-                    onChange={this.handleChange}
-                    htmlFor="internal"
-                    spanText="Internal"
-                  />
+                  </h3>
+                  <div className="cpp__types-inputs">
+                    <RadioInputGroup
+                      checked={type === 'a90ff7a3-37cb-4818-90e0-16c83be6f940'}
+                      type="radio"
+                      id="commercial"
+                      name="type"
+                      value="a90ff7a3-37cb-4818-90e0-16c83be6f940"
+                      onChange={this.handleChange}
+                      htmlFor="commercial"
+                      spanText="Commercial"
+                    />
+                    <RadioInputGroup
+                      checked={type === '26a5c423-e4f1-4194-a543-dd7f6cfbfb99'}
+                      type="radio"
+                      id="internal"
+                      name="type"
+                      value="26a5c423-e4f1-4194-a543-dd7f6cfbfb99"
+                      onChange={this.handleChange}
+                      htmlFor="internal"
+                      spanText="Internal"
+                    />
+                  </div>
                 </div>
-              </div>
-              <div className="cpp__engagement">
-                <h3 className="heading-tertiarry margin-right-md">
+                <div className="cpp__engagement">
+                  <h3 className="heading-tertiarry margin-right-md">
                   Engagement Model
-                </h3>
-                <div className="cpp__engagement-inputs">
-                  <RadioInputGroup
-                    checked={
+                  </h3>
+                  <div className="cpp__engagement-inputs">
+                    <RadioInputGroup
+                      checked={
                       engagement === '7f535dd6-56b1-4979-a5ed-f471a535de21'
                     }
-                    type="radio"
-                    id="fixedPrice"
-                    name="engagement"
-                    value="7f535dd6-56b1-4979-a5ed-f471a535de21"
-                    onChange={this.handleChange}
-                    htmlFor="fixedPrice"
-                    spanText="Fixed Price"
-                  />
-                  <RadioInputGroup
-                    checked={
+                      type="radio"
+                      id="fixedPrice"
+                      name="engagement"
+                      value="7f535dd6-56b1-4979-a5ed-f471a535de21"
+                      onChange={this.handleChange}
+                      htmlFor="fixedPrice"
+                      spanText="Fixed Price"
+                    />
+                    <RadioInputGroup
+                      checked={
                       engagement === 'e4b36752-5acc-4ba5-886f-b5e4d86fe1e1'
                     }
-                    type="radio"
-                    id="hourly"
-                    name="engagement"
-                    value="e4b36752-5acc-4ba5-886f-b5e4d86fe1e1"
-                    onChange={this.handleChange}
-                    htmlFor="hourly"
-                    spanText="Hourly"
-                  />
-                  <RadioInputGroup
-                    checked={
+                      type="radio"
+                      id="hourly"
+                      name="engagement"
+                      value="e4b36752-5acc-4ba5-886f-b5e4d86fe1e1"
+                      onChange={this.handleChange}
+                      htmlFor="hourly"
+                      spanText="Hourly"
+                    />
+                    <RadioInputGroup
+                      checked={
                       engagement === '0bea1179-488d-4018-a200-1176bf9fd959'
                     }
-                    type="radio"
-                    id="fulltime"
-                    name="engagement"
-                    value="0bea1179-488d-4018-a200-1176bf9fd959"
-                    onChange={this.handleChange}
-                    htmlFor="fulltime"
-                    spanText="Fulltime"
-                  />
+                      type="radio"
+                      id="fulltime"
+                      name="engagement"
+                      value="0bea1179-488d-4018-a200-1176bf9fd959"
+                      onChange={this.handleChange}
+                      htmlFor="fulltime"
+                      spanText="Fixed Price + Hourly"
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
-            <SelectInput
-              onChange={this.handleChange}
-              name="manager"
-              value={manager}
-            />
-            <UserPicker
-              getUsers={this.getParticipants}
-              title="Participants"
-              deleteUser={this.deleteParticipant}
-              users={participants}
-            />
-            <UserPicker
-              getUsers={this.getWatchers}
-              title="Watchers"
-              deleteUser={this.deleteWatcher}
-              users={watcher}
-            />
-            {this.state.errors.length >= 1 && (
+              <SelectInput
+                onChange={this.handleChange}
+                name="manager"
+                value={manager}
+              />
+              <UserPicker
+                getUsers={this.getParticipants}
+                title="Participants"
+                deleteUser={this.deleteParticipant}
+                users={participants}
+              />
+              <UserPicker
+                getUsers={this.getWatchers}
+                title="Watchers"
+                deleteUser={this.deleteWatcher}
+                users={watcher}
+              />
+              {this.state.errors.length >= 1 && (
               <div
                 style={{
                   color: 'red',
@@ -442,19 +441,22 @@ h
                 {this.state.errors.join(', ')}
 .
               </div>
-            )}
-            <div className="cpp__buttons-group">
-              <CustomButton type="submit" color="success">
-                Save
-              </CustomButton>
-              <CustomButton
-                type="button"
-                onClick={() => this.props.history.goBack()}
-                color="gray"
-              >
-                Cancel
-              </CustomButton>
+              )}
             </div>
+          </div>
+          <div className="cpp__buttons-group">
+            <Button
+              type="submit"
+            >
+                Save
+            </Button>
+            <Button
+              type="button"
+              onClick={() => this.props.history.goBack()}
+              use="transparent"
+            >
+                Cancel
+            </Button>
           </div>
         </form>
       </div>

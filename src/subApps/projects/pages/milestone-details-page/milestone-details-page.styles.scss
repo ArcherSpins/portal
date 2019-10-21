@@ -46,7 +46,7 @@
     .estimation-type-wrapper {
       display: flex;
       align-items: center;
-
+      margin-left: 1rem;
       .estimation-type-title {
         margin-right: 5px;
       }
@@ -96,11 +96,6 @@
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
       transform: translateY(0);
     }
-  }
-
-  .form {
-    display: flex;
-    justify-content: space-between;
   }
 
   .save-button {

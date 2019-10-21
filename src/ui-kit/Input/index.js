@@ -1,3 +1,4 @@
+// @flow
 import React, { type Node, Component } from 'react';
 import MaskedInput from 'react-text-mask';
 import noop from 'lodash.noop';

@@ -4,8 +4,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-// import type { Match } from 'react-router-dom';
-import { MILESTONE_ADD_ROUTE } from 'subApps/projects/routes';
+import type { Match } from 'react-router-dom';
 import { selectProjectsMolestones } from '../../redux/milestone/milestone.selectors';
 import { selectProjectItem } from '../../redux/project/project.selectors';
 import { getAllMilestones } from '../../redux/milestone/milestone.actions';
@@ -27,7 +26,7 @@ type State = {
 type Props = {
   milestones: Array<Milestone>,
   project: Project,
-  // match: Match,
+  match: Match,
   getAllMilestones: (id: string) => Array<Milestone>
 };
 
@@ -51,7 +50,7 @@ class MilestonePage extends React.Component<Props, State> {
 
   render() {
     const { openDescription, activePage } = this.state;
-    const { milestones, project } = this.props;
+    const { milestones, project, match } = this.props;
     return (
       <div className="milestones">
         <header className="milestones__header">
@@ -113,7 +112,7 @@ class MilestonePage extends React.Component<Props, State> {
                 </button>
               </div>
             </div>
-            <LinkButton to={MILESTONE_ADD_ROUTE}>
+            <LinkButton to={`${match.url}/create`}>
               Add Milestone
             </LinkButton>
           </div>

@@ -249,8 +249,6 @@ class EmployeeComponent extends React.PureComponent<EmployeeProps> {
       loadingCities,
     } = this.props;
 
-    console.log(positions)
-
     return (
       <PageContainer style={{ display: 'flex' }}>
         <LeftNavbar />

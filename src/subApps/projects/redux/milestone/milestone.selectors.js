@@ -2,6 +2,7 @@
 import { createSelector } from 'reselect';
 import type { State } from '../flow-state';
 import type { Milestone } from './milestone.flow-types';
+import { getUrlFromProject } from '../../helpers';
 
 type Props = {
   match: Object,
@@ -26,8 +27,7 @@ export const selectProjectsMolestones = createSelector<
 >(
   [selectMilestone, selectProjectIdByParams],
   (milestones: Array<Milestone>, projectId: string) => milestones.filter(
-    (milestone) => milestone.project.URL
-      === `http://projects.internal.sfxdx.ru/${projectId}`,
+    (milestone) => getUrlFromProject(milestone.project.URL) === `${projectId}`,
   ),
 );
 

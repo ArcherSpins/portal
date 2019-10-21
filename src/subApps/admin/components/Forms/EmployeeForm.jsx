@@ -9,7 +9,9 @@ import React from 'react';
 import { compose } from 'redux';
 import { graphql } from 'react-apollo';
 // $FlowFixMe
-import { Dropdown, Combobox, Input, Datepicker } from 'ui-kit';
+import {
+  Dropdown, Combobox, Input, Datepicker,
+} from 'ui-kit';
 import {
   InputToggle,
   PickerToggle,
@@ -76,7 +78,7 @@ class EmployeeForm extends React.Component<
         phoneNumber: false,
       },
       formData: {
-        department: true
+        department: true,
       },
     };
   }
@@ -233,7 +235,7 @@ class EmployeeForm extends React.Component<
           ...item,
           label: String(`${item.name}, ${item.country}`),
           value: String(`${item.name}, ${item.country}`),
-        }
+        };
       });
     }
 
@@ -268,8 +270,6 @@ class EmployeeForm extends React.Component<
     if (!defaultData) {
       return null;
     }
-
-    console.log(positions);
 
     return (
       <AuthForm
@@ -351,8 +351,8 @@ class EmployeeForm extends React.Component<
               this.toggleEdit(true);
             }}
             value={
-              formData.department ||
-                (departments.length > 0 ? departments.find((item) => item.active) || departments[0] : '')
+              formData.department
+                || (departments.length > 0 ? departments.find((item) => item.active) || departments[0] : '')
             }
             idx="department"
             label="Department"
@@ -366,8 +366,8 @@ class EmployeeForm extends React.Component<
               this.toggleEdit(true);
             }}
             value={
-              formData.position ||
-                (positions.length > 0 ? positions.find((item) => item.active) || positions[0] : '')
+              formData.position
+                || (positions.length > 0 ? positions.find((item) => item.active) || positions[0] : '')
             }
             idx="position"
             label="Position"
@@ -375,22 +375,6 @@ class EmployeeForm extends React.Component<
         </FieldBlock>
 
         <FieldBlock>
-          <Input
-            mask={['+', '7', ' ', '(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/]}
-            showInput={showEdit}
-            title={defaultData.phoneNumber}
-            label="Phone number"
-            idx="phoneNumber"
-            use="borderless"
-            error={errorBoundry.phoneNumber}
-            defaultValue="Not number"
-            value={formData.phoneNumber}
-            onChange={(e) => {
-              console.log(e);
-              this.onChange('phoneNumber', e.target.value);
-              this.toggleEdit(true);
-            }}
-          />
           <InputToggle
             showInput={showEdit}
             title={defaultData.phoneNumber}
@@ -413,12 +397,13 @@ class EmployeeForm extends React.Component<
               this.toggleEdit(true);
             }}
             selectedOption={
-              formData.city ?
-              {
-                ...formData.city,
-                label: String(`${formData.city.name}, ${formData.city.country}`),
-                value: String(`${formData.city.name}, ${formData.city.country}`),
-              } : (cities.length > 0 ? cities.find((item) => item.active) || cities[0] : null)
+              // eslint-disable-next-line no-nested-ternary
+              formData.city
+                ? {
+                  ...formData.city,
+                  label: String(`${formData.city.name}, ${formData.city.country}`),
+                  value: String(`${formData.city.name}, ${formData.city.country}`),
+                } : (cities.length > 0 ? cities.find((item) => item.active) || cities[0] : null)
             }
             label="City"
             error={errorBoundry.city}
@@ -432,8 +417,8 @@ class EmployeeForm extends React.Component<
               this.toggleEdit(true);
             }}
             value={
-              formData.timeZone ||
-                (timeZones.length > 0 ? timeZones.find((item) => item.active) || timeZones[0] : '')
+              formData.timeZone
+                || (timeZones.length > 0 ? timeZones.find((item) => item.active) || timeZones[0] : '')
             }
             label="Time zone"
           />
@@ -467,10 +452,10 @@ class EmployeeForm extends React.Component<
               this.toggleEdit(true);
             }}
             value={
-              formData.workDayStart ||
-                (defaultData.workDayStart.length > 0 ?
-                  defaultData.workDayStart.find((item) => item.active) ||
-                  defaultData.workDayStart[0] : '')
+              formData.workDayStart
+                || (defaultData.workDayStart.length > 0
+                  ? defaultData.workDayStart.find((item) => item.active)
+                  || defaultData.workDayStart[0] : '')
             }
             label="Working day starts at"
           />
@@ -495,10 +480,10 @@ class EmployeeForm extends React.Component<
               this.toggleEdit(true);
             }}
             value={
-              formData.lunchStart ||
-                (defaultData.lunchStart.length > 0 ?
-                  defaultData.lunchStart.find((item) => item.active) ||
-                  defaultData.lunchStart[0] : '')
+              formData.lunchStart
+                || (defaultData.lunchStart.length > 0
+                  ? defaultData.lunchStart.find((item) => item.active)
+                  || defaultData.lunchStart[0] : '')
             }
             label="Lunch starts at"
           />
