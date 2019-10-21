@@ -14,7 +14,6 @@ $color-gray-dark-1: #4b4b4b;
   min-width: 1200px;
 
   flex-direction: column;
-
   &__form {
     display: flex;
     justify-content: space-between;
@@ -214,5 +213,8 @@ $color-gray-dark-1: #4b4b4b;
   &__buttons-group {
     display: flex;
     justify-content: flex-start;
+    button {
+      margin-right: 10px;
+    }
   }
 }

@@ -37,9 +37,6 @@ import { getUrlFromProject } from '../../helpers';
 import UserPicker from '../../components/user-picker/user-picker.component';
 import RadioInputGroup from '../../components/forms/RadioInputGroup';
 import SelectInput from '../../components/forms/select-input/select-input.component';
-import TextInput from '../../components/forms/text-input/text-input.component';
-import InverseButtom from '../../components/inverse-button/inverse-button.component';
-import CustomButton from '../../components/custom-button/custom-button.component';
 
 import './project-details-page.styles.scss';
 
@@ -444,16 +441,18 @@ h
               </div>
             )}
             <div className="cpp__buttons-group">
-              <CustomButton type="submit" color="success">
+              <Button
+                type="submit"
+              >
                 Save
-              </CustomButton>
-              <CustomButton
+              </Button>
+              <Button
                 type="button"
                 onClick={() => this.props.history.goBack()}
-                color="gray"
+                use="transparent"
               >
                 Cancel
-              </CustomButton>
+              </Button>
             </div>
           </div>
         </form>
