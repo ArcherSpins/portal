@@ -100,6 +100,7 @@ const initialState = {
 class ProjectDetailPage extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
+    console.log(props);
     this.state = {
       id: props.project.id,
       createdAt: props.project.createdAt,
@@ -404,7 +405,7 @@ h
                     value="0bea1179-488d-4018-a200-1176bf9fd959"
                     onChange={this.handleChange}
                     htmlFor="fulltime"
-                    spanText="Fulltime"
+                    spanText="Fixed Price + Hourly"
                   />
                 </div>
               </div>

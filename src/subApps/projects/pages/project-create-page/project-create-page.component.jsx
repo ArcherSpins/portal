@@ -210,7 +210,7 @@ class CreateProjectPage extends Component<Props, State> {
       const participantsIDs = participants.map((p) => p.id.toString());
       const newProject = {
         title,
-        URL: `http://projects.internal.sfxdx.ru/${URL}`,
+        URL,
         description,
         managerID: managerID.toString(),
         engagementModel,
@@ -351,7 +351,7 @@ class CreateProjectPage extends Component<Props, State> {
                     value="0bea1179-488d-4018-a200-1176bf9fd959"
                     onChange={this.handleChange}
                     htmlFor="fulltime"
-                    spanText="Fulltime"
+                    spanText="Fixed Price + Hourly"
                   />
                 </div>
               </div>
