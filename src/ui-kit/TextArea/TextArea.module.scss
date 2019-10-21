@@ -1,0 +1,39 @@
+@import '../variables.scss';
+@import '../mixins';
+
+.textarea {
+  @include default-transition(all);
+  border: 1px solid $border-color;
+  border-radius: 0.25rem;
+  width: 100%;
+  min-width: 20rem;
+  font-size: 1rem;
+  resize: vertical;
+  padding-top: 0.5rem;
+  padding-left: 0.6rem;
+  &::placeholder {
+    color: $disabled-color;
+  }
+
+  &:disabled {
+    background: $grey-disabled;
+    cursor: not-allowed;
+  }
+
+  &:focus {
+    outline: none;
+    border: 1px solid $main-color;
+    &::placeholder {
+      color: lighten($disabled-color, 5%);
+    }
+  }
+
+  &:disabled {
+    background: $grey-disabled;
+    cursor: not-allowed;
+  }
+}
+
+.label {
+  font-size: 0.85rem;
+}

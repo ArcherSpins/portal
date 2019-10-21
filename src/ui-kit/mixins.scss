@@ -1,7 +1,14 @@
+@import "./variables.scss";
+
 @mixin default-transition($property) {
   transition: $property 0.2s ease-in;
 }
 
 @mixin default-font() {
   font-family: 'Proxima Nova';
+}
+
+@function calculateRem($size) {
+  $remSize: $size / $root-font-size;
+  @return #{$remSize}rem;
 }
