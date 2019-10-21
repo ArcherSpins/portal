@@ -6,11 +6,11 @@ import type { RouterHistory } from 'react-router-dom';
 
 import './milestone-add-page.styles.scss';
 
+import { Input, TextArea, Button } from 'ui-kit';
 import { createMilestone } from '../../redux/milestone/milestone.actions';
 
 import { selectServerError } from '../../redux/error/error.selectors';
 import { selectProjectItem } from '../../redux/project/project.selectors';
-
 import type {
   Milestone,
   MilestoneCreation,
@@ -18,10 +18,7 @@ import type {
 import type { Project } from '../../redux/project/project.flow-types';
 import type { Error } from '../../redux/error/error.flow-types';
 
-import TextInput from '../../components/forms/text-input/text-input.component';
 import UserPicker from '../../components/user-picker/user-picker.component';
-import CustomButton from '../../components/custom-button/custom-button.component';
-import CustomTextarea from '../../components/forms/custom-textarea/custom-textarea.component';
 
 type Employee = {
   id: string,
@@ -213,29 +210,41 @@ class MilestoneAddPage extends React.Component<Props, State> {
           </div>
         </div>
         <form onSubmit={this.handleSubmit} className="form">
-          <div style={{ width: '45%' }}>
-            <TextInput
-              header="Milestone"
-              name="title"
-              type="text"
-              value={title}
-              onChange={this.handleChange}
-              maxLength="100"
-              required
-            />
-            <UserPicker
-              getUsers={this.getParticipants}
-              title="Participants"
-              deleteUser={this.deleteParticipant}
-              users={participants}
-            />
-            <UserPicker
-              getUsers={this.getCreator}
-              title="Task Creators"
-              deleteUser={this.deleteCreator}
-              users={taskCreators}
-            />
-            {errors.length >= 1 && (
+          <div className="cpp__form-inputs">
+            <div style={{ width: '45%' }}>
+              <TextArea
+                label="Description"
+                value={description}
+                name="description"
+                labelClassName="cpp__textarea"
+                className="project__input"
+                onChange={this.handleChange}
+              />
+            </div>
+            <div style={{ width: '45%' }}>
+              <Input
+                label="Milestone"
+                name="title"
+                type="text"
+                value={title}
+                onChange={this.handleChange}
+                className="project__input"
+                maxLength="100"
+                required
+              />
+              <UserPicker
+                getUsers={this.getParticipants}
+                title="Participants"
+                deleteUser={this.deleteParticipant}
+                users={participants}
+              />
+              <UserPicker
+                getUsers={this.getCreator}
+                title="Task Creators"
+                deleteUser={this.deleteCreator}
+                users={taskCreators}
+              />
+              {errors.length >= 1 && (
               <div
                 style={{
                   color: 'red',
@@ -248,28 +257,22 @@ class MilestoneAddPage extends React.Component<Props, State> {
                 {errors.join(', ')}
 .
               </div>
-            )}
-            <div className="buttons-wrapper">
-              <CustomButton color="success" type="submit">
-                Save
-              </CustomButton>
-              <CustomButton
-                color="gray"
-                type="button"
-                onClick={() => history.goBack()}
-              >
-                Cancel
-              </CustomButton>
+              )}
             </div>
           </div>
-          <div style={{ width: '45%' }}>
-            <CustomTextarea
-              header="Description"
-              className="description"
-              value={description}
-              name="description"
-              onChange={this.handleChange}
-            />
+          <div className="cpp__buttons-group">
+            <Button
+              type="submit"
+            >
+                Save
+            </Button>
+            <Button
+              use="transparent"
+              type="button"
+              onClick={() => history.goBack()}
+            >
+              Cancel
+            </Button>
           </div>
         </form>
       </div>
