@@ -43,13 +43,12 @@ $color-gray-dark-1: #4b4b4b;
 
   .url-link {
     position: absolute;
-    font-size: 1.4em;
+    font-size: 1rem;
     top: 7px;
     left: 6px;
   }
 
   &__url {
-    padding-left: 193px;
     background: $color-white-1;
     border: 1px solid $color-gray-inactive;
     border-radius: 4px;

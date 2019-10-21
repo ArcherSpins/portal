@@ -47,16 +47,19 @@ const Navbar = ({ onNextClick, onPreviousClick }: NavbarElementProps) => (
   </div>
 );
 
-const DateInput = (props) => (
-  <div
-    className={styles.input}
-  >
-    <input {...props} />
-    <span className={styles.icon__wrap}>
-      <i className="icon-calendar" />
-    </span>
-  </div>
-);
+const DateInput = (props: any) => {
+  const { onFocus, onBlur } = props;
+  return (
+    <div
+      className={styles.input}
+    >
+      <input {...props} />
+      <button type="button" onClick={onFocus} onBlur={onBlur} className={styles.icon__wrap}>
+        <i className="icon-calendar" />
+      </button>
+    </div>
+  );
+};
 
 const getDate = (date: Date, format: string) => formatDate(date, format);
 
@@ -76,9 +79,14 @@ const Datepicker = ({
           classNames: overlayStyles,
           weekdaysShort,
           navbarElement: Navbar,
-          onBlur: () => {
+          onBlur: (e: SyntheticMouseEvent<HTMLElement>) => {
+            // hack for hiding day picker
+            // see: https://github.com/gpbl/react-day-picker/issues/926
+
             if (inputRef && inputRef.current) {
-              inputRef.current.hideAfterDayClick();
+              if (!e.relatedTarget) {
+                inputRef.current.hideAfterDayClick();
+              }
             }
           },
         }}
