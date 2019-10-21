@@ -9,7 +9,7 @@ import type { RouterHistory } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import Moment from 'react-moment';
 
-import { Input } from 'ui-kit';
+import { Input, Button, TextArea } from 'ui-kit';
 import { ROOT } from 'subApps/projects/routes';
 
 import { editProject } from '../../redux/project/project.actions';
@@ -32,6 +32,7 @@ import translate from '../../helpers/translator';
 import translateTitle from '../../helpers/translateTitle';
 import { bindUserId, unbindUserId } from '../../helpers/compareArrays';
 import { spentTimeInHours } from '../../helpers/sumTime';
+import { getUrlFromProject } from '../../helpers';
 
 import UserPicker from '../../components/user-picker/user-picker.component';
 import RadioInputGroup from '../../components/forms/RadioInputGroup';
@@ -106,7 +107,7 @@ class ProjectDetailPage extends Component<Props, State> {
       id: props.project.id,
       createdAt: props.project.createdAt,
       title: props.project.title,
-      url: props.project.URL,
+      url: getUrlFromProject(props.project.URL),
       type: props.project.type.id,
       engagement: props.project.engagementModel.id,
       manager: props.project.manager.id,
@@ -242,7 +243,7 @@ class ProjectDetailPage extends Component<Props, State> {
       const editedProject = {
         id,
         title,
-        URL: `http://projects.internal.sfxdx.ru/${url}`,
+        URL: url,
         description,
         managerID: manager.toString(),
         engagementModel: engagement,
@@ -281,43 +282,43 @@ class ProjectDetailPage extends Component<Props, State> {
           </div>
         </div>
         <div className="project-details__sub-header">
-          <InverseButtom
-            type="button"
-            color="success"
+          <Button
+            use="grey"
             onClick={() => this.props.history.push(`${ROOT}/${url}/milestones`)}
           >
             Milestones
-          </InverseButtom>
+          </Button>
           <span className="project-details__spent">
-            <b>Spent</b>
+            <b>Spent:</b>
             {' '}
             {spentTimeInHours(spentTime)}
 /
             {this.showLogTime()}
 h
           </span>
-          <span className="project-details__created">
-            <b>Created </b>
+          <span className="project-details__spent">
+            <b>Created:</b>
             <Moment format="DD/MM/YYYY">{createdAt}</Moment>
           </span>
         </div>
         <form className="cpp__form" onSubmit={this.handleSumbit}>
           <div style={{ width: '40%' }}>
-            <h3 className="heading-tertiarry">Description</h3>
-            <textarea
+            <TextArea
               className="cpp__description-input"
+              label="Description"
               value={description}
               name="description"
               onChange={this.handleChange}
             />
           </div>
           <div style={{ marginRight: '5%', width: '40%' }}>
-            <TextInput
-              header="Title"
+            <Input
+              label="Title"
               name="title"
               type="text"
               value={title}
               onChange={this.handleTitleChange}
+              className="project__input"
               required
               pattern="(?=.*[\p{L}]).{2,}"
               maxLength="100"
@@ -326,8 +327,10 @@ h
               name="url"
               type="text"
               label="Project URL"
+              prefix={`${window.location.origin}/projects/`}
               value={url}
               onChange={this.handleUrlChange}
+              className="project__input"
               required
               maxLength="66"
             />

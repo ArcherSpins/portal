@@ -18,12 +18,8 @@ storiesOf('Input', module)
             sectionFn: withDecorator(<Input placeholder="Placeholder text" onChange={onChange} />),
           },
           {
-            title: "With label",
-            sectionFn: withDecorator(<Input label="This is a label" placeholder="Placeholder text" onChange={onChange} />),
-          },
-          {
-            title: "With Prefix",
-            sectionFn: withDecorator(<Input label="This is a label" placeholder="text" prefix="Placeholder text" onChange={onChange} />),
+            title: "With Label and Prefix",
+            sectionFn: withDecorator(<Input label="This is a label" prefix={`${window.location.origin}/`} onChange={onChange} />),
           },
           {
             title: "Error state",
@@ -46,12 +42,8 @@ storiesOf('Input', module)
             sectionFn: withDecorator(<Input placeholder="Placeholder text" use="borderless" onChange={onChange} />),
           },
           {
-            title: "With label",
-            sectionFn: withDecorator(<Input label="This is a label" use="borderless" placeholder="Placeholder text" onChange={onChange} />),
-          },
-          {
-            title: "With Prefix",
-            sectionFn: withDecorator(<Input label="This is a label" use="borderless" placeholder="text" prefix="Placeholder text" onChange={onChange} />),
+            title: "With Label and Prefix",
+            sectionFn: withDecorator(<Input label="This is a label" use="borderless" prefix={`${window.location.origin}/`} onChange={onChange} />),
           },
           {
             title: "Error state",

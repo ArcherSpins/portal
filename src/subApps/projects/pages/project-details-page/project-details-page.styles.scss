@@ -112,9 +112,12 @@ $color-gray-dark-1: #4b4b4b;
 
 .project-details__spent {
   font-size: 14px;
-  margin-right: 3em;
+  margin: 0 1rem;
+  b {
+    font-weight: bold;
+  }
 }
 
-.project-details__created {
-  font-size: 14px;
+.project__input {
+  margin-bottom: 1rem;
 }
