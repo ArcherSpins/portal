@@ -263,6 +263,8 @@ class EmployeeForm extends React.Component<
     const cities = this.getCity(defaultData);
     const timeZones = this.getTimeZone();
 
+    console.log(errorBoundry, formData)
+
     if (!defaultData) {
       return null;
     }
@@ -371,6 +373,20 @@ class EmployeeForm extends React.Component<
         </FieldBlock>
 
         <FieldBlock>
+          {/* <Input
+            mask={['+', '7', ' ', '(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/]}
+            showInput={showEdit}
+            title={defaultData.phoneNumber}
+            label="Phone number"
+            idx="phoneNumber"
+            use="borderless"
+            error={errorBoundry.phoneNumber}
+            defaultValue="Not number"
+            onChange={(e) => {
+              this.onChange('phoneNumber', e.target.value);
+              this.toggleEdit(true);
+            }}
+          /> */}
           <InputToggle
             showInput={showEdit}
             title={defaultData.phoneNumber}
@@ -420,13 +436,13 @@ class EmployeeForm extends React.Component<
         </FieldBlock>
 
         <FieldBlock>
-          <Datepicker
+          {/* <Datepicker
             onDayChange={(value) => {
               console.log(value);
               this.onChange('dateOfEmployment', value);
               this.toggleEdit(true);
             }}
-          />
+          /> */}
           <PickerToggle
             onChange={this.onChange}
             showInput={showEdit}

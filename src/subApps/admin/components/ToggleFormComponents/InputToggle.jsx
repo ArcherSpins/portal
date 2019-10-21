@@ -75,7 +75,7 @@ export default ({
           placeholder={label}
           type={type || 'text'}
           value={value || valueState}
-          onChange={(e) => (e.target.value)}
+          onChange={(e) => change(e.target.value)}
           {...restProps}
         />
       </FieldBlock>

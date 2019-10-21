@@ -31,6 +31,12 @@
   bottom: 0;
   margin: 1px;
   border-left: 1px solid $text-color-50;
+  cursor: pointer;
+  @include default-transition(all);
+  &:hover {
+    background: rgba($text-color-50, .5);
+    color: $text-color;
+  }
   i {
     font-size: 1em;
     color: $text-color-50;

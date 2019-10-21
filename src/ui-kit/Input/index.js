@@ -1,5 +1,5 @@
-// @flow
-import React, { type Node } from 'react';
+import React, { type Node, Component } from 'react';
+import MaskedInput from 'react-text-mask';
 import noop from 'lodash.noop';
 import classNames from 'classnames';
 import xmark from './xmark.svg';
@@ -23,76 +23,156 @@ type Props = {
   name: string,
   icon?: Node,
   clearable?: boolean,
+  prefix?: string,
   onClearClick?: () => void,
   /** onChange */
-  onChange?: (e: SyntheticEvent<HTMLInputElement>) => void,
+  onChange?: (e: SyntheticInputEvent<HTMLInputElement>) => void,
+  onFocus?: (e: SyntheticInputEvent<HTMLInputElement>) => void,
   /** Срабатывает при потере фокуса */
-  onBlur?: (e: SyntheticEvent<HTMLInputElement>) => void
+  onBlur?: (e: SyntheticInputEvent<HTMLInputElement>) => void,
+  mask?: Array<mixed>
 }
 
-const Input = ({
-  type,
-  placeholder,
-  onChange,
-  error,
-  disabled,
-  value,
-  className = '',
-  name,
-  use = 'default',
-  label,
-  onBlur,
-  clearable,
-  onClearClick,
-  icon,
-  ...restProps
-}: Props): Node => (
-  <div
-    {...restProps}
-    className={
-      classNames(
-        styles[use],
-        { [styles.error]: error, [styles.paddingLeft]: icon },
-        className,
-      )
+type State = {
+  focused: boolean
+}
+class Input extends Component<Props, State> {
+  static defaultProps = {
+    type: 'text',
+    placeholder: '',
+    onChange: noop,
+    onBlur: noop,
+    onFocus: noop,
+    error: false,
+    disabled: false,
+    use: 'default',
+    value: '',
+    className: '',
+    label: '',
+    clearable: false,
+    onClearClick: noop,
+    icon: null,
+    prefix: '',
+    mask: null,
+  };
+
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      focused: false,
+    };
+  }
+
+  handleFocus = (event: SyntheticInputEvent<HTMLInputElement>) => {
+    const { onFocus } = this.props;
+    this.setState({
+      focused: true,
+    });
+
+    if (onFocus) {
+      onFocus(event);
     }
-  >
-    <label htmlFor={name}>
-      {label}
-      <div className={styles.wrap}>
-        <span className={styles.icon}>{icon && icon}</span>
-        <input
-          name={name}
-          type={type}
-          placeholder={placeholder}
-          onChange={onChange}
-          onBlur={onBlur}
-          disabled={disabled}
-          value={value}
-          {...restProps}
-        />
-        {/* TODO: REPLACE SVG TO <i /> */}
-        {clearable && <button onClick={onClearClick} className={styles.clear} type="button"><img src={xmark} alt="clear" /></button>}
+  };
+
+  handleBlur = (event: SyntheticInputEvent<HTMLInputElement>) => {
+    const { onBlur } = this.props;
+    this.setState({
+      focused: false,
+    });
+
+    if (onBlur) {
+      onBlur(event);
+    }
+  };
+
+  render() {
+    const {
+      type,
+      placeholder,
+      onChange,
+      error,
+      disabled,
+      value,
+      className = '',
+      name,
+      use = 'default',
+      label,
+      onBlur,
+      clearable,
+      prefix,
+      onClearClick,
+      icon,
+      mask,
+      ...restProps
+    } = this.props;
+
+    const { focused } = this.state;
+
+    if (icon && prefix) throw new Error('icon and prefix props cannot be used at the same time');
+
+    return (
+      <div
+        className={
+          classNames(
+            styles[use],
+            {
+              [styles.error]: error,
+              [styles.paddingLeft]: icon,
+              [styles.focus]: focused,
+              [styles.disabled]: disabled,
+            },
+            className,
+          )
+        }
+      >
+        <label htmlFor={name}>
+          {label}
+          <div className={styles.wrap}>
+            {icon && <span className={styles.icon}>{icon}</span>}
+            {prefix && <span className={styles.prefix}>{prefix}</span>}
+            {
+              mask ? (
+                <MaskedInput
+                  mask={mask}
+                  placeholder={placeholder}
+                  id={name}
+                  render={(ref, props) => (
+                    <input
+                      ref={ref}
+                      {...restProps}
+                      name={name}
+                      type={type}
+                      placeholder={placeholder}
+                      onChange={onChange}
+                      onFocus={this.handleFocus}
+                      onBlur={this.handleBlur}
+                      disabled={disabled}
+                      value={value}
+                      {...props}
+                    />
+                  )}
+                />
+              ) : (
+                <input
+                  {...restProps}
+                  name={name}
+                  type={type}
+                  placeholder={placeholder}
+                  onChange={onChange}
+                  onFocus={this.handleFocus}
+                  onBlur={this.handleBlur}
+                  disabled={disabled}
+                  value={value}
+                />
+              )
+            }
+            {/* TODO: REPLACE SVG TO <i /> */}
+            {clearable && <button onClick={onClearClick} className={styles.clear} type="button"><img src={xmark} alt="clear" /></button>}
+          </div>
+        </label>
       </div>
-    </label>
-
-  </div>
-);
-
-Input.defaultProps = {
-  type: 'text',
-  placeholder: '',
-  onChange: noop,
-  onBlur: noop,
-  error: false,
-  disabled: false,
-  use: 'default',
-  value: '',
-  className: '',
-  label: '',
-  clearable: false,
-  onClearClick: noop,
-  icon: null,
-};
+    );
+  }
+}
 
 export default Input;
