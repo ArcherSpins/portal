@@ -69,6 +69,7 @@ const Input = ({
           onBlur={onBlur}
           disabled={disabled}
           value={value}
+          {...restProps}
         />
         {/* TODO: REPLACE SVG TO <i /> */}
         {clearable && <button onClick={onClearClick} className={styles.clear} type="button"><img src={xmark} alt="clear" /></button>}

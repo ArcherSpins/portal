@@ -9,6 +9,7 @@ export { default as Spinner } from './Spinner';
 export { default as Chip } from './Chip';
 export { default as Combobox } from './Combobox';
 export { default as Dropdown } from './Dropdown';
+export { default as Datepicker } from './Datepicker';
 export {
   Modal, ModalHeader, ModalBody, ModalFooter,
 } from './Modal';

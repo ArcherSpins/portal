@@ -8,7 +8,8 @@
 import React from 'react';
 import { compose } from 'redux';
 import { graphql } from 'react-apollo';
-import { Dropdown, Combobox } from 'ui-kit';
+// $FlowFixMe
+import { Dropdown, Combobox, Input, Datepicker } from 'ui-kit';
 import {
   InputToggle,
   PickerToggle,
@@ -273,6 +274,16 @@ class EmployeeForm extends React.Component<
         style={{ maxWidth: 600 }}
       >
         <FieldBlock className="flex-block">
+          {/* <Input
+            label="Name"
+            error={errorBoundry.firstName}
+            use="borderless"
+            onChange={(e: SyntheticEvent<HTMLInputElement>) => {
+              // $FlowFixMe
+              this.onChange('firstName', e.target.value);
+              this.toggleEdit(true);
+            }}
+          /> */}
           <InputToggle
             showInput={showEdit}
             title={defaultData.firstName}
@@ -409,6 +420,13 @@ class EmployeeForm extends React.Component<
         </FieldBlock>
 
         <FieldBlock>
+          <Datepicker
+            onDayChange={(value) => {
+              console.log(value);
+              this.onChange('dateOfEmployment', value);
+              this.toggleEdit(true);
+            }}
+          />
           <PickerToggle
             onChange={this.onChange}
             showInput={showEdit}

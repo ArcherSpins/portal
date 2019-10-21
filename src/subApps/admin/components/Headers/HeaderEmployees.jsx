@@ -66,7 +66,7 @@ export default ({
                 clearable
               />
             </form>
-            <Link to={CREATE_EMPLOYEE_ROUTE}>
+            <Link to={CREATE_EMPLOYEE_ROUTE.replace(':', '')}>
               <Button
                 style={{ padding: '5px 10px', minHeight: `${31}px` }}
               >
