@@ -9,6 +9,7 @@ import type { RouterHistory } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import Moment from 'react-moment';
 
+import { Input } from 'ui-kit';
 import { ROOT } from 'subApps/projects/routes';
 
 import { editProject } from '../../redux/project/project.actions';
@@ -105,7 +106,7 @@ class ProjectDetailPage extends Component<Props, State> {
       id: props.project.id,
       createdAt: props.project.createdAt,
       title: props.project.title,
-      url: props.project.URL.substring(34),
+      url: props.project.URL,
       type: props.project.type.id,
       engagement: props.project.engagementModel.id,
       manager: props.project.manager.id,
@@ -321,21 +322,15 @@ h
               pattern="(?=.*[\p{L}]).{2,}"
               maxLength="100"
             />
-            <h3 className="heading-tertiarry">Project URL</h3>
-            <div className="url-wrapper">
-              <span className="url-link">
-                http://projects.internal.sfxdx.ru/
-              </span>
-              <TextInput
-                name="url"
-                type="text"
-                value={url}
-                onChange={this.handleUrlChange}
-                className="cpp__url"
-                required
-                maxLength="66"
-              />
-            </div>
+            <Input
+              name="url"
+              type="text"
+              label="Project URL"
+              value={url}
+              onChange={this.handleUrlChange}
+              required
+              maxLength="66"
+            />
             <p className="text-gray margin-bottom-md" style={{ width: '100%' }}>
               URL should be 1–100 characters length. Only lower case letters
               (a-z), numbers, dashes and underscores are alowed. Identifier

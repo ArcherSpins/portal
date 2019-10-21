@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import type { RouterHistory } from 'react-router-dom';
+import { Input } from 'ui-kit';
 import { saveProject } from '../../redux/project/project.actions';
 import translate from '../../helpers/translator';
 import emoveSpecial from '../../helpers/removeSpecial';
@@ -258,8 +259,7 @@ class CreateProjectPage extends Component<Props, State> {
           </div>
           <div style={{ marginRight: '5%', width: '40%' }}>
             <h1 className="heading-primary ">Create New Project</h1>
-            <TextInput
-              header="Title"
+            <Input
               name="title"
               type="text"
               value={title}
