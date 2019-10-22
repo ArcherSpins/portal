@@ -14,7 +14,7 @@ type Props = {
 
 const BackButton = ({ location, history }: Props) => {
   if (location.pathname === ROOT) {
-    return <div />;
+    return null;
   }
   return (
     <button type="button" className="back-button" onClick={() => history.goBack()}>

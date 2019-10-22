@@ -30,4 +30,5 @@ export const Label = styled.span`
 export const Content = styled.div`
   display: flex;
   min-height: 600px;
+  flex: 1;
 `;
