@@ -202,8 +202,9 @@ class MilestoneAddPage extends React.Component<Props, State> {
           <div className="estimation-type-wrapper">
             <b className="estimation-type-title">Spent/Estimation</b>
             <span className="estimation-type-count">0 of</span>
-            <input
+            <Input
               type="text"
+              size="sm"
               className="estimation-input"
               onChange={this.handleSpentChange}
               value={spent}

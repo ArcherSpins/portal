@@ -10,6 +10,8 @@ type ValueType = 'password' | 'text';
 
 type InputType = 'default' | 'borderless';
 
+type InputSize = 'sm' | 'md';
+
 type Props = {
   /** Тип текстового значения инпута. @example: input[type="text"] */
   type?: ValueType,
@@ -31,7 +33,8 @@ type Props = {
   onFocus?: (e: SyntheticInputEvent<HTMLInputElement>) => void,
   /** Срабатывает при потере фокуса */
   onBlur?: (e: SyntheticInputEvent<HTMLInputElement>) => void,
-  mask?: Array<mixed>
+  mask?: Array<mixed>,
+  size?: InputSize
 }
 
 type State = {
@@ -55,6 +58,7 @@ class Input extends Component<Props, State> {
     icon: null,
     prefix: '',
     mask: null,
+    size: 'md',
   };
 
   constructor(props: Props) {
@@ -104,6 +108,7 @@ class Input extends Component<Props, State> {
       onClearClick,
       icon,
       mask,
+      size,
       ...restProps
     } = this.props;
 
@@ -116,6 +121,7 @@ class Input extends Component<Props, State> {
         className={
           classNames(
             styles[use],
+            styles[size],
             {
               [styles.error]: error,
               [styles.paddingLeft]: icon,

@@ -286,9 +286,10 @@ class MilestoneDetailsPage extends React.Component<Props, State> {
               {' '}
 of
             </span>
-            <input
+            <Input
               type="text"
               className="estimation-input"
+              size="sm"
               onChange={this.handleSpentChange}
               value={estimatedTime}
             />
