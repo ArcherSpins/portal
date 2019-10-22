@@ -54,6 +54,7 @@ export default ({
           <RightBlock>
             <form style={{ marginRight: 20 }} onSubmit={onSubmit}>
               <Input
+                className="search-employees"
                 name="search-employees"
                 onChange={(e: SyntheticEvent<HTMLInputElement>) => {
                   // $FlowFixMe

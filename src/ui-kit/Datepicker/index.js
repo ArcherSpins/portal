@@ -16,7 +16,9 @@ type Props = {
   format?: string,
   placeholder?: string,
   value?: Date,
+  label?: string,
   className?: string,
+  name: string,
   style?: {
     [string]: mixed
   }
@@ -69,12 +71,16 @@ const Datepicker = ({
   placeholder = DEFAULT_FORMAT,
   value,
   className,
+  name,
+  label,
   style,
 }: Props) => {
   const inputRef = React.createRef();
   return (
     <div style={style} className={classNames(styles.datepicker, className)}>
+      <label htmlFor={name}>{label}</label>
       <DayPickerInput
+        id={name}
         dayPickerProps={{
           classNames: overlayStyles,
           weekdaysShort,
@@ -110,6 +116,7 @@ Datepicker.defaultProps = {
   value: '',
   className: '',
   style: {},
+  label: '',
 };
 
 export default Datepicker;

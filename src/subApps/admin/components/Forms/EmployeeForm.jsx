@@ -8,6 +8,7 @@
 import React from 'react';
 import { compose } from 'redux';
 import { graphql } from 'react-apollo';
+import { format } from 'date-fns';
 // $FlowFixMe
 import {
   Dropdown, Combobox, Input, Datepicker,
@@ -96,6 +97,7 @@ class EmployeeForm extends React.Component<
       formData: {
         ...data,
         position: this.getPosition(defaultData).find((item) => item.active),
+        dateOfEmployment: defaultData.dateOfEmployment,
       },
     });
   }
@@ -337,13 +339,14 @@ class EmployeeForm extends React.Component<
               this.toggleEdit(true);
             }}
           />
-          <PickerToggle
-            onChange={this.onChange}
-            showInput={showEdit}
-            date={new Date(defaultData.birthday || null)}
+          <Datepicker
             label="Date of birth"
-            idx="birthday"
-            toggleEdit={this.toggleEdit}
+            className="form-datepicker pr-1 col-6"
+            value={format(formData.birthday || new Date(), 'DD.MM.YYYY')}
+            onDayChange={(value) => {
+              this.onChange('birthday', value);
+              this.toggleEdit(true);
+            }}
           />
         </FieldBlock>
 
@@ -435,19 +438,22 @@ class EmployeeForm extends React.Component<
 
         <FieldBlock>
           <Datepicker
+            label="Date of employment"
+            className="form-datepicker pr-1 col-6"
+            value={format(formData.dateOfEmployment || new Date(), 'DD.MM.YYYY')}
             onDayChange={(value) => {
               this.onChange('dateOfEmployment', value);
               this.toggleEdit(true);
             }}
           />
-          <PickerToggle
+          {/* <PickerToggle
             onChange={this.onChange}
             showInput={showEdit}
             date={new Date(defaultData.dateOfEmployment || null)}
             label="Date of employment"
             idx="dateOfEmployment"
             toggleEdit={this.toggleEdit}
-          />
+          /> */}
         </FieldBlock>
 
         <FieldBlock className="flex-block dropdown-field-block">

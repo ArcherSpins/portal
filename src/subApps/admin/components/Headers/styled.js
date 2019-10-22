@@ -34,4 +34,14 @@ export const ArrorIcon = styled.img`
 export const RightBlock = styled.div`
   display: flex;
   align-items: center;
+
+  .search-employees {
+    min-width: 300px;
+  }
+
+  input {
+    &:focus {
+      border: none;
+    }
+  }
 `;

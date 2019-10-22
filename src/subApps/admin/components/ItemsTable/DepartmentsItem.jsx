@@ -68,10 +68,10 @@ function checkEmployees(data: DataType) {
     });
 
     if (Object.values(listPos).length !== 0) {
-      return Object.values(listPos).map((arr) => (
-        <EmployeesItem>
+      return Object.entries(listPos).map((arr) => (
+        <EmployeesItem key={String(arr[0])}>
           {/* $FlowFixMe */}
-          { arr.map((item) => item.name).join(', ') }
+          { arr[1].map((item) => item.name).join(', ') }
         </EmployeesItem>
       ));
     }
@@ -86,23 +86,23 @@ export default ({
   data,
 }: ItemProps) => (
   <ItemList>
-    <DepartmentItem>
+    <DepartmentItem width="15%">
       <DepartHeader>Analytics</DepartHeader>
       <DepartSubTitle>
         {`${data.countEmployees} employees`}
       </DepartSubTitle>
     </DepartmentItem>
-    <DepartmentItem>
+    <DepartmentItem width="15%">
       <PositionList>
         {checkPosition(data)}
       </PositionList>
     </DepartmentItem>
-    <DepartmentItem>
+    <DepartmentItem width="30%">
       {checkEmployees(data)}
     </DepartmentItem>
-    <DepartmentItem>
+    <DepartmentItem width="15%">
       {data.manager ? data.manager.name : 'Not Chief'}
     </DepartmentItem>
-    <DepartmentItem>{data.title}</DepartmentItem>
+    <DepartmentItem width="15%">{data.title}</DepartmentItem>
   </ItemList>
 );

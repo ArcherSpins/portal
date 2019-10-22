@@ -5,6 +5,11 @@
   display: inline-block;
   width: 100%;
   position: relative;
+
+  label {
+    display: block;
+    margin-bottom: .4rem;
+  }
 }
 
 .input {

@@ -2,6 +2,7 @@
 /* eslint-disable import/no-cycle */
 // @flow
 import React from 'react';
+// import TablePaginate from 'ui-kit/TablePaginate';
 import {
   LeftNavbar,
   HeaderEmployees,
@@ -9,7 +10,6 @@ import {
   DepartmentsItem,
   DepartmentsHeaderTable,
   MessageFound,
-  Paginate,
   AlertMessage,
 } from '../../components';
 import { LoadingContainer } from '../../containers';
@@ -17,6 +17,7 @@ import { PageContainer, ContainerContent } from '../styled';
 import { Main } from './styled';
 import type { Department } from '../../types';
 import Hoc from './hoc';
+
 
 const StyledList = (props) => (
   <ListTable {...props} style={{ maxWidth: '1100px' }} />
@@ -37,8 +38,6 @@ class DepartmentsComponent extends React.Component<DepartmentsProps> {
     requestAllDepartments();
   }
 
-  togglePaginate = () => {}
-
   render() {
     const {
       departments,
@@ -47,6 +46,8 @@ class DepartmentsComponent extends React.Component<DepartmentsProps> {
       errorStatus,
       closeErrorMessage,
     } = this.props;
+
+    console.log(departments);
 
     return (
       <PageContainer style={{ display: 'flex' }}>
@@ -73,10 +74,6 @@ class DepartmentsComponent extends React.Component<DepartmentsProps> {
                   {
                     departments.length > 0 ? (
                       <div>
-                        <Paginate
-                          count={departments.length / 25}
-                          togglePaginate={this.togglePaginate}
-                        />
                         <StyledList
                           data={departments}
                           ItemComponent={DepartmentsItem}

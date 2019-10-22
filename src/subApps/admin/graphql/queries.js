@@ -355,7 +355,12 @@ const getDepartments = gql`
           minutes
         },
         createdAt,
-        updatedAt
+        updatedAt,
+        position {
+          id,
+          title,
+          businessLoad,
+        }
       },
       countEmployees
     }

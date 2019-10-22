@@ -2,16 +2,32 @@
 // TODO: FIX THIS
 // @flow
 import React from 'react';
+import TablePaginate from 'ui-kit/TablePaginate';
 import {
   LeftNavbar,
   HeaderEmployees,
-  ListTable,
-  AccessMapItem,
-  AccessMapHeaderTable,
-  Paginate,
 } from '../../components';
 import { PageContainer, ContainerContent } from '../styled';
 import { Main } from './styled';
+
+export const columnsAccess = [
+  {
+    Header: 'Name',
+    accessor: 'name',
+  },
+  {
+    Header: 'Name',
+    accessor: 'name',
+  },
+  {
+    Header: 'Name',
+    accessor: 'name',
+  },
+  {
+    Header: 'Name',
+    accessor: 'name',
+  },
+];
 
 type State = {
 }
@@ -31,17 +47,17 @@ class AccessMap extends React.Component<State> {
           <HeaderEmployees noSearch title="Access management" />
           <Main style={{ fontSize: `${14}px` }}>
             <div>
-              <Paginate
-                count={1}
-                togglePaginate={this.togglePaginate}
-              />
-              <ListTable
-                data={[
+              <TablePaginate
+                items={[
                   { name: 'Module Name', id: 1 },
                   { name: 'Module Name', id: 2 },
                 ]}
-                ItemComponent={AccessMapItem}
-                Header={AccessMapHeaderTable}
+                pageSize={10}
+                getNumber={this.togglePaginate}
+                columns={columnsAccess}
+                activeIndex={1}
+                count={1}
+                manual
               />
             </div>
           </Main>

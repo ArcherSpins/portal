@@ -6,9 +6,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {
+  Dropdown,
+} from 'ui-kit';
+import {
   LeftNavbar,
   HeaderEmployees,
-  Select,
   Button,
 } from '../../components';
 import { LoadingContainer } from '../../containers';
@@ -16,7 +18,6 @@ import {
   PageContainer,
   ContainerContent,
   Main,
-  Label,
   FieldBlock,
 } from '../styled';
 import {
@@ -26,6 +27,7 @@ import {
   updateSpentTimeBounds,
 } from '../../redux/actions/spentTimeBounds';
 import type { SpentTimeBoundsType } from '../../types';
+import './style.scss';
 
 type Props = {
   getSpentTimeBounds: () => void,
@@ -37,9 +39,9 @@ type Props = {
 type State = {
   edit: boolean,
   data: {
-    hours: number,
-    minutes: number,
-    days: number
+    hours: number | string,
+    minutes: number | string,
+    days: number | string
   }
 }
 
@@ -70,7 +72,6 @@ class SittingsProjectsModulePage extends React.Component<Props, State> {
         this.setState({
           data: {
             ...data,
-            // $FlowFixMe
             days: selected.value.toString(),
           },
         });
@@ -79,9 +80,7 @@ class SittingsProjectsModulePage extends React.Component<Props, State> {
         this.setState({
           data: {
             ...data,
-            // $FlowFixMe
             hours: Number(selected.value.split(':')[0]).toString(),
-            // $FlowFixMe
             minutes: Number(selected.value.split(':')[1]).toString(),
           },
         });
@@ -116,7 +115,6 @@ class SittingsProjectsModulePage extends React.Component<Props, State> {
 
     const selected = days.find((item) => item.label === spentTimeBounds.days);
 
-    // $FlowFixMe
     return {
       days,
       selected,
@@ -160,6 +158,7 @@ class SittingsProjectsModulePage extends React.Component<Props, State> {
       <PageContainer style={{ display: 'flex' }}>
         <LeftNavbar />
         <ContainerContent
+          className="setting-container"
           style={{
             marginLeft: `${220}px`,
             paddingLeft: 30,
@@ -175,33 +174,39 @@ class SittingsProjectsModulePage extends React.Component<Props, State> {
                 />
                 <Main>
                   <FieldBlock>
-                    <Label>Working days</Label>
-                    <Select
-                      onChange={this.changeSelect}
+                    <Dropdown
+                      className="dropdown-block"
                       options={this.getDays().days}
-                      selected={this.getDays().selected}
-                      selectedName="days"
+                      onChange={(value) => {
+                        this.changeSelect({ ...value, selectedName: 'days' });
+                      }}
+                      value={this.getDays().selected}
+                      label="Working days"
                     />
                   </FieldBlock>
                   <FieldBlock>
-                    <Label>Working hours and minutes</Label>
-                    <Select
-                      selectedName="times"
-                      onChange={this.changeSelect}
+                    <Dropdown
+                      className="dropdown-block"
                       options={this.getTimes().times}
-                      selected={this.getTimes().selected}
+                      onChange={(value) => {
+                        this.changeSelect({ ...value, selectedName: 'times' });
+                      }}
+                      value={this.getTimes().selected}
+                      label="Working hours and minutes"
                     />
                   </FieldBlock>
-                  {
-                    edit && (
-                      <Button
-                        onClick={this.saveFunc}
-                        style={{ minWidth: '110px', marginTop: '20px' }}
-                      >
-                        Save
-                      </Button>
-                    )
-                  }
+                  <div className="footer-settings_form">
+                    {
+                      edit && (
+                        <Button
+                          onClick={this.saveFunc}
+                          style={{ minWidth: '110px', marginTop: '20px' }}
+                        >
+                          Save
+                        </Button>
+                      )
+                    }
+                  </div>
                 </Main>
               </div>
             )

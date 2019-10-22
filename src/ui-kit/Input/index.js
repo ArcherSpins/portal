@@ -128,49 +128,49 @@ class Input extends Component<Props, State> {
       >
         <label htmlFor={name}>
           {label}
-          <div className={styles.wrap}>
-            {icon && <span className={styles.icon}>{icon}</span>}
-            {prefix && <span className={styles.prefix}>{prefix}</span>}
-            {
-              mask ? (
-                <MaskedInput
-                  mask={mask}
-                  placeholder={placeholder}
-                  onChange={onChange}
-                  id={name}
-                  render={(ref, props) => (
-                    <input
-                      ref={ref}
-                      {...restProps}
-                      name={name}
-                      type={type}
-                      placeholder={placeholder}
-                      onFocus={this.handleFocus}
-                      onBlur={this.handleBlur}
-                      disabled={disabled}
-                      value={value}
-                      {...props}
-                    />
-                  )}
-                />
-              ) : (
-                <input
-                  {...restProps}
-                  name={name}
-                  type={type}
-                  placeholder={placeholder}
-                  onChange={onChange}
-                  onFocus={this.handleFocus}
-                  onBlur={this.handleBlur}
-                  disabled={disabled}
-                  value={value}
-                />
-              )
-            }
-            {/* TODO: REPLACE SVG TO <i /> */}
-            {clearable && <button onClick={onClearClick} className={styles.clear} type="button"><img src={xmark} alt="clear" /></button>}
-          </div>
         </label>
+        <div className={classNames(styles.wrap)}>
+          {icon && <span className={styles.icon}>{icon}</span>}
+          {prefix && <span className={styles.prefix}>{prefix}</span>}
+          {
+            mask ? (
+              <MaskedInput
+                mask={mask}
+                placeholder={placeholder}
+                onChange={onChange}
+                id={name}
+                render={(ref, props) => (
+                  <input
+                    ref={ref}
+                    {...restProps}
+                    name={name}
+                    type={type}
+                    placeholder={placeholder}
+                    onFocus={this.handleFocus}
+                    onBlur={this.handleBlur}
+                    disabled={disabled}
+                    value={value}
+                    {...props}
+                  />
+                )}
+              />
+            ) : (
+              <input
+                {...restProps}
+                name={name}
+                type={type}
+                placeholder={placeholder}
+                onChange={onChange}
+                onFocus={this.handleFocus}
+                onBlur={this.handleBlur}
+                disabled={disabled}
+                value={value}
+              />
+            )
+          }
+          {/* TODO: REPLACE SVG TO <i /> */}
+          {clearable && <button onClick={onClearClick} className={styles.clear} type="button"><img src={xmark} alt="clear" /></button>}
+        </div>
       </div>
     );
   }
