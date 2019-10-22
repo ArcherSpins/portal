@@ -46,6 +46,11 @@ const client = new ApolloClient({
   ]),
   uri: apiUrl,
   cache: new InMemoryCache(),
+  defaultOptions: {
+    query: {
+      fetchPolicy: 'network-only',
+    },
+  },
 });
 
 export default client;

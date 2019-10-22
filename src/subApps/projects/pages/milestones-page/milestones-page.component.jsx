@@ -5,6 +5,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import type { Match } from 'react-router-dom';
+import Header from 'subApps/projects/components/header';
 import { selectProjectsMolestones } from '../../redux/milestone/milestone.selectors';
 import { selectProjectItem } from '../../redux/project/project.selectors';
 import { getAllMilestones } from '../../redux/milestone/milestone.actions';
@@ -53,12 +54,11 @@ class MilestonePage extends React.Component<Props, State> {
     const { milestones, project, match } = this.props;
     return (
       <div className="milestones">
-        <header className="milestones__header">
-          <span className="milestones__project">Project:</span>
-          <h1 style={{ margin: 0 }} className="heading-primary">
+        <Header>
+          <h1 className="heading-primary">
             {project.title}
           </h1>
-        </header>
+        </Header>
         <div className="milestones__line" />
         <div className="milestones__body">
           <div className="milestones__subheader">

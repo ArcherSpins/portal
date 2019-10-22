@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import type { RouterHistory } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 
-import './task-add.page.styles.scss';
+import Header from 'subApps/projects/components/header';
+import { Input, TextArea, Button } from 'ui-kit';
 
 import { selectMilestoneByParams } from '../../redux/milestone/milestone.selectors';
 import { selectProjectItem } from '../../redux/project/project.selectors';
@@ -16,9 +17,8 @@ import type { Milestone } from '../../redux/milestone/milestone.flow-types';
 import type { Project } from '../../redux/project/project.flow-types';
 import type { Error } from '../../redux/error/error.flow-types';
 
-import TextInput from '../../components/forms/text-input/text-input.component';
-import CustomButton from '../../components/custom-button/custom-button.component';
-import CustomTextarea from '../../components/forms/custom-textarea/custom-textarea.component';
+import './task-add.page.styles.scss';
+
 
 type State = {
   subject: string,
@@ -118,36 +118,38 @@ class TaskAdd extends React.Component<Props, State> {
 
     return (
       <div className="task-add">
-        <div className="header">
-          <h1 className="heading-primary">
+        <Header>
+          <div>
+            <h1 className="heading-primary mb05">
             Project:
-            {' '}
-            {project.title}
-          </h1>
-          <h2 className="heading-secondary">
+              {' '}
+              {project.title}
+            </h1>
+            <h2 className="heading-secondary">
             Milestone #2:
-            {' '}
-            {milestone.title}
-          </h2>
-        </div>
-        <h1 className="heading-primary">Create Task</h1>
+              {' '}
+              {milestone.title}
+            </h2>
+          </div>
+        </Header>
+        <h2 className="heading-primary mb05">Create Task</h2>
         <form onSubmit={this.handleSubmit} className="body">
           <div className="body__left">
-            <TextInput
-              header="Subject"
+            <Input
+              label="Subject"
               placeholder="Placeholder text"
               onChange={this.handleChange}
               value={subject}
               name="subject"
+              className="project__input"
             />
-            <div className="textarea-wrapper">
-              <CustomTextarea
-                header="Description"
-                name="description"
-                value={description}
-                onChange={this.handleChange}
-              />
-            </div>
+            <TextArea
+              label="Description"
+              name="description"
+              value={description}
+              onChange={this.handleChange}
+              className="project__input"
+            />
             <div className="select-wrapper">
               <h3 className="heading-tertiarry">Assignee</h3>
               <select
@@ -183,9 +185,9 @@ class TaskAdd extends React.Component<Props, State> {
 .
               </div>
             )}
-            <CustomButton color="success" type="submit">
+            <Button type="submit">
               Create
-            </CustomButton>
+            </Button>
           </div>
           <div className="body__right" />
         </form>

@@ -1,10 +1,9 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
-// import type { Match } from 'react-router-dom';
+import type { Match } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
-import { TASK_ADD_ROUTE } from 'subApps/projects/routes';
-
+import Header from 'subApps/projects/components/header';
 import './tasks-page.styles.scss';
 
 import { getTasks } from '../../redux/task/task.actions';
@@ -21,6 +20,7 @@ import LinkButton from '../../components/link-button/link-button.component';
 import PaginationComponent from '../../components/pagination/pagination.component';
 import TaskItem from '../../components/task-item/task-item.component';
 
+
 type State = {
   openDescription: boolean,
   activePage: number
@@ -30,7 +30,7 @@ type Props = {
   milestone: Milestone,
   project: Project,
   tasks: Array<Task>,
-  // match: Match,
+  match: Match,
   getTasks: (id: string) => Array<Task>
 };
 
@@ -56,24 +56,26 @@ class TasksPage extends React.Component<Props, State> {
 
   render() {
     const { openDescription, activePage } = this.state;
-    const { project, milestone } = this.props;
+    const { project, milestone, match } = this.props;
     const { tasks } = this.props;
     return (
       <div className="tasks">
-        <div className="header">
-          <h1 className="heading-primary">
+        <Header>
+          <div>
+            <h1 className="heading-primary mb05">
             Project:
-            {' '}
-            {project.title}
-          </h1>
-          <h2 className="heading-secondary">
+              {' '}
+              {project.title}
+            </h1>
+            <h2 className="heading-secondary">
             Milestone #
-            {milestone ? milestone.number : 'null'}
+              {milestone ? milestone.number : 'null'}
 :
-            {' '}
-            {milestone && milestone.title}
-          </h2>
-        </div>
+              {' '}
+              {milestone && milestone.title}
+            </h2>
+          </div>
+        </Header>
 
         <div className="tasks__size">
           <div className="tasks__subheader">
@@ -123,7 +125,7 @@ class TasksPage extends React.Component<Props, State> {
               </div>
             </div>
             <div className="tasks__subheader-right">
-              <LinkButton to={TASK_ADD_ROUTE}>
+              <LinkButton to={`${match.url}/create`}>
                 Add Task
               </LinkButton>
             </div>

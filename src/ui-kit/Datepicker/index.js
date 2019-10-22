@@ -6,6 +6,7 @@ import classNames from 'classnames';
 // $FlowFixMe
 import 'react-day-picker/lib/style.css';
 
+import { Input } from 'ui-kit';
 import styles from './Datepicker.module.scss';
 import overlayStyles from './Overlay.module.scss';
 
@@ -17,6 +18,7 @@ type Props = {
   placeholder?: string,
   value?: Date,
   className?: string,
+  label?: string,
   style?: {
     [string]: mixed
   }
@@ -53,7 +55,7 @@ const DateInput = (props: any) => {
     <div
       className={styles.input}
     >
-      <input {...props} />
+      <Input {...props} />
       <button type="button" onClick={onFocus} onBlur={onBlur} className={styles.icon__wrap}>
         <i className="icon-calendar" />
       </button>
@@ -70,12 +72,16 @@ const Datepicker = ({
   value,
   className,
   style,
+  label,
+  ...props
 }: Props) => {
   const inputRef = React.createRef();
   return (
     <div style={style} className={classNames(styles.datepicker, className)}>
+      <span className={styles.label}>{label}</span>
       <DayPickerInput
         dayPickerProps={{
+          ...props,
           classNames: overlayStyles,
           weekdaysShort,
           navbarElement: Navbar,
@@ -108,6 +114,7 @@ Datepicker.defaultProps = {
   format: DEFAULT_FORMAT,
   placeholder: DEFAULT_FORMAT,
   value: '',
+  label: '',
   className: '',
   style: {},
 };

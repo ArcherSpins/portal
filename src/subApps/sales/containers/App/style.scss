@@ -145,10 +145,6 @@ button {
 input {
   outline: none;
 
-  &:focus {
-    box-shadow: 0px 0px 5px 0px #61B16F;
-  }
-
   &.not-focus {
     box-shadow: none;
   }

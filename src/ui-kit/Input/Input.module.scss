@@ -6,7 +6,6 @@
   color: $text-color;
   font-family: inherit, sans-serif;
   line-height: 1.5rem;
-
   .wrap {
     @include default-transition(all);
     overflow: hidden;

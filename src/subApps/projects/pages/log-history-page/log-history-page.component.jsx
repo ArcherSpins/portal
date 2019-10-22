@@ -5,6 +5,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import type { RouterHistory, Match } from 'react-router-dom';
+import { Button } from 'ui-kit';
 
 import './log-history-page.styles.scss';
 
@@ -17,7 +18,6 @@ import type { Task } from '../../redux/task/task.flow-types';
 import type { Log } from '../../redux/log/log.flow-types';
 
 import LogHistoryItem from '../../components/log-history-item/log-history-item.component';
-import InverseButton from '../../components/inverse-button/inverse-button.component';
 import PaginationComponent from '../../components/pagination/pagination.component';
 
 type Props = {
@@ -54,7 +54,6 @@ class LogHistoryPage extends React.Component<Props, State> {
   render() {
     const { activePage, openDescription } = this.state;
     const { match, history } = this.props;
-    const { projectId, milestoneId, taskId } = match.params;
     const { logs } = this.props;
     return (
       <div className="log-history">
@@ -102,16 +101,11 @@ class LogHistoryPage extends React.Component<Props, State> {
               </button>
             </div>
           </div>
-          <InverseButton
-            type="button"
-            color="success"
-            onClick={() => history.push(
-              `/${projectId || ''}/milestones/${milestoneId
-                  || ''}/tasks/${taskId || ''}/logcreate`,
-            )}
+          <Button
+            onClick={() => history.push(`${match.url}/logcreate`)}
           >
             Add Log
-          </InverseButton>
+          </Button>
         </div>
         {logs.length >= 1 && (
           <PaginationComponent

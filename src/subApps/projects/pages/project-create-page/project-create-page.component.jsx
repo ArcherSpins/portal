@@ -6,6 +6,7 @@ import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import type { RouterHistory } from 'react-router-dom';
 import { Input, TextArea, Button } from 'ui-kit';
+import Header from 'subApps/projects/components/header';
 import { saveProject } from '../../redux/project/project.actions';
 import translate from '../../helpers/translator';
 import emoveSpecial from '../../helpers/removeSpecial';
@@ -245,13 +246,13 @@ class CreateProjectPage extends Component<Props, State> {
     const { history } = this.props;
     return (
       <div className="cpp">
-        <div className="project-details__header">
+        <Header>
           <div className="project-details__title-container">
             <h1 style={{ marginBottom: 0 }} className="heading-primary">
               Create New Project
             </h1>
           </div>
-        </div>
+        </Header>
         <form className="cpp__form" onSubmit={this.handleSumbit}>
           <div className="cpp__form-inputs">
             <div style={{ width: '40%' }}>

@@ -8,8 +8,9 @@ import { connect } from 'react-redux';
 import type { RouterHistory } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import Moment from 'react-moment';
-
 import { Input, Button, TextArea } from 'ui-kit';
+import Header from 'subApps/projects/components/header';
+
 import { ROOT } from 'subApps/projects/routes';
 
 import { editProject } from '../../redux/project/project.actions';
@@ -270,14 +271,14 @@ class ProjectDetailPage extends Component<Props, State> {
     } = this.state;
     return (
       <div className="cpp">
-        <div className="project-details__header">
+        <Header>
           <div className="project-details__title-container">
             <span className="project-details__project">Project:</span>
             <h1 style={{ marginBottom: 0 }} className="heading-primary">
               {title}
             </h1>
           </div>
-        </div>
+        </Header>
         <div className="project-details__sub-header">
           <Button
             use="grey"

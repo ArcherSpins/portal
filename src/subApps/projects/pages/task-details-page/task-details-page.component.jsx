@@ -3,6 +3,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import type { RouterHistory, Match } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
+import { Button, TextArea, Input } from 'ui-kit';
+import Header from 'subApps/projects/components/header';
 
 import { editTask, deleteTask } from '../../redux/task/task.actions';
 import { selectTaskByParams } from '../../redux/task/task.selectors';
@@ -16,10 +18,6 @@ import type { Error } from '../../redux/error/error.flow-types';
 import { states } from './task-details.states';
 import './task-details-page.styles.scss';
 
-import TextInput from '../../components/forms/text-input/text-input.component';
-import CustomTextarea from '../../components/forms/custom-textarea/custom-textarea.component';
-import CustomButton from '../../components/custom-button/custom-button.component';
-import InverseButtom from '../../components/inverse-button/inverse-button.component';
 import Modal from '../../components/modal/modal.component';
 
 type State = {
@@ -151,44 +149,49 @@ class TaskDetails extends React.Component<Props, State> {
     const { match, history } = this.props;
     return (
       <div className="task-details">
-        <div className="header">
+        <Header>
           <div>
-            <h1 className="heading-primary">
-Project:
+            <h1 className="heading-primary mb05">
+              Project:
+              {' '}
               {project.title}
             </h1>
             <h2 className="heading-secondary">
               Milestone #
               {milestone.number}
-:
+              :
               {' '}
               {milestone.title}
             </h2>
           </div>
           <div className="header-buttons">
-            <InverseButtom color="danger" onClick={this.openModalHandler}>
+            <Button
+              use="danger"
+              size="sm"
+              onClick={this.openModalHandler}
+            >
               Delete task
-            </InverseButtom>
+            </Button>
           </div>
-        </div>
-        <h1 className="heading-primary">Project management system</h1>
+        </Header>
+        <h1 className="heading-primary mb05">Project management system</h1>
         <form onSubmit={this.handleSubmit} className="body">
           <div className="body__left">
-            <TextInput
-              header="Subject"
+            <Input
+              label="Subject"
               placeholder="Placeholder text"
               name="subject"
               value={subject}
               onChange={this.handleChange}
+              className="project__input"
             />
-            <div className="textarea-wrapper">
-              <CustomTextarea
-                header="Description"
-                name="description"
-                value={description}
-                onChange={this.handleChange}
-              />
-            </div>
+            <TextArea
+              label="Description"
+              name="description"
+              value={description}
+              onChange={this.handleChange}
+              className="project__input"
+            />
             <div className="status-wrapper">
               <h3 className="heading-tertiarry">Status</h3>
               <select
@@ -251,26 +254,27 @@ Project:
                 </div>
               )}
               <div className="body-buttons">
-                <CustomButton type="submit" color="success">
+                <Button type="submit">
                   Save
-                </CustomButton>
+                </Button>
                 <div>
-                  <InverseButtom
+                  <Button
                     onClick={() => history.push(
-                      `${match.url || ''}/logcreate`,
+                      `${match.url || ''}/logs/logcreate`,
                     )}
-                    className="inverse-button"
+                    className="mr1"
+                    use="transparent"
                   >
                     Add Log
-                  </InverseButtom>
-                  <InverseButtom
+                  </Button>
+                  <Button
                     onClick={() => history.push(
                       `${match.url || ''}/logs`,
                     )}
-                    className="inverse-button"
+                    use="transparent"
                   >
                     Log History
-                  </InverseButtom>
+                  </Button>
                 </div>
               </div>
             </div>

@@ -8,15 +8,17 @@
 }
 
 .input {
-  display: flex;
   position: relative;
   input {
-    border: 1px solid $text-color-50;
-    border-radius: 0.25em;
-    padding: 0.35em 0.5em;
     font-size: 0.875em;
     flex: 1;
+    width: 100%;
   }
+}
+
+.label {
+  display: inline-block;
+  margin-bottom: 0.25rem;
 }
 
 

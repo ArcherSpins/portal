@@ -19,6 +19,7 @@ import type { Project } from '../../redux/project/project.flow-types';
 import type { Error } from '../../redux/error/error.flow-types';
 
 import UserPicker from '../../components/user-picker/user-picker.component';
+import Header from '../../components/header';
 
 type Employee = {
   id: string,
@@ -190,13 +191,13 @@ class MilestoneAddPage extends React.Component<Props, State> {
     const { history } = this.props;
     return (
       <div className="milestone-add">
-        <div className="header">
+        <Header>
           <h1 style={{ marginBottom: 0 }} className="heading-primary">
             Milestone:
             {' '}
             {title}
           </h1>
-        </div>
+        </Header>
         <div className="sub-header">
           <div className="estimation-type-wrapper">
             <b className="estimation-type-title">Spent/Estimation</b>
