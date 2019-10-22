@@ -67,7 +67,7 @@ class MilestonePage extends React.Component<Props, State> {
                 style={{ fontSize: '2em' }}
                 className="milestones__subheader-title"
               >
-                Milestone
+                Milestones
               </h3>
               <div className="milestones__sort">
                 <button
