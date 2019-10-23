@@ -2,7 +2,6 @@
 /* eslint-disable import/no-cycle */
 // @flow
 import React from 'react';
-// import TablePaginate from 'ui-kit/TablePaginate';
 import {
   LeftNavbar,
   HeaderEmployees,
@@ -10,7 +9,6 @@ import {
   DepartmentsItem,
   DepartmentsHeaderTable,
   MessageFound,
-  AlertMessage,
 } from '../../components';
 import { LoadingContainer } from '../../containers';
 import { PageContainer, ContainerContent } from '../styled';
@@ -27,9 +25,6 @@ type DepartmentsProps = {
   requestAllDepartments: () => void,
   departments: Array<Department>,
   loading: boolean,
-  errorMessage: string,
-  errorStatus: boolean,
-  closeErrorMessage: () => void
 }
 
 class DepartmentsComponent extends React.Component<DepartmentsProps> {
@@ -42,9 +37,6 @@ class DepartmentsComponent extends React.Component<DepartmentsProps> {
     const {
       departments,
       loading,
-      errorMessage,
-      errorStatus,
-      closeErrorMessage,
     } = this.props;
 
     return (
@@ -55,15 +47,6 @@ class DepartmentsComponent extends React.Component<DepartmentsProps> {
             marginLeft: `${220}px`,
           }}
         >
-          {
-            errorStatus && (
-              <AlertMessage
-                error
-                message={errorMessage}
-                closeModal={closeErrorMessage}
-              />
-            )
-          }
           {
             loading ? <LoadingContainer /> : (
               <div>

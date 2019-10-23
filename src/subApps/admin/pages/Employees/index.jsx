@@ -3,13 +3,13 @@
 // TODO: FIX
 // @flow
 import React from 'react';
-import TablePaginate from 'ui-kit/TablePaginate';
+import { TablePaginate } from 'ui-kit';
 import { EMPLOYEES_ROUTE } from '../../routes';
 import {
   LeftNavbar,
   HeaderEmployees,
   MessageFound,
-  AlertMessage,
+  // AlertMessage,
 } from '../../components';
 import { LoadingContainer } from '../../containers';
 import { PageContainer, ContainerContent } from '../styled';
@@ -48,9 +48,6 @@ type EmployeesProps = {
     limit?: string
   }) => void,
   count: number,
-  closeErrorMessage: () => void,
-  errorStatus: boolean,
-  errorMessage: string,
 }
 
 type EmployeesState = {
@@ -124,9 +121,6 @@ class EmployeesComponent extends React.Component<EmployeesProps, EmployeesState>
       loadingUser,
       employees,
       count,
-      errorStatus,
-      errorMessage,
-      closeErrorMessage,
     } = this.props;
     const { activePaginate, search } = this.state;
 
@@ -138,15 +132,6 @@ class EmployeesComponent extends React.Component<EmployeesProps, EmployeesState>
             marginLeft: `${220}px`,
           }}
         >
-          {
-            errorStatus && (
-              <AlertMessage
-                error
-                message={errorMessage}
-                closeModal={closeErrorMessage}
-              />
-            )
-          }
           {
             loadingUser || loadingEmployees ? <LoadingContainer /> : (
               <div>

@@ -9,9 +9,7 @@ import {
   Calendar,
   LeftNavbar,
   HeaderEmployees,
-  AlertMessage,
 } from '../../components';
-import { closeErrorMessage } from '../../redux/actions';
 import { getCalendarData } from '../../redux/actions/calendar';
 import { LoadingContainer } from '../../containers';
 import {
@@ -26,9 +24,6 @@ type Props = {
   loadingCalendar: boolean,
   calendar: Array<CalendarType>,
   getCalendarData: (string) => void,
-  errorMessage: string,
-  errorStatus: boolean,
-  closeErrorMessage: () => void
 }
 
 class CalendarPage extends React.PureComponent<Props> {
@@ -46,9 +41,6 @@ class CalendarPage extends React.PureComponent<Props> {
     const {
       loadingCalendar,
       calendar,
-      errorStatus,
-      errorMessage,
-      closeErrorMessage,
     } = this.props;
 
     const { year: _tmp, ...dataCalendar } = calendar[0] ? calendar[0] : {};
@@ -62,15 +54,6 @@ class CalendarPage extends React.PureComponent<Props> {
             paddingLeft: 30,
           }}
         >
-          {
-            errorStatus && (
-              <AlertMessage
-                error
-                message={errorMessage}
-                closeModal={closeErrorMessage}
-              />
-            )
-          }
           {
             loadingCalendar ? (
               <LoadingContainer />
@@ -103,13 +86,10 @@ class CalendarPage extends React.PureComponent<Props> {
 const mapStateToProps = (state) => ({
   calendar: state.calendar.calendar,
   loadingCalendar: state.calendar.loading,
-  errorStatus: state.app.errorStatus,
-  errorMessage: state.app.errorMessage,
 });
 
 const mapDispatchToProps = {
   getCalendarData,
-  closeErrorMessage,
 };
 
 // $FlowFixMe
