@@ -5,6 +5,7 @@ import Spinner from 'ui-kit/Spinner';
 import classNames from 'classnames';
 // $FlowFixMe
 import AsyncSelect from 'react-select/lib/Async';
+import { components } from 'react-select';
 import './style.scss';
 
 type Option = {
@@ -19,15 +20,24 @@ type Action = {
   option?: string
 }
 
+type ComboboxType = 'borderless' | 'default';
+
 type Props = {
   loadOptions: () => Promise<Array<Option>>,
   defaultOptions?: boolean,
   selectedOption?: Option,
   error?: string,
+  use?: ComboboxType,
   label?: string,
   onChange: (option: Option, action: Action) => void,
   className?: string
 }
+
+const DropdownIndicator = (props) => (
+  <components.DropdownIndicator {...props}>
+    <i className="icon-down-dir" />
+  </components.DropdownIndicator>
+);
 
 const LoadingIndicator = () => null;
 
@@ -43,6 +53,7 @@ const LoadingMessage = () => (
 
 );
 
+
 const Combobox = ({
   loadOptions,
   defaultOptions,
@@ -51,48 +62,73 @@ const Combobox = ({
   error,
   label,
   className,
+  use,
   ...restProps
-}: Props) => (
-  <div
-    className={
-      classNames(
-        'cbx__wrap',
-        {
-          selected: !!selectedOption,
-          'error-select': !!error,
-        },
-        className,
-      )
-    }
-  >
-    {
-      label && <p className="label-combobox">{label}</p>
-    }
-    <AsyncSelect
-      loadOptions={loadOptions}
-      defaultOptions={defaultOptions}
-      value={selectedOption}
-      onChange={onChange}
-      classNamePrefix="cbx"
-      components={{
-        LoadingIndicator,
-        LoadingMessage,
-        DropdownIndicator: () => (<i className="icon-down-dir"></i>),
-        NoOptionsMessage,
-      }}
-      {...restProps}
-    />
-    {
-      error && <p className="error-text">{error}</p>
-    }
-  </div>
-);
+}: Props) => {
+  const customStyles = {
+    indicatorSeparator: () => {},
+    control: (base, state) => ({
+      ...base,
+      borderColor: state.isFocused ? '#61B16F' : '#D1D6DE',
+      '&:hover': {},
+      '&:focus': { borderColor: 'red' },
+      border: use === 'borderless' ? 'none !important' : base.border,
+      transition: 'all 0.3s',
+      boxShadow: 'none',
+    }),
+    container: (base) => ({
+      ...base,
+      width: '30%',
+    }),
+    option: (base, { isSelected }) => ({
+      ...base,
+      '&:hover': { backgroundColor: '#ddeee0' },
+      backgroundColor: isSelected && '#61B16F',
+    }),
+  };
+  return (
+    <div
+      className={
+        classNames(
+          'cbx__wrap wrapper',
+          {
+            selected: !!selectedOption,
+            'error-select': !!error,
+          },
+          className,
+        )
+      }
+    >
+      <label className={`${use || ''}`} htmlFor="select">{label}</label>
+      <AsyncSelect
+        className="select-component"
+        loadOptions={loadOptions}
+        defaultOptions={defaultOptions}
+        value={selectedOption}
+        onChange={onChange}
+        classNamePrefix="cbx"
+        styles={customStyles}
+        components={{
+          LoadingIndicator,
+          LoadingMessage,
+          DropdownIndicator,
+          NoOptionsMessage,
+        }}
+        {...restProps}
+      />
+      {
+        error && <p className="error-text">{error}</p>
+      }
+    </div>
+  );
+}
 
 Combobox.defaultProps = {
   defaultOptions: true,
   selectedOption: null,
   error: null,
   label: '',
+  use: 'default',
   className: '',
 };
 
