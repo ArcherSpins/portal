@@ -10,7 +10,7 @@ import { createStructuredSelector } from 'reselect';
 import Moment from 'react-moment';
 import {
   Input, Button, TextArea,
-  // Radio,
+  Radio,
 } from 'ui-kit';
 import Header from 'subApps/projects/components/header';
 
@@ -42,7 +42,6 @@ import { spentTimeInHours } from '../../helpers/sumTime';
 import { getUrlFromProject } from '../../helpers';
 
 import UserPicker from '../../components/user-picker/user-picker.component';
-import RadioInputGroup from '../../components/forms/RadioInputGroup';
 import SelectInput from '../../components/forms/select-input/select-input.component';
 
 import './project-details-page.styles.scss';
@@ -359,7 +358,7 @@ h
                   </h3>
                   <div className="cpp__types-inputs">
                     {projectTypes.map((pr) => (
-                      <RadioInputGroup
+                      <Radio
                         checked={type === pr.id}
                         type="radio"
                         id={pr.title}
@@ -375,11 +374,11 @@ h
                 </div>
                 <div className="cpp__engagement">
                   <h3 className="heading-tertiarry margin-right-md">
-                  Engagement Model
+                    Engagement Model
                   </h3>
                   <div className="cpp__engagement-inputs">
                     {engagementModels.map((model) => (
-                      <RadioInputGroup
+                      <Radio
                         checked={
                           engagement === model.id
                         }
