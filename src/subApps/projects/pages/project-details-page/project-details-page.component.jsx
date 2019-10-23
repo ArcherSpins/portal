@@ -262,7 +262,6 @@ class ProjectDetailPage extends Component<Props, State> {
         unbindParticipants: unbindUserId(participantsPropsIDs, participantsIDs),
         bindParticipants: bindUserId(participantsPropsIDs, participantsIDs),
       };
-      console.log(editedProject);
       this.props.editProject(editedProject, this.props.history);
       this.setState(initialState);
     }
