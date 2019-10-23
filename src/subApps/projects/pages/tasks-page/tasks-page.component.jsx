@@ -6,6 +6,7 @@ import { createStructuredSelector } from 'reselect';
 import Header from 'subApps/projects/components/header';
 import './tasks-page.styles.scss';
 
+import { H1 } from 'ui-kit';
 import { getTasks } from '../../redux/task/task.actions';
 
 import { selectMilestoneByParams } from '../../redux/milestone/milestone.selectors';
@@ -62,11 +63,11 @@ class TasksPage extends React.Component<Props, State> {
       <div className="tasks">
         <Header>
           <div>
-            <h1 className="heading-primary mb05">
+            <H1 className="mb05">
             Project:
               {' '}
               {project.title}
-            </h1>
+            </H1>
             <h2 className="heading-secondary">
             Milestone #
               {milestone ? milestone.number : 'null'}

@@ -6,7 +6,9 @@ import type { RouterHistory } from 'react-router-dom';
 
 import './milestone-add-page.styles.scss';
 
-import { Input, TextArea, Button } from 'ui-kit';
+import {
+  Input, TextArea, Button, H1,
+} from 'ui-kit';
 import { createMilestone } from '../../redux/milestone/milestone.actions';
 
 import { selectServerError } from '../../redux/error/error.selectors';
@@ -192,11 +194,11 @@ class MilestoneAddPage extends React.Component<Props, State> {
     return (
       <div className="milestone-add">
         <Header>
-          <h1 style={{ marginBottom: 0 }} className="heading-primary">
+          <H1>
             Milestone:
             {' '}
             {title}
-          </h1>
+          </H1>
         </Header>
         <div className="sub-header">
           <div className="estimation-type-wrapper">

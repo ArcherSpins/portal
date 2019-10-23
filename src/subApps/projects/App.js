@@ -21,7 +21,6 @@ import ProjectDetailsPage from './pages/project-details-page/project-details-pag
 import TasksPage from './pages/tasks-page/tasks-page.component';
 import CreateProjectPage from './pages/project-create-page/project-create-page.component';
 import Projects from './pages/projects-page/projects-page.component';
-
 import UserPicker from './components/user-picker/user-picker.component';
 
 import * as routes from './routes';

@@ -36,7 +36,7 @@ const RadioButton = ({
     />
     <label htmlFor={htmlFor} className={styles['form-label']}>
       <span className={styles['radio-button']} />
-      {spanText}
+      <span className={styles.label}>{spanText}</span>
     </label>
   </div>
 );

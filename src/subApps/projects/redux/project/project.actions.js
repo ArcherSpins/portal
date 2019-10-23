@@ -7,9 +7,14 @@ import {
 } from '../../graphql/mutations/project.mutations';
 import { projects } from '../../graphql/queries/project.queries';
 import * as routes from '../../routes';
+import projectActionTypes from './project.types';
 
 export const setProjectLoading = () => ({
   type: 'SET_PROJECT_LOADING',
+});
+
+export const getProjectTypes = () => ({
+  type: projectActionTypes.GET_PROJECT_TYPES_REQUEST,
 });
 
 export const getAllProjects = () => (dispatch: Dispatch) => {
