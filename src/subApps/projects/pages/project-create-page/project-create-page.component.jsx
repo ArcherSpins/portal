@@ -5,7 +5,9 @@ import React, { Component } from 'react';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import type { RouterHistory } from 'react-router-dom';
-import { Input, TextArea, Button } from 'ui-kit';
+import {
+  Input, TextArea, Button, Radio,
+} from 'ui-kit';
 import Header from 'subApps/projects/components/header';
 import { saveProject, getProjectTypes } from '../../redux/project/project.actions';
 import translate from '../../helpers/translator';
@@ -26,7 +28,6 @@ import type {
 } from '../../redux/project/project.flow-types';
 
 import UserPicker from '../../components/user-picker/user-picker.component';
-import RadioInputGroup from '../../components/forms/RadioInputGroup';
 import SelectInput from '../../components/forms/select-input/select-input.component';
 
 import './project-create-page.styles.scss';
@@ -316,7 +317,7 @@ class CreateProjectPage extends Component<Props, State> {
                   </h3>
                   <div className="cpp__types-inputs">
                     {projectTypes.map((pr) => (
-                      <RadioInputGroup
+                      <Radio
                         checked={type === pr.id}
                         type="radio"
                         id={pr.title}
@@ -336,7 +337,7 @@ class CreateProjectPage extends Component<Props, State> {
                   </h3>
                   <div className="cpp__engagement-inputs">
                     {engagementModels.map((model) => (
-                      <RadioInputGroup
+                      <Radio
                         checked={
                           engagementModel === model.id
                         }
