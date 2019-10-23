@@ -12,7 +12,7 @@ export const ItemList = styled.ul`
 
 export const Item = styled.li`
   padding: 10px 5px 10px 3px;
-  font-size: 14px;
+  font-size: 1rem;
   font-family: Proxima Nova;
   width: 25%;
   color: #333;
@@ -20,7 +20,7 @@ export const Item = styled.li`
 
 export const DepartmentItem = styled.li`
   padding: 10px 5px 10px 3px;
-  font-size: 14px;
+  font-size: 1rem;
   font-family: Proxima Nova;
   width: ${({ width }) => width || '20%'};
   box-sizing: border-box;

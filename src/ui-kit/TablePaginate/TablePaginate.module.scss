@@ -4,7 +4,8 @@
 
 .table_paginate {
   max-width: 55rem;
-  display: block;
+  display: table;
+  width: 100%;
   font-size: .88rem;
 
   th {

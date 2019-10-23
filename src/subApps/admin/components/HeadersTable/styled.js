@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const HeaderList = styled.ul`
   display: flex;
   justify-content: space-between;
+  color: #333333;
   list-style-type: none;
   box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.07);
   li {
@@ -14,6 +15,7 @@ export const HeaderListDepartment = styled.ul`
   display: flex;
   justify-content: space-between;
   list-style-type: none;
+  color: #333333;
   box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.07);
 `;
 

@@ -6,6 +6,9 @@
 import React, { useState } from 'react';
 import dayjs from 'dayjs';
 import {
+  Input,
+} from 'ui-kit';
+import {
   Header,
   FieldBlock,
   Label,
@@ -14,11 +17,11 @@ import {
   TabsComponent,
   ContactBlock,
   ToggleChangeComponent,
-  ToggleBlock,
+  // ToggleBlock,
   SelectValid,
 } from './styled';
-import { UserPicker, ModalMessage } from '../index';
-import notImage from '../../assets/not_image.png';
+import { ModalMessage } from '../index';
+// import notImage from '../../assets/not_image.png';
 import type { DetailsListProps, PropsType } from './type';
 import './style.scss';
 
@@ -41,9 +44,9 @@ const DetailsList = ({
     editForm,
     activeUser,
     statuses,
-    channels,
+    // channels,
     sources,
-    managers,
+    // managers,
     errorsFormCreate,
     showModalErrorMessage,
     toggleShowModal,
@@ -80,8 +83,16 @@ const DetailsList = ({
           }}
         >
           <FieldBlock className="field">
-            <Label className="mb-10">Client</Label>
-            <ToggleBlock
+            {/* <Label className="mb-10">Client</Label> */}
+            <Input
+              label="Client"
+              onChange={(value) => changeInput('client', value)}
+              use="borderless"
+              value={data.client ? data.client : ''}
+              error={errorsFormCreate.client.error}
+              name="client"
+            />
+            {/* <ToggleBlock
               edit={editForm.client}
               id="client"
               editProps={{
@@ -95,10 +106,18 @@ const DetailsList = ({
                 name: activeUser.client ? activeUser.client : '',
                 doubleClick: activateFormEdit,
               }}
-            />
+            /> */}
           </FieldBlock>
           <FieldBlock className="field option-edit-select">
-            <UserPicker
+            <Input
+              onChange={(value) => changeInput('manager', value)}
+              use="borderless"
+              value={activeUser.manager}
+              // error={errorsFormCreate.client.error}
+              name="manager"
+              label="Sales"
+            />
+            {/* <UserPicker
               users={[data.manager]}
               usersJson={managers}
               getUsers={(users: Array<{ id: string }>) => {
@@ -111,7 +130,7 @@ const DetailsList = ({
               }}
               selected={activeUser.manager}
               defaultImage={notImage}
-            />
+            /> */}
           </FieldBlock>
           <FieldBlock className="field">
             <div
@@ -152,8 +171,16 @@ const DetailsList = ({
             }
           </FieldBlock>
           <FieldBlock className="field">
-            <Label className="mb-10">Channel</Label>
-            <select
+            {/* <Label className="mb-10">Channel</Label> */}
+            <Input
+              onChange={(value) => changeInput('channel', value)}
+              use="borderless"
+              value={data.channel.title}
+              // error={errorsFormCreate.client.error}
+              name="channel"
+              label="Channel"
+            />
+            {/* <select
               className="toggle-select"
               id="channel"
               onChange={
@@ -176,7 +203,7 @@ const DetailsList = ({
                   );
                 })
               }
-            </select>
+            </select> */}
           </FieldBlock>
           <FieldBlock className="field">
             <Label className="mb-10">Source</Label>
