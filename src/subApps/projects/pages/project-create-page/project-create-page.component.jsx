@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import type { RouterHistory } from 'react-router-dom';
 import { Input, TextArea, Button } from 'ui-kit';
 import Header from 'subApps/projects/components/header';
-import { saveProject } from '../../redux/project/project.actions';
+import { saveProject, getProjectTypes } from '../../redux/project/project.actions';
 import translate from '../../helpers/translator';
 import emoveSpecial from '../../helpers/removeSpecial';
 import translateTitle from '../../helpers/translateTitle';
@@ -15,11 +15,14 @@ import translateTitle from '../../helpers/translateTitle';
 import {
   selectAllProjects,
   selectProjectLoadingBool,
+  selectEngagementModels,
+  selectProjectTypes,
 } from '../../redux/project/project.selectors';
 
 import type {
   Project,
   ProjectCreation,
+  ProjectType,
 } from '../../redux/project/project.flow-types';
 
 import UserPicker from '../../components/user-picker/user-picker.component';
@@ -52,7 +55,10 @@ type State = {
 
 type Props = {
   history: RouterHistory,
-  saveProject: (project: ProjectCreation, history: RouterHistory) => Project
+  saveProject: (project: ProjectCreation, history: RouterHistory) => Project,
+  projectTypes: Array<ProjectType>,
+  engagementModels: Array<ProjectType>,
+  getProjectTypes: () => void,
 };
 
 const initialState = {
@@ -87,6 +93,11 @@ class CreateProjectPage extends Component<Props, State> {
       description: '',
       errors: [],
     };
+  }
+
+  componentDidMount() {
+    const { getProjectTypes: fetchProjectTypes } = this.props;
+    fetchProjectTypes();
   }
 
   validate = () => {
@@ -242,8 +253,10 @@ class CreateProjectPage extends Component<Props, State> {
       watchers,
       description,
       errors,
+      type,
+      engagementModel,
     } = this.state;
-    const { history } = this.props;
+    const { projectTypes, engagementModels, history } = this.props;
     return (
       <div className="cpp">
         <Header>
@@ -302,25 +315,19 @@ class CreateProjectPage extends Component<Props, State> {
                   Project type
                   </h3>
                   <div className="cpp__types-inputs">
-                    <RadioInputGroup
-                      checked
-                      type="radio"
-                      id="commercial"
-                      name="type"
-                      value="a90ff7a3-37cb-4818-90e0-16c83be6f940"
-                      onChange={this.handleChange}
-                      htmlFor="commercial"
-                      spanText="Commercial"
-                    />
-                    <RadioInputGroup
-                      type="radio"
-                      id="internal"
-                      name="type"
-                      value="26a5c423-e4f1-4194-a543-dd7f6cfbfb99"
-                      onChange={this.handleChange}
-                      htmlFor="internal"
-                      spanText="Internal"
-                    />
+                    {projectTypes.map((pr) => (
+                      <RadioInputGroup
+                        checked={type === pr.id}
+                        type="radio"
+                        id={pr.title}
+                        key={pr.id}
+                        name="type"
+                        value={pr.id}
+                        onChange={this.handleChange}
+                        htmlFor={pr.title}
+                        spanText={pr.title}
+                      />
+                    ))}
                   </div>
                 </div>
                 <div className="cpp__engagement">
@@ -328,34 +335,21 @@ class CreateProjectPage extends Component<Props, State> {
                   Engagement Model
                   </h3>
                   <div className="cpp__engagement-inputs">
-                    <RadioInputGroup
-                      checked
-                      type="radio"
-                      id="fixedPrice"
-                      name="engagementModel"
-                      value="7f535dd6-56b1-4979-a5ed-f471a535de21"
-                      onChange={this.handleChange}
-                      htmlFor="fixedPrice"
-                      spanText="Fixed Price"
-                    />
-                    <RadioInputGroup
-                      type="radio"
-                      id="hourly"
-                      name="engagementModel"
-                      value="e4b36752-5acc-4ba5-886f-b5e4d86fe1e1"
-                      onChange={this.handleChange}
-                      htmlFor="hourly"
-                      spanText="Hourly"
-                    />
-                    <RadioInputGroup
-                      type="radio"
-                      id="fulltime"
-                      name="engagementModel"
-                      value="0bea1179-488d-4018-a200-1176bf9fd959"
-                      onChange={this.handleChange}
-                      htmlFor="fulltime"
-                      spanText="Fixed Price + Hourly"
-                    />
+                    {engagementModels.map((model) => (
+                      <RadioInputGroup
+                        checked={
+                          engagementModel === model.id
+                        }
+                        type="radio"
+                        id={model.title}
+                        key={model.id}
+                        name="engagementModel"
+                        value={model.id}
+                        onChange={this.handleChange}
+                        htmlFor={model.title}
+                        spanText={model.title}
+                      />
+                    ))}
                   </div>
                 </div>
               </div>
@@ -416,10 +410,12 @@ class CreateProjectPage extends Component<Props, State> {
 const mapStateToProps = createStructuredSelector({
   projects: selectAllProjects,
   loading: selectProjectLoadingBool,
+  projectTypes: selectProjectTypes,
+  engagementModels: selectEngagementModels,
 });
 
 // $FlowFixMe
 export default connect(
   mapStateToProps,
-  { saveProject },
+  { saveProject, getProjectTypes },
 )(CreateProjectPage);

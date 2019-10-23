@@ -8,16 +8,21 @@ import { connect } from 'react-redux';
 import type { RouterHistory } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import Moment from 'react-moment';
-import { Input, Button, TextArea } from 'ui-kit';
+import {
+  Input, Button, TextArea,
+  // Radio,
+} from 'ui-kit';
 import Header from 'subApps/projects/components/header';
 
 import { ROOT } from 'subApps/projects/routes';
 
-import { editProject } from '../../redux/project/project.actions';
+import { editProject, getProjectTypes } from '../../redux/project/project.actions';
 import {
   selectProjectItem,
   selectAllProjects,
   selectProjectLoadingBool,
+  selectProjectTypes,
+  selectEngagementModels,
 } from '../../redux/project/project.selectors';
 import { selectProjectsMolestones } from '../../redux/milestone/milestone.selectors';
 
@@ -27,6 +32,7 @@ import type { Milestone } from '../../redux/milestone/milestone.flow-types';
 import type {
   Project,
   ProjectCreation,
+  ProjectType,
 } from '../../redux/project/project.flow-types';
 
 import translate from '../../helpers/translator';
@@ -79,6 +85,9 @@ type Props = {
   projects: Array<Project>,
   history: RouterHistory,
   milestones: Array<Milestone>,
+  projectTypes: Array<ProjectType>,
+  engagementModels: Array<ProjectType>,
+  getProjectTypes: () => void,
   editProject: (editProject: ProjectCreation, history: RouterHistory) => Project
 };
 
@@ -119,6 +128,8 @@ class ProjectDetailPage extends Component<Props, State> {
   }
 
   componentDidMount = () => {
+    const { getProjectTypes: fetchProjects } = this.props;
+    fetchProjects();
     getEstimation(this.props.project.id).then((response) => {
       const { estimatedTime, spentTime } = response.data.project;
       this.setState({ estimatedTime, spentTime });
@@ -251,6 +262,7 @@ class ProjectDetailPage extends Component<Props, State> {
         unbindParticipants: unbindUserId(participantsPropsIDs, participantsIDs),
         bindParticipants: bindUserId(participantsPropsIDs, participantsIDs),
       };
+      console.log(editedProject);
       this.props.editProject(editedProject, this.props.history);
       this.setState(initialState);
     }
@@ -269,6 +281,7 @@ class ProjectDetailPage extends Component<Props, State> {
       spentTime,
       engagement,
     } = this.state;
+    const { projectTypes, engagementModels } = this.props;
     return (
       <div className="cpp">
         <Header>
@@ -346,26 +359,19 @@ h
                   Project type
                   </h3>
                   <div className="cpp__types-inputs">
-                    <RadioInputGroup
-                      checked={type === 'a90ff7a3-37cb-4818-90e0-16c83be6f940'}
-                      type="radio"
-                      id="commercial"
-                      name="type"
-                      value="a90ff7a3-37cb-4818-90e0-16c83be6f940"
-                      onChange={this.handleChange}
-                      htmlFor="commercial"
-                      spanText="Commercial"
-                    />
-                    <RadioInputGroup
-                      checked={type === '26a5c423-e4f1-4194-a543-dd7f6cfbfb99'}
-                      type="radio"
-                      id="internal"
-                      name="type"
-                      value="26a5c423-e4f1-4194-a543-dd7f6cfbfb99"
-                      onChange={this.handleChange}
-                      htmlFor="internal"
-                      spanText="Internal"
-                    />
+                    {projectTypes.map((pr) => (
+                      <RadioInputGroup
+                        checked={type === pr.id}
+                        type="radio"
+                        id={pr.title}
+                        key={pr.id}
+                        name="type"
+                        value={pr.id}
+                        onChange={this.handleChange}
+                        htmlFor={pr.title}
+                        spanText={pr.title}
+                      />
+                    ))}
                   </div>
                 </div>
                 <div className="cpp__engagement">
@@ -373,42 +379,21 @@ h
                   Engagement Model
                   </h3>
                   <div className="cpp__engagement-inputs">
-                    <RadioInputGroup
-                      checked={
-                      engagement === '7f535dd6-56b1-4979-a5ed-f471a535de21'
-                    }
-                      type="radio"
-                      id="fixedPrice"
-                      name="engagement"
-                      value="7f535dd6-56b1-4979-a5ed-f471a535de21"
-                      onChange={this.handleChange}
-                      htmlFor="fixedPrice"
-                      spanText="Fixed Price"
-                    />
-                    <RadioInputGroup
-                      checked={
-                      engagement === 'e4b36752-5acc-4ba5-886f-b5e4d86fe1e1'
-                    }
-                      type="radio"
-                      id="hourly"
-                      name="engagement"
-                      value="e4b36752-5acc-4ba5-886f-b5e4d86fe1e1"
-                      onChange={this.handleChange}
-                      htmlFor="hourly"
-                      spanText="Hourly"
-                    />
-                    <RadioInputGroup
-                      checked={
-                      engagement === '0bea1179-488d-4018-a200-1176bf9fd959'
-                    }
-                      type="radio"
-                      id="fulltime"
-                      name="engagement"
-                      value="0bea1179-488d-4018-a200-1176bf9fd959"
-                      onChange={this.handleChange}
-                      htmlFor="fulltime"
-                      spanText="Fixed Price + Hourly"
-                    />
+                    {engagementModels.map((model) => (
+                      <RadioInputGroup
+                        checked={
+                          engagement === model.id
+                        }
+                        type="radio"
+                        id={model.title}
+                        key={model.id}
+                        name="engagement"
+                        value={model.id}
+                        onChange={this.handleChange}
+                        htmlFor={model.title}
+                        spanText={model.title}
+                      />
+                    ))}
                   </div>
                 </div>
               </div>
@@ -470,10 +455,12 @@ const mapStateToProps = createStructuredSelector({
   project: selectProjectItem,
   projects: selectAllProjects,
   milestones: selectProjectsMolestones,
+  projectTypes: selectProjectTypes,
+  engagementModels: selectEngagementModels,
 });
 
 // $FlowFixMe
 export default connect(
   mapStateToProps,
-  { editProject },
+  { editProject, getProjectTypes },
 )(ProjectDetailPage);
