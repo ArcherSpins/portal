@@ -1,9 +1,10 @@
 // @flow
 import React from 'react';
 import { Redirect } from 'react-router-dom';
+import { Input, Button } from 'ui-kit';
 import { Title, LeftTitleBlock } from './styled';
 import getRoute from '../../helpers/getRoute';
-import SearchInput from '../../components/shared/Input/SearchInput';
+// import SearchInput from '../../components/shared/Input/SearchInput';
 
 type LeftBlockProps = {
   submitSearch: (SyntheticEvent<any>) => void,
@@ -19,18 +20,23 @@ const LeftBlock = ({
   <LeftTitleBlock className={className}>
     <form onSubmit={submitSearch}>
       <Title>Deals</Title>
-      <SearchInput
+      <Input
+        icon={<i className="icon-search" />}
+        value={searchValue}
+        onChange={onChange}
+      />
+      {/* <SearchInput
         className="not-focus"
         value={searchValue}
         onChange={onChange}
         placeholder=""
-      />
-      <button
+      /> */}
+      <Button
         type="submit"
         className="search-button fz-16"
       >
         Search page
-      </button>
+      </Button>
     </form>
     {
       redirect ? (
