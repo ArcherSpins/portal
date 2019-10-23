@@ -59,6 +59,10 @@
     font-size: 14px;
   }
 
+  p {
+    color: #333333;
+  }
+
   input {
     color: #333333;
     font-size: 16px;
@@ -75,4 +79,8 @@
 
 .col-4 {
   width: 40%;
+}
+
+.pl-2 {
+  padding-left: 2px;
 }

@@ -13,10 +13,6 @@ import { format } from 'date-fns';
 import {
   Dropdown, Combobox, Input, Datepicker,
 } from 'ui-kit';
-import {
-  InputToggle,
-  PickerToggle,
-} from '..';
 import { getCities } from '../../graphql/queries';
 import type { Employee, CityType } from '../../types';
 import {
@@ -446,14 +442,6 @@ class EmployeeForm extends React.Component<
               this.toggleEdit(true);
             }}
           />
-          {/* <PickerToggle
-            onChange={this.onChange}
-            showInput={showEdit}
-            date={new Date(defaultData.dateOfEmployment || null)}
-            label="Date of employment"
-            idx="dateOfEmployment"
-            toggleEdit={this.toggleEdit}
-          /> */}
         </FieldBlock>
 
         <FieldBlock className="flex-block dropdown-field-block">
@@ -473,16 +461,10 @@ class EmployeeForm extends React.Component<
             }
             label="Working day starts at"
           />
-          <InputToggle
-            className="block col-6"
-            showInput={false}
-            title={`Working day ends at ${(defaultData.workDayEnd && String(defaultData.workDayEnd.hours).padStart(2, '0')) || 18}
-            :${(defaultData.workDayEnd && String(defaultData.workDayEnd.minutes || 0).padStart(2, '0')) || '00'}`}
-            label=""
-            idx="working_day_starts_at_string"
-            onChange={this.onChange}
-            toggleEdit={() => {}}
-          />
+          <p className="block col-6 pl-2">
+            {`Working day ends at ${(defaultData.workDayEnd && String(defaultData.workDayEnd.hours).padStart(2, '0')) || 18}
+          :${(defaultData.workDayEnd && String(defaultData.workDayEnd.minutes || 0).padStart(2, '0')) || '00'}`}
+          </p>
         </FieldBlock>
 
         <FieldBlock>

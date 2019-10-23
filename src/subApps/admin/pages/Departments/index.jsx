@@ -47,8 +47,6 @@ class DepartmentsComponent extends React.Component<DepartmentsProps> {
       closeErrorMessage,
     } = this.props;
 
-    console.log(departments);
-
     return (
       <PageContainer style={{ display: 'flex' }}>
         <LeftNavbar />
