@@ -96,8 +96,8 @@ export default (state = initialState, action) => {
       return {
         ...state,
         comments: [
-          action.payload,
           ...state.comments,
+          action.payload,
         ],
       };
 

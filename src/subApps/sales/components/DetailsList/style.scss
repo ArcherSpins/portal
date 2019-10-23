@@ -3,8 +3,6 @@
     width: 322px;
     font-size: 16px;
 
-    
-
     .add-button {
         background-color: white;
         border: 1px solid #C6CCD5;
@@ -79,7 +77,6 @@
         }
 
         .field {
-            border-bottom: 0.5px solid #DBDBDC;
             p {
                 margin-bottom: 15px;
             }
@@ -238,4 +235,12 @@
 
 .mr-10 {
     margin-right: 10px;
+}
+
+.pl-0 {
+    padding-left: 0 !important;
+
+    * {
+        padding-left: 0 !important;
+    }
 }

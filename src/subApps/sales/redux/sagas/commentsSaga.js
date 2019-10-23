@@ -31,7 +31,7 @@ export function* getCommentsSaga(action: {
     if (action.payload.returnComments && typeof action.payload.returnComments === 'function') {
       action.payload.returnComments(response);
     }
-    yield put({ type: 'GET_COMMENTS_SUCCESS', payload: response });
+    yield put({ type: 'GET_COMMENTS_SUCCESS', payload: response.reverse() });
   } catch (error) {
     yield put({ type: 'OPEN_ERROR_ALERT', payload: error.message });
     yield put({ type: 'GET_COMMENTS_FAIL' });

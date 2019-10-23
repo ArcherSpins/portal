@@ -46,6 +46,7 @@ const CRMPage = ({
       />
       <Header>
         <LeftBlock
+          className="search-container_crm"
           submitSearch={submitSearch}
           searchValue={state.searchValue}
           onChange={toggleSearchValue}

@@ -15,7 +15,7 @@ export const LeftTitleBlock = styled.div`
 export const Header = styled(HeaderWrap)`
   display: grid;
   justify-content: space-between;
-  grid-template-columns: 4fr 4fr 1fr;
+  grid-template-columns: 3fr 3fr 1fr;
   padding: 20px 10px;
 `;
 

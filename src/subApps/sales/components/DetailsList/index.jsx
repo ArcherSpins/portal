@@ -13,9 +13,9 @@ import {
   FieldBlock,
   Label,
   Button,
-  ItemIcon,
+  // ItemIcon,
   TabsComponent,
-  ContactBlock,
+  // ContactBlock,
   ToggleChangeComponent,
   // ToggleBlock,
   SelectValid,
@@ -30,11 +30,11 @@ const DetailsList = ({
   props,
   state,
   changeInput,
-  newContact,
-  editImage,
+  // newContact,
+  // editImage,
   closeEdit,
   onSubmitEdit,
-  deleteContact,
+  // deleteContact,
   setSourceData,
 }: DetailsListProps) => {
   const typeProps: PropsType = props;
@@ -51,7 +51,10 @@ const DetailsList = ({
     showModalErrorMessage,
     toggleShowModal,
   } = typeProps;
-  const { data, contacts } = state;
+  const {
+    data,
+    // contacts
+  } = state;
 
   const [tabIndex, toggleTabIdx] = useState(0);
 
@@ -61,6 +64,8 @@ const DetailsList = ({
   };
 
   const dateDetailsList = activeUser.createdAt ? dayjs(activeUser.createdAt).format('DD MMMM YYYY hh:mm') : '';
+
+  console.log(errorsFormCreate);
 
   return (
     <div className="details-column">
@@ -83,39 +88,27 @@ const DetailsList = ({
           }}
         >
           <FieldBlock className="field">
-            {/* <Label className="mb-10">Client</Label> */}
             <Input
+              className="pl-0"
               label="Client"
-              onChange={(value) => changeInput('client', value)}
+              onChange={(e) => changeInput('client', e.target.value)}
               use="borderless"
-              value={data.client ? data.client : ''}
+              value={data.client}
               error={errorsFormCreate.client.error}
               name="client"
+              placeholder="Client name"
             />
-            {/* <ToggleBlock
-              edit={editForm.client}
-              id="client"
-              editProps={{
-                onChange: changeInput,
-                value: data.client ? data.client : '',
-                error: errorsFormCreate.client.error,
-                errorMessage: errorsFormCreate.client.message,
-                className: errorsFormCreate.client.error ? 'error-border' : '',
-              }}
-              prevProps={{
-                name: activeUser.client ? activeUser.client : '',
-                doubleClick: activateFormEdit,
-              }}
-            /> */}
           </FieldBlock>
           <FieldBlock className="field option-edit-select">
             <Input
-              onChange={(value) => changeInput('manager', value)}
+              className="pl-0"
+              onChange={(e) => changeInput('manager', e.target.value)}
               use="borderless"
-              value={activeUser.manager}
+              value={data.manager}
               // error={errorsFormCreate.client.error}
               name="manager"
               label="Sales"
+              placeholder="Manager name"
             />
             {/* <UserPicker
               users={[data.manager]}
@@ -133,7 +126,17 @@ const DetailsList = ({
             /> */}
           </FieldBlock>
           <FieldBlock className="field">
-            <div
+            <Input
+              className="pl-0"
+              onChange={(e) => changeInput('contact', e.target.value)}
+              use="borderless"
+              value={data.contact}
+              // error={errorsFormCreate.client.error}
+              name="contact"
+              label="Contact"
+              placeholder="Contact"
+            />
+            {/* <div
               className="d-flex justify-content-between align-items-center mb-10"
             >
               <Label>Contact</Label>
@@ -168,42 +171,19 @@ const DetailsList = ({
                     />
                   )
               ))
-            }
+            } */}
           </FieldBlock>
           <FieldBlock className="field">
-            {/* <Label className="mb-10">Channel</Label> */}
             <Input
-              onChange={(value) => changeInput('channel', value)}
+              className="pl-0"
+              onChange={(e) => changeInput('channel', e.target.value)}
               use="borderless"
-              value={data.channel.title}
+              value={data.channel}
               // error={errorsFormCreate.client.error}
               name="channel"
               label="Channel"
+              placeholder="Channel"
             />
-            {/* <select
-              className="toggle-select"
-              id="channel"
-              onChange={
-                (val) => {
-                  const find = channels.find((item) => item.title === val.target.value);
-                  changeInput('channel', find);
-                }
-              }
-            >
-              {
-                Array.isArray(channels) && data.channel && channels.map((item) => {
-                  const channel = item;
-                  return (
-                    <option
-                      key={channel.id}
-                      selected={item.id === data.channel.id}
-                    >
-                      {channel.title}
-                    </option>
-                  );
-                })
-              }
-            </select> */}
           </FieldBlock>
           <FieldBlock className="field">
             <Label className="mb-10">Source</Label>

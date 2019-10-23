@@ -2,6 +2,17 @@ html, body, #root {
     height: 100%;
 } 
 
+.search-container_crm {
+    input {
+        min-width: 300px;
+        min-height: 22px;
+    }
+
+    button {
+        height: 36px;
+    }
+}
+
 .page {
     height: 100%;
 }
@@ -22,8 +33,6 @@ html, body, #root {
 .crm-page {
     min-height: 600px;
     padding-top: 36px;
-
-    
 }
 
 .add-deal-button {
@@ -50,7 +59,6 @@ html, body, #root {
     display: block;
     text-align: center;
     width: 100px;
-    height: 36px;
     box-sizing: border-box;
     float: right;
 }
@@ -59,23 +67,24 @@ html, body, #root {
     display: flex;  
 
     button {
-        padding: 4px 9px;
+        padding-left: 15px;
+        padding-right: 15px;
         border: none;
-        max-height: 28px;
         background-color: #E9EEF2;
         border: 1px solid #e0dede;
         color: #333333;
         cursor: pointer;
+        height: 36px;
     }
 
     .left-button {
-        border-top-left-radius: 0.25rem;
-        border-bottom-left-radius: 0.25rem;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
     }
 
     .right-button {
-        border-top-right-radius: 0.25rem;
-        border-bottom-right-radius: 0.25rem;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
     }
 
     .active {

@@ -34,14 +34,14 @@ class DetailsListContainer extends React.PureComponent<Props, State> {
 
       this.getUser();
     }
-    if (!edit && data.channel
-      && (activeUser.channel.id !== data.channel.id
-        || activeUser.stage.id !== data.stage.id
-        || activeUser.manager.name !== data.manager.name
-        || activeUser.jobProposalURL !== data.jobProposalURL)
-    ) {
-      this.getUser();
-    }
+    // if (!edit && data.channel
+    //   && (activeUser.channel.id !== data.channel.id
+    //     || activeUser.stage.id !== data.stage.id
+    //     || activeUser.manager.name !== data.manager.name
+    //     || activeUser.jobProposalURL !== data.jobProposalURL)
+    // ) {
+    //   this.getUser();
+    // }
   }
 
   getUser = () => {
@@ -65,7 +65,7 @@ class DetailsListContainer extends React.PureComponent<Props, State> {
         this.setState({
           data: {
             ...data,
-            manager: obj,
+            manager: value,
           },
         });
         activateFormEdit({}, 'sales');
@@ -81,16 +81,17 @@ class DetailsListContainer extends React.PureComponent<Props, State> {
         activateFormEdit({}, 'channel');
         break;
       case 'contact':
-        findContactIdx = contacts.findIndex((item) => item.id === itemId);
-        findContact = contacts[findContactIdx];
+        this.setState({ data: { ...data, contact: value } });
+        // findContactIdx = contacts.findIndex((item) => item.id === itemId);
+        // findContact = contacts[findContactIdx];
 
-        findContact.value = value;
-        // eslint-disable-next-line no-case-declarations
-        const contact = [...contacts];
-        contact[findContactIdx] = findContact;
-        this.setState({
-          data: { ...data, contacts: contact },
-        });
+        // findContact.value = value;
+        // // eslint-disable-next-line no-case-declarations
+        // const contact = [...contacts];
+        // contact[findContactIdx] = findContact;
+        // this.setState({
+        //   data: { ...data, contacts: contact },
+        // });
         break;
       case 'source':
         this.setState({

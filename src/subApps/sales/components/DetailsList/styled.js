@@ -24,6 +24,13 @@ export const Label = styled.label`
 
 export const FieldBlock = styled.div`
     margin-bottom: 15px;
+    label {
+      color: rgba(51, 51, 51, 0.5);
+    }
+
+    * {
+      color: #333333;
+    }
 `;
 
 export const Button = styled.button`
