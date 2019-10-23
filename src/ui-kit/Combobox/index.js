@@ -72,7 +72,7 @@ const Combobox = ({
       borderColor: state.isFocused ? '#61B16F' : '#D1D6DE',
       '&:hover': {},
       '&:focus': { borderColor: 'red' },
-      border: use === 'borderless' ? 'none' : base.border,
+      border: use === 'borderless' ? 'none !important' : base.border,
       transition: 'all 0.3s',
       boxShadow: 'none',
     }),
