@@ -3,7 +3,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import type { RouterHistory, Match } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
-import { Button, TextArea, Input } from 'ui-kit';
+import {
+  Button, TextArea, Input, H1,
+} from 'ui-kit';
 import Header from 'subApps/projects/components/header';
 
 import { editTask, deleteTask } from '../../redux/task/task.actions';
@@ -151,11 +153,11 @@ class TaskDetails extends React.Component<Props, State> {
       <div className="task-details">
         <Header>
           <div>
-            <h1 className="heading-primary mb05">
+            <H1 className="mb05">
               Project:
               {' '}
               {project.title}
-            </h1>
+            </H1>
             <h2 className="heading-secondary">
               Milestone #
               {milestone.number}
@@ -174,7 +176,7 @@ class TaskDetails extends React.Component<Props, State> {
             </Button>
           </div>
         </Header>
-        <h1 className="heading-primary mb05">Project management system</h1>
+        <H1 className="mb05">Project management system</H1>
         <form onSubmit={this.handleSubmit} className="body">
           <div className="body__left">
             <Input

@@ -5,7 +5,9 @@ import type { RouterHistory } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 
 import Header from 'subApps/projects/components/header';
-import { Input, TextArea, Button } from 'ui-kit';
+import {
+  Input, TextArea, Button, H1,
+} from 'ui-kit';
 
 import { selectMilestoneByParams } from '../../redux/milestone/milestone.selectors';
 import { selectProjectItem } from '../../redux/project/project.selectors';
@@ -120,11 +122,11 @@ class TaskAdd extends React.Component<Props, State> {
       <div className="task-add">
         <Header>
           <div>
-            <h1 className="heading-primary mb05">
+            <H1 className="mb05">
             Project:
               {' '}
               {project.title}
-            </h1>
+            </H1>
             <h2 className="heading-secondary">
             Milestone #2:
               {' '}
@@ -132,7 +134,7 @@ class TaskAdd extends React.Component<Props, State> {
             </h2>
           </div>
         </Header>
-        <h2 className="heading-primary mb05">Create Task</h2>
+        <H1 className="mb05">Create Task</H1>
         <form onSubmit={this.handleSubmit} className="body">
           <div className="body__left">
             <Input

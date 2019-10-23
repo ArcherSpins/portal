@@ -5,7 +5,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import type { RouterHistory, Match } from 'react-router-dom';
-import { Button } from 'ui-kit';
+import { Button, H1 } from 'ui-kit';
 
 import './log-history-page.styles.scss';
 
@@ -59,9 +59,9 @@ class LogHistoryPage extends React.Component<Props, State> {
       <div className="log-history">
         <div className="header">
           <div className="header-left">
-            <h1 className="heading-primary" style={{ marginRight: '20px' }}>
+            <H1 style={{ marginRight: '20px' }}>
               Logs
-            </h1>
+            </H1>
             <div className="toggler-wrapper">
               <button
                 type="button"

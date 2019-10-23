@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import Header from 'subApps/projects/components/header';
 import {
-  Input, Button, TextArea, Datepicker,
+  Input, Button, TextArea, Datepicker, H1,
 } from 'ui-kit';
 import { addYears } from 'date-fns';
 
@@ -267,7 +267,7 @@ class LogCreate extends React.Component<Props, State> {
     return (
       <div className="log-create">
         <Header>
-          <h1 className="heading-primary">New Log</h1>
+          <H1>New Log</H1>
         </Header>
         <form onSubmit={this.handleSubmit} className="body">
           <div className="pb1 mb1 border">

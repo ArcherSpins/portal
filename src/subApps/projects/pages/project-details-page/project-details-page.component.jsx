@@ -10,7 +10,7 @@ import { createStructuredSelector } from 'reselect';
 import Moment from 'react-moment';
 import {
   Input, Button, TextArea,
-  Radio,
+  Radio, H1,
 } from 'ui-kit';
 import Header from 'subApps/projects/components/header';
 
@@ -285,9 +285,9 @@ class ProjectDetailPage extends Component<Props, State> {
         <Header>
           <div className="project-details__title-container">
             <span className="project-details__project">Project:</span>
-            <h1 style={{ marginBottom: 0 }} className="heading-primary">
+            <H1>
               {title}
-            </h1>
+            </H1>
           </div>
         </Header>
         <div className="project-details__sub-header">

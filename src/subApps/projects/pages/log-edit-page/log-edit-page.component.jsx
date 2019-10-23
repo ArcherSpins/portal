@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import type { RouterHistory } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import {
-  Input, Button, TextArea, Datepicker,
+  Input, Button, TextArea, Datepicker, H1,
 } from 'ui-kit';
 import Header from 'subApps/projects/components/header';
 import { addYears } from 'date-fns';
@@ -266,7 +266,7 @@ class LogEditPage extends React.Component<Props, State> {
     return (
       <div className="log-create">
         <Header>
-          <h1 className="heading-primary">Edit Log</h1>
+          <H1>Edit Log</H1>
         </Header>
         <form onSubmit={this.handleSubmit} className="body">
           <div className="pb1 mb1 border">
