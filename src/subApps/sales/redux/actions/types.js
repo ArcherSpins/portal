@@ -1,6 +1,5 @@
 // @flow
 // deals types
-import type { Element } from 'react';
 import type {
   DealType,
   ColumnType,
@@ -49,7 +48,7 @@ export type UpdateDealReorderPayloadPropsType = {
   columns: {
     [string]: ColumnType,
   },
-  element: Element<any>,
+  element: HTMLElement,
 }
 
 export type UpdateDealReorderPayloadType = {

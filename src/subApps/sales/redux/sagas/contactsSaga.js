@@ -4,9 +4,9 @@ import {
   takeEvery,
   call,
   all,
-  delay,
 } from 'redux-saga/effects';
 import type { Saga } from 'redux-saga';
+import { Toast } from 'ui-kit';
 import {
   fetchDeleteContact,
   fetchCreateContact,
@@ -23,15 +23,10 @@ export function* updateContactSaga(action: {
 }): Saga<void> {
   try {
     const response = yield call(fetchUpdateContact, action.payload);
-    // if (action.payload.returnContacts && typeof action.payload.returnContacts === 'function') {
-    //   action.payload.returnContacts(response);
-    // }
     yield put({ type: 'UPDATE_CONTACT_SUCCESS', payload: response });
   } catch (error) {
-    yield put({ type: 'OPEN_ERROR_ALERT', payload: error.message });
+    Toast.push({ message: String(error), type: 'danger' });
     yield put({ type: 'UPDATE_CONTACT_FAIL' });
-    yield delay(3500);
-    yield put({ type: 'CLOSE_ERROR_ALERT' });
   }
 }
 
@@ -49,10 +44,8 @@ export function* deleteContactSaga(action: {
     }
     yield put({ type: 'DELETE_CONTACT_SUCCESS', payload: response });
   } catch (error) {
-    yield put({ type: 'OPEN_ERROR_ALERT', payload: error.message });
+    Toast.push({ message: String(error), type: 'danger' });
     yield put({ type: 'DELETE_CONTACT_FAIL' });
-    yield delay(3500);
-    yield put({ type: 'CLOSE_ERROR_ALERT' });
   }
 }
 
@@ -72,10 +65,8 @@ export function* createContactSaga(action: {
       payload: [...action.contacts, response],
     });
   } catch (error) {
-    yield put({ type: 'OPEN_ERROR_ALERT', payload: error.message });
+    Toast.push({ message: String(error), type: 'danger' });
     yield put({ type: 'CREATE_CONTACT_FAIL' });
-    yield delay(3500);
-    yield put({ type: 'CLOSE_ERROR_ALERT' });
   }
 }
 

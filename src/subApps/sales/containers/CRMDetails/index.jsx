@@ -55,9 +55,9 @@ class CRMDetailsContainer extends React.PureComponent<PropsCrmDetails, State> {
       modalApproval: true,
     });
 
-    setTimeout(() => {
-      this.setState({ modalApproval: false });
-    }, 5000);
+    // setTimeout(() => {
+    //   this.setState({ modalApproval: false });
+    // }, 5000);
   }
 
   approveDeleteDeal = () => {

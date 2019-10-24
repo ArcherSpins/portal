@@ -7,6 +7,7 @@ import React, { useState } from 'react';
 import dayjs from 'dayjs';
 import {
   Input,
+  Switcher,
 } from 'ui-kit';
 import {
   Header,
@@ -64,8 +65,6 @@ const DetailsList = ({
   };
 
   const dateDetailsList = activeUser.createdAt ? dayjs(activeUser.createdAt).format('DD MMMM YYYY hh:mm') : '';
-
-  console.log(errorsFormCreate);
 
   return (
     <div className="details-column">
@@ -186,6 +185,7 @@ const DetailsList = ({
             />
           </FieldBlock>
           <FieldBlock className="field">
+            <Switcher items={['UpWork', 'LinkedIn', 'Direct']} />
             <Label className="mb-10">Source</Label>
             <TabsComponent tabs={sources} toggleTabIndex={toggleTabIndex}>
               <div className="tab-block-content">

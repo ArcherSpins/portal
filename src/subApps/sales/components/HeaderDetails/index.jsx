@@ -2,6 +2,7 @@
 /* eslint-disable react/no-unused-state */
 // @flow
 import React, { useEffect } from 'react';
+import { Button } from 'ui-kit';
 import arrow from '../../assets/icons/arrow-left.png';
 // import { Heading } from '../shared/styled';
 import { InputForTitle, Title } from './styled';
@@ -90,13 +91,13 @@ const HeaderDetails = ({
       <div className="right-block fz-14">
         {
           activeUser.id ? (
-            <button
+            <Button
               type="button"
               onClick={clickDeleteButton}
-              className="delete-deal-button"
+              use="transparent"
             >
                 Delete deal
-            </button>
+            </Button>
           )
             : null
         }

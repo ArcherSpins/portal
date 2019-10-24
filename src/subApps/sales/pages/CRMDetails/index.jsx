@@ -7,7 +7,6 @@ import {
   DetailsContent,
   HeaderDetails,
   ModalApproval,
-  AlertMessage,
 } from '../../components';
 import { DetailsListContainer } from '../../containers';
 import './style.scss';
@@ -46,8 +45,6 @@ const CRMDetailsPage = ({
     errorsFormCreate,
     deleteErrorForm,
     history,
-    errorAlert,
-    closeErrorAlert,
   } = props;
 
   const {
@@ -61,15 +58,6 @@ const CRMDetailsPage = ({
   const { goBack } = history;
   return (
     <div className="details-page">
-      {
-        errorAlert.status && (
-          <AlertMessage
-            error={errorAlert.status}
-            message={errorAlert.message}
-            closeModal={closeErrorAlert}
-          />
-        )
-      }
       {
         modalApproval && (
           <ModalApproval

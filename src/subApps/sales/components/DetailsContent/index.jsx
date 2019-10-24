@@ -3,6 +3,7 @@
 /* eslint-disable lines-between-class-members */
 // @flow
 import React from 'react';
+// $FlowFixMe
 import zenscroll from 'zenscroll';
 import { ChatForm, DetailsListStyled } from '../index';
 import { MessageComponent } from './styled';
@@ -61,7 +62,7 @@ class DetailsContent extends React.Component<Props, State> {
 
   scrollSection = () => {
     if (this.messagesContainer) {
-      console.log(this.scroll, this.messagesContainer.scrollHeight);
+      // $FlowFixMe
       this.scroll.toY(this.messagesContainer.scrollHeight);
     }
   }
