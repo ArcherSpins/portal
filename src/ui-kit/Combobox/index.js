@@ -68,7 +68,7 @@ const Combobox = ({
   <div
     className={
       classNames(
-        'cbx__wrap wrapper',
+        'cbx__wrap wrapper combobox',
         `combobox_${use || ''}`,
         {
           selected: !!selectedOption,

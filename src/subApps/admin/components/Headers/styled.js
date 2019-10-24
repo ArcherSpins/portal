@@ -39,6 +39,15 @@ export const RightBlock = styled.div`
     min-width: 300px;
   }
 
+  .delete-deal-button {
+    color: #333333;
+    border-color: #C6CCD5;
+
+    &:hover {
+      color: white;
+    }
+  }
+
   input {
     &:focus {
       border: none;

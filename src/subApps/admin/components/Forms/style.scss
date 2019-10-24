@@ -27,11 +27,17 @@
     .select-component {
       width: 100%;
     }
+
+    padding-right: 8px;
   }
 }
 
 .employee-form {
   .form-datepicker {
+
+    * {
+      border: none;
+    }
 
     .Datepicker_input__16dVZ {
       width: 130px;

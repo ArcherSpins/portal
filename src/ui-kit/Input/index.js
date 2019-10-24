@@ -175,7 +175,7 @@ class Input extends Component<Props, State> {
             )
           }
           {/* TODO: REPLACE SVG TO <i /> */}
-          {clearable && <button onClick={onClearClick} className={styles.clear} type="button"><img src={xmark} alt="clear" /></button>}
+          {clearable && (value && value.length) && <button onClick={onClearClick} className={styles.clear} type="button"><img src={xmark} alt="clear" /></button>}
         </div>
       </div>
     );

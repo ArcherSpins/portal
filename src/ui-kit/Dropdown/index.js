@@ -4,7 +4,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import Select, { components } from 'react-select';
-import styles from './Dropdown.module.scss';
+import styles from './style.scss';
 
 
 type DropdownType = 'borderless' | 'default';
@@ -38,47 +38,23 @@ const Dropdown = ({
   onChange,
   use,
   className,
-}: Props) => {
-  const customStyles = {
-    indicatorSeparator: () => {},
-    control: (base, state) => ({
-      ...base,
-      borderColor: state.isFocused ? '#61B16F' : '#D1D6DE',
-      '&:hover': {},
-      '&:focus': { borderColor: 'red' },
-      border: use === 'borderless' ? 'none' : base.border,
-      transition: 'all 0.3s',
-      boxShadow: 'none',
-    }),
-    container: (base) => ({
-      ...base,
-      width: '30%',
-    }),
-    option: (base, { isSelected }) => ({
-      ...base,
-      '&:hover': { backgroundColor: '#ddeee0' },
-      backgroundColor: isSelected && '#61B16F',
-    }),
-  };
-
-  return (
-    <div className={classNames(styles.wrapper, className)}>
-      <label className={styles[use]} htmlFor="select">{label}</label>
-      <Select
-        className="select-component"
-        isSearchable={false}
-        onChange={onChange}
-        placeholder={placeholder}
-        components={{ DropdownIndicator }}
-        styles={customStyles}
-        options={options}
-        name={name}
-        value={value}
-        isDisabled={disabled}
-      />
-    </div>
-  );
-};
+}: Props) => (
+  <div className={classNames(styles.wrapper, `cbx__wrap dropdown dropdown_${use || ''}`, className)}>
+    <label className={classNames(styles[use], 'cbx__label')} htmlFor="select">{label}</label>
+    <Select
+      className="select-component"
+      isSearchable={false}
+      onChange={onChange}
+      placeholder={placeholder}
+      components={{ DropdownIndicator }}
+      classNamePrefix="cbx"
+      options={options}
+      name={name}
+      value={value}
+      isDisabled={disabled}
+    />
+  </div>
+);
 
 Dropdown.defaultProps = {
   placeholder: '',

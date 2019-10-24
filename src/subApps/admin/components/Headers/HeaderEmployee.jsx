@@ -1,22 +1,17 @@
 // @flow
 
 import React, { type Node } from 'react';
-import { Link } from 'react-router-dom';
-import { EMPLOYEES_ROUTE } from 'subApps/admin/routes';
+import { EMPLOYEES_ROUTE, SINGLE_EMPLOYEE_ROUTE } from 'subApps/admin/routes';
+import { Button, Breadcrumbs } from 'ui-kit';
 import {
   GoBackButton,
-  TransparentButton,
 } from '..';
 import { TitleAdminPanel } from '../styled';
 import {
   Header,
   RightBlock,
-  Subtitle,
   LeftBlock,
-  ArrorIcon,
 } from './styled';
-// $FlowFixMe
-import arrowIcon from '../../assets/icons/arrow-right.svg';
 
 type HeaderProps = {
   goBack: () => void,
@@ -24,16 +19,17 @@ type HeaderProps = {
   title: string
 }
 
+const routes = {
+  [EMPLOYEES_ROUTE]: 'Employees',
+  [SINGLE_EMPLOYEE_ROUTE]: 'Employee',
+};
+
 const HeaderComponent = ({ goBack, deleteEmployee, title }: HeaderProps): Node => (
   <Header style={{ alignItems: 'flex-end' }}>
     <LeftBlock>
-      <Subtitle>
-        <Link to={EMPLOYEES_ROUTE}>
-          employees
-        </Link>
-        <ArrorIcon src={arrowIcon} />
-        employee
-      </Subtitle>
+      <Breadcrumbs
+        routes={routes}
+      />
       <TitleAdminPanel style={{ position: 'relative' }}>
         <GoBackButton
           className="go-back-button"
@@ -45,11 +41,9 @@ const HeaderComponent = ({ goBack, deleteEmployee, title }: HeaderProps): Node =
     <RightBlock>
       {
         deleteEmployee && (
-          <TransparentButton
-            onClick={deleteEmployee}
-          >
+          <Button className="delete-deal-button" use="transparent" onClick={deleteEmployee}>
             Delete employee
-          </TransparentButton>
+          </Button>
         )
       }
     </RightBlock>
