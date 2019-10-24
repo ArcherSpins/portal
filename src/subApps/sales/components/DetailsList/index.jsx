@@ -62,9 +62,28 @@ const DetailsList = ({
     setSourceData(sources[idx]);
   };
 
+  const newManagers = managers.map((item) => ({ ...item, label: item.name, value: item.name }));
+  const loadOptionsManagers = (inputValue, callback) => new Promise(() => {
+    setTimeout(() => {
+      callback(
+        newManagers.filter((item) => item.label.toLowerCase().includes(inputValue.toLowerCase())),
+      );
+    }, 1500);
+  });
+
+  const newChannels = channels.map((item) => ({ ...item, value: item.title, label: item.title }));
+  const loadOptionsChannels = (inputValue, callback) => new Promise(() => {
+    setTimeout(() => {
+      callback(
+        newChannels.filter((item) => item.label.toLowerCase().includes(inputValue.toLowerCase())),
+      );
+    }, 1500);
+  });
+
+
   const dateDetailsList = activeUser.createdAt ? dayjs(activeUser.createdAt).format('DD MMMM YYYY hh:mm') : '';
 
-  console.log(managers);
+  console.log(data);
 
   return (
     <div className="details-column">
@@ -101,36 +120,12 @@ const DetailsList = ({
           <FieldBlock className="field option-edit-select">
             <Combobox
               use="underlined"
-              loadOptions={() => new Promise((resolve) => resolve(managers))}
+              loadOptions={loadOptionsManagers}
               onChange={(value) => changeInput('manager', value.id, null, value)}
               label="Sales"
               selectedOption={data.manager}
               placeholder="Manager name"
             />
-            {/* <Input
-              className="pl-0"
-              onChange={(e) => changeInput('manager', e.target.value)}
-              use="borderless"
-              selectedOption={data.manager}
-              // error={errorsFormCreate.client.error}
-              name="manager"
-              label="Sales"
-              placeholder="Manager name"
-            /> */}
-            {/* <UserPicker
-              users={[data.manager]}
-              usersJson={managers}
-              getUsers={(users: Array<{ id: string }>) => {
-                changeInput('manager', users[0].id, null, users[0]);
-              }}
-              title="Sales"
-              deleteUser={(del) => {
-                const deleteUs = del;
-                return deleteUs;
-              }}
-              selected={activeUser.manager}
-              defaultImage={notImage}
-            /> */}
           </FieldBlock>
           <FieldBlock className="field">
             <Input
@@ -183,22 +178,16 @@ const DetailsList = ({
           <FieldBlock className="field">
             <Combobox
               use="underlined"
-              loadOptions={() => new Promise((resolve) => resolve(channels))}
+              loadOptions={loadOptionsChannels}
               onChange={(value) => changeInput('channel', value)}
               label="Channel"
-              selectedOption={data.manager}
+              selectedOption={{
+                ...data.channel,
+                value: data.channel && data.channel.name,
+                label: data.channel && data.channel.name,
+              }}
               placeholder="Channel"
             />
-            {/* <Input
-              className="pl-0"
-              onChange={(e) => changeInput('channel', e.target.value)}
-              use="borderless"
-              value={data.channel}
-              // error={errorsFormCreate.client.error}
-              name="channel"
-              label="Channel"
-              placeholder="Channel"
-            /> */}
           </FieldBlock>
           <FieldBlock className="field">
             <Switcher items={['UpWork', 'LinkedIn', 'Direct']} onChange={() => {}} />

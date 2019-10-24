@@ -2,7 +2,7 @@
 import type {
   DealType,
   ContactType,
-  // ChannelType,
+  ChannelType,
 } from '../../types';
 
 export type Props = {
@@ -32,7 +32,7 @@ export type State = {
     client: string,
     createdAt: string,
     updatedAT: string,
-    channel: string,
+    channel: ChannelType,
     salesURL: string,
     messagesURL: string,
     stage: any,
