@@ -20,7 +20,7 @@ type Action = {
   option?: string
 }
 
-type ComboboxType = 'borderless' | 'default';
+type ComboboxType = 'borderless' | 'default' | 'underlined';
 
 type Props = {
   loadOptions: () => Promise<Array<Option>>,
@@ -64,6 +64,7 @@ const Combobox = ({
   className,
   use,
   ...restProps
+<<<<<<< HEAD
 }: Props) => {
   const customStyles = {
     indicatorSeparator: () => {},
@@ -121,6 +122,43 @@ const Combobox = ({
     </div>
   );
 }
+=======
+}: Props) => (
+  <div
+    className={
+      classNames(
+        'cbx__wrap wrapper',
+        `combobox_${use || ''}`,
+        {
+          selected: !!selectedOption,
+          'error-select': !!error,
+        },
+        className,
+      )
+    }
+  >
+    <label className={`${use || ''}`} htmlFor="select">{label}</label>
+    <AsyncSelect
+      className="select-component"
+      loadOptions={loadOptions}
+      defaultOptions={defaultOptions}
+      value={selectedOption}
+      onChange={onChange}
+      classNamePrefix="cbx"
+      components={{
+        LoadingIndicator,
+        LoadingMessage,
+        DropdownIndicator,
+        NoOptionsMessage,
+      }}
+      {...restProps}
+    />
+    {
+      error && <p className="error-text">{error}</p>
+    }
+  </div>
+);
+>>>>>>> 63902903341895a69739b0d2b2052e5a6d4ea98f
 
 Combobox.defaultProps = {
   defaultOptions: true,
