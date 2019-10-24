@@ -85,6 +85,20 @@
     box-shadow: none;
   }
 
+  .container-loader_combobox {
+    padding: .8rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    span {
+      color: $text-color-200;
+      font-size: .9rem;
+      margin-left: .4rem;
+    }
+  }
+
+
   .default {
     font-size: 1rem;
     color: #818a95;
