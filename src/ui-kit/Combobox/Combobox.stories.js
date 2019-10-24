@@ -75,6 +75,28 @@ storiesOf('Combobox', module)
               return <Combobox onChange={onChange} loadOptions={loadOptions} label="Title" error="Error text" />
             },
           },
+          {
+            title: 'Combobox use=borderless',
+            sectionFn: () => {
+              return <Combobox
+                onChange={onChange}
+                loadOptions={loadOptions}
+                label="Title"
+                use="borderless"
+              />
+            },
+          },
+          {
+            title: 'Combobox use=underlined',
+            sectionFn: () => {
+              return <Combobox
+                onChange={onChange}
+                loadOptions={loadOptions}
+                label="Title"
+                use="underlined"
+              />
+            },
+          },
         ],
       },
     ],
