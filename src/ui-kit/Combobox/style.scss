@@ -149,17 +149,14 @@
     @extend .default;
     padding-left: 0.625rem;
   }
-<<<<<<< HEAD
-}
-=======
 
   .underlined {
     @extend .default;
   }
 }
 
->>>>>>> 63902903341895a69739b0d2b2052e5a6d4ea98f
-
-
-
-
+.cbx__label {
+  font-size: 0.875rem;
+  margin-bottom: 0.25rem;
+  color: $text-color;
+}

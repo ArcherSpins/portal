@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import type { RouterHistory } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import Moment from 'react-moment';
+import uniqBy from 'lodash.uniqby';
 import {
   Input, Button, TextArea,
   Radio, H1, Combobox,
@@ -16,6 +17,7 @@ import Header from 'subApps/projects/components/header';
 
 import { ROOT } from 'subApps/projects/routes';
 
+import type { Option, Action } from 'ui-kit/Combobox';
 import { editProject, getProjectTypes } from '../../redux/project/project.actions';
 import {
   selectProjectItem,
@@ -40,9 +42,6 @@ import translateTitle from '../../helpers/translateTitle';
 import { bindUserId, unbindUserId } from '../../helpers/compareArrays';
 import { spentTimeInHours } from '../../helpers/sumTime';
 import { getUrlFromProject } from '../../helpers';
-
-import UserPicker from '../../components/user-picker/user-picker.component';
-
 import './project-details-page.styles.scss';
 
 type Employee = {
@@ -61,8 +60,8 @@ type State = {
   engagement: string,
   manager: string,
   description: string,
-  participants: Array<Employee>,
-  watcher: Array<Employee>,
+  participants: Array<Option>,
+  watchers: Array<Option>,
   errors: Array<string>,
   spentTime: number,
   estimatedTime: number
@@ -98,7 +97,7 @@ const initialState = {
   engagement: '',
   manager: '',
   participants: [],
-  watcher: [],
+  watchers: [],
   description: '',
   estimatedTime: 0,
   spentTime: 0,
@@ -116,8 +115,8 @@ class ProjectDetailPage extends Component<Props, State> {
       type: props.project.type.id,
       engagement: props.project.engagementModel.id,
       manager: props.project.manager.id,
-      participants: props.project.participants,
-      watcher: props.project.watchers,
+      participants: this.formatEmployees(props.project.participants),
+      watchers: this.formatEmployees(props.project.watchers),
       description: props.project.description,
       estimatedTime: props.project.estimatedTime,
       spentTime: props.project.spentTime,
@@ -136,7 +135,7 @@ class ProjectDetailPage extends Component<Props, State> {
 
   validate = () => {
     const {
-      title, url, participants, watcher, type, engagement,
+      title, url, participants, watchers, type, engagement,
     } = this.state;
     const errors = [];
 
@@ -152,7 +151,7 @@ class ProjectDetailPage extends Component<Props, State> {
       errors.push('Participants Field');
     }
 
-    if (watcher.length <= 0) {
+    if (watchers.length <= 0) {
       errors.push('Watcher Field');
     }
 
@@ -195,25 +194,29 @@ class ProjectDetailPage extends Component<Props, State> {
     this.setState({ url });
   };
 
-  getParticipants = (participants: Array<Employee>) => {
-    this.setState({ participants });
-  };
-
-  getWatchers = (watchers: Array<Employee>) => {
-    this.setState({ watcher: watchers });
-  };
-
   handleChange = (e: SyntheticInputEvent<*>) => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
   handleProjectsChange = (
-    option: { id: string, label: string},
-    e: { name: string },
+    option: Option,
+    e: Action,
   ) => {
-    this.setState({
-      [e.name]: option,
-    });
+    if (e.name) {
+      this.setState({
+        [e.name]: option,
+      });
+    }
+  }
+
+  handleChipInputChange = (option: Option, { name }: Action) => {
+    if (name) {
+      this.setState((state) => ({
+        [name]: uniqBy([...state[name], option], (e) => e.id),
+      }));
+    } else {
+      throw new Error('define name prop to combobox');
+    }
   }
 
   deleteParticipant = (id: string) => {
@@ -224,7 +227,7 @@ class ProjectDetailPage extends Component<Props, State> {
 
   deleteWatcher = (id: string) => {
     this.setState({
-      watcher: this.state.watcher.filter((p) => p.id !== id),
+      watchers: this.state.watchers.filter((p) => p.id !== id),
     });
   };
 
@@ -246,14 +249,14 @@ class ProjectDetailPage extends Component<Props, State> {
         engagement,
         manager,
         participants,
-        watcher,
+        watchers,
         description,
         id,
       } = this.state;
 
       const watcherPropsIDs = this.props.project.watchers.map((w) => w.id.toString());
       const participantsPropsIDs = this.props.project.participants.map((p) => p.id.toString());
-      const watcherIDs = watcher.map((w) => w.id.toString());
+      const watcherIDs = watchers.map((w) => w.id.toString());
 
       const participantsIDs = participants.map((p) => p.id.toString());
       const editedProject = {
@@ -274,25 +277,26 @@ class ProjectDetailPage extends Component<Props, State> {
     }
   };
 
-  loadProjectManager = async (value: string) => {
+  loadEmployees = async (value: string) => {
     const employees = await getEmployees(value);
-    return employees.data.employees.employees
-      .map((em) => ({ id: em.id, label: em.name, value: em.id }));
+    return this.formatEmployees(employees.data.employees.employees);
   }
+
+  formatEmployees = (employees: Array<Employee>): Array<Option> => employees
+    .map((em) => ({ id: em.id, label: em.name, value: em.id }))
 
   render() {
     const {
       title,
       url,
       manager,
-      participants,
-      watcher,
       description,
       createdAt,
       type,
       spentTime,
       engagement,
     } = this.state;
+    console.log(this.state);
     const { projectTypes, engagementModels } = this.props;
     return (
       <div className="cpp">
@@ -411,23 +415,26 @@ h
               </div>
               <Combobox
                 onChange={this.handleProjectsChange}
-                loadOptions={this.loadProjectManager}
+                loadOptions={this.loadEmployees}
                 name="manager"
                 value={manager}
                 selectedOption={manager}
                 label="Project Manager"
+                className="mb1"
               />
-              <UserPicker
-                getUsers={this.getParticipants}
-                title="Participants"
-                deleteUser={this.deleteParticipant}
-                users={participants}
+              <Combobox
+                loadOptions={this.loadEmployees}
+                onChange={this.handleChipInputChange}
+                name="participants"
+                label="Participants"
+                className="mb1"
               />
-              <UserPicker
-                getUsers={this.getWatchers}
-                title="Watchers"
-                deleteUser={this.deleteWatcher}
-                users={watcher}
+              <Combobox
+                loadOptions={this.loadEmployees}
+                onChange={this.handleChipInputChange}
+                name="watchers"
+                label="Watchers"
+                className="mb1"
               />
               {this.state.errors.length >= 1 && (
               <div
