@@ -37,7 +37,7 @@ const MilestoneItem = (props: Props) => (
         )}
       >
         {props.title.length > 25
-          ? `${props.title.substring(30)}...`
+          ? `${props.title.substring(0, 30)}...`
           : props.title}
       </span>
       <span className="milestone-item__spent">
