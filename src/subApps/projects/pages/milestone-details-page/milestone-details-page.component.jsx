@@ -293,7 +293,7 @@ class MilestoneDetailsPage extends React.Component<Props, State> {
             <span className="estimation-type-count">
               {spentTimeInHours(spentTime)}
               {' '}
-of
+              of
             </span>
             <Input
               type="text"
