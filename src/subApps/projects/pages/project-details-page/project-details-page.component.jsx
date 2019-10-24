@@ -10,7 +10,7 @@ import { createStructuredSelector } from 'reselect';
 import Moment from 'react-moment';
 import {
   Input, Button, TextArea,
-  Radio, H1,
+  Radio, H1, Combobox,
 } from 'ui-kit';
 import Header from 'subApps/projects/components/header';
 
@@ -27,6 +27,7 @@ import {
 import { selectProjectsMolestones } from '../../redux/milestone/milestone.selectors';
 
 import { getEstimation } from '../../graphql/queries/project.queries';
+import { getEmployees } from '../../graphql/queries/employess.queries';
 
 import type { Milestone } from '../../redux/milestone/milestone.flow-types';
 import type {
@@ -34,7 +35,6 @@ import type {
   ProjectCreation,
   ProjectType,
 } from '../../redux/project/project.flow-types';
-
 import translate from '../../helpers/translator';
 import translateTitle from '../../helpers/translateTitle';
 import { bindUserId, unbindUserId } from '../../helpers/compareArrays';
@@ -266,6 +266,13 @@ class ProjectDetailPage extends Component<Props, State> {
     }
   };
 
+  loadProjectManager = async (value: string) => {
+    const employees = await getEmployees(value);
+    console.log(value);
+    return employees.data.employees.employees
+      .map((em) => ({ id: em.id, label: em.name, value: em.id }));
+  }
+
   render() {
     const {
       title,
@@ -395,6 +402,12 @@ h
                   </div>
                 </div>
               </div>
+              <Combobox
+                onChange={this.handleChange}
+                loadOptions={this.loadProjectManager}
+                name="manager"
+                value={manager}
+              />
               <SelectInput
                 onChange={this.handleChange}
                 name="manager"

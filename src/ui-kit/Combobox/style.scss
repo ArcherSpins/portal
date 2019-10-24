@@ -1,129 +1,102 @@
 @import '../variables';
 @import '../mixins';
 
-.wrapper {
+.cbx__wrap {
   display: flex;
   flex-direction: column;
+
+  .cbx__menu {
+    margin-top: .2rem;
+  }
+
+  .no-results {
+    color: $text-color-200;
+    padding: 1rem;
+    font-size: 1rem;
+  }
+
+  .cbx__dropdown-indicator {
+    svg {
+      display: none;
+    }
+  }
+
+  .cbx__option {
+    &:hover {
+      background-color: rgba($main-color, .6) !important;
+      color: white;
+    }
+
+    &.cbx__option--is-focused {
+      background-color: $main-color-hovered !important;
+      color: white;
+    }
+
+    &.cbx__option--is-selected {
+      background-color: $main-color-focused !important;
+      color: white;
+    }
+  }
+
+  .label-combobox {
+    color: $text-color-200;
+    margin-bottom: 0.2rem;
+  }
+
+  &.error-select {
+    .cbx__control {
+      border-style: solid;
+      border-color: $danger-400;
+    }
+  }
+
+  .error-text {
+    color: $danger-400;
+    margin-top: .3rem;
+  }
+
+  &.selected {
+    .cbx__control {
+      border-style: solid;
+    }
+  }
+
+  .borderless_combobox {
+    border-style: none;
+    border: none;
+    border-width: 0;
+  }
+
+  .cbx__indicators {
+    span {
+      display: none;
+    }
+  }
+
+  .cbx__indicator {
+    padding: 0;
+  }
+
+  .cbx__control {
+    height: 100%;
+    min-height: 2rem;
+    border-color: $main-color;
+    border-style: dashed;
+    box-shadow: none;
+  }
+
+  .default {
+    font-size: 1rem;
+    color: #818a95;
+    margin-bottom: 0.2rem;
+  }
+  
+  .borderless {
+    @extend .default;
+    padding-left: 0.625rem;
+  }
 }
 
-.default {
-  font-size: 1rem;
-  color: #818a95;
-  margin-bottom: 0.2rem;
-}
-
-.borderless {
-  @extend .default;
-  padding-left: 0.625rem;
-}
 
 
-
-// @import '../variables';
-// @import '../mixins';
-
-// .wrapper {
-//   display: flex;
-//   flex-direction: column;
-// }
-
-// .default {
-//   font-size: 1rem;
-//   color: #818a95;
-//   margin-bottom: 0.2rem;
-// }
-
-// .borderless {
-//   @extend .default;
-//   padding-left: 0.625rem;
-// }
-// @import "../variables.scss";
-// @import "../mixins.scss";
-
-// .cbx__wrap {
-
-//   .no-results {
-//     color: $text-color-200;
-//     padding: 1rem;
-//     font-size: 1rem;
-//   }
-
-//   .cbx__dropdown-indicator {
-//     svg {
-//       display: none;
-//     }
-//   }
-
-//   .cbx__option {
-//     &:hover {
-//       background-color: rgba($main-color, .6) !important;
-//       color: white;
-//     }
-
-//     &.cbx__option--is-focused {
-//       background-color: $main-color-hovered !important;
-//       color: white;
-//     }
-
-//     &.cbx__option--is-selected {
-//       background-color: $main-color-focused !important;
-//       color: white;
-//     }
-//   }
-
-//   .label-combobox {
-//     color: $text-color-200;
-//     margin-bottom: 0.2rem;
-//     padding-left: 0.625rem;
-//   }
-
-//   &.error-select {
-//     .cbx__control {
-//       border-style: solid !important;
-//       border-color: $danger-400 !important;
-//     }
-//   }
-
-//   .error-text {
-//     color: $danger-400;
-//     margin-top: .3rem;
-//   }
-
-//   &.selected {
-//     .cbx__control {
-//       border-style: solid !important;
-//     }
-//   }
-
-//   .container-loader_combobox {
-//     padding: .8rem;
-//     display: flex;
-//     justify-content: flex-start;
-//     align-items: center;
-
-//     span {
-//       color: $text-color-200;
-//       font-size: .9rem;
-//       margin-left: .4rem;
-//     }
-//   }
-
-//   .cbx__indicators {
-//     span {
-//       display: none;
-//     }
-//   }
-
-//   .cbx__indicator {
-//     padding: 0;
-//   }
-
-//   .cbx__control {
-//     height: 100%;
-//     min-height: 2rem;
-//     border-color: $main-color !important;
-//     border-style: dashed;
-//     box-shadow: none;
-//   }
-// }
 
