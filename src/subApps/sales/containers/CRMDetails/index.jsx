@@ -5,7 +5,7 @@
 /* eslint-disable react/no-unused-state */
 
 // @flow
-import React from 'react';
+import React, { type AbstractComponent } from 'react';
 import { withRouter } from 'react-router-dom';
 import {
   ErrorBoundry,
