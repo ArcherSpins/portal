@@ -15,4 +15,5 @@ const LinkButton = ({ to, children, ...rest }: Props) => (
   </Button>
 );
 
+
 export default LinkButton;
