@@ -2,11 +2,11 @@ import gql from 'graphql-tag';
 import client from 'utils/api';
 
 // eslint-disable-next-line import/prefer-default-export
-export const getEmployees = async () => {
+export const getEmployees = async (name) => {
   const response = await client.query({
     query: gql`
-      query Employees {
-        employees {
+      query Employees($search: String) {
+        employees(search: $search) {
           employees {
             id
             firstName
@@ -16,6 +16,9 @@ export const getEmployees = async () => {
         }
       }
     `,
+    variables: {
+      search: name,
+    },
   });
 
   return response;

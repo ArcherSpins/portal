@@ -8,13 +8,13 @@ import AsyncSelect from 'react-select/lib/Async';
 import { components } from 'react-select';
 import './style.scss';
 
-type Option = {
+export type Option = {
   id: string,
   label: string,
   value: string
 }
 
-type Action = {
+export type Action = {
   action: string,
   name: ?string,
   option?: string
@@ -78,7 +78,7 @@ const Combobox = ({
       )
     }
   >
-    <label className={`${use || ''}`} htmlFor="select">{label}</label>
+    <label className="cbx__label" htmlFor="select">{label}</label>
     <AsyncSelect
       className="select-component"
       loadOptions={loadOptions}

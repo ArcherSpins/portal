@@ -12,4 +12,5 @@ const LinkButton = (props: Props) => (
   <Link className="link-button" {...props} />
 );
 
+
 export default LinkButton;
