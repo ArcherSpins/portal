@@ -4,6 +4,7 @@ import {
   put, takeEvery, call, all,
 } from 'redux-saga/effects';
 import type { Saga } from 'redux-saga';
+import { Toast } from 'ui-kit';
 import { fetchProjectTypes } from './project.api';
 import ProjectActionTypes from './project.types';
 // import { type ProjectAction } from './project.flow-types';
@@ -14,6 +15,7 @@ export function* getProjectTypes(): Saga<void> {
     yield put({ type: ProjectActionTypes.GET_PROJECT_TYPES_SUCCESS, payload: response });
   } catch (err) {
     yield put({ type: ProjectActionTypes.GET_PROJECT_TYPES_FAIL });
+    Toast.push({ message: err.message });
   }
 }
 
