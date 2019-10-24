@@ -19,11 +19,8 @@ type Props = {
   value?: Date,
   label?: string,
   className?: string,
-<<<<<<< HEAD
   name: string,
-=======
   label?: string,
->>>>>>> 63902903341895a69739b0d2b2052e5a6d4ea98f
   style?: {
     [string]: mixed
   }
@@ -79,17 +76,13 @@ const Datepicker = ({
   name,
   label,
   style,
-  label,
   ...props
 }: Props) => {
   const inputRef = React.createRef();
   return (
     <div style={style} className={classNames(styles.datepicker, className)}>
-<<<<<<< HEAD
       <label htmlFor={name}>{label}</label>
-=======
-      <span className={styles.label}>{label}</span>
->>>>>>> 63902903341895a69739b0d2b2052e5a6d4ea98f
+      {/* <span className={styles.label}>{label}</span> */}
       <DayPickerInput
         id={name}
         dayPickerProps={{
@@ -129,7 +122,6 @@ Datepicker.defaultProps = {
   label: '',
   className: '',
   style: {},
-  label: '',
 };
 
 export default Datepicker;

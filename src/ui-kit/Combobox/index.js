@@ -64,66 +64,6 @@ const Combobox = ({
   className,
   use,
   ...restProps
-<<<<<<< HEAD
-}: Props) => {
-  const customStyles = {
-    indicatorSeparator: () => {},
-    control: (base, state) => ({
-      ...base,
-      borderColor: state.isFocused ? '#61B16F' : '#D1D6DE',
-      '&:hover': {},
-      '&:focus': { borderColor: 'red' },
-      border: use === 'borderless' ? 'none !important' : base.border,
-      transition: 'all 0.3s',
-      boxShadow: 'none',
-    }),
-    container: (base) => ({
-      ...base,
-      width: '30%',
-    }),
-    option: (base, { isSelected }) => ({
-      ...base,
-      '&:hover': { backgroundColor: '#ddeee0' },
-      backgroundColor: isSelected && '#61B16F',
-    }),
-  };
-  return (
-    <div
-      className={
-        classNames(
-          'cbx__wrap wrapper',
-          {
-            selected: !!selectedOption,
-            'error-select': !!error,
-          },
-          className,
-        )
-      }
-    >
-      <label className={`${use || ''}`} htmlFor="select">{label}</label>
-      <AsyncSelect
-        className="select-component"
-        loadOptions={loadOptions}
-        defaultOptions={defaultOptions}
-        value={selectedOption}
-        onChange={onChange}
-        classNamePrefix="cbx"
-        styles={customStyles}
-        components={{
-          LoadingIndicator,
-          LoadingMessage,
-          DropdownIndicator,
-          NoOptionsMessage,
-        }}
-        {...restProps}
-      />
-      {
-        error && <p className="error-text">{error}</p>
-      }
-    </div>
-  );
-}
-=======
 }: Props) => (
   <div
     className={
@@ -159,7 +99,6 @@ const Combobox = ({
     }
   </div>
 );
->>>>>>> 63902903341895a69739b0d2b2052e5a6d4ea98f
 
 Combobox.defaultProps = {
   defaultOptions: true,
