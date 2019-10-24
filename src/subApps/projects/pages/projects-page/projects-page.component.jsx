@@ -2,14 +2,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { CREATE_PROJECT_ROUTE } from 'subApps/projects/routes';
-import { H1 } from 'ui-kit';
+import { H1, Button } from 'ui-kit';
+import history from 'utils/history';
 import ProjectItem from '../../components/project-item/project-item.component';
 import type { Project } from '../../redux/project/project.flow-types';
 
 import { getAllProjects } from '../../redux/project/project.actions';
 
 import PaginationComponent from '../../components/pagination/pagination.component';
-import LinkButton from '../../components/link-button/link-button.component';
 
 import './projects-page.styles.scss';
 
@@ -71,6 +71,10 @@ class Projects extends Component<Props, State> {
     this.setState({ activePage: pageNumber });
   };
 
+  onNewProjectClick = () => {
+    history.push(CREATE_PROJECT_ROUTE);
+  }
+
   render() {
     const { activePage } = this.state;
     const { projects } = this.props;
@@ -80,7 +84,12 @@ class Projects extends Component<Props, State> {
         <div className="projects">
           <header className="projects__header">
             <H1>Projects</H1>
-            <LinkButton to={CREATE_PROJECT_ROUTE}>Create new project</LinkButton>
+            <Button
+              onClick={this.onNewProjectClick}
+              use="transparent"
+            >
+              Create new project
+            </Button>
           </header>
           <div className="projects__middle">
             {filtered.length >= 1 && (

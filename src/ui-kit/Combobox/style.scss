@@ -47,6 +47,10 @@
     .cbx__control {
       border-style: solid;
       border-color: $danger-400;
+
+      &:hover {
+        border-color: $danger-400;
+      }
     }
   }
 
@@ -61,10 +65,18 @@
     }
   }
 
-  .borderless_combobox {
+  &.combobox_borderless {
     border-style: none;
     border: none;
     border-width: 0;
+
+    .cbx__control {
+      border: none;
+    }
+
+    .error-text {
+      padding-left: 0.625rem;
+    }
   }
 
   .cbx__indicators {
@@ -83,7 +95,49 @@
     border-color: $main-color;
     border-style: dashed;
     box-shadow: none;
+
+    &:hover {
+      border-color: $main-color;
+    }
   }
+
+  .container-loader_combobox {
+    padding: .8rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    span {
+      color: $text-color-200;
+      font-size: .9rem;
+      margin-left: .4rem;
+    }
+  }
+
+  &.combobox_underlined {
+    border-style: none;
+    border: none;
+    border-width: 0;
+
+    .cbx__control {
+      border: 0;
+      border-bottom: .1rem solid $grey-200;
+      border-radius: 0;
+    }
+
+    .cbx__indicators {
+      display: none;
+    }
+
+    .cbx__control--is-focused {
+      border-color: $main-color;
+    }
+
+    input:disabled .cbx__control {
+      border-color: $disabled-color;
+    }
+  }
+
 
   .default {
     font-size: 1rem;
@@ -95,7 +149,12 @@
     @extend .default;
     padding-left: 0.625rem;
   }
+
+  .underlined {
+    @extend .default;
+  }
 }
+
 
 
 
