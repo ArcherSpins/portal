@@ -42,7 +42,6 @@ import { spentTimeInHours } from '../../helpers/sumTime';
 import { getUrlFromProject } from '../../helpers';
 
 import UserPicker from '../../components/user-picker/user-picker.component';
-import SelectInput from '../../components/forms/select-input/select-input.component';
 
 import './project-details-page.styles.scss';
 
@@ -208,6 +207,15 @@ class ProjectDetailPage extends Component<Props, State> {
     this.setState({ [e.target.name]: e.target.value });
   };
 
+  handleProjectsChange = (
+    option: { id: string, label: string},
+    e: { name: string },
+  ) => {
+    this.setState({
+      [e.name]: option,
+    });
+  }
+
   deleteParticipant = (id: string) => {
     this.setState({
       participants: this.state.participants.filter((p) => p.id !== id),
@@ -268,7 +276,6 @@ class ProjectDetailPage extends Component<Props, State> {
 
   loadProjectManager = async (value: string) => {
     const employees = await getEmployees(value);
-    console.log(value);
     return employees.data.employees.employees
       .map((em) => ({ id: em.id, label: em.name, value: em.id }));
   }
@@ -403,15 +410,12 @@ h
                 </div>
               </div>
               <Combobox
-                onChange={this.handleChange}
+                onChange={this.handleProjectsChange}
                 loadOptions={this.loadProjectManager}
                 name="manager"
                 value={manager}
-              />
-              <SelectInput
-                onChange={this.handleChange}
-                name="manager"
-                value={manager}
+                selectedOption={manager}
+                label="Project Manager"
               />
               <UserPicker
                 getUsers={this.getParticipants}

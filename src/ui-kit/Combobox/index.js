@@ -78,7 +78,6 @@ const Combobox = ({
     }),
     container: (base) => ({
       ...base,
-      width: '30%',
     }),
     option: (base, { isSelected }) => ({
       ...base,
