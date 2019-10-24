@@ -14,6 +14,7 @@ export { default as Switcher } from './Switcher';
 export { default as Dropdown } from './Dropdown';
 export { default as Combobox } from './Combobox';
 export { default as TextArea } from './TextArea';
+export { default as Participants } from './Participants';
 export {
   Modal, ModalHeader, ModalBody, ModalFooter,
 } from './Modal';

@@ -20,7 +20,8 @@ export type Project = {
   manager: {
     id: string,
     firstName: string,
-    lastName: string
+    lastName: string,
+    name: string
   },
   participants: Array<{
     id: string,

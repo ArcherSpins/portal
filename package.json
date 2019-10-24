@@ -21,6 +21,7 @@
     "history": "^4.10.1",
     "lodash.debounce": "^4.0.8",
     "lodash.noop": "^3.0.1",
+    "lodash.uniqby": "^4.7.0",
     "moment": "^2.24.0",
     "okami": "^0.2.5",
     "react": "^16.10.2",
