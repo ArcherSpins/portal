@@ -3,8 +3,14 @@
 /* eslint-disable react/no-unused-state */
 // @flow
 import React, { useState } from 'react';
-import Select from 'react-select';
-import { Picker } from '..';
+// import Select from 'react-select';
+import {
+  Input,
+  Datepicker,
+  Dropdown,
+  Button,
+} from 'ui-kit';
+// import { Picker } from '..';
 import type { FilterBlockProps } from './type';
 import './style.scss';
 
@@ -75,7 +81,17 @@ const FilterBlock = ({
       className="mb-10 filter-block d-flex justify-content-between align-items-center"
     >
       <div className="field-block">
-        <label htmlFor="deal">Deal Title</label>
+        <Input
+          name="filter-block_deal"
+          label="Deal Title"
+          onChange={(e) => {
+            changeFilter('deal', e.target.value);
+          }}
+          value={filterObject.deal}
+          className="big"
+          placeholder="Not specified"
+        />
+        {/* <label htmlFor="deal">Deal Title</label>
         <input
           id="deal"
           value={filterObject.deal}
@@ -84,10 +100,19 @@ const FilterBlock = ({
           }}
           className="big"
           placeholder="Not specified"
-        />
+        /> */}
       </div>
       <div className="field-block">
-        <label htmlFor="client">Client Name</label>
+        <Input
+          name="filter-block_client"
+          label="Client Name"
+          onChange={(e) => {
+            changeFilter('client', e.target.value);
+          }}
+          value={filterObject.client}
+          placeholder="Not specified"
+        />
+        {/* <label htmlFor="client">Client Name</label>
         <input
           id="client"
           value={filterObject.client}
@@ -95,7 +120,7 @@ const FilterBlock = ({
             changeFilter(e.target.id, e.target.value);
           }}
           placeholder="Not specified"
-        />
+        /> */}
       </div>
       <div className="date-block field-block">
         <label htmlFor="date">Date</label>
@@ -103,25 +128,35 @@ const FilterBlock = ({
           className="d-flex align-items-center justify-content-center date-double-block"
         >
           <div className="field-block">
-            <Picker
+            <Datepicker
+              value={date}
+              onDayChange={(dateRes) => changeFilter('start', dateRes)}
+            />
+            {/* <Picker
               startDate={date}
               handleChange={(dateRes) => changeFilter('start', dateRes)}
-            />
+            /> */}
           </div>
           <span className="tag"> - </span>
           <div className="field-block">
-            <Picker
+            <Datepicker
+              value={endDate}
+              onDayChange={(dateRes) => {
+                changeFilter('end', dateRes);
+              }}
+            />
+            {/* <Picker
               startDate={endDate}
               handleChange={(dateRes) => {
                 changeFilter('end', dateRes);
               }}
-            />
+            /> */}
           </div>
         </div>
       </div>
       <div className="field-block">
         <label htmlFor="status">Status</label>
-        <Select
+        <Dropdown
           styles={customStyles}
           value={data.status}
           onChange={changeStatus}
@@ -132,7 +167,7 @@ const FilterBlock = ({
       </div>
       <div className="field-block">
         <label htmlFor="manager">Manager</label>
-        <Select
+        <Dropdown
           styles={customStyles}
           value={data.manager}
           onChange={changeManager}
@@ -142,13 +177,13 @@ const FilterBlock = ({
         />
       </div>
       <div className="field-block">
-        <button
+        <Button
           type="button"
           onClick={submitFilter}
           className="search-button"
         >
           Search
-        </button>
+        </Button>
       </div>
     </div>
   );

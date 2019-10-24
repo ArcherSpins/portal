@@ -1,7 +1,8 @@
 // @flow
 import React from 'react';
 import styled from 'styled-components';
-import SearchInput from '../shared/Input/SearchInput';
+import { Input } from 'ui-kit';
+// import SearchInput from '../shared/Input/SearchInput';
 import { Heading } from '../shared/styled';
 
 import './style.scss';
@@ -26,12 +27,20 @@ export const SearchHeader = ({
 }: SearchHeaderProps) => (
   <div className="header-search">
     <Title>Search</Title>
-    <SearchInput
+    <Input
+      className="search-input not-focus"
+      name="search-header"
+      onChange={changeSearch}
+      icon={<i className="icon-search" />}
+      value={searchValue}
+      placeholder="Search..."
+    />
+    {/* <SearchInput
       value={searchValue}
       onChange={changeSearch}
       className="search-input not-focus"
       placeholder=""
-    />
+    /> */}
     <button
       type="button"
       onClick={toggleSearchShow}
