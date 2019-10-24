@@ -16,6 +16,7 @@ const BackButton = ({ location, history }: Props) => {
   if (location.pathname === ROOT) {
     return null;
   }
+
   return (
     <button type="button" className="back-button" onClick={() => history.goBack()}>
       <i className="icon-left-open" />

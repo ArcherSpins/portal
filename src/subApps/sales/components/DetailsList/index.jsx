@@ -8,17 +8,15 @@ import dayjs from 'dayjs';
 import {
   Input,
   Switcher,
+  Combobox,
 } from 'ui-kit';
 import {
   Header,
   FieldBlock,
   Label,
   Button,
-  // ItemIcon,
   TabsComponent,
-  // ContactBlock,
   ToggleChangeComponent,
-  // ToggleBlock,
   SelectValid,
 } from './styled';
 import { ModalMessage } from '../index';
@@ -45,9 +43,9 @@ const DetailsList = ({
     editForm,
     activeUser,
     statuses,
-    // channels,
+    channels,
     sources,
-    // managers,
+    managers,
     errorsFormCreate,
     showModalErrorMessage,
     toggleShowModal,
@@ -99,16 +97,24 @@ const DetailsList = ({
             />
           </FieldBlock>
           <FieldBlock className="field option-edit-select">
-            <Input
+            <Combobox
+              use="underlined"
+              loadOptions={() => new Promise((resolve) => resolve(managers))}
+              onChange={(value) => changeInput('manager', value.id, null, value)}
+              label="Sales"
+              selectedOption={data.manager}
+              placeholder="Manager name"
+            />
+            {/* <Input
               className="pl-0"
               onChange={(e) => changeInput('manager', e.target.value)}
               use="borderless"
-              value={data.manager}
+              selectedOption={data.manager}
               // error={errorsFormCreate.client.error}
               name="manager"
               label="Sales"
               placeholder="Manager name"
-            />
+            /> */}
             {/* <UserPicker
               users={[data.manager]}
               usersJson={managers}
@@ -173,7 +179,15 @@ const DetailsList = ({
             } */}
           </FieldBlock>
           <FieldBlock className="field">
-            <Input
+            <Combobox
+              use="underlined"
+              loadOptions={() => new Promise((resolve) => resolve(channels))}
+              onChange={(value) => changeInput('channel', value)}
+              label="Channel"
+              selectedOption={data.manager}
+              placeholder="Channel"
+            />
+            {/* <Input
               className="pl-0"
               onChange={(e) => changeInput('channel', e.target.value)}
               use="borderless"
@@ -182,10 +196,10 @@ const DetailsList = ({
               name="channel"
               label="Channel"
               placeholder="Channel"
-            />
+            /> */}
           </FieldBlock>
           <FieldBlock className="field">
-            <Switcher items={['UpWork', 'LinkedIn', 'Direct']} />
+            <Switcher items={['UpWork', 'LinkedIn', 'Direct']} onChange={() => {}} />
             <Label className="mb-10">Source</Label>
             <TabsComponent tabs={sources} toggleTabIndex={toggleTabIndex}>
               <div className="tab-block-content">

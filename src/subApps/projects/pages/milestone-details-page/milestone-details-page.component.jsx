@@ -5,7 +5,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import type { RouterHistory, Match } from 'react-router-dom';
-import { Input, Button, TextArea } from 'ui-kit';
+import {
+  Input, Button, TextArea, H1,
+} from 'ui-kit';
 import Header from 'subApps/projects/components/header';
 
 import { selectMilestoneByParams } from '../../redux/milestone/milestone.selectors';
@@ -255,13 +257,13 @@ class MilestoneDetailsPage extends React.Component<Props, State> {
     return (
       <div className="milestone-details">
         <Header className="">
-          <h1 className="heading-primary">
+          <H1>
             Milestone #
             {number || 'null'}
 :
             {' '}
             {title}
-          </h1>
+          </H1>
           <Button
             type="button"
             use="danger"

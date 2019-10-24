@@ -1,6 +1,6 @@
 // @flow
 import type { Dispatch as ReduxDispatch } from 'redux';
-
+import type { DatabaseRecord } from '../basic-types';
 import type { ErrorAction } from '../error/error.flow-types';
 
 export type Project = {
@@ -54,15 +54,28 @@ export type ProjectCreation = {
   bindParticipants?: Array<string>
 };
 
-export type ProjectState = {
-  projects: Array<Project>,
-  loading: boolean
-};
+
+export type ProjectType = {
+  title: string
+} & DatabaseRecord;
 
 export type ProjectAction =
   | { type: "SAVE_PROJECT", +payload: Project }
   | { type: "EDIT_PROJECT", +payload: Project }
   | { type: "GET_ALL_PROJECTS", +payload: Array<Project> }
-  | { type: "SET_PROJECT_LOADING" };
+  | { type: "SET_PROJECT_LOADING", payload?: void }
+  | { type: "GET_PROJECT_TYPES_REQUEST", payload?: void }
+  | { type: "GET_PROJECT_TYPES_FAIL", payload?: void }
+  | { type: "GET_PROJECT_TYPES_SUCCESS", +payload: {
+    projectTypes: Array<ProjectType>,
+    engagementModels: Array<ProjectType>
+  } }
+
+export type ProjectState = {
+    projects: Array<Project>,
+    loading: boolean,
+    projectTypes: Array<ProjectType>,
+    engagementModels: Array<ProjectType>
+  };
 
 export type Dispatch = ReduxDispatch<ProjectAction | ErrorAction>;
