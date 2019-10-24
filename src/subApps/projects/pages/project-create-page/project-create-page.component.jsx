@@ -5,9 +5,12 @@ import React, { Component } from 'react';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import type { RouterHistory } from 'react-router-dom';
+import uniqBy from 'lodash.uniqby';
 import {
-  Input, TextArea, Button, Radio, H1,
+  Input, TextArea, Button, Radio, H1, Combobox, Participants,
 } from 'ui-kit';
+import type { Option, Action } from 'ui-kit/Combobox';
+import type { Action as ParticipantsAction } from 'ui-kit/Participants';
 import Header from 'subApps/projects/components/header';
 import { saveProject, getProjectTypes } from '../../redux/project/project.actions';
 import translate from '../../helpers/translator';
@@ -26,9 +29,7 @@ import type {
   ProjectCreation,
   ProjectType,
 } from '../../redux/project/project.flow-types';
-
-import UserPicker from '../../components/user-picker/user-picker.component';
-import SelectInput from '../../components/forms/select-input/select-input.component';
+import { getEmployees } from '../../graphql/queries/employess.queries';
 
 import './project-create-page.styles.scss';
 
@@ -44,13 +45,13 @@ type State = {
   URL: string,
   type: string,
   engagementModel: string,
-  managerID: string,
+  manager: ?Option,
   description: string,
   participantName: string,
   watcherName: string,
   filteredUsers: Array<Employee>,
-  participants: Array<Employee>,
-  watchers: Array<Employee>,
+  participants: Array<Option>,
+  watchers: Array<Option>,
   errors: Array<string>
 };
 
@@ -68,7 +69,7 @@ const initialState = {
   URL: '',
   type: 'a90ff7a3-37cb-4818-90e0-16c83be6f940',
   engagementModel: '7f535dd6-56b1-4979-a5ed-f471a535de21',
-  managerID: '',
+  manager: null,
   participants: [],
   watchers: [],
   participantName: '',
@@ -80,20 +81,7 @@ const initialState = {
 class CreateProjectPage extends Component<Props, State> {
   constructor() {
     super();
-    this.state = {
-      filteredUsers: [],
-      title: '',
-      URL: '',
-      type: 'a90ff7a3-37cb-4818-90e0-16c83be6f940',
-      engagementModel: '7f535dd6-56b1-4979-a5ed-f471a535de21',
-      managerID: '',
-      participants: [],
-      watchers: [],
-      participantName: '',
-      watcherName: '',
-      description: '',
-      errors: [],
-    };
+    this.state = initialState;
   }
 
   componentDidMount() {
@@ -180,10 +168,6 @@ class CreateProjectPage extends Component<Props, State> {
     }
   };
 
-  setFirstManager = (id: string) => {
-    this.setState({ managerID: id });
-  };
-
   deleteParticipant = (id: string) => {
     this.setState((state) => ({
       participants: state.participants.filter((p) => p.id !== id),
@@ -199,6 +183,27 @@ class CreateProjectPage extends Component<Props, State> {
     }));
   };
 
+  loadEmployees = async (value: string) => {
+    const employees = await getEmployees(value);
+    return this.formatEmployees(employees.data.employees.employees);
+  }
+
+  formatEmployees = (employees: Array<Employee>): Array<Option> => employees
+    .map((em) => this.formatEmployee(em))
+
+
+  formatEmployee = (employee: Employee): Option => ({
+    id: employee.id,
+    label: employee.name ? employee.name : `${employee.firstName} ${employee.lastName}`,
+    value: employee.id,
+  });
+
+  onChipDelete = ({ name, value }: ParticipantsAction) => {
+    this.setState((state) => ({
+      [name]: state[name].filter((item) => item.id !== value),
+    }));
+  }
+
   handleSumbit = (event: SyntheticInputEvent<*>) => {
     event.preventDefault();
     const isValid = this.validate();
@@ -210,7 +215,7 @@ class CreateProjectPage extends Component<Props, State> {
         URL,
         type,
         engagementModel,
-        managerID,
+        manager,
         participants,
         watchers,
         description,
@@ -225,7 +230,7 @@ class CreateProjectPage extends Component<Props, State> {
         title,
         URL,
         description,
-        managerID: managerID.toString(),
+        managerID: manager ? manager.id.toString() : '',
         engagementModel,
         type,
         watchers: watcherIDs,
@@ -237,19 +242,32 @@ class CreateProjectPage extends Component<Props, State> {
     }
   };
 
-  getParticipants = (participants: Array<Employee>) => {
-    this.setState({ participants });
-  };
+  handleProjectsChange = (
+    option: Option,
+    e: Action,
+  ) => {
+    if (e.name) {
+      this.setState({
+        [e.name]: option,
+      });
+    }
+  }
 
-  getWatchers = (watchers: Array<Employee>) => {
-    this.setState({ watchers });
-  };
+  handleChipInputChange = (option: Option, { name }: Action) => {
+    if (name) {
+      this.setState((state) => ({
+        [name]: uniqBy([...state[name], option], (e) => e.id),
+      }));
+    } else {
+      throw new Error('define name prop to combobox');
+    }
+  }
 
   render() {
     const {
       title,
       URL,
-      managerID,
+      manager,
       participants,
       watchers,
       description,
@@ -354,24 +372,41 @@ class CreateProjectPage extends Component<Props, State> {
                   </div>
                 </div>
               </div>
-              <SelectInput
-                onChange={this.handleChange}
-                name="managerID"
-                value={managerID}
-                setFirstUser={this.setFirstManager}
+              <Combobox
+                onChange={this.handleProjectsChange}
+                loadOptions={this.loadEmployees}
+                name="manager"
+                value={manager}
+                selectedOption={manager}
+                label="Project Manager"
+                className="mb1"
               />
-              <UserPicker
-                getUsers={this.getParticipants}
-                title="Participants"
-                deleteUser={this.deleteParticipant}
-                users={participants}
-              />
-              <UserPicker
-                getUsers={this.getWatchers}
-                title="Watchers"
-                deleteUser={this.deleteWatcher}
-                users={watchers}
-              />
+              <Participants
+                chips={participants}
+                onDelete={this.onChipDelete}
+                name="participants"
+              >
+                <Combobox
+                  loadOptions={this.loadEmployees}
+                  onChange={this.handleChipInputChange}
+                  name="participants"
+                  label="Participants"
+                  className="mb05"
+                />
+              </Participants>
+              <Participants
+                chips={watchers}
+                onDelete={this.onChipDelete}
+                name="watchers"
+              >
+                <Combobox
+                  loadOptions={this.loadEmployees}
+                  onChange={this.handleChipInputChange}
+                  name="watchers"
+                  label="Watchers"
+                  className="mb1"
+                />
+              </Participants>
               {Array.isArray(errors) && errors.length >= 1 && (
               <div
                 style={{

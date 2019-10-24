@@ -288,7 +288,7 @@ class ProjectDetailPage extends Component<Props, State> {
 
   formatEmployee = (employee: Employee): Option => ({
     id: employee.id,
-    label: employee.name,
+    label: employee.name ? employee.name : `${employee.firstName} ${employee.lastName}`,
     value: employee.id,
   });
 
