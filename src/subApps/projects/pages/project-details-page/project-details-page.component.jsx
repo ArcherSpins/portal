@@ -11,7 +11,7 @@ import Moment from 'react-moment';
 import uniqBy from 'lodash.uniqby';
 import {
   Input, Button, TextArea,
-  Radio, H1, Combobox, Participants,
+  Radio, H1, Participants, Combobox,
 } from 'ui-kit';
 import type { Action as ParticipantsAction } from 'ui-kit/Participants';
 import Header from 'subApps/projects/components/header';
