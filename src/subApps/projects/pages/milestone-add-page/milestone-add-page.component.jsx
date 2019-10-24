@@ -6,7 +6,9 @@ import type { RouterHistory } from 'react-router-dom';
 
 import './milestone-add-page.styles.scss';
 
-import { Input, TextArea, Button } from 'ui-kit';
+import {
+  Input, TextArea, Button, H1,
+} from 'ui-kit';
 import { createMilestone } from '../../redux/milestone/milestone.actions';
 
 import { selectServerError } from '../../redux/error/error.selectors';
@@ -19,6 +21,7 @@ import type { Project } from '../../redux/project/project.flow-types';
 import type { Error } from '../../redux/error/error.flow-types';
 
 import UserPicker from '../../components/user-picker/user-picker.component';
+import Header from '../../components/header';
 
 type Employee = {
   id: string,
@@ -190,19 +193,20 @@ class MilestoneAddPage extends React.Component<Props, State> {
     const { history } = this.props;
     return (
       <div className="milestone-add">
-        <div className="header">
-          <h1 style={{ marginBottom: 0 }} className="heading-primary">
+        <Header>
+          <H1>
             Milestone:
             {' '}
             {title}
-          </h1>
-        </div>
+          </H1>
+        </Header>
         <div className="sub-header">
           <div className="estimation-type-wrapper">
             <b className="estimation-type-title">Spent/Estimation</b>
             <span className="estimation-type-count">0 of</span>
-            <input
+            <Input
               type="text"
+              size="sm"
               className="estimation-input"
               onChange={this.handleSpentChange}
               value={spent}

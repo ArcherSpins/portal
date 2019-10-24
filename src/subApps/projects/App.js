@@ -21,10 +21,10 @@ import ProjectDetailsPage from './pages/project-details-page/project-details-pag
 import TasksPage from './pages/tasks-page/tasks-page.component';
 import CreateProjectPage from './pages/project-create-page/project-create-page.component';
 import Projects from './pages/projects-page/projects-page.component';
-
 import UserPicker from './components/user-picker/user-picker.component';
 
 import * as routes from './routes';
+import styles from './App.module.scss';
 
 function App() {
   return (
@@ -32,7 +32,7 @@ function App() {
       <PersistGate persistor={persistor}>
         <div className="projects__app">
           <StyledBreadcrumbs />
-          <div>
+          <div className={styles.page}>
             <BackButton />
             <Switch>
               <Route exath path={routes.USER_PICKER_ROUTE} component={UserPicker} />
@@ -61,21 +61,23 @@ function App() {
                 component={TaskDetails}
               />
             </Switch>
-            <Route
-              exact
-              path={routes.LOG_HISTORY_ROUTE}
-              component={LogHistory}
-            />
-            <Route
-              exact
-              path={routes.LOG_EDIT_ROUTE}
-              component={LogEditPage}
-            />
-            <Route
-              exact
-              path={routes.LOG_CREATE_ROUTE}
-              component={LogCreate}
-            />
+            <Switch>
+              <Route
+                exact
+                path={routes.LOG_HISTORY_ROUTE}
+                component={LogHistory}
+              />
+              <Route
+                exact
+                path={routes.LOG_CREATE_ROUTE}
+                component={LogCreate}
+              />
+              <Route
+                exact
+                path={routes.LOG_EDIT_ROUTE}
+                component={LogEditPage}
+              />
+            </Switch>
             <Switch>
               <Route
                 exact

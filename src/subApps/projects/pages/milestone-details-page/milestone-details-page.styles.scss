@@ -1,14 +1,6 @@
 .milestone-details {
   min-width: 1200px;
   font-size: 14px;
-  .header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-bottom: 1em;
-    border-bottom: 1px solid #d5d5d5;
-    margin-bottom: 1.2em;
-  }
 
   .delete-button {
     margin-right: 3em;
@@ -53,18 +45,6 @@
 
       .estimation-type-count {
         margin-right: 5px;
-      }
-      .estimation-input {
-        padding-left: 5px;
-        width: 4.8em;
-        height: 2.4em;
-        border: 1px solid #d1d6de;
-        border-radius: 4px;
-
-        &:focus {
-          outline: none;
-          border: 1px solid #838383;
-        }
       }
     }
   }

@@ -18,6 +18,10 @@ storiesOf('Input', module)
             sectionFn: withDecorator(<Input placeholder="Placeholder text" onChange={onChange} />),
           },
           {
+            title: "size=sm",
+            sectionFn: withDecorator(<Input label="This is a label" value="Some value" size="sm" onChange={onChange} />),
+          },
+          {
             title: "With Label and Prefix",
             sectionFn: withDecorator(<Input label="This is a label" prefix={`${window.location.origin}/`} onChange={onChange} />),
           },

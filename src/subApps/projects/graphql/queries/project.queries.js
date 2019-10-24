@@ -67,3 +67,17 @@ export const getEstimation = async (id) => {
 
   return response;
 };
+
+export const GET_PROJECT_TYPES = gql`
+  query projectTypes {
+    projectTypes {
+      id
+      title
+    }
+
+    engagementModels {
+      id 
+      title
+    }
+  }
+`;

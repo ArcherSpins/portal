@@ -1,12 +1,6 @@
 .back-button {
-  background: white;
-  border: none;
   cursor: pointer;
   position: absolute;
-  top: 97px;
-  left: 37px;
-
-  &:focus {
-    outline: none;
-  }
+  left: -2rem;
+  padding: 0.65rem 0.5rem;
 }

@@ -13,15 +13,18 @@
 }
 
 .input {
-  display: flex;
   position: relative;
+  outline: none;
   input {
-    border: 1px solid $text-color-50;
-    border-radius: 0.25em;
-    padding: 0.35em 0.5em;
-    font-size: 0.875em;
+    font-size: 1rem;
     flex: 1;
+    width: 100%;
   }
+}
+
+.label {
+  display: inline-block;
+  margin-bottom: 0.25rem;
 }
 
 
@@ -37,6 +40,7 @@
   margin: 1px;
   border-left: 1px solid $text-color-50;
   cursor: pointer;
+  outline: none;
   @include default-transition(all);
   &:hover {
     background: rgba($text-color-50, .5);

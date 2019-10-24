@@ -3,7 +3,7 @@
   padding-bottom: 5px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.07);
   .task-item {
-    font-size: 1.4em;
+    font-size: 0.875rem;
     display: flex;
     align-items: center;
 
@@ -14,10 +14,14 @@
     .name-wrapper {
       flex-basis: 40%;
       display: flex;
-      flex-direction: column;
-
+      justify-content: stretch;
       .name {
         cursor: pointer;
+        width: 100%;
+        text-align: left;
+        &:focus {
+          outline: none;
+        }
       }
     }
 

@@ -6,12 +6,9 @@
   color: $text-color;
   font-family: inherit, sans-serif;
   line-height: 1.5rem;
-
   .wrap {
     @include default-transition(all);
     overflow: hidden;
-    font-size: 1rem;
-    padding: 0.375rem 0.5rem;
     line-height: 1.5rem;
     color: $disabled-color;
   }
@@ -112,5 +109,19 @@
 .paddingLeft {
   input {
     padding-left: 2.25rem;
+  }
+}
+
+.md {
+  .wrap {
+    font-size: 1rem;
+    padding: 0.375rem 0.5rem;
+  }
+}
+
+.sm {
+  .wrap {
+    font-size: 0.875rem;
+    padding: 0.3rem 0.35rem;
   }
 }

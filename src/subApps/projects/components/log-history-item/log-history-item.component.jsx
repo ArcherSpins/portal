@@ -64,7 +64,7 @@ class LogHistoryItem extends React.Component<Props, State> {
           <div className="edit-button-wrapper">
             <button
               className="log-edit-button"
-              onClick={() => this.props.history.push(`${ROOT}/${this.props.match.url || " "}/${this.props.log.id}`)}
+              onClick={() => this.props.history.push(`${this.props.match.url || " "}/${this.props.log.id}`)}
             >
               <svg
                 width="15"

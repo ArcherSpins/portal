@@ -76,7 +76,6 @@ const mapRoutes = (projects, tasks, milestones) => ({
 });
 
 const StyledBreadcrumbs = ({ projects, tasks, milestones, location }) => {
-  console.log(location);
   if (location.pathname === routes.ROOT) {
     return null;
   }
