@@ -20,7 +20,7 @@ type Action = {
   option?: string
 }
 
-type ComboboxType = 'borderless' | 'default';
+type ComboboxType = 'borderless' | 'default' | 'underlined';
 
 type Props = {
   loadOptions: () => Promise<Array<Option>>,
@@ -72,13 +72,9 @@ const Combobox = ({
       borderColor: state.isFocused ? '#61B16F' : '#D1D6DE',
       '&:hover': {},
       '&:focus': { borderColor: 'red' },
-      border: use === 'borderless' ? 'none !important' : base.border,
+      border: use === 'borderless' || use === 'borderless' ? 'none !important' : base.border,
       transition: 'all 0.3s',
       boxShadow: 'none',
-    }),
-    container: (base) => ({
-      ...base,
-      width: '30%',
     }),
     option: (base, { isSelected }) => ({
       ...base,
@@ -91,6 +87,7 @@ const Combobox = ({
       className={
         classNames(
           'cbx__wrap wrapper',
+          `combobox_${use || ''}`,
           {
             selected: !!selectedOption,
             'error-select': !!error,
@@ -107,7 +104,6 @@ const Combobox = ({
         value={selectedOption}
         onChange={onChange}
         classNamePrefix="cbx"
-        styles={customStyles}
         components={{
           LoadingIndicator,
           LoadingMessage,
