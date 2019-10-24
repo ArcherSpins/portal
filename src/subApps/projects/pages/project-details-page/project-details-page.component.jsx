@@ -11,8 +11,9 @@ import Moment from 'react-moment';
 import uniqBy from 'lodash.uniqby';
 import {
   Input, Button, TextArea,
-  Radio, H1, Combobox,
+  Radio, H1, Combobox, Participants,
 } from 'ui-kit';
+import type { Action as ParticipantsAction } from 'ui-kit/Participants';
 import Header from 'subApps/projects/components/header';
 
 import { ROOT } from 'subApps/projects/routes';
@@ -58,7 +59,7 @@ type State = {
   url: string,
   type: string,
   engagement: string,
-  manager: string,
+  manager: Option,
   description: string,
   participants: Array<Option>,
   watchers: Array<Option>,
@@ -75,7 +76,7 @@ type Props = {
   url: string,
   type: string,
   engagement: string,
-  manager: string,
+  manager: ?Employee,
   description: string,
   participants: Array<Employee>,
   watcher: Array<Employee>,
@@ -95,7 +96,6 @@ const initialState = {
   url: '',
   type: '',
   engagement: '',
-  manager: '',
   participants: [],
   watchers: [],
   description: '',
@@ -114,7 +114,7 @@ class ProjectDetailPage extends Component<Props, State> {
       url: getUrlFromProject(props.project.URL),
       type: props.project.type.id,
       engagement: props.project.engagementModel.id,
-      manager: props.project.manager.id,
+      manager: this.formatEmployee(props.project.manager),
       participants: this.formatEmployees(props.project.participants),
       watchers: this.formatEmployees(props.project.watchers),
       description: props.project.description,
@@ -264,7 +264,7 @@ class ProjectDetailPage extends Component<Props, State> {
         title,
         URL: url,
         description,
-        managerID: manager.toString(),
+        managerID: manager.id.toString(),
         engagementModel: engagement,
         type,
         unbindWatchers: unbindUserId(watcherPropsIDs, watcherIDs),
@@ -283,7 +283,20 @@ class ProjectDetailPage extends Component<Props, State> {
   }
 
   formatEmployees = (employees: Array<Employee>): Array<Option> => employees
-    .map((em) => ({ id: em.id, label: em.name, value: em.id }))
+    .map((em) => this.formatEmployee(em))
+
+
+  formatEmployee = (employee: Employee): Option => ({
+    id: employee.id,
+    label: employee.name,
+    value: employee.id,
+  });
+
+  onChipDelete = ({ name, value }: ParticipantsAction) => {
+    this.setState((state) => ({
+      [name]: state[name].filter((item) => item.id !== value),
+    }));
+  }
 
   render() {
     const {
@@ -295,8 +308,9 @@ class ProjectDetailPage extends Component<Props, State> {
       type,
       spentTime,
       engagement,
+      watchers,
+      participants,
     } = this.state;
-    console.log(this.state);
     const { projectTypes, engagementModels } = this.props;
     return (
       <div className="cpp">
@@ -422,20 +436,33 @@ h
                 label="Project Manager"
                 className="mb1"
               />
-              <Combobox
-                loadOptions={this.loadEmployees}
-                onChange={this.handleChipInputChange}
+
+              <Participants
+                chips={participants}
+                onDelete={this.onChipDelete}
                 name="participants"
-                label="Participants"
-                className="mb1"
-              />
-              <Combobox
-                loadOptions={this.loadEmployees}
-                onChange={this.handleChipInputChange}
+              >
+                <Combobox
+                  loadOptions={this.loadEmployees}
+                  onChange={this.handleChipInputChange}
+                  name="participants"
+                  label="Participants"
+                  className="mb05"
+                />
+              </Participants>
+              <Participants
+                chips={watchers}
+                onDelete={this.onChipDelete}
                 name="watchers"
-                label="Watchers"
-                className="mb1"
-              />
+              >
+                <Combobox
+                  loadOptions={this.loadEmployees}
+                  onChange={this.handleChipInputChange}
+                  name="watchers"
+                  label="Watchers"
+                  className="mb1"
+                />
+              </Participants>
               {this.state.errors.length >= 1 && (
               <div
                 style={{

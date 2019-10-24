@@ -31,6 +31,7 @@ export const projects = async () => {
               id
               firstName
               lastName
+              name
             }
             type {
               title
