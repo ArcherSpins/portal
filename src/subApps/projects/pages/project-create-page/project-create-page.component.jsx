@@ -5,7 +5,11 @@ import React, { Component } from 'react';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import type { RouterHistory } from 'react-router-dom';
-import { saveProject } from '../../redux/project/project.actions';
+import {
+  Input, TextArea, Button, Radio, H1,
+} from 'ui-kit';
+import Header from 'subApps/projects/components/header';
+import { saveProject, getProjectTypes } from '../../redux/project/project.actions';
 import translate from '../../helpers/translator';
 import emoveSpecial from '../../helpers/removeSpecial';
 import translateTitle from '../../helpers/translateTitle';
@@ -13,17 +17,17 @@ import translateTitle from '../../helpers/translateTitle';
 import {
   selectAllProjects,
   selectProjectLoadingBool,
+  selectEngagementModels,
+  selectProjectTypes,
 } from '../../redux/project/project.selectors';
 
 import type {
   Project,
   ProjectCreation,
+  ProjectType,
 } from '../../redux/project/project.flow-types';
 
-import TextInput from '../../components/forms/text-input/text-input.component';
 import UserPicker from '../../components/user-picker/user-picker.component';
-import RadioInputGroup from '../../components/forms/RadioInputGroup';
-import CustomButton from '../../components/custom-button/custom-button.component';
 import SelectInput from '../../components/forms/select-input/select-input.component';
 
 import './project-create-page.styles.scss';
@@ -52,7 +56,10 @@ type State = {
 
 type Props = {
   history: RouterHistory,
-  saveProject: (project: ProjectCreation, history: RouterHistory) => Project
+  saveProject: (project: ProjectCreation, history: RouterHistory) => Project,
+  projectTypes: Array<ProjectType>,
+  engagementModels: Array<ProjectType>,
+  getProjectTypes: () => void,
 };
 
 const initialState = {
@@ -87,6 +94,11 @@ class CreateProjectPage extends Component<Props, State> {
       description: '',
       errors: [],
     };
+  }
+
+  componentDidMount() {
+    const { getProjectTypes: fetchProjectTypes } = this.props;
+    fetchProjectTypes();
   }
 
   validate = () => {
@@ -211,7 +223,7 @@ class CreateProjectPage extends Component<Props, State> {
       const participantsIDs = participants.map((p) => p.id.toString());
       const newProject = {
         title,
-        URL: `http://projects.internal.sfxdx.ru/${URL}`,
+        URL,
         description,
         managerID: managerID.toString(),
         engagementModel,
@@ -242,135 +254,125 @@ class CreateProjectPage extends Component<Props, State> {
       watchers,
       description,
       errors,
+      type,
+      engagementModel,
     } = this.state;
-    const { history } = this.props;
+    const { projectTypes, engagementModels, history } = this.props;
     return (
       <div className="cpp">
-        <form className="cpp__form" onSubmit={this.handleSumbit}>
-          <div style={{ width: '40%' }}>
-            <h3 className="heading-tertiarry">Description</h3>
-            <textarea
-              className="cpp__description-input"
-              value={description}
-              name="description"
-              onChange={this.handleChange}
-            />
+        <Header>
+          <div className="project-details__title-container">
+            <H1>
+              Create New Project
+            </H1>
           </div>
-          <div style={{ marginRight: '5%', width: '40%' }}>
-            <h1 className="heading-primary ">Create New Project</h1>
-            <TextInput
-              header="Title"
-              name="title"
-              type="text"
-              value={title}
-              onChange={this.handleTitleChange}
-              required
-              maxLength="100"
-              pattern="(?=.*[\p{L}]).{2,}"
-            />
-            <h3 className="heading-tertiarry">Project URL</h3>
-            <div className="url-wrapper">
-              <span className="url-link">
-                http://projects.internal.sfxdx.ru/
-              </span>
-              <TextInput
-                name="URL"
-                type="text"
-                value={URL}
-                onChange={this.handleUrlChange}
-                className="cpp__url"
-                required
-                maxLength="66"
+        </Header>
+        <form className="cpp__form" onSubmit={this.handleSumbit}>
+          <div className="cpp__form-inputs">
+            <div style={{ width: '40%' }}>
+              <TextArea
+                label="Description"
+                value={description}
+                name="description"
+                labelClassName="cpp__textarea"
+                className="project__input"
+                onChange={this.handleChange}
               />
             </div>
-            <p className="text-gray margin-bottom-md" style={{ width: '100%' }}>
+            <div style={{ marginRight: '5%', width: '40%' }}>
+              <Input
+                name="title"
+                type="text"
+                label="Title"
+                className="project__input"
+                value={title}
+                onChange={this.handleTitleChange}
+                required
+                maxLength="100"
+                pattern="(?=.*[\p{L}]).{2,}"
+              />
+              <div className="url-wrapper">
+                <Input
+                  name="URL"
+                  label="Project URL"
+                  type="text"
+                  className="project__input"
+                  prefix={`${window.location.origin}/projects/`}
+                  value={URL}
+                  onChange={this.handleUrlChange}
+                  required
+                  maxLength="66"
+                />
+              </div>
+              <p className="text-gray margin-bottom-md" style={{ width: '100%' }}>
               URL should be 1–100 characters length. Only lower case letters
               (a-z), numbers, dashes and underscores are alowed. Identifier
               should start with lowercase letter. Once saved identifier cannot
               be changed.
-            </p>
-            <div className="cpp__typesAndEngagement margin-bottom-lg">
-              <div className="cpp__types">
-                <h3 className="heading-tertiarry margin-right-md">
+              </p>
+              <div className="cpp__typesAndEngagement margin-bottom-lg">
+                <div className="cpp__types">
+                  <h3 className="heading-tertiarry margin-right-md">
                   Project type
-                </h3>
-                <div className="cpp__types-inputs">
-                  <RadioInputGroup
-                    checked
-                    type="radio"
-                    id="commercial"
-                    name="type"
-                    value="a90ff7a3-37cb-4818-90e0-16c83be6f940"
-                    onChange={this.handleChange}
-                    htmlFor="commercial"
-                    spanText="Commercial"
-                  />
-                  <RadioInputGroup
-                    type="radio"
-                    id="internal"
-                    name="type"
-                    value="26a5c423-e4f1-4194-a543-dd7f6cfbfb99"
-                    onChange={this.handleChange}
-                    htmlFor="internal"
-                    spanText="Internal"
-                  />
+                  </h3>
+                  <div className="cpp__types-inputs">
+                    {projectTypes.map((pr) => (
+                      <Radio
+                        checked={type === pr.id}
+                        type="radio"
+                        id={pr.title}
+                        key={pr.id}
+                        name="type"
+                        value={pr.id}
+                        onChange={this.handleChange}
+                        htmlFor={pr.title}
+                        spanText={pr.title}
+                      />
+                    ))}
+                  </div>
                 </div>
-              </div>
-              <div className="cpp__engagement">
-                <h3 className="heading-tertiarry margin-right-md">
+                <div className="cpp__engagement">
+                  <h3 className="heading-tertiarry margin-right-md">
                   Engagement Model
-                </h3>
-                <div className="cpp__engagement-inputs">
-                  <RadioInputGroup
-                    checked
-                    type="radio"
-                    id="fixedPrice"
-                    name="engagementModel"
-                    value="7f535dd6-56b1-4979-a5ed-f471a535de21"
-                    onChange={this.handleChange}
-                    htmlFor="fixedPrice"
-                    spanText="Fixed Price"
-                  />
-                  <RadioInputGroup
-                    type="radio"
-                    id="hourly"
-                    name="engagementModel"
-                    value="e4b36752-5acc-4ba5-886f-b5e4d86fe1e1"
-                    onChange={this.handleChange}
-                    htmlFor="hourly"
-                    spanText="Hourly"
-                  />
-                  <RadioInputGroup
-                    type="radio"
-                    id="fulltime"
-                    name="engagementModel"
-                    value="0bea1179-488d-4018-a200-1176bf9fd959"
-                    onChange={this.handleChange}
-                    htmlFor="fulltime"
-                    spanText="Fulltime"
-                  />
+                  </h3>
+                  <div className="cpp__engagement-inputs">
+                    {engagementModels.map((model) => (
+                      <Radio
+                        checked={
+                          engagementModel === model.id
+                        }
+                        type="radio"
+                        id={model.title}
+                        key={model.id}
+                        name="engagementModel"
+                        value={model.id}
+                        onChange={this.handleChange}
+                        htmlFor={model.title}
+                        spanText={model.title}
+                      />
+                    ))}
+                  </div>
                 </div>
               </div>
-            </div>
-            <SelectInput
-              onChange={this.handleChange}
-              name="managerID"
-              value={managerID}
-              setFirstUser={this.setFirstManager}
-            />
-            <UserPicker
-              getUsers={this.getParticipants}
-              title="Participants"
-              deleteUser={this.deleteParticipant}
-              users={participants}
-            />
-            <UserPicker
-              getUsers={this.getWatchers}
-              title="Watchers"
-              deleteUser={this.deleteWatcher}
-              users={watchers}
-            />
-            {Array.isArray(errors) && errors.length >= 1 && (
+              <SelectInput
+                onChange={this.handleChange}
+                name="managerID"
+                value={managerID}
+                setFirstUser={this.setFirstManager}
+              />
+              <UserPicker
+                getUsers={this.getParticipants}
+                title="Participants"
+                deleteUser={this.deleteParticipant}
+                users={participants}
+              />
+              <UserPicker
+                getUsers={this.getWatchers}
+                title="Watchers"
+                deleteUser={this.deleteWatcher}
+                users={watchers}
+              />
+              {Array.isArray(errors) && errors.length >= 1 && (
               <div
                 style={{
                   color: 'red',
@@ -383,18 +385,22 @@ class CreateProjectPage extends Component<Props, State> {
                 {errors.join(', ')}
 .
               </div>
-            )}
-            <div className="cpp__buttons-group">
-              <CustomButton type="submit" color="success">
-                Create
-              </CustomButton>
-              <CustomButton
-                type="button"
-                onClick={() => history.goBack()}
-              >
-                Cancel
-              </CustomButton>
+              )}
             </div>
+          </div>
+          <div className="cpp__buttons-group">
+            <Button
+              type="submit"
+            >
+                Create
+            </Button>
+            <Button
+              type="button"
+              use="transparent"
+              onClick={() => history.goBack()}
+            >
+                Cancel
+            </Button>
           </div>
         </form>
       </div>
@@ -405,10 +411,12 @@ class CreateProjectPage extends Component<Props, State> {
 const mapStateToProps = createStructuredSelector({
   projects: selectAllProjects,
   loading: selectProjectLoadingBool,
+  projectTypes: selectProjectTypes,
+  engagementModels: selectEngagementModels,
 });
 
 // $FlowFixMe
 export default connect(
   mapStateToProps,
-  { saveProject },
+  { saveProject, getProjectTypes },
 )(CreateProjectPage);

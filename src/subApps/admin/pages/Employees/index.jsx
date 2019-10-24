@@ -3,16 +3,14 @@
 // TODO: FIX
 // @flow
 import React from 'react';
+import TablePaginate from 'ui-kit/TablePaginate';
+import { EMPLOYEES_ROUTE } from '../../routes';
 import {
   LeftNavbar,
   HeaderEmployees,
-  ListTable,
-  EmployeeItem,
-  EmployeesHeaderTable,
   MessageFound,
   AlertMessage,
 } from '../../components';
-import { Paginate } from '../../components/Paginate';
 import { LoadingContainer } from '../../containers';
 import { PageContainer, ContainerContent } from '../styled';
 import { Main } from './styled';
@@ -20,6 +18,25 @@ import type {
   Employees as EmployeesType,
 } from '../../types';
 import Hoc from './hoc';
+
+export const columns = [
+  {
+    Header: 'Name',
+    accessor: 'name',
+  },
+  {
+    Header: 'Department',
+    accessor: 'department',
+  },
+  {
+    Header: 'Position',
+    accessor: 'position',
+  },
+  {
+    Header: 'Location',
+    accessor: 'location',
+  },
+];
 
 type EmployeesProps = {
   employees: Array<EmployeesType>,
@@ -87,7 +104,7 @@ class EmployeesComponent extends React.Component<EmployeesProps, EmployeesState>
     this.setState({ activePaginate: idx });
     // $FlowFixMe
     requestEmployees({
-      offset: idx > 0 ? ((idx) + PAGE_SIZE).toString() : '0',
+      offset: idx - 1 > 0 ? ((idx - 1) + PAGE_SIZE).toString() : '0',
       limit: PAGE_SIZE.toString(),
     });
   }
@@ -111,7 +128,6 @@ class EmployeesComponent extends React.Component<EmployeesProps, EmployeesState>
       errorMessage,
       closeErrorMessage,
     } = this.props;
-
     const { activePaginate, search } = this.state;
 
     return (
@@ -144,15 +160,20 @@ class EmployeesComponent extends React.Component<EmployeesProps, EmployeesState>
                   {
                     employees.length > 0 ? (
                       <div>
-                        <Paginate
-                          activeNum={activePaginate}
-                          count={count / PAGE_SIZE}
-                          togglePaginate={this.togglePaginate}
-                        />
-                        <ListTable
-                          data={employees}
-                          ItemComponent={EmployeeItem}
-                          Header={EmployeesHeaderTable}
+                        <TablePaginate
+                          items={employees.map((item) => ({
+                            url: `${EMPLOYEES_ROUTE}/${item.id}`,
+                            name: item.name,
+                            department: item.department ? item.department.title : 'Not department',
+                            position: item.position ? item.position.title : 'Not position',
+                            location: `${(item.city.name || 'Not city, ')} ${(item.city.country || 'not country')}`,
+                          }))}
+                          pageSize={PAGE_SIZE}
+                          getNumber={this.togglePaginate}
+                          columns={columns}
+                          activeIndex={activePaginate}
+                          count={Math.ceil(count / PAGE_SIZE)}
+                          manual
                         />
                       </div>
                     ) : <MessageFound />

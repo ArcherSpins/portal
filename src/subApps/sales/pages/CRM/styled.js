@@ -17,7 +17,6 @@ export const Header = styled(HeaderWrap)`
   justify-content: space-between;
   grid-template-columns: 4fr 4fr 1fr;
   padding: 20px 10px;
-  padding-top: 50px;
 `;
 
 export const Label = styled.span`
@@ -31,4 +30,5 @@ export const Label = styled.span`
 export const Content = styled.div`
   display: flex;
   min-height: 600px;
+  flex: 1;
 `;

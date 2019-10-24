@@ -2,8 +2,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { CREATE_PROJECT_ROUTE } from 'subApps/projects/routes';
+import { H1 } from 'ui-kit';
 import ProjectItem from '../../components/project-item/project-item.component';
-
 import type { Project } from '../../redux/project/project.flow-types';
 
 import { getAllProjects } from '../../redux/project/project.actions';
@@ -79,7 +79,7 @@ class Projects extends Component<Props, State> {
       return (
         <div className="projects">
           <header className="projects__header">
-            <h1 className="heading-primary">Projects</h1>
+            <H1>Projects</H1>
             <LinkButton to={CREATE_PROJECT_ROUTE}>Create new project</LinkButton>
           </header>
           <div className="projects__middle">

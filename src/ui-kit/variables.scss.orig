@@ -1,0 +1,34 @@
+$root-font-size: 16px;
+
+$text-color: #333;
+$text-color-disabled: #a2a4a7;
+
+$black-200: #303030;
+
+$text-color-200: #79818D;
+$text-color-100:  #BCC0C6;
+$text-color-50: #D5D5D5;
+
+$main-color: #61b16f;
+$main-color-focused: #65a771;
+$main-color-hovered: #6fb87c;
+
+$chip-green: #61b16f33;
+
+$disabled-color: #afb1b7;
+
+$grey: #c6ccd5;
+$grey-hovered: #e1e6ee;
+$grey-focused: #cacfd7;
+$grey-disabled: #e6e9ee;
+$grey-200: #e2e5ea;
+$grey-100: #f0f0f0;
+
+$danger-400: #eb5757;
+$danger-200: #ed6868;
+$danger-600: #d64f4f;
+$danger-100: #f5abab;
+
+$blue-400: #2f80ed;
+
+$border-color: #d1d6de;

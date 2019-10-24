@@ -143,12 +143,14 @@ class EmployeeComponent extends React.PureComponent<EmployeeProps> {
       return {
         ...item,
         label: `${String(item.hours).padStart(2, '0')}:${String(item.minutes).padStart(2, '0')}`,
+        value: `${String(item.hours).padStart(2, '0')}:${String(item.minutes).padStart(2, '0')}`,
         active: true,
       };
     }
     return {
       ...item,
       label: `${String(item.hours).padStart(2, '0')}:${String(item.minutes).padStart(2, '0')}`,
+      value: `${String(item.hours).padStart(2, '0')}:${String(item.minutes).padStart(2, '0')}`,
       active: false,
     };
   })

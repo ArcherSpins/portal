@@ -129,25 +129,8 @@ body {
   word-wrap: break-word;
 }
 
-button {
-  box-shadow: none !important;
-  outline: none;
-
-  &:hover {
-    cursor: pointer;
-  }
-
-  &:active {
-    box-shadow: 0px 0px 5px 0px #61B16F !important;
-  }
-}
-
 input {
   outline: none;
-
-  &:focus {
-    box-shadow: 0px 0px 5px 0px #61B16F;
-  }
 
   &.not-focus {
     box-shadow: none;
@@ -160,4 +143,10 @@ select {
   &:active {
     box-shadow: 0px 0px 5px 0px #61B16F;
   }
+}
+
+.crm-pLinkage {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }

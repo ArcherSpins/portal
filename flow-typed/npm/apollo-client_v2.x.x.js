@@ -1,7 +1,7 @@
 // flow-typed signature: 3bcc4d06dca7d9dbb6d4b9da1ba1fb64
 // flow-typed version: c6154227d1/apollo-client_v2.x.x/flow_>=v0.104.x
 
-declare module "apollo-client" {
+declare module 'apollo-client' {
   /**
    * Types From graphql
    * graphql types are maintained in the graphql-js repo
@@ -307,8 +307,7 @@ declare module "apollo-client" {
     optimisticResponse?: Object | Function;
     updateQueries?: MutationQueryReducersMap<T>;
     optimisticResponse?: Object;
-    refetchQueries?:
-      | ((result: ExecutionResult<>) => RefetchQueryDescription)
+    refetchQueries?: | ((result: ExecutionResult<>) => RefetchQueryDescription)
       | RefetchQueryDescription;
     update?: MutationUpdaterFn<T>;
     errorPolicy?: ErrorPolicy;

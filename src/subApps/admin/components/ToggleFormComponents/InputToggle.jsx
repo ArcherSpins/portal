@@ -17,7 +17,9 @@ type InputToggleProps = {
   required: boolean,
   type: string,
   defaultValue: string,
-  error: boolean
+  error: boolean,
+  ref: any,
+  value: string
 }
 
 export default ({
@@ -30,10 +32,13 @@ export default ({
   type,
   required,
   defaultValue,
+  value,
   error,
+  ref,
+  ...restProps
 }: InputToggleProps) => {
   const [text, changeTitle] = useState(title || defaultValue || 'Not value');
-  const [value, changeValue] = useState(title);
+  const [valueState, changeValue] = useState(title);
   const [show, toggleShow] = useState(showInput);
 
   useEffect(() => {
@@ -46,7 +51,7 @@ export default ({
       toggleShow(showInput);
       changeValue(title);
     }
-  }, [showInput, title]);
+  });
 
   const change = (_value: string): void => {
     changeValue(_value);
@@ -63,13 +68,15 @@ export default ({
       <FieldBlock>
         <Label error={error}>{label}</Label>
         <Input
+          ref={ref}
           autoFocus
           error={error}
           required={required}
           placeholder={label}
           type={type || 'text'}
-          value={value}
+          value={value || valueState}
           onChange={(e) => change(e.target.value)}
+          {...restProps}
         />
       </FieldBlock>
     );

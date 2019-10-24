@@ -1,0 +1,31 @@
+@import "../variables.scss";
+@import "../mixins.scss";
+
+.breadcrumbs {
+  margin-bottom: .6rem;
+  list-style: none;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-weight: 600;
+  font-size: .88rem;
+
+  a {
+    text-decoration: none;
+    color: $text-color;
+  }
+
+  i {
+    color: rgba($black-200, 0.34);
+    font-size: .6rem;
+    margin: 0 0.3rem;
+  }
+
+  .link {
+    outline: none;
+  }
+
+  .active-link {
+    color: rgba($black-200, 0.54);
+  }
+}

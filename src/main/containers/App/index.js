@@ -5,7 +5,7 @@ import ProtectedRoute from 'main/containers/ProtectedRoute';
 
 import Auth from 'main/containers/Auth';
 import MainApp from 'main/containers/MainApp';
-import './App.module.scss';
+import styles from './App.module.scss';
 // apps
 const SalesApp = lazy(() => import('subApps/sales'));
 const AdminApp = lazy(() => import('subApps/admin'));
@@ -14,7 +14,7 @@ const ProjectsApp = lazy(() => import('subApps/projects'));
 class App extends Component<Props> {
   render() {
     return (
-      <div className="app">
+      <div className={styles.app}>
         <Switch>
           <Route path="/auth" component={Auth} />
           <ProtectedRoute path="/" component={MainApp} />

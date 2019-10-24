@@ -1,9 +1,12 @@
 // @flow
 import type { ProjectState, ProjectAction } from './project.flow-types';
+import projectActionTypes from './project.types';
 
 const initialState = {
   projects: [],
   loading: false,
+  projectTypes: [],
+  engagementModels: [],
 };
 
 const projectReducer = (
@@ -39,6 +42,17 @@ const projectReducer = (
         }),
         loading: false,
       };
+
+    case projectActionTypes.GET_PROJECT_TYPES_SUCCESS: {
+      if (!action.payload) return state;
+
+      return {
+        ...state,
+        projectTypes: action.payload.projectTypes,
+        engagementModels: action.payload.engagementModels,
+      };
+    }
+
     default:
       return state;
   }

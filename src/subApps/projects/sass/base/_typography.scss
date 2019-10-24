@@ -1,22 +1,15 @@
-.heading-primary {
-  font-size: 2.8em;
-  color: $color-gray-dark-2;
-  font-family: "proxima_novablack";
-  font-weight: 700;
-}
-
 .heading-tertiarry {
   display: inline-block;
-  font-size: 1.4em;
+  font-size: 0.875rem;
   color: $color-gray-dark-2;
-  font-weight: bolder;
-  font-family: "proxima_novabold";
-  // margin-bottom: 2px;
+  font-family: "Proxima Nova";
+  margin-bottom: 0.2rem;
+  line-height: 1.25rem;
 }
 
 .heading-secondary {
-  font-family: "proxima_novabold";
-  font-size: 24px;
+  font-family: "Proxima Nova";
+  font-size: 1.5rem;
 }
 
 .text-gray {

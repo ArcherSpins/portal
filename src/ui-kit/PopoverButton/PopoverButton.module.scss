@@ -1,0 +1,56 @@
+@import '../variables.scss';
+@import '../mixins.scss';
+.button {
+  width: 2rem;
+  height: 2rem;
+  min-width: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  border: none;
+  span {
+    color: #fff;
+    font-size: 2rem;
+  }
+}
+
+.popover {
+  @include default-transition(all);
+  position: absolute;
+  top: 0;
+  left: 3rem;
+  font-size: 0.85rem;
+  color: #fff;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  border-radius: 4px;
+  background-color: $main-color;
+  height: 2rem;
+  min-width: 6rem;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(3px);
+
+  &:before {
+    transform: rotate(-90deg);
+    content: '';
+    border-style: solid;
+    border-width: 0 1rem 1rem 1rem;
+    border-color: transparent transparent $main-color transparent;
+    position: absolute;
+    top: 8px;
+    left: -21px;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.button:hover .popover {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0px);
+}

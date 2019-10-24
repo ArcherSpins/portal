@@ -148,10 +148,6 @@ button {
 input {
   outline: none;
 
-  &:focus {
-    border: 1px solid #61B16F;
-  }
-
   &.not-focus {
     box-shadow: none;
   }
@@ -167,3 +163,4 @@ select {
   top: 50%;
   margin-top: -13px;
 }
+

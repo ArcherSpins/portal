@@ -8,14 +8,21 @@ import { connect } from 'react-redux';
 import type { RouterHistory } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import Moment from 'react-moment';
+import {
+  Input, Button, TextArea,
+  Radio, H1,
+} from 'ui-kit';
+import Header from 'subApps/projects/components/header';
 
 import { ROOT } from 'subApps/projects/routes';
 
-import { editProject } from '../../redux/project/project.actions';
+import { editProject, getProjectTypes } from '../../redux/project/project.actions';
 import {
   selectProjectItem,
   selectAllProjects,
   selectProjectLoadingBool,
+  selectProjectTypes,
+  selectEngagementModels,
 } from '../../redux/project/project.selectors';
 import { selectProjectsMolestones } from '../../redux/milestone/milestone.selectors';
 
@@ -25,19 +32,17 @@ import type { Milestone } from '../../redux/milestone/milestone.flow-types';
 import type {
   Project,
   ProjectCreation,
+  ProjectType,
 } from '../../redux/project/project.flow-types';
 
 import translate from '../../helpers/translator';
 import translateTitle from '../../helpers/translateTitle';
 import { bindUserId, unbindUserId } from '../../helpers/compareArrays';
 import { spentTimeInHours } from '../../helpers/sumTime';
+import { getUrlFromProject } from '../../helpers';
 
 import UserPicker from '../../components/user-picker/user-picker.component';
-import RadioInputGroup from '../../components/forms/RadioInputGroup';
 import SelectInput from '../../components/forms/select-input/select-input.component';
-import TextInput from '../../components/forms/text-input/text-input.component';
-import InverseButtom from '../../components/inverse-button/inverse-button.component';
-import CustomButton from '../../components/custom-button/custom-button.component';
 
 import './project-details-page.styles.scss';
 
@@ -79,6 +84,9 @@ type Props = {
   projects: Array<Project>,
   history: RouterHistory,
   milestones: Array<Milestone>,
+  projectTypes: Array<ProjectType>,
+  engagementModels: Array<ProjectType>,
+  getProjectTypes: () => void,
   editProject: (editProject: ProjectCreation, history: RouterHistory) => Project
 };
 
@@ -105,7 +113,7 @@ class ProjectDetailPage extends Component<Props, State> {
       id: props.project.id,
       createdAt: props.project.createdAt,
       title: props.project.title,
-      url: props.project.URL.substring(34),
+      url: getUrlFromProject(props.project.URL),
       type: props.project.type.id,
       engagement: props.project.engagementModel.id,
       manager: props.project.manager.id,
@@ -119,6 +127,8 @@ class ProjectDetailPage extends Component<Props, State> {
   }
 
   componentDidMount = () => {
+    const { getProjectTypes: fetchProjects } = this.props;
+    fetchProjects();
     getEstimation(this.props.project.id).then((response) => {
       const { estimatedTime, spentTime } = response.data.project;
       this.setState({ estimatedTime, spentTime });
@@ -241,7 +251,7 @@ class ProjectDetailPage extends Component<Props, State> {
       const editedProject = {
         id,
         title,
-        URL: `http://projects.internal.sfxdx.ru/${url}`,
+        URL: url,
         description,
         managerID: manager.toString(),
         engagementModel: engagement,
@@ -269,169 +279,140 @@ class ProjectDetailPage extends Component<Props, State> {
       spentTime,
       engagement,
     } = this.state;
+    const { projectTypes, engagementModels } = this.props;
     return (
       <div className="cpp">
-        <div className="project-details__header">
+        <Header>
           <div className="project-details__title-container">
             <span className="project-details__project">Project:</span>
-            <h1 style={{ marginBottom: 0 }} className="heading-primary">
+            <H1>
               {title}
-            </h1>
+            </H1>
           </div>
-        </div>
+        </Header>
         <div className="project-details__sub-header">
-          <InverseButtom
-            type="button"
-            color="success"
+          <Button
+            use="grey"
             onClick={() => this.props.history.push(`${ROOT}/${url}/milestones`)}
           >
             Milestones
-          </InverseButtom>
+          </Button>
           <span className="project-details__spent">
-            <b>Spent</b>
+            <b>Spent:</b>
             {' '}
             {spentTimeInHours(spentTime)}
 /
             {this.showLogTime()}
 h
           </span>
-          <span className="project-details__created">
-            <b>Created </b>
+          <span className="project-details__spent">
+            <b>Created:</b>
             <Moment format="DD/MM/YYYY">{createdAt}</Moment>
           </span>
         </div>
         <form className="cpp__form" onSubmit={this.handleSumbit}>
-          <div style={{ width: '40%' }}>
-            <h3 className="heading-tertiarry">Description</h3>
-            <textarea
-              className="cpp__description-input"
-              value={description}
-              name="description"
-              onChange={this.handleChange}
-            />
-          </div>
-          <div style={{ marginRight: '5%', width: '40%' }}>
-            <TextInput
-              header="Title"
-              name="title"
-              type="text"
-              value={title}
-              onChange={this.handleTitleChange}
-              required
-              pattern="(?=.*[\p{L}]).{2,}"
-              maxLength="100"
-            />
-            <h3 className="heading-tertiarry">Project URL</h3>
-            <div className="url-wrapper">
-              <span className="url-link">
-                http://projects.internal.sfxdx.ru/
-              </span>
-              <TextInput
+          <div className="cpp__form-inputs">
+            <div style={{ width: '40%' }}>
+              <TextArea
+                labelClassName="cpp__textarea"
+                className="project__input"
+                label="Description"
+                value={description}
+                name="description"
+                onChange={this.handleChange}
+              />
+            </div>
+            <div style={{ marginRight: '5%', width: '40%' }}>
+              <Input
+                label="Title"
+                name="title"
+                type="text"
+                value={title}
+                onChange={this.handleTitleChange}
+                className="project__input"
+                required
+                pattern="(?=.*[\p{L}]).{2,}"
+                maxLength="100"
+              />
+              <Input
                 name="url"
                 type="text"
+                label="Project URL"
+                prefix={`${window.location.origin}/projects/`}
                 value={url}
                 onChange={this.handleUrlChange}
-                className="cpp__url"
+                className="project__input"
                 required
                 maxLength="66"
               />
-            </div>
-            <p className="text-gray margin-bottom-md" style={{ width: '100%' }}>
+              <p className="text-gray margin-bottom-md" style={{ width: '100%' }}>
               URL should be 1–100 characters length. Only lower case letters
               (a-z), numbers, dashes and underscores are alowed. Identifier
               should start with lowercase letter. Once saved identifier cannot
               be changed.
-            </p>
-            <div className="cpp__typesAndEngagement margin-bottom-lg">
-              <div className="cpp__types">
-                <h3 className="heading-tertiarry margin-right-md">
+              </p>
+              <div className="cpp__typesAndEngagement margin-bottom-lg">
+                <div className="cpp__types">
+                  <h3 className="heading-tertiarry margin-right-md">
                   Project type
-                </h3>
-                <div className="cpp__types-inputs">
-                  <RadioInputGroup
-                    checked={type === 'a90ff7a3-37cb-4818-90e0-16c83be6f940'}
-                    type="radio"
-                    id="commercial"
-                    name="type"
-                    value="a90ff7a3-37cb-4818-90e0-16c83be6f940"
-                    onChange={this.handleChange}
-                    htmlFor="commercial"
-                    spanText="Commercial"
-                  />
-                  <RadioInputGroup
-                    checked={type === '26a5c423-e4f1-4194-a543-dd7f6cfbfb99'}
-                    type="radio"
-                    id="internal"
-                    name="type"
-                    value="26a5c423-e4f1-4194-a543-dd7f6cfbfb99"
-                    onChange={this.handleChange}
-                    htmlFor="internal"
-                    spanText="Internal"
-                  />
+                  </h3>
+                  <div className="cpp__types-inputs">
+                    {projectTypes.map((pr) => (
+                      <Radio
+                        checked={type === pr.id}
+                        type="radio"
+                        id={pr.title}
+                        key={pr.id}
+                        name="type"
+                        value={pr.id}
+                        onChange={this.handleChange}
+                        htmlFor={pr.title}
+                        spanText={pr.title}
+                      />
+                    ))}
+                  </div>
+                </div>
+                <div className="cpp__engagement">
+                  <h3 className="heading-tertiarry margin-right-md">
+                    Engagement Model
+                  </h3>
+                  <div className="cpp__engagement-inputs">
+                    {engagementModels.map((model) => (
+                      <Radio
+                        checked={
+                          engagement === model.id
+                        }
+                        type="radio"
+                        id={model.title}
+                        key={model.id}
+                        name="engagement"
+                        value={model.id}
+                        onChange={this.handleChange}
+                        htmlFor={model.title}
+                        spanText={model.title}
+                      />
+                    ))}
+                  </div>
                 </div>
               </div>
-              <div className="cpp__engagement">
-                <h3 className="heading-tertiarry margin-right-md">
-                  Engagement Model
-                </h3>
-                <div className="cpp__engagement-inputs">
-                  <RadioInputGroup
-                    checked={
-                      engagement === '7f535dd6-56b1-4979-a5ed-f471a535de21'
-                    }
-                    type="radio"
-                    id="fixedPrice"
-                    name="engagement"
-                    value="7f535dd6-56b1-4979-a5ed-f471a535de21"
-                    onChange={this.handleChange}
-                    htmlFor="fixedPrice"
-                    spanText="Fixed Price"
-                  />
-                  <RadioInputGroup
-                    checked={
-                      engagement === 'e4b36752-5acc-4ba5-886f-b5e4d86fe1e1'
-                    }
-                    type="radio"
-                    id="hourly"
-                    name="engagement"
-                    value="e4b36752-5acc-4ba5-886f-b5e4d86fe1e1"
-                    onChange={this.handleChange}
-                    htmlFor="hourly"
-                    spanText="Hourly"
-                  />
-                  <RadioInputGroup
-                    checked={
-                      engagement === '0bea1179-488d-4018-a200-1176bf9fd959'
-                    }
-                    type="radio"
-                    id="fulltime"
-                    name="engagement"
-                    value="0bea1179-488d-4018-a200-1176bf9fd959"
-                    onChange={this.handleChange}
-                    htmlFor="fulltime"
-                    spanText="Fulltime"
-                  />
-                </div>
-              </div>
-            </div>
-            <SelectInput
-              onChange={this.handleChange}
-              name="manager"
-              value={manager}
-            />
-            <UserPicker
-              getUsers={this.getParticipants}
-              title="Participants"
-              deleteUser={this.deleteParticipant}
-              users={participants}
-            />
-            <UserPicker
-              getUsers={this.getWatchers}
-              title="Watchers"
-              deleteUser={this.deleteWatcher}
-              users={watcher}
-            />
-            {this.state.errors.length >= 1 && (
+              <SelectInput
+                onChange={this.handleChange}
+                name="manager"
+                value={manager}
+              />
+              <UserPicker
+                getUsers={this.getParticipants}
+                title="Participants"
+                deleteUser={this.deleteParticipant}
+                users={participants}
+              />
+              <UserPicker
+                getUsers={this.getWatchers}
+                title="Watchers"
+                deleteUser={this.deleteWatcher}
+                users={watcher}
+              />
+              {this.state.errors.length >= 1 && (
               <div
                 style={{
                   color: 'red',
@@ -444,19 +425,22 @@ h
                 {this.state.errors.join(', ')}
 .
               </div>
-            )}
-            <div className="cpp__buttons-group">
-              <CustomButton type="submit" color="success">
-                Save
-              </CustomButton>
-              <CustomButton
-                type="button"
-                onClick={() => this.props.history.goBack()}
-                color="gray"
-              >
-                Cancel
-              </CustomButton>
+              )}
             </div>
+          </div>
+          <div className="cpp__buttons-group">
+            <Button
+              type="submit"
+            >
+                Save
+            </Button>
+            <Button
+              type="button"
+              onClick={() => this.props.history.goBack()}
+              use="transparent"
+            >
+                Cancel
+            </Button>
           </div>
         </form>
       </div>
@@ -469,10 +453,12 @@ const mapStateToProps = createStructuredSelector({
   project: selectProjectItem,
   projects: selectAllProjects,
   milestones: selectProjectsMolestones,
+  projectTypes: selectProjectTypes,
+  engagementModels: selectEngagementModels,
 });
 
 // $FlowFixMe
 export default connect(
   mapStateToProps,
-  { editProject },
+  { editProject, getProjectTypes },
 )(ProjectDetailPage);

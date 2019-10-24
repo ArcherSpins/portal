@@ -21,73 +21,77 @@ import ProjectDetailsPage from './pages/project-details-page/project-details-pag
 import TasksPage from './pages/tasks-page/tasks-page.component';
 import CreateProjectPage from './pages/project-create-page/project-create-page.component';
 import Projects from './pages/projects-page/projects-page.component';
-
 import UserPicker from './components/user-picker/user-picker.component';
 
 import * as routes from './routes';
+import styles from './App.module.scss';
 
 function App() {
   return (
     <Provider store={store}>
       <PersistGate persistor={persistor}>
         <div className="projects__app">
-          <BackButton />
           <StyledBreadcrumbs />
-          <Switch>
-            <Route exath path={routes.USER_PICKER_ROUTE} component={UserPicker} />
-            <Route exact path={routes.CREATE_PROJECT_ROUTE} component={CreateProjectPage} />
-            <Route exact path={routes.PROJECT_DETAILS_ROUTE} component={ProjectDetailsPage} />
-          </Switch>
-          <Route
-            exact
-            path={routes.MILESTONES_ROUTE}
-            component={MilestonesPage}
-          />
-          <Route
-            exact
-            path={routes.TASKS_ROUTE}
-            component={TasksPage}
-          />
-          <Switch>
+          <div className={styles.page}>
+            <BackButton />
+            <Switch>
+              <Route exath path={routes.USER_PICKER_ROUTE} component={UserPicker} />
+              <Route exact path={routes.CREATE_PROJECT_ROUTE} component={CreateProjectPage} />
+              <Route exact path={routes.PROJECT_DETAILS_ROUTE} component={ProjectDetailsPage} />
+            </Switch>
             <Route
               exact
-              path={routes.TASK_ADD_ROUTE}
-              component={TaskAdd}
+              path={routes.MILESTONES_ROUTE}
+              component={MilestonesPage}
             />
             <Route
               exact
-              path={routes.TASK_DETAILS_ROUTE}
-              component={TaskDetails}
+              path={routes.TASKS_ROUTE}
+              component={TasksPage}
             />
-          </Switch>
-          <Route
-            exact
-            path={routes.LOG_HISTORY_ROUTE}
-            component={LogHistory}
-          />
-          <Route
-            exact
-            path={routes.LOG_EDIT_ROUTE}
-            component={LogEditPage}
-          />
-          <Route
-            exact
-            path={routes.LOG_CREATE_ROUTE}
-            component={LogCreate}
-          />
-          <Switch>
-            <Route
-              exact
-              path={routes.MILESTONE_ADD_ROUTE}
-              component={MilestoneAddPage}
-            />
-            <Route
-              exact
-              path={routes.MILESTONE_DETAILS_ROUTE}
-              component={MilestoneDetailsPage}
-            />
-          </Switch>
-          <Route exact path={routes.ROOT} component={Projects} />
+            <Switch>
+              <Route
+                exact
+                path={routes.TASK_ADD_ROUTE}
+                component={TaskAdd}
+              />
+              <Route
+                exact
+                path={routes.TASK_DETAILS_ROUTE}
+                component={TaskDetails}
+              />
+            </Switch>
+            <Switch>
+              <Route
+                exact
+                path={routes.LOG_HISTORY_ROUTE}
+                component={LogHistory}
+              />
+              <Route
+                exact
+                path={routes.LOG_CREATE_ROUTE}
+                component={LogCreate}
+              />
+              <Route
+                exact
+                path={routes.LOG_EDIT_ROUTE}
+                component={LogEditPage}
+              />
+            </Switch>
+            <Switch>
+              <Route
+                exact
+                path={routes.MILESTONE_ADD_ROUTE}
+                component={MilestoneAddPage}
+              />
+              <Route
+                exact
+                path={routes.MILESTONE_DETAILS_ROUTE}
+                component={MilestoneDetailsPage}
+              />
+            </Switch>
+            <Route exact path={routes.ROOT} component={Projects} />
+          </div>
         </div>
       </PersistGate>
     </Provider>

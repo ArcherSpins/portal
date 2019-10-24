@@ -5,8 +5,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import type { RouterHistory, Match } from 'react-router-dom';
-
-import './milestone-details-page.styles.scss';
+import {
+  Input, Button, TextArea, H1,
+} from 'ui-kit';
+import Header from 'subApps/projects/components/header';
 
 import { selectMilestoneByParams } from '../../redux/milestone/milestone.selectors';
 import {
@@ -21,19 +23,16 @@ import { selectProjectItem } from '../../redux/project/project.selectors';
 
 import { bindUserId, unbindUserId } from '../../helpers/compareArrays';
 import { spentTimeInHours } from '../../helpers/sumTime';
-
 import type {
   Milestone,
   MilestoneCreation,
 } from '../../redux/milestone/milestone.flow-types';
 import type { Error } from '../../redux/error/error.flow-types';
 
-import TextInput from '../../components/forms/text-input/text-input.component';
 import UserPicker from '../../components/user-picker/user-picker.component';
-import InversButton from '../../components/inverse-button/inverse-button.component';
-import CustomButton from '../../components/custom-button/custom-button.component';
-import CustomTextarea from '../../components/forms/custom-textarea/custom-textarea.component';
 import Modal from '../../components/modal/modal.component';
+
+import './milestone-details-page.styles.scss';
 
 type Employee = {
   id: string,
@@ -257,30 +256,31 @@ class MilestoneDetailsPage extends React.Component<Props, State> {
     const { history, match } = this.props;
     return (
       <div className="milestone-details">
-        <div className="header">
-          <h1 style={{ marginBottom: 0 }} className="heading-primary">
+        <Header className="">
+          <H1>
             Milestone #
             {number || 'null'}
 :
             {' '}
             {title}
-          </h1>
-          <InversButton
+          </H1>
+          <Button
             type="button"
-            color="danger"
+            use="danger"
+            size="sm"
             onClick={this.openModalHandler}
           >
             Delete Milestone
-          </InversButton>
-        </div>
+          </Button>
+        </Header>
         <div className="sub-header">
-          <InversButton
+          <Button
             type="button"
-            color="success"
+            size="sm"
             onClick={() => history.push(`${match.url || ''}/tasks`)}
           >
             Tasks
-          </InversButton>
+          </Button>
           <div className="estimation-type-wrapper">
             <b className="estimation-type-title">Spent/Estimation</b>
             <span className="estimation-type-count">
@@ -288,38 +288,49 @@ class MilestoneDetailsPage extends React.Component<Props, State> {
               {' '}
 of
             </span>
-            <input
+            <Input
               type="text"
               className="estimation-input"
+              size="sm"
               onChange={this.handleSpentChange}
               value={estimatedTime}
             />
           </div>
         </div>
         <form onSubmit={this.handleSubmit} className="form">
-          <div style={{ width: '45%' }}>
-            <TextInput
-              header="Milestone"
-              name="title"
-              type="text"
-              value={title}
-              maxLength="100"
-              onChange={this.handleChange}
-              required
-            />
-            <UserPicker
-              getUsers={this.getParticipants}
-              title="Participants"
-              deleteUser={this.deleteParticipant}
-              users={participants}
-            />
-            <UserPicker
-              getUsers={this.getCreator}
-              title="Task Creators"
-              deleteUser={this.deleteCreator}
-              users={taskCreators}
-            />
-            {errors.length >= 1 && (
+          <div className="cpp__form-inputs">
+            <div style={{ width: '45%' }}>
+              <TextArea
+                label="Description"
+                value={description}
+                name="description"
+                onChange={this.handleChange}
+              />
+            </div>
+            <div style={{ width: '45%' }}>
+              <Input
+                label="Milestone"
+                name="title"
+                type="text"
+                className="project__input"
+                value={title}
+                maxLength="100"
+                onChange={this.handleChange}
+                required
+              />
+              <UserPicker
+                getUsers={this.getParticipants}
+                title="Participants"
+                deleteUser={this.deleteParticipant}
+                users={participants}
+              />
+              <UserPicker
+                getUsers={this.getCreator}
+                title="Task Creators"
+                deleteUser={this.deleteCreator}
+                users={taskCreators}
+              />
+              {errors.length >= 1 && (
               <div
                 style={{
                   color: 'red',
@@ -332,19 +343,15 @@ of
                 {errors.join(', ')}
 .
               </div>
-            )}
-            <CustomButton color="success" type="submit">
-              Save
-            </CustomButton>
+              )}
+            </div>
           </div>
-          <div style={{ width: '45%' }}>
-            <CustomTextarea
-              header="Description"
-              className="description"
-              value={description}
-              name="description"
-              onChange={this.handleChange}
-            />
+          <div className="cpp__buttons-group">
+            <Button
+              type="submit"
+            >
+              Save
+            </Button>
           </div>
         </form>
         {isShowing ? (

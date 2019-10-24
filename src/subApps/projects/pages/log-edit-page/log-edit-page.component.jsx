@@ -5,12 +5,14 @@
 // TODO: FIX THIS
 // @flow
 import React from 'react';
-import DatePicker from 'react-datepicker';
 import { connect } from 'react-redux';
 import type { RouterHistory } from 'react-router-dom';
-import noop from 'lodash.noop';
 import { createStructuredSelector } from 'reselect';
-
+import {
+  Input, Button, TextArea, Datepicker, H1,
+} from 'ui-kit';
+import Header from 'subApps/projects/components/header';
+import { addYears } from 'date-fns';
 import { editLog } from '../../redux/log/log.actions';
 
 import { selectProjectItem } from '../../redux/project/project.selectors';
@@ -25,10 +27,6 @@ import { logEditHours, logEditMinutes } from '../../helpers/sumTime';
 // $FlowFixMe
 import 'react-datepicker/dist/react-datepicker.css';
 import '../log-create-page/log-create-page.styles.scss';
-
-import CustomTextarea from '../../components/forms/custom-textarea/custom-textarea.component';
-import CustomButton from '../../components/custom-button/custom-button.component';
-import TextInput from '../../components/forms/text-input/text-input.component';
 
 import type { Project } from '../../redux/project/project.flow-types';
 import type { Milestone } from '../../redux/milestone/milestone.flow-types';
@@ -259,24 +257,28 @@ class LogEditPage extends React.Component<Props, State> {
   };
 
   render() {
-    const { milestone, project } = this.props;
+    const { milestone, project, log } = this.props;
     const { title, number } = milestone;
     const {
       date, comment, errors, minutes, hours,
     } = this.state;
+    const now = new Date();
     return (
       <div className="log-create">
-        <div className="header-wrapper">
-          <h1 className="heading-primary">New Log</h1>
-        </div>
+        <Header>
+          <H1>Edit Log</H1>
+        </Header>
         <form onSubmit={this.handleSubmit} className="body">
-          <div className="sub-header">
-            <h2 className="sub-header-title">Task Name</h2>
-            <div className="project-wrapper">
-              <span className="project-label">Project:</span>
+          <div className="pb1 mb1 border">
+            <h2 className="sub-header-title mb05">{log.task.title}</h2>
+            <div className="project-wrapper mb05">
+              <span className="project-label">
+              Project:
+                {' '}
+              </span>
               <span className="project-title">{project.title}</span>
             </div>
-            <span className="log-create-milestone">
+            <span className="log-create-milestone mb05">
               Milestone #
               {number}
 :
@@ -284,42 +286,40 @@ class LogEditPage extends React.Component<Props, State> {
               {title}
             </span>
           </div>
-          <div className="time-wrapper">
+          <div className="time-wrapper mb1">
             <div className="hours-wrapper">
-              <TextInput
-                header="Hours"
+              <Input
+                label="Hours"
                 onChange={this.handleHoursChange}
                 value={hours}
               />
             </div>
-            <div className="minutes-wrapper">
-              <TextInput
-                header="Minutes"
+            <div className="minutes-wrapper mr1">
+              <Input
+                label="Minutes"
                 onChange={this.handleMinutesChange}
                 value={minutes}
               />
             </div>
             <span className="time-note">{this.showAbleToLog()}</span>
           </div>
-          <div className="date-wrapper">
-            <h3 className="heading-tertiarry">Date</h3>
-            <div className="date-input-wrapper">
-              <DatePicker
-                className="date-input"
-                selected={date}
-                onChange={this.handleDateChange}
-                minDate={new Date()}
-                maxDate={
-                  new Date(new Date().setFullYear(new Date().getFullYear() + 2))
-                }
-                customInput={<ExampleCustomInput />}
-              />
-            </div>
+          <div>
+            <Datepicker
+              className="project__datepicker mb1"
+              label="Date"
+              onChange={this.handleDateChange}
+              value={date}
+              disabledDays={{
+                before: now,
+                after: addYears(now, 2),
+              }}
+            />
           </div>
-          <CustomTextarea
-            header="Comment"
+          <TextArea
+            label="Comment"
             placeholder="Please describe the work you have done"
             value={comment}
+            className="mb1"
             onChange={this.handleChange}
           />
           {errors.length >= 1 && (
@@ -336,56 +336,14 @@ class LogEditPage extends React.Component<Props, State> {
 .
             </div>
           )}
-          <CustomButton type="submit" color="dark-gray">
+          <Button type="submit">
             Save
-          </CustomButton>
+          </Button>
         </form>
       </div>
     );
   }
 }
-
-// TODO: FIX
-type Props2 = {
-  value?: string,
-  onClick?: (e: SyntheticMouseEvent<*>) => void,
-  onChange?: (e: SyntheticInputEvent<HTMLInputElement>) => void
-};
-
-const ExampleCustomInput = ({ value, onChange, onClick }: Props2) => {
-  ExampleCustomInput.defaultProps = {
-    value: '',
-    onClick: noop,
-    onChange: noop,
-  };
-  return (
-    <div className="date-input-wrapper">
-      <input
-        type="text"
-        className="date-input"
-        value={value}
-        onChange={onChange}
-      />
-      <label className="date-label" htmlFor="date" onClick={onClick}>
-        <svg
-          width="17"
-          height="18"
-          viewBox="0 0 17 18"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            fillRule="evenodd"
-            clipRule="evenodd"
-            d="M2.73877 0H4.73877V2H12.7388V0H14.7388V2C15.8433 2 16.7388 2.89543 16.7388 4V16C16.7388 17.1046 15.8433 18 14.7388 18H2.73877C1.6342 18 0.73877 17.1046 0.73877 16V4C0.73877 2.89543 1.6342 2 2.73877 2V0ZM14.7388 6H2.73877V16H14.7388V6Z"
-            fill="black"
-            fillOpacity="0.54"
-          />
-        </svg>
-      </label>
-    </div>
-  );
-};
 
 const mapStateToProps = createStructuredSelector({
   project: selectProjectItem,
