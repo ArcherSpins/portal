@@ -18,7 +18,9 @@ import Hoc from './hoc';
 
 
 const StyledList = (props) => (
-  <ListTable {...props} style={{ maxWidth: '1600px' }} />
+  <div style={{ maxWidth: '1600px' }}>
+    <ListTable {...props} />
+  </div>
 );
 
 type DepartmentsProps = {
