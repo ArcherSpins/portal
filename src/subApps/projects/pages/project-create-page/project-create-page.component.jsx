@@ -302,6 +302,7 @@ class CreateProjectPage extends Component<Props, State> {
                 name="title"
                 type="text"
                 label="Title"
+                placeholder="Project Title"
                 className="project__input"
                 value={title}
                 onChange={this.handleTitleChange}
