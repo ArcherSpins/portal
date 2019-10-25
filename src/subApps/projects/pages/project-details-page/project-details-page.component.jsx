@@ -324,7 +324,7 @@ class ProjectDetailPage extends Component<Props, State> {
         </Header>
         <div className="project-details__sub-header">
           <Button
-            use="grey"
+            use="transparent"
             onClick={() => this.props.history.push(`${ROOT}/${url}/milestones`)}
           >
             Milestones
