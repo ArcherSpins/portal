@@ -38,7 +38,7 @@ const Dropdown = ({
   value,
   name,
   onChange,
-  use,
+  use = '',
   className,
   ...restProps
 }: Props) => (

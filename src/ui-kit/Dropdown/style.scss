@@ -18,6 +18,13 @@
     margin-top: .2rem;
   }
 
+  .cbx__control {
+    height: 100%;
+    min-height: 2rem;
+    box-shadow: none;
+    @include default-transition(all);
+  }
+
   .cbx__option {
     &:hover {
       background-color: rgba($main-color, .6) !important;
@@ -38,6 +45,24 @@
   &.selected {
     .cbx__control {
       border-style: solid;
+    }
+  }
+
+  &.dropdown_default {
+
+    .cbx__control {
+      border: 1px solid $grey;
+      &:hover {
+        border-color: $main-color;
+      }
+    }
+
+    .cbx__control--is-focused {
+      border-color: $main-color;
+    }
+
+    .error-text {
+      padding-left: 0.625rem;
     }
   }
 
@@ -66,18 +91,6 @@
     }
   }
 
-
-  .cbx__control {
-    height: 100%;
-    min-height: 2rem;
-    border-color: $main-color;
-    box-shadow: none;
-
-    &:hover {
-      border-color: $main-color;
-    }
-  }
-
   &.dropdown_underlined {
     border: none;
     border-width: 0;
@@ -99,21 +112,6 @@
     input:disabled .cbx__control {
       border-color: $disabled-color;
     }
-  }
-
-  .default {
-    font-size: 1rem;
-    color: #818a95;
-    margin-bottom: 0.2rem;
-  }
-  
-  .borderless {
-    @extend .default;
-    padding-left: 0.625rem;
-  }
-
-  .underlined {
-    @extend .default;
   }
 }
 
