@@ -40,7 +40,9 @@ export function* getDealsSaga(action: {
     const newColumns = action.payload.columns || { taskIds: [] };
     deals.forEach((item, task) => {
       objCrm[deals[task].id] = deals[task];
-      newColumns[deals[task].stage.id].taskIds.push(deals[task].id);
+      if (newColumns[deals[task].stage.id]) {
+        newColumns[deals[task].stage.id].taskIds.push(deals[task].id);
+      }
     });
     // for (let task = 0; task < deals.length; task += 1) {
     //   objCrm[deals[task].id] = deals[task];

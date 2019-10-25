@@ -183,8 +183,4 @@ const mapDispatchToProps = {
   getEmployees: getEmployeesAction,
 };
 
-export default compose(
-  connect<
-    SearchDealContainerProps, SearchDealContainerProps, _, _, _, _
-  >(mapStateToProps, mapDispatchToProps),
-)(SearchDealContainer);
+export default compose(connect(mapStateToProps, mapDispatchToProps))(SearchDealContainer);

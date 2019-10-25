@@ -83,8 +83,6 @@ const DetailsList = ({
 
   const dateDetailsList = activeUser.createdAt ? dayjs(activeUser.createdAt).format('DD MMMM YYYY hh:mm') : '';
 
-  console.log(data);
-
   return (
     <div className="details-column">
       <ModalMessage

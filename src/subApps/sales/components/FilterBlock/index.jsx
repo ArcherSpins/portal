@@ -43,25 +43,6 @@ const FilterBlock = ({
     manager: filterObject.manager,
   });
 
-  const optionsStatuses = [];
-  const optionsManagers = [];
-
-  for (let i = 0; i < statuses.length; i += 1) {
-    optionsStatuses.push({
-      label: statuses[i].title,
-      value: statuses[i].title,
-      id: statuses[i].id,
-    });
-  }
-
-  for (let i = 0; i < managers.length; i += 1) {
-    optionsManagers.push({
-      label: managers[i].name,
-      value: managers[i].name,
-      id: managers[i].id,
-    });
-  }
-
   const submitFilter = () => {
     onSubmitFilter(data.status, data.manager);
   };
@@ -91,16 +72,6 @@ const FilterBlock = ({
           className="big"
           placeholder="Not specified"
         />
-        {/* <label htmlFor="deal">Deal Title</label>
-        <input
-          id="deal"
-          value={filterObject.deal}
-          onChange={(e) => {
-            changeFilter(e.target.id, e.target.value);
-          }}
-          className="big"
-          placeholder="Not specified"
-        /> */}
       </div>
       <div className="field-block">
         <Input
@@ -112,30 +83,17 @@ const FilterBlock = ({
           value={filterObject.client}
           placeholder="Not specified"
         />
-        {/* <label htmlFor="client">Client Name</label>
-        <input
-          id="client"
-          value={filterObject.client}
-          onChange={(e) => {
-            changeFilter(e.target.id, e.target.value);
-          }}
-          placeholder="Not specified"
-        /> */}
       </div>
       <div className="date-block field-block">
-        <label htmlFor="date">Date</label>
         <div
-          className="d-flex align-items-center justify-content-center date-double-block"
+          className="d-flex align-items-end justify-content-center date-double-block"
         >
           <div className="field-block">
             <Datepicker
+              label="Date"
               value={date}
               onDayChange={(dateRes) => changeFilter('start', dateRes)}
             />
-            {/* <Picker
-              startDate={date}
-              handleChange={(dateRes) => changeFilter('start', dateRes)}
-            /> */}
           </div>
           <span className="tag"> - </span>
           <div className="field-block">
@@ -145,42 +103,41 @@ const FilterBlock = ({
                 changeFilter('end', dateRes);
               }}
             />
-            {/* <Picker
-              startDate={endDate}
-              handleChange={(dateRes) => {
-                changeFilter('end', dateRes);
-              }}
-            /> */}
           </div>
         </div>
       </div>
-      <div className="field-block">
-        <label htmlFor="status">Status</label>
-        <Dropdown
-          styles={customStyles}
-          value={data.status}
-          onChange={changeStatus}
-          className="select-details small"
-          options={optionsStatuses}
-          id="status"
-        />
-      </div>
-      <div className="field-block">
-        <label htmlFor="manager">Manager</label>
-        <Dropdown
-          styles={customStyles}
-          value={data.manager}
-          onChange={changeManager}
-          className="select-details big"
-          options={optionsManagers}
-          id="manager"
-        />
+      <div className="grid-field align-items-center pt-6 ml-20">
+        <div className="field-block">
+          <Dropdown
+            styles={customStyles}
+            value={data.status}
+            onChange={changeStatus}
+            className="select-details small"
+            options={[
+              { title: 'Not select' },
+              ...statuses,
+            ].map((item) => ({ ...item, label: item.title, value: item.title }))}
+            id="status"
+            label="Status"
+          />
+        </div>
+        <div className="field-block">
+          <Dropdown
+            styles={customStyles}
+            value={data.manager}
+            onChange={changeManager}
+            className="select-details big"
+            options={managers.map((item) => ({ ...item, label: item.name, value: item.name }))}
+            label="Manager"
+            id="manager"
+          />
+        </div>
       </div>
       <div className="field-block">
         <Button
           type="button"
           onClick={submitFilter}
-          className="search-button"
+          className="filter-button"
         >
           Search
         </Button>
