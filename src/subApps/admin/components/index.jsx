@@ -11,8 +11,6 @@ import EmployeeItem from './ItemsTable/EmployeeItem';
 
 export * from './ErrorBoundry';
 export * from './Loading/Loading';
-export * from './shared/styled';
-export * from './shared';
 
 export * from './HeadersTable';
 

@@ -38,6 +38,7 @@ const Dropdown = ({
   onChange,
   use,
   className,
+  ...restProps
 }: Props) => (
   <div className={classNames(styles.wrapper, `cbx__wrap dropdown dropdown_${use || ''}`, className)}>
     <label className={classNames(styles[use], 'cbx__label')} htmlFor="select">{label}</label>
@@ -52,6 +53,7 @@ const Dropdown = ({
       name={name}
       value={value}
       isDisabled={disabled}
+      {...restProps}
     />
   </div>
 );

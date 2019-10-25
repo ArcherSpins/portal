@@ -7,11 +7,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {
   Dropdown,
+  Button,
 } from 'ui-kit';
 import {
   LeftNavbar,
   HeaderEmployees,
-  Button,
 } from '../../components';
 import { LoadingContainer } from '../../containers';
 import {
@@ -41,7 +41,8 @@ type State = {
   data: {
     hours: number | string,
     minutes: number | string,
-    days: number | string
+    days: number | string,
+    times: string,
   }
 }
 
@@ -82,6 +83,7 @@ class SittingsProjectsModulePage extends React.Component<Props, State> {
             ...data,
             hours: Number(selected.value.split(':')[0]).toString(),
             minutes: Number(selected.value.split(':')[1]).toString(),
+            times: selected.value,
           },
         });
         break;
@@ -99,6 +101,7 @@ class SittingsProjectsModulePage extends React.Component<Props, State> {
 
   getDays = () => {
     const { spentTimeBounds } = this.props;
+    const { data } = this.state;
     const days: Array<{
       label: number,
       value: number,
@@ -113,7 +116,9 @@ class SittingsProjectsModulePage extends React.Component<Props, State> {
       });
     }
 
-    const selected = days.find((item) => item.label === spentTimeBounds.days);
+    const selected = days.find(
+      (item) => item.label === (Number(data.days || spentTimeBounds.days)),
+    );
 
     return {
       days,
@@ -123,6 +128,7 @@ class SittingsProjectsModulePage extends React.Component<Props, State> {
 
   getTimes = () => {
     const { spentTimeBounds } = this.props;
+    const { data } = this.state;
     const arr = [];
 
     for (let i = 0; i < 24; i += 1) {
@@ -130,15 +136,17 @@ class SittingsProjectsModulePage extends React.Component<Props, State> {
         id: i,
         label: `${String(i).padStart(2, '0')}:00`,
         value: `${String(i).padStart(2, '0')}:00`,
-        selected: spentTimeBounds.hours === i
-          && spentTimeBounds.minutes === 0,
+        selected: data.times === `${String(i).padStart(2, '0')}:00`
+          || (spentTimeBounds.hours === i
+          && spentTimeBounds.minutes === 0),
       });
       arr.push({
         id: i,
         label: `${String(i).padStart(2, '0')}:30`,
         value: `${String(i).padStart(2, '0')}:30`,
-        selected: spentTimeBounds.hours === i
-          && spentTimeBounds.minutes === 30,
+        selected: data.times === `${String(i).padStart(2, '0')}:00`
+          || (spentTimeBounds.hours === i
+          && spentTimeBounds.minutes === 30),
       });
     }
 
