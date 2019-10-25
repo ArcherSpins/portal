@@ -87,6 +87,7 @@ class Projects extends Component<Props, State> {
             <Button
               onClick={this.onNewProjectClick}
               use="transparent"
+              size="sm"
             >
               Create new project
             </Button>
