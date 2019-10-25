@@ -10,6 +10,10 @@ export const Header = styled.header`
     return result;
   }};
   margin-bottom: 20px;
+
+  h1 {
+    margin-top: 15px;
+  }
 `;
 
 export const LeftBlock = styled.div`
@@ -41,7 +45,7 @@ export const RightBlock = styled.div`
 
   .delete-deal-button {
     color: #333333;
-    border-color: #C6CCD5;
+    border: 1px solid #C6CCD5;
 
     &:hover {
       color: white;
