@@ -221,13 +221,13 @@ class ProjectDetailPage extends Component<Props, State> {
 
   deleteParticipant = (id: string) => {
     this.setState({
-      participants: this.state.participants.filter((p) => p.id !== id),
+      participants: this.state.participants.filter((p) => p.value !== id),
     });
   };
 
   deleteWatcher = (id: string) => {
     this.setState({
-      watchers: this.state.watchers.filter((p) => p.id !== id),
+      watchers: this.state.watchers.filter((p) => p.value !== id),
     });
   };
 
@@ -256,15 +256,15 @@ class ProjectDetailPage extends Component<Props, State> {
 
       const watcherPropsIDs = this.props.project.watchers.map((w) => w.id.toString());
       const participantsPropsIDs = this.props.project.participants.map((p) => p.id.toString());
-      const watcherIDs = watchers.map((w) => w.id.toString());
+      const watcherIDs = watchers.map((w) => w.value.toString());
 
-      const participantsIDs = participants.map((p) => p.id.toString());
+      const participantsIDs = participants.map((p) => p.value.toString());
       const editedProject = {
         id,
         title,
         URL: url,
         description,
-        managerID: manager.id.toString(),
+        managerID: manager.value.toString(),
         engagementModel: engagement,
         type,
         unbindWatchers: unbindUserId(watcherPropsIDs, watcherIDs),
@@ -435,6 +435,7 @@ h
                 selectedOption={manager}
                 label="Project Manager"
                 className="mb1"
+                use="grey"
               />
 
               <Participants
@@ -448,6 +449,7 @@ h
                   name="participants"
                   label="Participants"
                   className="mb05"
+                  use="grey"
                 />
               </Participants>
               <Participants
@@ -461,6 +463,7 @@ h
                   name="watchers"
                   label="Watchers"
                   className="mb1"
+                  use="grey"
                 />
               </Participants>
               {this.state.errors.length >= 1 && (

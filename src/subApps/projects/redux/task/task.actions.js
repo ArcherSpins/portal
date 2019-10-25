@@ -1,6 +1,6 @@
 // @flow
 import type { RouterHistory } from 'react-router-dom';
-import { taskActionTypes } from './task.types';
+import taskActionTypes from './task.types';
 import type { TaskCreation, Dispatch } from './task.flow-types';
 import { clearErrors } from '../error/error.actions';
 import {
@@ -85,3 +85,8 @@ export const deleteTask = (taskId: string, history: RouterHistory) => (
       payload: error.graphQLErrors[0],
     }));
 };
+
+
+export const getTaskStatuses = () => ({
+  type: taskActionTypes.GET_TASKS_STATUSES_REQUEST,
+});

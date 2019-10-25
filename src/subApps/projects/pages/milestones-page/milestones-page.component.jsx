@@ -6,7 +6,8 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import type { Match } from 'react-router-dom';
 import Header from 'subApps/projects/components/header';
-import { H1 } from 'ui-kit';
+import { H1, Button } from 'ui-kit';
+import history from 'utils/history';
 import { selectProjectsMolestones } from '../../redux/milestone/milestone.selectors';
 import { selectProjectItem } from '../../redux/project/project.selectors';
 import { getAllMilestones } from '../../redux/milestone/milestone.actions';
@@ -14,7 +15,6 @@ import { getAllMilestones } from '../../redux/milestone/milestone.actions';
 import './milestones-page.styles.scss';
 
 import MilestoneItem from '../../components/milestone-item/milestone-item.component';
-import LinkButton from '../../components/link-button/link-button.component';
 import PaginationComponent from '../../components/pagination/pagination.component';
 
 import type { Milestone } from '../../redux/milestone/milestone.flow-types';
@@ -50,9 +50,14 @@ class MilestonePage extends React.Component<Props, State> {
     this.setState({ activePage: pageNumber });
   };
 
+  onAddMilestone = () => {
+    const { match } = this.props;
+    history.push(`${match.url}/create`);
+  }
+
   render() {
     const { openDescription, activePage } = this.state;
-    const { milestones, project, match } = this.props;
+    const { milestones, project } = this.props;
     return (
       <div className="milestones">
         <Header>
@@ -113,9 +118,13 @@ class MilestonePage extends React.Component<Props, State> {
                 </button>
               </div>
             </div>
-            <LinkButton to={`${match.url}/create`}>
+            <Button
+              use="transparent"
+              onClick={this.onAddMilestone}
+              size="sm"
+            >
               Add Milestone
-            </LinkButton>
+            </Button>
           </div>
           {milestones.length >= 1 && (
             <PaginationComponent

@@ -1,9 +1,11 @@
 // @flow
 import type { TaskState, TaskAction } from './task.flow-types';
+import TaskActionTypes from './task.types';
 
 const INITIAL_STATE = {
   tasks: [],
   loading: false,
+  statuses: [],
 };
 
 const taskReducer = (
@@ -11,8 +13,6 @@ const taskReducer = (
   action: TaskAction,
 ): TaskState => {
   switch (action.type) {
-    default:
-      return state;
     case 'SET_TASK_LOADING':
       return {
         ...state,
@@ -51,6 +51,15 @@ const taskReducer = (
         ...state,
         tasks: state.tasks.filter((task) => task.id !== action.payload),
       };
+
+    case TaskActionTypes.GET_TASKS_STATUSES_SUCCESS:
+      return {
+        ...state,
+        statuses: action.payload,
+      };
+
+    default:
+      return state;
   }
 };
 

@@ -9,7 +9,6 @@ import { components } from 'react-select';
 import './style.scss';
 
 export type Option = {
-  id: string,
   label: string,
   value: string
 }
@@ -20,7 +19,7 @@ export type Action = {
   option?: string
 }
 
-type ComboboxType = 'borderless' | 'default' | 'underlined';
+type ComboboxType = 'borderless' | 'default' | 'underlined' | 'grey';
 
 type Props = {
   loadOptions: () => Promise<Array<Option>>,
@@ -62,14 +61,14 @@ const Combobox = ({
   error,
   label,
   className,
-  use,
+  use = 'default',
   ...restProps
 }: Props) => (
   <div
     className={
       classNames(
         'cbx__wrap wrapper',
-        `combobox_${use || ''}`,
+        `combobox_${use}`,
         {
           selected: !!selectedOption,
           'error-select': !!error,

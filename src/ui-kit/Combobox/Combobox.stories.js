@@ -97,6 +97,17 @@ storiesOf('Combobox', module)
               />
             },
           },
+          {
+            title: 'Combobox use=grey',
+            sectionFn: () => {
+              return <Combobox
+                onChange={onChange}
+                loadOptions={loadOptions}
+                label="Title"
+                use="grey"
+              />
+            },
+          },
         ],
       },
     ],

@@ -5,11 +5,16 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import type { RouterHistory, Match } from 'react-router-dom';
+import uniqBy from 'lodash.uniqby';
 import {
-  Input, Button, TextArea, H1,
+  Input, Button, TextArea, H1, Combobox, Participants,
 } from 'ui-kit';
 import Header from 'subApps/projects/components/header';
 
+import type { Option, Action } from 'ui-kit/Combobox';
+import type { Action as ParticipantsAction } from 'ui-kit/Participants';
+
+import { getEmployees } from '../../graphql/queries/employess.queries';
 import { selectMilestoneByParams } from '../../redux/milestone/milestone.selectors';
 import {
   editMilestone,
@@ -20,7 +25,6 @@ import {
 
 import { selectServerError } from '../../redux/error/error.selectors';
 import { selectProjectItem } from '../../redux/project/project.selectors';
-
 import { bindUserId, unbindUserId } from '../../helpers/compareArrays';
 import { spentTimeInHours } from '../../helpers/sumTime';
 import type {
@@ -28,8 +32,6 @@ import type {
   MilestoneCreation,
 } from '../../redux/milestone/milestone.flow-types';
 import type { Error } from '../../redux/error/error.flow-types';
-
-import UserPicker from '../../components/user-picker/user-picker.component';
 import Modal from '../../components/modal/modal.component';
 
 import './milestone-details-page.styles.scss';
@@ -46,8 +48,7 @@ type State = {
   title: string,
   status: string,
   number: number,
-  taskCreators: Array<Employee>,
-  participants: Array<Employee>,
+  participants: Array<Option>,
   spentTime: number,
   estimatedTime: string | number,
   isShowing: boolean,
@@ -73,7 +74,6 @@ const initialState = {
   id: '',
   title: '',
   status: '',
-  taskCreators: [],
   participants: [],
   spentTime: 0,
   estimatedTime: 0,
@@ -90,8 +90,7 @@ class MilestoneDetailsPage extends React.Component<Props, State> {
       number: props.milestone.number,
       title: props.milestone.title,
       status: props.milestone.state.title,
-      taskCreators: props.milestone.taskCreators,
-      participants: props.milestone.participants,
+      participants: this.formatEmployees(props.milestone.participants),
       estimatedTime: props.milestone.estimatedTime / 60,
       spentTime: props.milestone.spentTime,
       description: props.milestone.description,
@@ -140,7 +139,7 @@ class MilestoneDetailsPage extends React.Component<Props, State> {
 
   validate = () => {
     const {
-      title, participants, taskCreators, estimatedTime,
+      title, participants, estimatedTime,
     } = this.state;
     const errors = [];
 
@@ -156,10 +155,6 @@ class MilestoneDetailsPage extends React.Component<Props, State> {
       errors.push('Participants Field');
     }
 
-    if (taskCreators.length <= 0) {
-      errors.push('Task Creators Field');
-    }
-
     if (!estimatedTime) {
       errors.push('Spent Field');
     }
@@ -172,7 +167,6 @@ class MilestoneDetailsPage extends React.Component<Props, State> {
     const {
       title,
       id,
-      taskCreators,
       participants,
       estimatedTime,
       description,
@@ -183,11 +177,10 @@ class MilestoneDetailsPage extends React.Component<Props, State> {
     if (isValid.length) {
       this.setState({ errors: isValid });
     } else {
-      const taskCreatorsPropsIDs = milestone.taskCreators.map((w) => w.id.toString());
+      // const taskCreatorsPropsIDs = milestone.taskCreators.map((w) => w.id.toString());
       const participantsPropsIDs = milestone.participants.map((p) => p.id.toString());
-      const taskCreatorsIDs = taskCreators.map((w) => w.id.toString());
 
-      const participantsIDs = participants.map((p) => p.id.toString());
+      const participantsIDs = participants.map((p) => p.value.toString());
       const newEst = parseFloat(estimatedTime) * 60;
       const editedMilestone = {
         id,
@@ -195,8 +188,8 @@ class MilestoneDetailsPage extends React.Component<Props, State> {
         description,
         estTime: newEst.toString(),
         stateID: 'a9bfe6d2-9a5a-4dda-96b2-daeff3404a20',
-        unbindTaskCreators: unbindUserId(taskCreatorsPropsIDs, taskCreatorsIDs),
-        bindTaskCreators: bindUserId(taskCreatorsPropsIDs, taskCreatorsIDs),
+        // unbindTaskCreators: unbindUserId(taskCreatorsPropsIDs, taskCreatorsIDs),
+        // bindTaskCreators: bindUserId(taskCreatorsPropsIDs, taskCreatorsIDs),
         unbindParticipants: unbindUserId(participantsPropsIDs, participantsIDs),
         bindParticipants: bindUserId(participantsPropsIDs, participantsIDs),
       };
@@ -208,22 +201,8 @@ class MilestoneDetailsPage extends React.Component<Props, State> {
 
   deleteParticipant = (id: string) => {
     this.setState((state) => ({
-      participants: state.participants.filter((p) => p.id !== id),
+      participants: state.participants.filter((p) => p.value !== id),
     }));
-  };
-
-  deleteCreator = (id: string) => {
-    this.setState((state) => ({
-      taskCreators: state.taskCreators.filter((p) => p.id !== id),
-    }));
-  };
-
-  getParticipants = (participants: Array<Employee>) => {
-    this.setState({ participants });
-  };
-
-  getCreator = (taskCreators: Array<Employee>) => {
-    this.setState({ taskCreators });
   };
 
   onDeleteClick = () => {
@@ -241,10 +220,38 @@ class MilestoneDetailsPage extends React.Component<Props, State> {
     this.setState({ isShowing: false }, () => deleteMilestone(id, pushTo));
   };
 
+  loadEmployees = async (value: string) => {
+    const employees = await getEmployees(value);
+    return this.formatEmployees(employees.data.employees.employees);
+  }
+
+  formatEmployees = (employees: Array<Employee>): Array<Option> => employees
+    .map((em) => this.formatEmployee(em))
+
+
+  formatEmployee = (employee: Employee): Option => ({
+    id: employee.id,
+    label: employee.name ? employee.name : `${employee.firstName} ${employee.lastName}`,
+    value: employee.id,
+  });
+
+  onChipDelete = ({ name, value }: ParticipantsAction) => {
+    this.setState((state) => ({
+      [name]: state[name].filter((item) => item.id !== value),
+    }));
+  }
+
+  handleChipInputChange = (option: Option, { name }: Action) => {
+    if (name) {
+      this.setState((state) => ({
+        [name]: uniqBy([...state[name], option], (e) => e.id),
+      }));
+    }
+  }
+
   render() {
     const {
       title,
-      taskCreators,
       participants,
       estimatedTime,
       spentTime,
@@ -286,7 +293,7 @@ class MilestoneDetailsPage extends React.Component<Props, State> {
             <span className="estimation-type-count">
               {spentTimeInHours(spentTime)}
               {' '}
-of
+              of
             </span>
             <Input
               type="text"
@@ -318,18 +325,20 @@ of
                 onChange={this.handleChange}
                 required
               />
-              <UserPicker
-                getUsers={this.getParticipants}
-                title="Participants"
-                deleteUser={this.deleteParticipant}
-                users={participants}
-              />
-              <UserPicker
-                getUsers={this.getCreator}
-                title="Task Creators"
-                deleteUser={this.deleteCreator}
-                users={taskCreators}
-              />
+              <Participants
+                chips={participants}
+                onDelete={this.onChipDelete}
+                name="participants"
+              >
+                <Combobox
+                  label="Participants"
+                  onChange={this.handleChipInputChange}
+                  className="mb05"
+                  loadOptions={this.loadEmployees}
+                  name="participants"
+                  use="grey"
+                />
+              </Participants>
               {errors.length >= 1 && (
               <div
                 style={{

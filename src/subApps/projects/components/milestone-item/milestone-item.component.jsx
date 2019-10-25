@@ -36,13 +36,11 @@ const MilestoneItem = (props: Props) => (
           `${props.match.url || ''}/milestone${props.number}`,
         )}
       >
-        {props.title.length > 25
-          ? `${props.title.substring(0, 30)}...`
-          : props.title}
+        {props.title}
       </span>
       <span className="milestone-item__spent">
         {spentTimeInHours(props.spentTime)}
-/
+        /
         {props.estimatedTime / 60}
       </span>
       <span className="milestone-item__status">{props.status}</span>
