@@ -1,7 +1,11 @@
 // @flow
 import type { Dispatch as ReduxDispatch } from 'redux';
-
+import type { DatabaseRecord } from '../basic-types';
 import type { ErrorAction } from '../error/error.flow-types';
+
+export type TaskStatus = {
+  title: string
+} & DatabaseRecord;
 
 export type Task = {
   id: string,
@@ -13,10 +17,7 @@ export type Task = {
     id: string,
     name: string
   },
-  state: {
-    id: string,
-    title: string
-  },
+  state: TaskStatus,
   milestone: {
     id: string,
     title: string,
@@ -40,7 +41,8 @@ export type TaskCreation = {
 
 export type TaskState = {
   tasks: Array<Task>,
-  loading: boolean
+  loading: boolean,
+  statuses: Array<TaskStatus>
 };
 
 export type TaskAction =
@@ -48,7 +50,8 @@ export type TaskAction =
   | { type: "DELETE_TASK", payload: string }
   | { type: "CREATE_TASK", payload: Task }
   | { type: "GET_TASKS", payload: Array<Task> }
-  | { type: "EDIT_TASK", payload: Task };
+  | { type: "EDIT_TASK", payload: Task }
+  | { type: "GET_TASKS_STATUSES_SUCCESS", payload: Array<TaskStatus> }
 // | { type: "DELETE_TASK_BY_MILESTONE", payload: string };
 
 export type Dispatch = ReduxDispatch<TaskAction | ErrorAction>;

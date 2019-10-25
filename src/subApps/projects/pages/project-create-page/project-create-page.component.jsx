@@ -170,7 +170,7 @@ class CreateProjectPage extends Component<Props, State> {
 
   deleteParticipant = (id: string) => {
     this.setState((state) => ({
-      participants: state.participants.filter((p) => p.id !== id),
+      participants: state.participants.filter((p) => p.value !== id),
     }),
     () => {
       this.setState({});
@@ -179,7 +179,7 @@ class CreateProjectPage extends Component<Props, State> {
 
   deleteWatcher = (id: string) => {
     this.setState((state) => ({
-      watchers: state.watchers.filter((p) => p.id !== id),
+      watchers: state.watchers.filter((p) => p.value !== id),
     }));
   };
 
@@ -223,14 +223,14 @@ class CreateProjectPage extends Component<Props, State> {
       // TODO: FIX THIS
       // eslint-disable-next-line no-shadow
       const { saveProject, history } = this.props;
-      const watcherIDs = watchers.map((w) => w.id.toString());
+      const watcherIDs = watchers.map((w) => w.value.toString());
 
-      const participantsIDs = participants.map((p) => p.id.toString());
+      const participantsIDs = participants.map((p) => p.value.toString());
       const newProject = {
         title,
         URL,
         description,
-        managerID: manager ? manager.id.toString() : '',
+        managerID: manager ? manager.value.toString() : '',
         engagementModel,
         type,
         watchers: watcherIDs,

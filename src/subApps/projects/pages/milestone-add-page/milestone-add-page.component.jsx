@@ -104,7 +104,7 @@ class MilestoneAddPage extends React.Component<Props, State> {
 
   deleteParticipant = (id: string) => {
     this.setState((state) => ({
-      participants: state.participants.filter((p) => p.id !== id),
+      participants: state.participants.filter((p) => p.value !== id),
     }));
   };
 
@@ -152,7 +152,7 @@ class MilestoneAddPage extends React.Component<Props, State> {
     } else {
       // const taskCreatorsIDs = taskCreators.map((w) => w.id.toString());
 
-      const participantIDs = participants.map((p) => p.id.toString());
+      const participantIDs = participants.map((p) => p.value.toString());
       const newSpent = parseFloat(spent) * 60;
       const newMilestone = {
         title,

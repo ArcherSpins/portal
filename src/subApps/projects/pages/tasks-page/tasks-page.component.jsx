@@ -6,7 +6,8 @@ import { createStructuredSelector } from 'reselect';
 import Header from 'subApps/projects/components/header';
 import './tasks-page.styles.scss';
 
-import { H1 } from 'ui-kit';
+import { H1, Button } from 'ui-kit';
+import history from 'utils/history';
 import { getTasks } from '../../redux/task/task.actions';
 
 import { selectMilestoneByParams } from '../../redux/milestone/milestone.selectors';
@@ -16,8 +17,6 @@ import { selectAllTasks } from '../../redux/task/task.selectors';
 import type { Milestone } from '../../redux/milestone/milestone.flow-types';
 import type { Task } from '../../redux/task/task.flow-types';
 import type { Project } from '../../redux/project/project.flow-types';
-
-import LinkButton from '../../components/link-button/link-button.component';
 import PaginationComponent from '../../components/pagination/pagination.component';
 import TaskItem from '../../components/task-item/task-item.component';
 
@@ -55,9 +54,14 @@ class TasksPage extends React.Component<Props, State> {
     this.setState({ activePage: pageNumber });
   };
 
+  onAddTaskClick = () => {
+    const { match } = this.props;
+    history.push(`${match.url}/create`);
+  }
+
   render() {
     const { openDescription, activePage } = this.state;
-    const { project, milestone, match } = this.props;
+    const { project, milestone } = this.props;
     const { tasks } = this.props;
     return (
       <div className="tasks">
@@ -126,9 +130,13 @@ class TasksPage extends React.Component<Props, State> {
               </div>
             </div>
             <div className="tasks__subheader-right">
-              <LinkButton to={`${match.url}/create`}>
+              <Button
+                use="transparent"
+                size="sm"
+                onClick={this.onAddTaskClick}
+              >
                 Add Task
-              </LinkButton>
+              </Button>
             </div>
           </div>
           {tasks.length >= 1 && (

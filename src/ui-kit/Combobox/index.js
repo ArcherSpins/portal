@@ -9,7 +9,6 @@ import { components } from 'react-select';
 import './style.scss';
 
 export type Option = {
-  id: string,
   label: string,
   value: string
 }

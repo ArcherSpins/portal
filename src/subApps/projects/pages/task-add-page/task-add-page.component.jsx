@@ -6,8 +6,9 @@ import { createStructuredSelector } from 'reselect';
 
 import Header from 'subApps/projects/components/header';
 import {
-  Input, TextArea, Button, H1,
+  Input, TextArea, Button, H1, Dropdown,
 } from 'ui-kit';
+import type { Option, Action } from 'ui-kit/Combobox';
 
 import { selectMilestoneByParams } from '../../redux/milestone/milestone.selectors';
 import { selectProjectItem } from '../../redux/project/project.selectors';
@@ -25,7 +26,7 @@ import './task-add.page.styles.scss';
 type State = {
   subject: string,
   description: string,
-  assignee: string,
+  assignee: Option,
   errors: Array<string>
 };
 
@@ -40,19 +41,17 @@ type Props = {
 const initialState = {
   subject: '',
   description: '',
-  assignee: '',
+  assignee: {
+    value: '',
+    label: 'Not assigned',
+  },
   errors: [],
 };
 
 class TaskAdd extends React.Component<Props, State> {
   constructor() {
     super();
-    this.state = {
-      subject: '',
-      description: '',
-      assignee: '',
-      errors: [],
-    };
+    this.state = initialState;
   }
 
   // eslint-disable-next-line camelcase
@@ -69,7 +68,7 @@ class TaskAdd extends React.Component<Props, State> {
     this.setState({ [name]: value });
   };
 
-  validate = () => {
+  validate = (): Array<string> => {
     const { subject, assignee } = this.state;
     const errors = [];
 
@@ -91,19 +90,27 @@ class TaskAdd extends React.Component<Props, State> {
     // TODO: FIX THIS
     // eslint-disable-next-line no-shadow
     const { milestone, history, createTask } = this.props;
-    if (isValid.length) {
+    if (isValid.length > 0) {
       this.setState({ errors: isValid });
     } else {
       const newTask = {
         title: subject,
         milestoneID: milestone.id,
         description,
-        assignedUserID: assignee,
+        assignedUserID: assignee.value,
       };
       createTask(newTask, history);
       this.setState(initialState);
     }
   };
+
+  handleDropdownChange = (option: Option, { name }: Action) => {
+    if (name) {
+      this.setState({
+        [name]: option,
+      });
+    }
+  }
 
   render() {
     const {
@@ -154,24 +161,13 @@ class TaskAdd extends React.Component<Props, State> {
             />
             <div className="select-wrapper">
               <h3 className="heading-tertiarry">Assignee</h3>
-              <select
-                className="select"
-                name="assignee"
+              <Dropdown
                 value={assignee}
-                onChange={this.handleChange}
+                onChange={this.handleDropdownChange}
+                name="assignee"
+                options={participants.map((p) => ({ value: p.id, label: p.name }))}
                 required
-              >
-                <option value="" disabled selected>
-                  Not selected
-                </option>
-                {participants.length >= 1
-                  ? participants.map((p) => (
-                    <option key={p.id} value={`${p.id}`}>
-                      {p.name}
-                    </option>
-                  ))
-                  : null}
-              </select>
+              />
             </div>
             {errors.length >= 1 && (
               <div

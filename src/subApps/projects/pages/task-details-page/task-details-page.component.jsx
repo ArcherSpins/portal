@@ -4,29 +4,28 @@ import { connect } from 'react-redux';
 import type { RouterHistory, Match } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import {
-  Button, TextArea, Input, H1,
+  Button, TextArea, Input, H1, Dropdown,
 } from 'ui-kit';
+import type { Option, Action } from 'ui-kit/Combobox';
 import Header from 'subApps/projects/components/header';
 
-import { editTask, deleteTask } from '../../redux/task/task.actions';
-import { selectTaskByParams } from '../../redux/task/task.selectors';
+import { editTask, deleteTask, getTaskStatuses } from '../../redux/task/task.actions';
+import { selectTaskByParams, selectTaskStatuses } from '../../redux/task/task.selectors';
 import { selectMilestoneByParams } from '../../redux/milestone/milestone.selectors';
 import { selectServerError } from '../../redux/error/error.selectors';
 
 import type { Milestone } from '../../redux/milestone/milestone.flow-types';
 import type { Task, TaskCreation } from '../../redux/task/task.flow-types';
 import type { Error } from '../../redux/error/error.flow-types';
-
-import { states } from './task-details.states';
 import './task-details-page.styles.scss';
 
 import Modal from '../../components/modal/modal.component';
 
 type State = {
-  status: string,
+  status: Option,
   subject: string,
   description: string,
-  assignee: string,
+  assignee: Option,
   errors: Array<string>,
   isShowing: boolean,
   milestone: {
@@ -45,6 +44,8 @@ type Props = {
   milestone: Milestone,
   editTask: (task: TaskCreation, history: RouterHistory) => Task,
   deleteTask: (taskId: string, history: RouterHistory) => void,
+  getTaskStatuses: () => void,
+  taskStates: Array<Option>,
   history: RouterHistory,
   match: Match,
   error: Error
@@ -56,13 +57,24 @@ class TaskDetails extends React.Component<Props, State> {
     this.state = {
       project: props.task.project,
       milestone: props.task.milestone,
-      status: props.task.state.id,
+      status: {
+        value: props.task.state.id,
+        label: props.task.state.title,
+      },
       subject: props.task.title,
       description: props.task.description,
-      assignee: props.task.assignedUser.name,
+      assignee: {
+        value: props.task.assignedUser.id,
+        label: props.task.assignedUser.name,
+      },
       errors: [],
       isShowing: false,
     };
+  }
+
+  componentDidMount() {
+    const { getTaskStatuses: getStatuses } = this.props;
+    getStatuses();
   }
 
   handleChange = (e: SyntheticInputEvent<*>) => {
@@ -97,7 +109,9 @@ class TaskDetails extends React.Component<Props, State> {
   handleSubmit = (e: SyntheticInputEvent<*>) => {
     e.preventDefault();
     const isValid = this.validate();
-    const { subject, description, status } = this.state;
+    const {
+      subject, description, status, assignee,
+    } = this.state;
     // TODO: Fix this
     // eslint-disable-next-line no-shadow
     const { task, editTask, history } = this.props;
@@ -107,10 +121,10 @@ class TaskDetails extends React.Component<Props, State> {
     } else {
       const editedTask = {
         id,
-        stateID: status,
+        stateID: status.value,
         title: subject,
         description,
-        assignedUserID: '0',
+        assignedUserID: assignee.value,
       };
       editTask(editedTask, history);
     }
@@ -137,6 +151,14 @@ class TaskDetails extends React.Component<Props, State> {
     });
   };
 
+  handleDropdownChange = (option: Option, { name }: Action) => {
+    if (name) {
+      this.setState({
+        [name]: option,
+      });
+    }
+  }
+
   render() {
     const {
       subject,
@@ -148,7 +170,9 @@ class TaskDetails extends React.Component<Props, State> {
       milestone,
       isShowing,
     } = this.state;
-    const { match, history } = this.props;
+    const {
+      match, history, taskStates, milestone: { participants },
+    } = this.props;
     return (
       <div className="task-details">
         <Header>
@@ -196,11 +220,17 @@ class TaskDetails extends React.Component<Props, State> {
             />
             <div className="status-wrapper">
               <h3 className="heading-tertiarry">Status</h3>
-              <select
+              <Dropdown
+                onChange={this.handleDropdownChange}
+                name="status"
+                value={status}
+                options={taskStates}
+              />
+              {/* <select
                 onChange={this.handleChange}
                 name="status"
                 value={status}
-                className="status-field"
+            \    className="status-field"
                 required
               >
                 {states.map((o) => (
@@ -208,37 +238,17 @@ class TaskDetails extends React.Component<Props, State> {
                     {o.title}
                   </option>
                 ))}
-              </select>
+              </select> */}
             </div>
             <div className="select-wrapper">
               <h3 className="heading-tertiarry">Assignee</h3>
-              <select
-                className="select"
-                required
-                name="assignee"
+              <Dropdown
                 value={assignee}
-                onChange={this.handleChange}
-              >
-                {assignee ? (
-                  <option value={`${assignee}`} selected>
-                    {assignee}
-                  </option>
-                ) : (
-                  <option value="" disabled selected>
-                    Not selected
-                  </option>
-                )}
-                {/* eslint-disable-next-line react/destructuring-assignment */}
-                {this.props.milestone
-                  // TODO: FIX ME
-                  // eslint-disable-next-line react/destructuring-assignment
-                  ? this.props.milestone.participants.map((p) => (
-                    <option key={p.id} value={`${p.name}`}>
-                      {p.name}
-                    </option>
-                  ))
-                  : null}
-              </select>
+                onChange={this.handleDropdownChange}
+                name="assignee"
+                options={participants.map((p) => ({ value: p.id, label: p.name }))}
+                required
+              />
             </div>
             <div>
               {errors.length >= 1 && (
@@ -306,10 +316,11 @@ const mapStateToProps = createStructuredSelector({
   task: selectTaskByParams,
   milestone: selectMilestoneByParams,
   error: selectServerError,
+  taskStates: selectTaskStatuses,
 });
 
 // $FlowFixMe
 export default connect(
   mapStateToProps,
-  { deleteTask, editTask },
+  { deleteTask, editTask, getTaskStatuses },
 )(TaskDetails);

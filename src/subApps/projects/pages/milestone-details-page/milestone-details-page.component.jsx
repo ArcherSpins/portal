@@ -180,7 +180,7 @@ class MilestoneDetailsPage extends React.Component<Props, State> {
       // const taskCreatorsPropsIDs = milestone.taskCreators.map((w) => w.id.toString());
       const participantsPropsIDs = milestone.participants.map((p) => p.id.toString());
 
-      const participantsIDs = participants.map((p) => p.id.toString());
+      const participantsIDs = participants.map((p) => p.value.toString());
       const newEst = parseFloat(estimatedTime) * 60;
       const editedMilestone = {
         id,
@@ -201,7 +201,7 @@ class MilestoneDetailsPage extends React.Component<Props, State> {
 
   deleteParticipant = (id: string) => {
     this.setState((state) => ({
-      participants: state.participants.filter((p) => p.id !== id),
+      participants: state.participants.filter((p) => p.value !== id),
     }));
   };
 

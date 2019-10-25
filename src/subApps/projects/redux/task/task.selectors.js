@@ -10,6 +10,8 @@ type Props = {
 
 const selectTask = (state: State) => state.task.tasks;
 const selectTaskId = (state: State, ownProps: Props) => ownProps.match.params.taskId;
+const selectTaskStates = (state: State) => state.task.statuses;
+
 
 export const selectAllTasks = createSelector<State, *, *, *, *, *, *, *, *>(
   [selectTask],
@@ -23,4 +25,10 @@ export const selectTaskByParams = createSelector<State, *, *, *, *, *, *, *, *>(
   (tasks: Array<Task>, taskId: string) => tasks.find(
     (task) => task.number === parseFloat(taskId.substring(4)),
   ),
+);
+
+// $FlowFixMe
+export const selectTaskStatuses = createSelector(
+  [selectTaskStates],
+  (statuses) => statuses.map((st) => ({ value: st.id, label: st.title })),
 );
