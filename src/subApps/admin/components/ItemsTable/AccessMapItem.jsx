@@ -4,7 +4,10 @@ import { ItemList, Item } from './styled';
 
 type ItemProps = {
   data: {
-    name: string,
+    module: string,
+    role_name: string,
+    role_access: string,
+    employee_name: string,
     id: string | number
   }
 }
@@ -13,9 +16,9 @@ export default ({
   data,
 }: ItemProps) => (
   <ItemList>
-    <Item>{data.name}</Item>
-    <Item>{data.name}</Item>
-    <Item>{data.name}</Item>
-    <Item>{data.name}</Item>
+    <Item>{data.module}</Item>
+    <Item>{data.role_name}</Item>
+    <Item>{data.role_access}</Item>
+    <Item>{data.employee_name}</Item>
   </ItemList>
 );

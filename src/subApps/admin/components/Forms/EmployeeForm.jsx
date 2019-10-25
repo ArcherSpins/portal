@@ -8,14 +8,11 @@
 import React from 'react';
 import { compose } from 'redux';
 import { graphql } from 'react-apollo';
+import { format } from 'date-fns';
 // $FlowFixMe
 import {
-  Dropdown, Combobox, Input, Datepicker,
+  Dropdown, Combobox, Input, Datepicker, Toast,
 } from 'ui-kit';
-import {
-  InputToggle,
-  PickerToggle,
-} from '..';
 import { getCities } from '../../graphql/queries';
 import type { Employee, CityType } from '../../types';
 import {
@@ -95,7 +92,8 @@ class EmployeeForm extends React.Component<
     this.setState({
       formData: {
         ...data,
-        position: this.getPosition(defaultData),
+        position: this.getPosition(defaultData).find((item) => item.active),
+        dateOfEmployment: defaultData.dateOfEmployment,
       },
     });
   }
@@ -137,6 +135,7 @@ class EmployeeForm extends React.Component<
       if (!data[arrayValidate[i]]) {
         status = false;
         errors[arrayValidate[i]] = true;
+        Toast.push({ message: 'Fill in all the fields!', type: 'danger' });
       } else {
         errors[arrayValidate[i]] = false;
       }
@@ -180,13 +179,14 @@ class EmployeeForm extends React.Component<
   })
 
   getPosition = (defaultData: { ...Employee, cities: Array<CityType> }) => [
-    { title: 'Not selected', id: null },
+    { title: 'Not selected', id: null, value: 'Not selected' },
     ...defaultData.positions,
   ].map((item) => {
     if (defaultData.position && defaultData.position.id === item.id) {
       return {
         ...item,
         label: item.title,
+        value: item.title,
         active: true,
       };
     }
@@ -194,6 +194,7 @@ class EmployeeForm extends React.Component<
     return {
       ...item,
       label: item.title,
+      value: item.title,
     };
   })
 
@@ -275,9 +276,12 @@ class EmployeeForm extends React.Component<
         onSubmit={this.submitForm}
         style={{ maxWidth: 600 }}
       >
-        <FieldBlock className="flex-block">
-          {/* <Input
+        <FieldBlock className="flex-block dropdown-field-block padding-right-1">
+          <Input
+            className="block"
             label="Name"
+            value={formData.firstName}
+            placeholder="Your firstname"
             error={errorBoundry.firstName}
             use="borderless"
             onChange={(e: SyntheticEvent<HTMLInputElement>) => {
@@ -285,57 +289,61 @@ class EmployeeForm extends React.Component<
               this.onChange('firstName', e.target.value);
               this.toggleEdit(true);
             }}
-          /> */}
-          <InputToggle
-            showInput={showEdit}
-            title={defaultData.firstName}
-            label="Name"
-            idx="firstName"
-            error={errorBoundry.firstName}
-            onChange={this.onChange}
-            toggleEdit={this.toggleEdit}
           />
-          <InputToggle
-            showInput={showEdit}
-            title={defaultData.email}
-            error={errorBoundry.email}
+          <Input
+            className="block"
             label="Login"
+            value={formData.email}
+            placeholder="Your lastname"
+            error={errorBoundry.email}
+            use="borderless"
+            onChange={(e: SyntheticEvent<HTMLInputElement>) => {
+              // $FlowFixMe
+              this.onChange('email', e.target.value);
+              this.toggleEdit(true);
+            }}
             type="email"
-            idx="email"
-            onChange={this.onChange}
-            toggleEdit={this.toggleEdit}
           />
         </FieldBlock>
 
         <FieldBlock>
-          <InputToggle
-            showInput={showEdit}
-            title={defaultData.lastName}
-            error={errorBoundry.lastName}
+          <Input
+            className="pr-1 col-6"
             label="Surname"
-            idx="lastName"
-            onChange={this.onChange}
-            toggleEdit={this.toggleEdit}
+            value={formData.lastName}
+            placeholder="Your surname"
+            error={errorBoundry.lastName}
+            use="borderless"
+            onChange={(e: SyntheticEvent<HTMLInputElement>) => {
+              // $FlowFixMe
+              this.onChange('lastName', e.target.value);
+              this.toggleEdit(true);
+            }}
           />
         </FieldBlock>
 
-        <FieldBlock className="flex-block">
-          <InputToggle
-            showInput={showEdit}
-            title={defaultData.middleName}
+        <FieldBlock className="flex-block dropdown-field-block padding-right-1">
+          <Input
             label="Middle name"
-            idx="middleName"
+            className="block"
+            placeholder="Middle name"
+            value={formData.middleName}
             error={errorBoundry.middleName}
-            onChange={this.onChange}
-            toggleEdit={this.toggleEdit}
+            use="borderless"
+            onChange={(e: SyntheticEvent<HTMLInputElement>) => {
+              // $FlowFixMe
+              this.onChange('middleName', e.target.value);
+              this.toggleEdit(true);
+            }}
           />
-          <PickerToggle
-            onChange={this.onChange}
-            showInput={showEdit}
-            date={new Date(defaultData.birthday || null)}
+          <Datepicker
             label="Date of birth"
-            idx="birthday"
-            toggleEdit={this.toggleEdit}
+            className="form-datepicker pr-1 col-6"
+            value={format(formData.birthday || new Date(), 'DD.MM.YYYY')}
+            onDayChange={(value) => {
+              this.onChange('birthday', value);
+              this.toggleEdit(true);
+            }}
           />
         </FieldBlock>
 
@@ -363,6 +371,7 @@ class EmployeeForm extends React.Component<
               this.onChange('position', value);
               this.toggleEdit(true);
             }}
+            error={errorBoundry.position}
             value={
               formData.position
                 || (positions.length > 0 ? positions.find((item) => item.active) || positions[0] : '')
@@ -373,15 +382,19 @@ class EmployeeForm extends React.Component<
         </FieldBlock>
 
         <FieldBlock>
-          <InputToggle
-            showInput={showEdit}
-            title={defaultData.phoneNumber}
+          <Input
+            className="pr-1 col-6"
+            mask={['+', '7', ' ', '(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/]}
+            value={formData.phoneNumber}
+            placeholder="Your phone number"
             label="Phone number"
-            idx="phoneNumber"
+            use="borderless"
+            name="phoneNumber"
             error={errorBoundry.phoneNumber}
-            defaultValue="Not number"
-            onChange={this.onChange}
-            toggleEdit={this.toggleEdit}
+            onChange={(e) => {
+              this.onChange('phoneNumber', e.target.value);
+              this.toggleEdit(true);
+            }}
           />
         </FieldBlock>
 
@@ -423,20 +436,14 @@ class EmployeeForm extends React.Component<
         </FieldBlock>
 
         <FieldBlock>
-          {/* <Datepicker
+          <Datepicker
+            label="Date of employment"
+            className="form-datepicker pr-1 col-6"
+            value={format(formData.dateOfEmployment || new Date(), 'DD.MM.YYYY')}
             onDayChange={(value) => {
-              console.log(value);
               this.onChange('dateOfEmployment', value);
               this.toggleEdit(true);
             }}
-          /> */}
-          <PickerToggle
-            onChange={this.onChange}
-            showInput={showEdit}
-            date={new Date(defaultData.dateOfEmployment || null)}
-            label="Date of employment"
-            idx="dateOfEmployment"
-            toggleEdit={this.toggleEdit}
           />
         </FieldBlock>
 
@@ -457,16 +464,10 @@ class EmployeeForm extends React.Component<
             }
             label="Working day starts at"
           />
-          <InputToggle
-            className="block col-6"
-            showInput={false}
-            title={`Working day ends at ${(defaultData.workDayEnd && String(defaultData.workDayEnd.hours).padStart(2, '0')) || 18}
-            :${(defaultData.workDayEnd && String(defaultData.workDayEnd.minutes || 0).padStart(2, '0')) || '00'}`}
-            label=""
-            idx="working_day_starts_at_string"
-            onChange={this.onChange}
-            toggleEdit={() => {}}
-          />
+          <p className="block col-6 pl-2">
+            {`Working day ends at ${(defaultData.workDayEnd && String(defaultData.workDayEnd.hours).padStart(2, '0')) || 18}
+          :${(defaultData.workDayEnd && String(defaultData.workDayEnd.minutes || 0).padStart(2, '0')) || '00'}`}
+          </p>
         </FieldBlock>
 
         <FieldBlock>

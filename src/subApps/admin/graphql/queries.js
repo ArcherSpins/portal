@@ -355,7 +355,12 @@ const getDepartments = gql`
           minutes
         },
         createdAt,
-        updatedAt
+        updatedAt,
+        position {
+          id,
+          title,
+          businessLoad,
+        }
       },
       countEmployees
     }
@@ -582,10 +587,10 @@ export const getSpentTimeBounds = gql`
 
 export const updateSpentTime = gql`
   mutation updateSpentTimeBounds(
-    $weeks: Int,
-    $days: Int,
-    $hours: Int,
-    $minutes: Int
+    $weeks: Int!,
+    $days: Int!,
+    $hours: Int!,
+    $minutes: Int!
   ) {
     updateSpentTimeBounds(
       weeks: $weeks,

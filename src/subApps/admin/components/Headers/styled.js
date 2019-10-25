@@ -10,6 +10,10 @@ export const Header = styled.header`
     return result;
   }};
   margin-bottom: 20px;
+
+  h1 {
+    margin-top: 15px;
+  }
 `;
 
 export const LeftBlock = styled.div`
@@ -34,4 +38,23 @@ export const ArrorIcon = styled.img`
 export const RightBlock = styled.div`
   display: flex;
   align-items: center;
+
+  .search-employees {
+    min-width: 300px;
+  }
+
+  .delete-deal-button {
+    color: #333333;
+    border: 1px solid #C6CCD5;
+
+    &:hover {
+      color: white;
+    }
+  }
+
+  input {
+    &:focus {
+      border: none;
+    }
+  }
 `;

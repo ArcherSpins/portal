@@ -54,6 +54,7 @@ export default ({
           <RightBlock>
             <form style={{ marginRight: 20 }} onSubmit={onSubmit}>
               <Input
+                className="search-employees"
                 name="search-employees"
                 onChange={(e: SyntheticEvent<HTMLInputElement>) => {
                   // $FlowFixMe
@@ -68,7 +69,7 @@ export default ({
             </form>
             <Link to={CREATE_EMPLOYEE_ROUTE.replace(':', '')}>
               <Button
-                style={{ padding: '5px 10px', minHeight: `${31}px` }}
+                style={{ padding: '5px 15px', minHeight: '31px' }}
               >
                 Add employee
               </Button>

@@ -12,7 +12,7 @@ export const ItemList = styled.ul`
 
 export const Item = styled.li`
   padding: 10px 5px 10px 3px;
-  font-size: 14px;
+  font-size: 1rem;
   font-family: Proxima Nova;
   width: 25%;
   color: #333;
@@ -20,9 +20,9 @@ export const Item = styled.li`
 
 export const DepartmentItem = styled.li`
   padding: 10px 5px 10px 3px;
-  font-size: 14px;
+  font-size: 1rem;
   font-family: Proxima Nova;
-  width: 20%;
+  width: ${({ width }) => width || '20%'};
   box-sizing: border-box;
   color: #333;
 `;
@@ -42,12 +42,12 @@ export const PositionList = styled.ul`
 export const PositionItem = styled.li`
   color: #61B16F;
   &:nth-child(n+2) {
-    margin-top: 6px;
+    margin-top: 10px;
   }
 `;
 
 export const EmployeesItem = styled.p`
   &:nth-child(n+2) {
-    margin-top: 6px;
+    margin-top: 10px;
   }
 `;

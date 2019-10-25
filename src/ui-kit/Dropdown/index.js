@@ -40,46 +40,25 @@ const Dropdown = ({
   onChange,
   use,
   className,
-  ...rest
-}: Props) => {
-  const customStyles = {
-    indicatorSeparator: () => {},
-    control: (base, state) => ({
-      ...base,
-      borderColor: state.isFocused ? '#61B16F' : '#D1D6DE',
-      '&:hover': {},
-      '&:focus': { borderColor: 'red' },
-      border: use === 'borderless' ? 'none' : base.border,
-      transition: 'all 0.3s',
-      boxShadow: 'none',
-    }),
-    option: (base, { isSelected }) => ({
-      ...base,
-      '&:hover': { backgroundColor: '#ddeee0' },
-      backgroundColor: isSelected && '#61B16F',
-    }),
-  };
-
-  return (
-    <div className={classNames('drwn__wrap', styles.wrapper, className)}>
-      <label className={styles[use]} htmlFor="select">{label}</label>
-      <Select
-        {...rest}
-        className="select-component"
-        isSearchable={false}
-        onChange={onChange}
-        placeholder={placeholder}
-        components={{ DropdownIndicator }}
-        styles={customStyles}
-        options={options}
-        name={name}
-        value={value}
-        isDisabled={disabled}
-        classNamePrefix="drwn"
-      />
-    </div>
-  );
-};
+  ...restProps
+}: Props) => (
+  <div className={classNames(styles.wrapper, `cbx__wrap dropdown dropdown_${use || ''}`, className)}>
+    <label className={classNames(styles[use], 'cbx__label')} htmlFor="select">{label}</label>
+    <Select
+      className="select-component"
+      isSearchable={false}
+      onChange={onChange}
+      placeholder={placeholder}
+      components={{ DropdownIndicator }}
+      classNamePrefix="cbx"
+      options={options}
+      name={name}
+      value={value}
+      isDisabled={disabled}
+      {...restProps}
+    />
+  </div>
+);
 
 Dropdown.defaultProps = {
   placeholder: '',

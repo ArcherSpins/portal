@@ -128,7 +128,7 @@ const TablePaginate = ({
   const [index, setIndex] = useState(activeIndex || 1);
 
   const togglePage = (idx: number) => {
-    if (typeof getNumber === 'function') {
+    if (typeof getNumber === 'function' && idx !== index) {
       getNumber(idx);
     }
     if (!manual) {

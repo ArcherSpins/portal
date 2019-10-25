@@ -9,8 +9,6 @@ import {
   DepartmentsItem,
   DepartmentsHeaderTable,
   MessageFound,
-  Paginate,
-  AlertMessage,
 } from '../../components';
 import { LoadingContainer } from '../../containers';
 import { PageContainer, ContainerContent } from '../styled';
@@ -18,17 +16,17 @@ import { Main } from './styled';
 import type { Department } from '../../types';
 import Hoc from './hoc';
 
+
 const StyledList = (props) => (
-  <ListTable {...props} style={{ maxWidth: '1100px' }} />
+  <div style={{ maxWidth: '1600px' }}>
+    <ListTable {...props} />
+  </div>
 );
 
 type DepartmentsProps = {
   requestAllDepartments: () => void,
   departments: Array<Department>,
   loading: boolean,
-  errorMessage: string,
-  errorStatus: boolean,
-  closeErrorMessage: () => void
 }
 
 class DepartmentsComponent extends React.Component<DepartmentsProps> {
@@ -37,15 +35,10 @@ class DepartmentsComponent extends React.Component<DepartmentsProps> {
     requestAllDepartments();
   }
 
-  togglePaginate = () => {}
-
   render() {
     const {
       departments,
       loading,
-      errorMessage,
-      errorStatus,
-      closeErrorMessage,
     } = this.props;
 
     return (
@@ -57,15 +50,6 @@ class DepartmentsComponent extends React.Component<DepartmentsProps> {
           }}
         >
           {
-            errorStatus && (
-              <AlertMessage
-                error
-                message={errorMessage}
-                closeModal={closeErrorMessage}
-              />
-            )
-          }
-          {
             loading ? <LoadingContainer /> : (
               <div>
                 <HeaderEmployees noBorder noSearch title="Departments" />
@@ -73,10 +57,6 @@ class DepartmentsComponent extends React.Component<DepartmentsProps> {
                   {
                     departments.length > 0 ? (
                       <div>
-                        <Paginate
-                          count={departments.length / 25}
-                          togglePaginate={this.togglePaginate}
-                        />
                         <StyledList
                           data={departments}
                           ItemComponent={DepartmentsItem}

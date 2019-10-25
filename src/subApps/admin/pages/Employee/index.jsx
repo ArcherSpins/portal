@@ -11,13 +11,11 @@ import {
   LeftNavbar,
   HeaderEmployee,
   EmployeeForm,
-  AlertMessage,
 } from '../../components';
 import { LoadingContainer } from '../../containers';
 import {
   getEmployeeId,
   requestAllDepartments,
-  closeErrorMessage,
   getCitiesAction,
 } from '../../redux/actions';
 import {
@@ -51,9 +49,6 @@ type EmployeeProps = {
   requestAllDepartments: () => void,
   departments: Array<Department>,
   loadingDepartments: boolean,
-  errorStatus: boolean,
-  errorMessage: string,
-  closeErrorMessage: () => void,
   getCitiesAction: () => void,
   cities: Array<CityType>,
   loadingCities: boolean
@@ -171,12 +166,14 @@ class EmployeeComponent extends React.PureComponent<EmployeeProps> {
       return {
         ...item,
         label: `${String(item.hours).padStart(2, '0')}:${String(item.minutes).padStart(2, '0')}`,
+        value: `${String(item.hours).padStart(2, '0')}:${String(item.minutes).padStart(2, '0')}`,
         active: true,
       };
     }
     return {
       ...item,
       label: `${String(item.hours).padStart(2, '0')}:${String(item.minutes).padStart(2, '0')}`,
+      value: `${String(item.hours).padStart(2, '0')}:${String(item.minutes).padStart(2, '0')}`,
       active: false,
     };
   })
@@ -240,9 +237,6 @@ class EmployeeComponent extends React.PureComponent<EmployeeProps> {
       loadingPositions,
       departments,
       loadingDepartments,
-      errorStatus,
-      errorMessage,
-      closeErrorMessage,
       cities,
       loadingCities,
     } = this.props;
@@ -256,15 +250,6 @@ class EmployeeComponent extends React.PureComponent<EmployeeProps> {
             paddingLeft: 30,
           }}
         >
-          {
-            errorStatus && (
-              <AlertMessage
-                error
-                message={errorMessage}
-                closeModal={closeErrorMessage}
-              />
-            )
-          }
           {
             loadingEmployeeById || loadingPositions || loadingDepartments || loadingCities ? (
               <LoadingContainer />
@@ -316,8 +301,6 @@ const mapStateToProps = (state) => ({
   positions: state.position.positions,
   departments: state.departments.departments,
   loadingDepartments: state.departments.loading,
-  errorStatus: state.app.errorStatus,
-  errorMessage: state.app.errorMessage,
   cities: state.city.cities,
   loadingCities: state.city.loading,
 });
@@ -329,7 +312,6 @@ const mapDispatchToProps = {
   deleteEmployee,
   getPositions,
   requestAllDepartments,
-  closeErrorMessage,
   getCitiesAction,
 };
 

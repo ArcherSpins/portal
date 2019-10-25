@@ -2,6 +2,7 @@
 import React from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { Link } from 'react-router-dom';
+import { Button } from 'ui-kit';
 import getRoute from '../../helpers/getRoute';
 import { Header, Content } from './styled';
 // TODO: Fix this
@@ -51,20 +52,20 @@ const CRMPage = ({
           redirect={state.redirect}
         />
         <div className="tab-buttons fz-16">
-          <button
+          <Button
             type="button"
             onClick={() => toggleShowTab(false)}
             className={`left-button ${!state.tabStatus ? 'active' : ''}`}
           >
             My Deals
-          </button>
-          <button
+          </Button>
+          <Button
             type="button"
             onClick={() => toggleShowTab(true)}
             className={`right-button ${state.tabStatus ? 'active' : ''}`}
           >
             All Deals
-          </button>
+          </Button>
         </div>
         <div>
           <Link to={getRoute('/details')} className="add-deal-button">

@@ -277,6 +277,7 @@ class ProjectDetailPage extends Component<Props, State> {
     }
   };
 
+
   loadEmployees = async (value: string) => {
     const employees = await getEmployees(value);
     return this.formatEmployees(employees.data.employees.employees);
