@@ -38,11 +38,11 @@ const Dropdown = ({
   value,
   name,
   onChange,
-  use = '',
+  use = 'default',
   className,
   ...restProps
 }: Props) => (
-  <div className={classNames(styles.wrapper, `cbx__wrap dropdown dropdown_${use || ''}`, className)}>
+  <div className={classNames(styles.wrapper, `cbx__wrap dropdown dropdown_${use}`, className)}>
     <label className={classNames(styles[use], 'cbx__label')} htmlFor="select">{label}</label>
     <Select
       className="select-component"
