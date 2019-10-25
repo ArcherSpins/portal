@@ -5,6 +5,10 @@
   display: flex;
   flex-direction: column;
   font-size: 1rem;
+
+  .cbx__placeholder {
+    color: $disabled-color;
+  }
   .cbx__menu {
     margin-top: .2rem;
   }
@@ -135,6 +139,17 @@
 
     input:disabled .cbx__control {
       border-color: $disabled-color;
+    }
+  }
+
+  &.combobox_grey {
+    .cbx__control {
+      border-style: solid;
+      border-color: $grey;
+    }
+
+    .cbx__control--is-focused {
+      border-color: $main-color;
     }
   }
 

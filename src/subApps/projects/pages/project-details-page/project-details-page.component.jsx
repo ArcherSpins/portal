@@ -435,6 +435,7 @@ h
                 selectedOption={manager}
                 label="Project Manager"
                 className="mb1"
+                use="grey"
               />
 
               <Participants
@@ -448,6 +449,7 @@ h
                   name="participants"
                   label="Participants"
                   className="mb05"
+                  use="grey"
                 />
               </Participants>
               <Participants
@@ -461,6 +463,7 @@ h
                   name="watchers"
                   label="Watchers"
                   className="mb1"
+                  use="grey"
                 />
               </Participants>
               {this.state.errors.length >= 1 && (

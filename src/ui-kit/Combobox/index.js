@@ -20,7 +20,7 @@ export type Action = {
   option?: string
 }
 
-type ComboboxType = 'borderless' | 'default' | 'underlined';
+type ComboboxType = 'borderless' | 'default' | 'underlined' | 'grey';
 
 type Props = {
   loadOptions: () => Promise<Array<Option>>,
@@ -62,7 +62,7 @@ const Combobox = ({
   error,
   label,
   className,
-  use,
+  use = 'default',
   ...restProps
 
 }: Props) => (
@@ -70,7 +70,7 @@ const Combobox = ({
     className={
       classNames(
         'cbx__wrap wrapper',
-        `combobox_${use || ''}`,
+        `combobox_${use}`,
         {
           selected: !!selectedOption,
           'error-select': !!error,

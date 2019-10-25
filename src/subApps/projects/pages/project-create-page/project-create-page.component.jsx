@@ -379,6 +379,7 @@ class CreateProjectPage extends Component<Props, State> {
                 value={manager}
                 selectedOption={manager}
                 label="Project Manager"
+                use="grey"
                 className="mb1"
               />
               <Participants
@@ -391,6 +392,7 @@ class CreateProjectPage extends Component<Props, State> {
                   onChange={this.handleChipInputChange}
                   name="participants"
                   label="Participants"
+                  use="grey"
                   className="mb05"
                 />
               </Participants>
@@ -405,6 +407,7 @@ class CreateProjectPage extends Component<Props, State> {
                   name="watchers"
                   label="Watchers"
                   className="mb1"
+                  use="grey"
                 />
               </Participants>
               {Array.isArray(errors) && errors.length >= 1 && (

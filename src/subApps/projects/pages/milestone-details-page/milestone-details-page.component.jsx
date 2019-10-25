@@ -336,6 +336,7 @@ class MilestoneDetailsPage extends React.Component<Props, State> {
                   className="mb05"
                   loadOptions={this.loadEmployees}
                   name="participants"
+                  use="grey"
                 />
               </Participants>
               {errors.length >= 1 && (

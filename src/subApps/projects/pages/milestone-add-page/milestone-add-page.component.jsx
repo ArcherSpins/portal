@@ -259,6 +259,7 @@ class MilestoneAddPage extends React.Component<Props, State> {
                   label="Participants"
                   onChange={this.handleChipInputChange}
                   className="mb05"
+                  use="grey"
                   loadOptions={this.loadEmployees}
                   name="participants"
                 />
