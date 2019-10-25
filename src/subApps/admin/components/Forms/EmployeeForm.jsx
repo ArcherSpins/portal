@@ -11,7 +11,7 @@ import { graphql } from 'react-apollo';
 import { format } from 'date-fns';
 // $FlowFixMe
 import {
-  Dropdown, Combobox, Input, Datepicker,
+  Dropdown, Combobox, Input, Datepicker, Toast,
 } from 'ui-kit';
 import { getCities } from '../../graphql/queries';
 import type { Employee, CityType } from '../../types';
@@ -135,6 +135,7 @@ class EmployeeForm extends React.Component<
       if (!data[arrayValidate[i]]) {
         status = false;
         errors[arrayValidate[i]] = true;
+        Toast.push({ message: 'Fill in all the fields!', type: 'danger' });
       } else {
         errors[arrayValidate[i]] = false;
       }
@@ -370,9 +371,10 @@ class EmployeeForm extends React.Component<
               this.onChange('position', value);
               this.toggleEdit(true);
             }}
+            error={errorBoundry.position}
             value={
               formData.position
-                || (positions.length > 0 ? positions.find((item) => item.active) || positions[1] : '')
+                || (positions.length > 0 ? positions.find((item) => item.active) || positions[0] : '')
             }
             idx="position"
             label="Position"
@@ -388,6 +390,7 @@ class EmployeeForm extends React.Component<
             label="Phone number"
             use="borderless"
             name="phoneNumber"
+            error={errorBoundry.phoneNumber}
             onChange={(e) => {
               this.onChange('phoneNumber', e.target.value);
               this.toggleEdit(true);

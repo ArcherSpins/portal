@@ -22,7 +22,7 @@ export const HeaderListDepartment = styled.ul`
 export const HeaderItem = styled.li`
   width: ${({ width }) => width || '20%'};
   padding: 8px 6px 8px 4px;
-  color: color: rgba(51, 51, 51, 0.54);
+  color: #333333;
   font-weight: bold;
   font-family: Proxima Nova;
   font-size: 14px;

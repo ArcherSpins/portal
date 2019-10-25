@@ -12,20 +12,20 @@ import { Main } from './styled';
 
 export const columnsAccess = [
   {
-    Header: 'Name',
-    accessor: 'name',
+    Header: 'Module',
+    accessor: 'module_name',
   },
   {
-    Header: 'Name',
-    accessor: 'name',
+    Header: 'Role name',
+    accessor: 'role_name',
   },
   {
-    Header: 'Name',
-    accessor: 'name',
+    Header: 'Role access',
+    accessor: 'role_access',
   },
   {
-    Header: 'Name',
-    accessor: 'name',
+    Header: 'Employee name',
+    accessor: 'employee_name',
   },
 ];
 
@@ -49,8 +49,13 @@ class AccessMap extends React.Component<State> {
             <div>
               <TablePaginate
                 items={[
-                  { name: 'Module Name', id: 1 },
-                  { name: 'Module Name', id: 2 },
+                  {
+                    module_name: 'Module Name',
+                    role_name: 'Role name',
+                    role_access: 'Role access',
+                    employee_name: 'John Doe Konstantinovich',
+                    id: 1,
+                  },
                 ]}
                 pageSize={10}
                 getNumber={this.togglePaginate}

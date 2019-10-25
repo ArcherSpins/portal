@@ -1,7 +1,10 @@
 // @flow
 
 import React, { type Node } from 'react';
-import { EMPLOYEES_ROUTE, SINGLE_EMPLOYEE_ROUTE } from 'subApps/admin/routes';
+import {
+  EMPLOYEES_ROUTE,
+  SINGLE_EMPLOYEE_ROUTE,
+} from 'subApps/admin/routes';
 import { Button, Breadcrumbs, H1 } from 'ui-kit';
 import {
   GoBackButton,
@@ -23,14 +26,15 @@ const HeaderComponent = ({ goBack, deleteEmployee, title }: HeaderProps): Node =
     '/admin': null,
     [EMPLOYEES_ROUTE]: 'Employees',
     [SINGLE_EMPLOYEE_ROUTE]: title,
+    '/create': 'Employees',
   };
   return (
-    <Header style={{ alignItems: 'flex-end' }}>
+    <Header style={{ alignItems: 'flex-end', marginTop: 10 }}>
       <LeftBlock>
         <Breadcrumbs
           routes={routes}
         />
-        <H1 style={{ position: 'relative' }}>
+        <H1 style={{ position: 'relative', color: '#333333' }}>
           <GoBackButton
             className="go-back-button"
             onClick={goBack}
