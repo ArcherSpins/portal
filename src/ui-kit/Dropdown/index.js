@@ -5,7 +5,7 @@ import React from 'react';
 import classNames from 'classnames';
 import Select, { components } from 'react-select';
 import styles from './Dropdown.module.scss';
-import './styles.scss';
+import './style.scss';
 
 import type { Option, Action } from '../Combobox';
 
