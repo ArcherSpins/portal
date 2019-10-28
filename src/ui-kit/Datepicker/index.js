@@ -88,7 +88,6 @@ const Datepicker = ({
       {/* <span className={styles.label}>{label}</span> */}
       <DayPickerInput
         id={name}
-        showOverlay
         dayPickerProps={{
           ...props,
           classNames: overlayStyles,

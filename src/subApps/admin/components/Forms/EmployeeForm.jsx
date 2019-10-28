@@ -340,9 +340,8 @@ class EmployeeForm extends React.Component<
             label="Date of birth"
             className="form-datepicker pr-1 col-6"
             value={format(formData.birthday || new Date(), 'DD.MM.YYYY')}
-            name="date"
+            name="birthday"
             onDayChange={(value) => {
-              console.log(value);
               this.onChange('birthday', value);
               this.toggleEdit(true);
             }}
