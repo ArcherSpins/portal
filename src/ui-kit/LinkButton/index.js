@@ -26,7 +26,7 @@ const LinkButton = ({
 }: Props) => (
   <Link
     to={to}
-    className={classNames(styles.linkButton, className, { [styles.disabledLinkButtongit]: disabled })}
+    className={classNames(styles.linkButton, className, { [styles.disabledLinkButton]: disabled })}
     disabled={disabled}
     onClick={onClick}
     type={type}
