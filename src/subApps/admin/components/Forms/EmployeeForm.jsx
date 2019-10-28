@@ -11,7 +11,7 @@ import { graphql } from 'react-apollo';
 import { format } from 'date-fns';
 // $FlowFixMe
 import {
-  Dropdown, Combobox, Input, Datepicker, Toast,
+  Dropdown, Combobox, Input, Datepicker, Toast, Button,
 } from 'ui-kit';
 import { getCities } from '../../graphql/queries';
 import type { Employee, CityType } from '../../types';
@@ -340,7 +340,9 @@ class EmployeeForm extends React.Component<
             label="Date of birth"
             className="form-datepicker pr-1 col-6"
             value={format(formData.birthday || new Date(), 'DD.MM.YYYY')}
+            name="date"
             onDayChange={(value) => {
+              console.log(value);
               this.onChange('birthday', value);
               this.toggleEdit(true);
             }}
@@ -490,12 +492,11 @@ class EmployeeForm extends React.Component<
 
         {
           showEdit && (
-            <SubmitButton
+            <Button
               type="submit"
-              bgColor="#219653"
             >
               Save
-            </SubmitButton>
+            </Button>
           )
         }
       </AuthForm>

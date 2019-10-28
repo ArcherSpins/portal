@@ -261,7 +261,6 @@ class LogCreate extends React.Component<Props, State> {
     const {
       date, comment, errors, minutes, hours,
     } = this.state;
-
     const now = new Date();
 
     return (
@@ -305,7 +304,7 @@ class LogCreate extends React.Component<Props, State> {
             <Datepicker
               className="project__datepicker mb1"
               label="Date"
-              onChange={this.handleDateChange}
+              onDayChange={this.handleDateChange}
               value={date}
               disabledDays={{
                 before: now,

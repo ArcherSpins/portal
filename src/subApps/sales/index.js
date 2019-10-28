@@ -6,10 +6,8 @@ import { App } from './containers';
 
 const store = configureStore();
 
-const SubApp = () => (
+export default () => (
   <Provider store={store}>
     <App />
   </Provider>
 );
-
-export default SubApp;
