@@ -82,16 +82,17 @@ class DetailsListContainer extends React.PureComponent<Props, State> {
         break;
       case 'contact':
         this.setState({ data: { ...data, contact: value } });
-        // findContactIdx = contacts.findIndex((item) => item.id === itemId);
-        // findContact = contacts[findContactIdx];
+        findContactIdx = contacts.findIndex((item) => item.id === itemId);
+        findContact = contacts[findContactIdx];
 
-        // findContact.value = value;
-        // // eslint-disable-next-line no-case-declarations
-        // const contact = [...contacts];
-        // contact[findContactIdx] = findContact;
-        // this.setState({
-        //   data: { ...data, contacts: contact },
-        // });
+        findContact.value = value;
+        // eslint-disable-next-line no-case-declarations
+        const contact = [...contacts];
+        contact[findContactIdx] = findContact;
+        this.setState({
+          data: { ...data, contacts: contact },
+        });
+        activateFormEdit({}, 'contact');
         break;
       case 'source':
         this.setState({
@@ -100,6 +101,7 @@ class DetailsListContainer extends React.PureComponent<Props, State> {
             [itemId]: value,
           },
         });
+        activateFormEdit({}, 'source');
         break;
       case 'status':
         this.setState({
@@ -177,6 +179,7 @@ class DetailsListContainer extends React.PureComponent<Props, State> {
     const { fetchEditForm, deleteContact, toggleShowModal } = this.props;
     const { data, contacts, deletedContacts } = this.state;
     const inputs = document.querySelectorAll('.input-edit');
+    console.log(data);
     // $FlowFixMe
     const status = this.valideInputs(inputs);
     if (deletedContacts.length > 0) {

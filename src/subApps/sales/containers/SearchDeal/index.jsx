@@ -2,9 +2,9 @@
 /* eslint-disable react/no-unused-state */
 // TODO: FIX ESLINT SUPPRESS COMMENTS
 // @flow
-import React from 'react';
+import React, { type AbstractComponent } from 'react';
 import { connect } from 'react-redux';
-import { compose } from 'redux';
+// import { compose } from 'redux';
 import moment from 'moment';
 import { SearchDealPage } from '../../pages';
 import {
@@ -183,4 +183,13 @@ const mapDispatchToProps = {
   getEmployees: getEmployeesAction,
 };
 
-export default compose(connect(mapStateToProps, mapDispatchToProps))(SearchDealContainer);
+export default (
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  )(SearchDealContainer): AbstractComponent<SearchDealContainerProps>
+);
+
+// export default compose(
+//   connect(mapStateToProps, mapDispatchToProps),
+// )(SearchDealContainer);

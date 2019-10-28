@@ -1,6 +1,4 @@
 // @flow
-import { connect } from 'react-redux';
-import { compose } from 'redux';
 import { reorderCards } from '../../redux/actions/reorderCardsCrm';
 import {
   getDealsAction,
@@ -11,7 +9,7 @@ import {
   updateDealReorderAction,
 } from '../../redux/actions/deals';
 
-const mapStateToProps = (state) => ({
+export const mapStateToProps = (state: any) => ({
   columnOrder: state.column.columnOrder,
   columns: state.column.columns,
   loadingColumns: state.column.loadingColumns,
@@ -20,17 +18,10 @@ const mapStateToProps = (state) => ({
   loadingDeals: state.deals.loadingDeals,
 });
 
-const mapDispatchToProps = {
+export const mapDispatchToProps = {
   reorderCards,
   getDealsAction,
   getColumnsDataAction,
   updateDealReorderAction,
   getEmployeesAction,
 };
-
-// TODO: FIX THIS
-// $FlowFixMe
-export default compose(
-  // $FlowFixMe
-  connect(mapStateToProps, mapDispatchToProps),
-);
