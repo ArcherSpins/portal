@@ -11,7 +11,7 @@ import { graphql } from 'react-apollo';
 import { format } from 'date-fns';
 // $FlowFixMe
 import {
-  Dropdown, Combobox, Input, Datepicker, Toast,
+  Dropdown, Combobox, Input, Datepicker, Toast, Button,
 } from 'ui-kit';
 import { getCities } from '../../graphql/queries';
 import type { Employee, CityType } from '../../types';
@@ -93,7 +93,8 @@ class EmployeeForm extends React.Component<
       formData: {
         ...data,
         position: this.getPosition(defaultData).find((item) => item.active),
-        dateOfEmployment: defaultData.dateOfEmployment,
+        dateOfEmployment: defaultData.dateOfEmployment ? new Date(defaultData.dateOfEmployment) : '',
+        birthday: defaultData.birthday ? new Date(defaultData.birthday) : '',
       },
     });
   }
@@ -339,7 +340,8 @@ class EmployeeForm extends React.Component<
           <Datepicker
             label="Date of birth"
             className="form-datepicker pr-1 col-6"
-            value={format(formData.birthday || new Date(), 'DD.MM.YYYY')}
+            value={formData.birthday}
+            name="birthday"
             onDayChange={(value) => {
               this.onChange('birthday', value);
               this.toggleEdit(true);
@@ -439,7 +441,7 @@ class EmployeeForm extends React.Component<
           <Datepicker
             label="Date of employment"
             className="form-datepicker pr-1 col-6"
-            value={format(formData.dateOfEmployment || new Date(), 'DD.MM.YYYY')}
+            value={formData.dateOfEmployment}
             onDayChange={(value) => {
               this.onChange('dateOfEmployment', value);
               this.toggleEdit(true);
@@ -490,12 +492,11 @@ class EmployeeForm extends React.Component<
 
         {
           showEdit && (
-            <SubmitButton
+            <Button
               type="submit"
-              bgColor="#219653"
             >
               Save
-            </SubmitButton>
+            </Button>
           )
         }
       </AuthForm>

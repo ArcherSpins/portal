@@ -53,11 +53,14 @@ const Navbar = ({ onNextClick, onPreviousClick }: NavbarElementProps) => (
 
 const DateInput = (props: any) => {
   const { onFocus, onBlur } = props;
+
   return (
     <div
       className={styles.input}
     >
-      <Input {...props} />
+      <Input
+        {...props}
+      />
       <button type="button" onClick={onFocus} onBlur={onBlur} className={styles.icon__wrap}>
         <i className="icon-calendar" />
       </button>
@@ -90,6 +93,7 @@ const Datepicker = ({
           classNames: overlayStyles,
           weekdaysShort,
           navbarElement: Navbar,
+          selectedDays: value,
           onBlur: (e: SyntheticMouseEvent<HTMLElement>) => {
             // hack for hiding day picker
             // see: https://github.com/gpbl/react-day-picker/issues/926
