@@ -2,7 +2,8 @@
 import React from 'react';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import { DateUtils } from 'react-day-picker';
-import { format as formatDate, parse } from 'date-fns';
+import { format as dateFnsFormat, parse as dateFnsParse } from 'date-fns';
+
 import classNames from 'classnames';
 // $FlowFixMe
 import 'react-day-picker/lib/style.css';
@@ -11,7 +12,7 @@ import { Input } from 'ui-kit';
 import styles from './Datepicker.module.scss';
 import overlayStyles from './Overlay.module.scss';
 
-const DEFAULT_FORMAT = 'DD.MM.YYYY';
+const DEFAULT_FORMAT = 'd.L.y';
 
 type Props = {
   onDayChange: Date => void,
@@ -68,10 +69,10 @@ const DateInput = (props: any) => {
   );
 };
 
-const getDate = (date: Date, format: string) => formatDate(date, format);
+const getDate = (date: Date, format: string) => dateFnsFormat(date, format);
 
 const parseDate = (str, format) => {
-  const parsed = parse(str, format, new Date());
+  const parsed = dateFnsParse(str, format, new Date());
   if (DateUtils.isDate(parsed)) {
     return parsed;
   }
@@ -95,7 +96,7 @@ const Datepicker = ({
       <label htmlFor={name}>{label}</label>
       {/* <span className={styles.label}>{label}</span> */}
       <DayPickerInput
-        id={name}
+        name={name}
         dayPickerProps={{
           ...props,
           classNames: overlayStyles,
@@ -130,7 +131,7 @@ const Datepicker = ({
 
 Datepicker.defaultProps = {
   format: DEFAULT_FORMAT,
-  placeholder: DEFAULT_FORMAT,
+  placeholder: 'DD.MM.YYYY',
   value: '',
   label: '',
   className: '',

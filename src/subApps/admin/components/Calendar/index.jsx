@@ -2,7 +2,7 @@
 // @flow
 import React from 'react';
 import {
-  eachDay,
+  eachDayOfInterval,
   getMonth,
 // $FlowFixMe
 } from 'date-fns';
@@ -14,7 +14,9 @@ import { ChooseYear } from '..';
 import { Wrap } from './styled';
 
 const getAllMonthsOfGivenYear = (year: number) => {
-  const allDays = eachDay(new Date(year, 0, 1), new Date(parseInt(year, 10) + 1, 0, 1));
+  const allDays = eachDayOfInterval(
+    { start: new Date(year, 0, 1), end: new Date(parseInt(year, 10) + 1, 0, 1) },
+  );
 
   const allMonths = allDays
     .reduce((acc, day) => {

@@ -13,6 +13,7 @@ import { format } from 'date-fns';
 import {
   Dropdown, Combobox, Input, Datepicker, Toast, Button,
 } from 'ui-kit';
+import DayPickerInput from 'react-day-picker/DayPickerInput';
 import { getCities } from '../../graphql/queries';
 import type { Employee, CityType } from '../../types';
 import {
@@ -37,11 +38,14 @@ type EmployeeFormProps = {
   new_employee: boolean
 }
 
+type FormData = {
+  birthday: string,
+  dateOfEmployment: string,
+  [string]: any
+}
+
 type EmployeeFormState = {
-  formData: {
-    birthday: Date,
-    [string]: any
-  },
+  formData: FormData,
   errorBoundry: {
     city: boolean,
     firstName: boolean,
@@ -77,6 +81,8 @@ class EmployeeForm extends React.Component<
       },
       formData: {
         department: true,
+        birthday: '',
+        dateOfEmployment: '',
       },
     };
   }
@@ -121,7 +127,7 @@ class EmployeeForm extends React.Component<
     });
   }
 
-  validateForm = (data: { [string]: mixed }): boolean => {
+  validateForm = (data: FormData): boolean => {
     let status = true;
     const { errorBoundry } = this.state;
     const arrayValidate = [
@@ -260,8 +266,19 @@ class EmployeeForm extends React.Component<
     return arr;
   }
 
-  onDateChange = (value) => {
-
+  onDateChange = (selectedDay: Date, modifiers: mixed, dayPickerInput: DayPickerInput) => {
+    const { name } = dayPickerInput.props;
+    const { formData } = this.state;
+    if (name) {
+      this.setState({
+        formData: {
+          ...formData,
+          [name]: selectedDay,
+        },
+      });
+    } else {
+      throw new Error('input should have a name property');
+    }
   }
 
   render() {
@@ -271,11 +288,9 @@ class EmployeeForm extends React.Component<
     const positions = this.getPosition(defaultData);
     const cities = this.getCity(defaultData);
     const timeZones = this.getTimeZone();
-
     if (!defaultData) {
       return null;
     }
-
     return (
       <AuthForm
         className="employee-form"
