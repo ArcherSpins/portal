@@ -39,6 +39,7 @@ type EmployeeFormProps = {
 
 type EmployeeFormState = {
   formData: {
+    birthday: Date,
     [string]: any
   },
   errorBoundry: {
@@ -259,6 +260,10 @@ class EmployeeForm extends React.Component<
     return arr;
   }
 
+  onDateChange = (value) => {
+
+  }
+
   render() {
     const { showEdit, errorBoundry, formData } = this.state;
     const { defaultData } = this.props;
@@ -342,10 +347,7 @@ class EmployeeForm extends React.Component<
             className="form-datepicker pr-1 col-6"
             value={formData.birthday}
             name="birthday"
-            onDayChange={(value) => {
-              this.onChange('birthday', value);
-              this.toggleEdit(true);
-            }}
+            onDayChange={this.onDateChange}
           />
         </FieldBlock>
 

@@ -1,7 +1,8 @@
 // @flow
 import React from 'react';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
-import { format as formatDate } from 'date-fns';
+import { DateUtils } from 'react-day-picker';
+import { format as formatDate, parse } from 'date-fns';
 import classNames from 'classnames';
 // $FlowFixMe
 import 'react-day-picker/lib/style.css';
@@ -32,7 +33,6 @@ type NavbarElementProps = {
 }
 
 const weekdaysShort = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
-
 
 const Navbar = ({ onNextClick, onPreviousClick }: NavbarElementProps) => (
   <div className={overlayStyles.nav}>
@@ -69,6 +69,14 @@ const DateInput = (props: any) => {
 };
 
 const getDate = (date: Date, format: string) => formatDate(date, format);
+
+const parseDate = (str, format) => {
+  const parsed = parse(str, format, new Date());
+  if (DateUtils.isDate(parsed)) {
+    return parsed;
+  }
+  return undefined;
+};
 
 const Datepicker = ({
   onDayChange,
@@ -112,6 +120,7 @@ const Datepicker = ({
         format={format}
         placeholder={placeholder}
         formatDate={getDate}
+        parseDate={parseDate}
         onDayChange={onDayChange}
         value={value}
       />
