@@ -9,7 +9,7 @@ import { type ButtonUse } from './types';
 export const DEFAULT = 'default';
 
 export type ButtonSize = 'md' | 'sm';
-type ButtonType = 'button' | 'submit' | 'reset';
+export type ButtonType = 'button' | 'submit' | 'reset';
 
 export type ButtonProps = {
   /** Функция-обработчик события клика */
@@ -43,9 +43,7 @@ const Button = (props: ButtonProps) => {
       className={classNames(styles[use], styles[size], className)}
       onClick={onClick}
     >
-      <span>
-        {children}
-      </span>
+      {children}
     </button>
   );
 };
