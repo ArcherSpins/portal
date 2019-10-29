@@ -13,10 +13,13 @@ class Logout extends Component<{}> {
   }
 
   logout = async () => {
-    await client.mutate({
-      mutation: SIGN_OUT,
-    });
-    localStorage.removeItem(AUTH_TOKEN_KEY);
+    if (localStorage.getItem(AUTH_TOKEN_KEY)) {
+      await client.mutate({
+        mutation: SIGN_OUT,
+      });
+      localStorage.removeItem(AUTH_TOKEN_KEY);
+    }
+
     history.push('/');
   }
 

@@ -1,7 +1,6 @@
 // @flow
 import React from 'react';
-import icon from '../../assets/icons/arrow-left.png';
-import { Button, Img } from './styled';
+import { Button } from './styled';
 
 type ButtonProps = {
   onClick: () => void,
@@ -17,6 +16,6 @@ export default ({
   className,
 }: ButtonProps) => (
   <Button className={className} onClick={onClick} style={style}>
-    <Img src={icon} />
+    <i className="icon-left-open" />
   </Button>
 );

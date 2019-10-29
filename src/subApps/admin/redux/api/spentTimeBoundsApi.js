@@ -21,9 +21,13 @@ export async function fetchUpdateSpentTimeBounds(
   data: SpentTimeBoundsType,
 ): Promise<FetchResult<Response>> {
   try {
+    // TODO: fix this
     await client.query({
       query: updateSpentTime,
-      variables: data,
+      variables: {
+        ...data,
+        weeks: '0',
+      },
     });
   } catch (err) {
     throw new Error(err.message);

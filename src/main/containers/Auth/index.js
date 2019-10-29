@@ -33,7 +33,7 @@ class Auth extends Component<Props, State> {
       <>
         {isAuthenticated ? (
           <Switch>
-            <Route exact path="auth/logout" component={Logout} />
+            <Route exact path="/auth/logout" component={Logout} />
             <Redirect to="/" />
           </Switch>
         ) : (

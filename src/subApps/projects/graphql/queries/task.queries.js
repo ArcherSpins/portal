@@ -43,3 +43,13 @@ export const getAllTasks = async (milestoneID) => {
 
   return response;
 };
+
+
+export const GET_TASK_STATUSES = gql`
+  query Tasks {
+    taskStates {
+      id
+      title
+    }
+  }
+`;

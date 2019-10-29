@@ -4,26 +4,91 @@
   align-items: center;
 }
 
+.pr-1 {
+  padding-right: 1rem;
+}
+
 .dropdown-field-block {
   display: flex;
 
+  &.padding-right-1 {
+    .block {
+      padding-right: 1rem;
+    }
+  }
+
   .block {
     flex-grow: 1;
+
+    * {
+      margin-left: 0;
+    }
     
     .select-component {
       width: 100%;
     }
+
+    padding-right: 8px;
   }
 }
 
 .employee-form {
+  padding: 0;
+
+  .form-datepicker {
+
+    * {
+      border: none;
+    }
+
+    .Datepicker_input__16dVZ {
+      width: 130px;
+    }
+
+    input {
+      border: none;
+      width: 100%;
+      font-size: 16px;
+    }
+
+    button {
+      background-color: transparent;
+      border: none;
+      
+      i {
+        color: #737373;
+      }
+    }
+  }
+
+  label {
+    padding-left: .5rem;
+    color: #333333;
+    font-size: 14px;
+  }
+
+  p {
+    color: #333333;
+  }
+
   input {
+    color: #333333;
+    font-size: 16px;
     &:focus {
       box-shadow: none;
+      border: none;
     }
   }
 }
 
 .col-6 {
   width: 50%;
+}
+
+.col-4 {
+  width: 40%;
+}
+
+.pl-2 {
+  padding-left: 2px;
 }

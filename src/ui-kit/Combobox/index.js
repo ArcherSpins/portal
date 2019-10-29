@@ -8,19 +8,18 @@ import AsyncSelect from 'react-select/lib/Async';
 import { components } from 'react-select';
 import './style.scss';
 
-type Option = {
-  id: string,
+export type Option = {
   label: string,
   value: string
 }
 
-type Action = {
+export type Action = {
   action: string,
   name: ?string,
   option?: string
 }
 
-type ComboboxType = 'borderless' | 'default' | 'underlined';
+type ComboboxType = 'borderless' | 'default' | 'underlined' | 'grey';
 
 type Props = {
   loadOptions: () => Promise<Array<Option>>,
@@ -62,14 +61,14 @@ const Combobox = ({
   error,
   label,
   className,
-  use,
+  use = 'default',
   ...restProps
 }: Props) => (
   <div
     className={
       classNames(
-        'cbx__wrap wrapper',
-        `combobox_${use || ''}`,
+        'cbx__wrap wrapper combobox',
+        `combobox_${use}`,
         {
           selected: !!selectedOption,
           'error-select': !!error,
@@ -78,7 +77,7 @@ const Combobox = ({
       )
     }
   >
-    <label className={`${use || ''}`} htmlFor="select">{label}</label>
+    <label className="cbx__label" htmlFor="select">{label}</label>
     <AsyncSelect
       className="select-component"
       loadOptions={loadOptions}

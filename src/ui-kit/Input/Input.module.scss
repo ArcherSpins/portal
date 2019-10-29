@@ -9,7 +9,7 @@
   .wrap {
     @include default-transition(all);
     overflow: hidden;
-    line-height: 1.5rem;
+    line-height: 1.25rem;
     color: $disabled-color;
     background-color: white;
   }

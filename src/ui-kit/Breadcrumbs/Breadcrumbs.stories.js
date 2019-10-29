@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React from 'react';
-// import { action } from '@storybook/addon-actions';
+import { BrowserRouter as Router } from 'react-router-dom';
 import Breadcrumbs from 'ui-kit/Breadcrumbs';
 import { storiesOf } from '@storybook/react';
 
@@ -22,7 +22,7 @@ storiesOf('Breadcrumbs', module)
           {
             title: 'Breadcrumbs',
             sectionFn: () => {
-              return <Breadcrumbs routes={routes} />;
+              return <Router><Breadcrumbs routes={routes} /></Router>;
             },
           },
         ],

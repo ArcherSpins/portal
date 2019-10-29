@@ -12,6 +12,10 @@ export const Button = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-top: 8px;
+  padding-right: 10px;
+  font-size: 12px;
+  color: #818A95;
 
   &:active {
     box-shadow: none;

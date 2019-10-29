@@ -181,8 +181,11 @@
 }
 
 /* Default modifiers */
-
 .today {
+  color: $main-color;
+}
+
+.selected {
   color: white;
   background-color: $main-color;
   font-weight: 700;
@@ -198,7 +201,6 @@
   cursor: default;
   /* background-color: #eff1f1; */
 }
-
 /* Example modifiers */
 
 .DayPicker-Day--sunday {

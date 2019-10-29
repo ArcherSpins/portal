@@ -16,3 +16,7 @@
   @extend .default;
   padding-left: 0.625rem;
 }
+
+.disabled {
+  cursor: not-allowed;
+}

@@ -9,7 +9,7 @@ import { AUTH_TOKEN_KEY, ROOT_PAGE_ROUTE } from 'utils/constants';
 
 import { SET_NEW_PASSWORD } from 'graphql/auth';
 import {
-  ButtonWithProgress, H1, Input, Separator,
+  ButtonWithProgress, H1, Input, Separator, Toast, ErrorText,
 } from 'ui-kit';
 import styles from '../Auth.module.scss';
 
@@ -33,7 +33,8 @@ class ResetPassword extends Component<Props> {
         },
       });
       setSubmitting(false);
-      // this.redirect();
+      Toast.push({ message: 'Your password is changed', type: 'info' });
+      this.redirect();
     } catch (err) {
       setSubmitting(false);
       // console.log(err);
@@ -115,7 +116,9 @@ class ResetPassword extends Component<Props> {
                   error={touched.oldPassword && errors.oldPassword}
                   onChange={handleChange}
                 />
-                {touched.newPassword && touched.oldPassword && errors.confirm}
+                <ErrorText>
+                  {touched.newPassword && touched.oldPassword && errors.confirm}
+                </ErrorText>
                 <div className={styles.actions}>
                   <ButtonWithProgress
                     loading={isSubmitting}

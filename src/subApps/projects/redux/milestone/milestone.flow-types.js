@@ -18,12 +18,6 @@ export type Milestone = {
     id: string,
     title: string
   },
-  taskCreators: Array<{
-    id: string,
-    firstName: string,
-    lastName: string,
-    name: string
-  }>,
   participants: Array<{
     id: string,
     firstName: string,
@@ -39,8 +33,6 @@ export type MilestoneCreation = {
   estTime: string,
   stateID?: string,
   projectID?: string,
-  unbindTaskCreators?: Array<string>,
-  bindTaskCreators?: Array<string>,
   unbindParticipants?: Array<string>,
   bindParticipants?: Array<string>
 };

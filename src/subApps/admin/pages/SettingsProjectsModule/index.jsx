@@ -6,17 +6,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {
+  Dropdown,
+  Button,
+} from 'ui-kit';
+import {
   LeftNavbar,
   HeaderEmployees,
-  Select,
-  Button,
 } from '../../components';
 import { LoadingContainer } from '../../containers';
 import {
   PageContainer,
   ContainerContent,
   Main,
-  Label,
   FieldBlock,
 } from '../styled';
 import {
@@ -26,6 +27,7 @@ import {
   updateSpentTimeBounds,
 } from '../../redux/actions/spentTimeBounds';
 import type { SpentTimeBoundsType } from '../../types';
+import './style.scss';
 
 type Props = {
   getSpentTimeBounds: () => void,
@@ -37,9 +39,10 @@ type Props = {
 type State = {
   edit: boolean,
   data: {
-    hours: number,
-    minutes: number,
-    days: number
+    hours: number | string,
+    minutes: number | string,
+    days: number | string,
+    times: string,
   }
 }
 
@@ -70,7 +73,6 @@ class SittingsProjectsModulePage extends React.Component<Props, State> {
         this.setState({
           data: {
             ...data,
-            // $FlowFixMe
             days: selected.value.toString(),
           },
         });
@@ -79,10 +81,9 @@ class SittingsProjectsModulePage extends React.Component<Props, State> {
         this.setState({
           data: {
             ...data,
-            // $FlowFixMe
             hours: Number(selected.value.split(':')[0]).toString(),
-            // $FlowFixMe
             minutes: Number(selected.value.split(':')[1]).toString(),
+            times: selected.value,
           },
         });
         break;
@@ -100,6 +101,7 @@ class SittingsProjectsModulePage extends React.Component<Props, State> {
 
   getDays = () => {
     const { spentTimeBounds } = this.props;
+    const { data } = this.state;
     const days: Array<{
       label: number,
       value: number,
@@ -114,9 +116,10 @@ class SittingsProjectsModulePage extends React.Component<Props, State> {
       });
     }
 
-    const selected = days.find((item) => item.label === spentTimeBounds.days);
+    const selected = days.find(
+      (item) => item.label === (Number(data.days || spentTimeBounds.days)),
+    );
 
-    // $FlowFixMe
     return {
       days,
       selected,
@@ -125,6 +128,7 @@ class SittingsProjectsModulePage extends React.Component<Props, State> {
 
   getTimes = () => {
     const { spentTimeBounds } = this.props;
+    const { data } = this.state;
     const arr = [];
 
     for (let i = 0; i < 24; i += 1) {
@@ -132,15 +136,17 @@ class SittingsProjectsModulePage extends React.Component<Props, State> {
         id: i,
         label: `${String(i).padStart(2, '0')}:00`,
         value: `${String(i).padStart(2, '0')}:00`,
-        selected: spentTimeBounds.hours === i
-          && spentTimeBounds.minutes === 0,
+        selected: data.times === `${String(i).padStart(2, '0')}:00`
+          || (spentTimeBounds.hours === i
+          && spentTimeBounds.minutes === 0),
       });
       arr.push({
         id: i,
         label: `${String(i).padStart(2, '0')}:30`,
         value: `${String(i).padStart(2, '0')}:30`,
-        selected: spentTimeBounds.hours === i
-          && spentTimeBounds.minutes === 30,
+        selected: data.times === `${String(i).padStart(2, '0')}:00`
+          || (spentTimeBounds.hours === i
+          && spentTimeBounds.minutes === 30),
       });
     }
 
@@ -160,6 +166,7 @@ class SittingsProjectsModulePage extends React.Component<Props, State> {
       <PageContainer style={{ display: 'flex' }}>
         <LeftNavbar />
         <ContainerContent
+          className="setting-container"
           style={{
             marginLeft: `${220}px`,
             paddingLeft: 30,
@@ -169,42 +176,45 @@ class SittingsProjectsModulePage extends React.Component<Props, State> {
             loading ? <LoadingContainer /> : (
               <div>
                 <HeaderEmployees
-                  style={{ width: '45%' }}
-                  styleTitle={{ fontSize: '18px', lineHeight: '22px' }}
                   noBorder
                   noSearch
-                  title={`Time before which it is possimble to make labor\n
-                  costs after the end of the working day`}
+                  title="Settings projects module"
                 />
                 <Main>
                   <FieldBlock>
-                    <Label>Working days</Label>
-                    <Select
-                      onChange={this.changeSelect}
+                    <Dropdown
+                      className="dropdown-block"
                       options={this.getDays().days}
-                      selected={this.getDays().selected}
-                      selectedName="days"
+                      onChange={(value) => {
+                        this.changeSelect({ ...value, selectedName: 'days' });
+                      }}
+                      value={this.getDays().selected}
+                      label="Working days"
                     />
                   </FieldBlock>
                   <FieldBlock>
-                    <Label>Working hours and minutes</Label>
-                    <Select
-                      selectedName="times"
-                      onChange={this.changeSelect}
+                    <Dropdown
+                      className="dropdown-block"
                       options={this.getTimes().times}
-                      selected={this.getTimes().selected}
+                      onChange={(value) => {
+                        this.changeSelect({ ...value, selectedName: 'times' });
+                      }}
+                      value={this.getTimes().selected}
+                      label="Working hours and minutes"
                     />
                   </FieldBlock>
-                  {
-                    edit && (
-                      <Button
-                        onClick={this.saveFunc}
-                        style={{ minWidth: '110px', marginTop: '20px' }}
-                      >
-                        Save
-                      </Button>
-                    )
-                  }
+                  <div className="footer-settings_form">
+                    {
+                      edit && (
+                        <Button
+                          onClick={this.saveFunc}
+                          style={{ minWidth: '110px', marginTop: '20px' }}
+                        >
+                          Save
+                        </Button>
+                      )
+                    }
+                  </div>
                 </Main>
               </div>
             )

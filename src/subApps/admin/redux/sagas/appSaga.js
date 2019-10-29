@@ -4,9 +4,11 @@ import {
   takeEvery,
   delay,
 } from 'redux-saga/effects';
+import { Toast } from 'ui-kit';
 import type { Saga } from 'redux-saga';
 
-export function* toggleErrorMessage(): Saga<void> {
+export function* toggleErrorMessage(action: { payload: string }): Saga<void> {
+  Toast.push({ message: String(action.payload), type: 'danger' });
   yield delay(4000);
   yield put({
     type: 'CLOSE_ERROR_MESSAGE',

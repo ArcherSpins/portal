@@ -4,19 +4,19 @@ import { HeaderListDepartment, HeaderItem } from './styled';
 
 export default () => (
   <HeaderListDepartment>
-    <HeaderItem>
+    <HeaderItem width="15%">
       Department
     </HeaderItem>
-    <HeaderItem>
+    <HeaderItem width="15%">
       Position
     </HeaderItem>
-    <HeaderItem>
+    <HeaderItem width="30%">
       Employees
     </HeaderItem>
-    <HeaderItem>
+    <HeaderItem width="15%">
       Chief
     </HeaderItem>
-    <HeaderItem>
+    <HeaderItem width="15%">
       Subordination
     </HeaderItem>
   </HeaderListDepartment>

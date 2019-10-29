@@ -19,12 +19,6 @@ export const getMilestones = async (projectID, limit = '100') => {
               id
               title
             }
-            taskCreators {
-              id
-              firstName
-              lastName
-              name
-            }
             participants {
               id
               firstName
@@ -62,12 +56,6 @@ export const getMilestone = async (id) => {
           }
           spentTime
           estimatedTime
-          taskCreators {
-            id
-            firstName
-            lastName
-            name
-          }
           participants {
             id
             firstName

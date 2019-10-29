@@ -1,7 +1,9 @@
 // @flow
 import React from 'react';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
-import { format as formatDate } from 'date-fns';
+import { DateUtils } from 'react-day-picker';
+import { format as dateFnsFormat, parse as dateFnsParse } from 'date-fns';
+
 import classNames from 'classnames';
 // $FlowFixMe
 import 'react-day-picker/lib/style.css';
@@ -10,14 +12,16 @@ import { Input } from 'ui-kit';
 import styles from './Datepicker.module.scss';
 import overlayStyles from './Overlay.module.scss';
 
-const DEFAULT_FORMAT = 'DD.MM.YYYY';
+const DEFAULT_FORMAT = 'd.L.y';
 
 type Props = {
   onDayChange: Date => void,
   format?: string,
   placeholder?: string,
   value?: Date,
+  label?: string,
   className?: string,
+  name: string,
   label?: string,
   style?: {
     [string]: mixed
@@ -30,7 +34,6 @@ type NavbarElementProps = {
 }
 
 const weekdaysShort = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
-
 
 const Navbar = ({ onNextClick, onPreviousClick }: NavbarElementProps) => (
   <div className={overlayStyles.nav}>
@@ -51,11 +54,14 @@ const Navbar = ({ onNextClick, onPreviousClick }: NavbarElementProps) => (
 
 const DateInput = (props: any) => {
   const { onFocus, onBlur } = props;
+
   return (
     <div
       className={styles.input}
     >
-      <Input {...props} />
+      <Input
+        {...props}
+      />
       <button type="button" onClick={onFocus} onBlur={onBlur} className={styles.icon__wrap}>
         <i className="icon-calendar" />
       </button>
@@ -63,7 +69,15 @@ const DateInput = (props: any) => {
   );
 };
 
-const getDate = (date: Date, format: string) => formatDate(date, format);
+const getDate = (date: Date, format: string) => dateFnsFormat(date, format);
+
+const parseDate = (str, format) => {
+  const parsed = dateFnsParse(str, format, new Date());
+  if (DateUtils.isDate(parsed)) {
+    return parsed;
+  }
+  return undefined;
+};
 
 const Datepicker = ({
   onDayChange,
@@ -71,20 +85,24 @@ const Datepicker = ({
   placeholder = DEFAULT_FORMAT,
   value,
   className,
-  style,
+  name,
   label,
+  style,
   ...props
 }: Props) => {
   const inputRef = React.createRef();
   return (
     <div style={style} className={classNames(styles.datepicker, className)}>
-      <span className={styles.label}>{label}</span>
+      <label htmlFor={name}>{label}</label>
+      {/* <span className={styles.label}>{label}</span> */}
       <DayPickerInput
+        name={name}
         dayPickerProps={{
           ...props,
           classNames: overlayStyles,
           weekdaysShort,
           navbarElement: Navbar,
+          selectedDays: value,
           onBlur: (e: SyntheticMouseEvent<HTMLElement>) => {
             // hack for hiding day picker
             // see: https://github.com/gpbl/react-day-picker/issues/926
@@ -103,6 +121,7 @@ const Datepicker = ({
         format={format}
         placeholder={placeholder}
         formatDate={getDate}
+        parseDate={parseDate}
         onDayChange={onDayChange}
         value={value}
       />
@@ -112,7 +131,7 @@ const Datepicker = ({
 
 Datepicker.defaultProps = {
   format: DEFAULT_FORMAT,
-  placeholder: DEFAULT_FORMAT,
+  placeholder: 'DD.MM.YYYY',
   value: '',
   label: '',
   className: '',

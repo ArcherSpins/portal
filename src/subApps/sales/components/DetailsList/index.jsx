@@ -6,8 +6,11 @@ import React from 'react';
 import dayjs from 'dayjs';
 import {
   Input,
+<<<<<<< HEAD
   // Switcher,
   Combobox,
+=======
+>>>>>>> 63259ef9ef5e7e58dc03214ab17ccd650e6ee702
 } from 'ui-kit';
 import {
   Header,
@@ -15,8 +18,15 @@ import {
   Label,
   Button,
   TabsComponent,
+<<<<<<< HEAD
   // ToggleChangeComponent,
   // SelectValid,
+=======
+  ContactBlock,
+  ToggleChangeComponent,
+  // ToggleBlock,
+  SelectValid,
+>>>>>>> 63259ef9ef5e7e58dc03214ab17ccd650e6ee702
 } from './styled';
 import { ModalMessage } from '../index';
 // import notImage from '../../assets/not_image.png';
@@ -42,9 +52,9 @@ const DetailsList = ({
     // editForm,
     activeUser,
     statuses,
-    channels,
+    // channels,
     sources,
-    managers,
+    // managers,
     errorsFormCreate,
     showModalErrorMessage,
     toggleShowModal,
@@ -113,6 +123,7 @@ const DetailsList = ({
           }}
         >
           <FieldBlock className="field">
+<<<<<<< HEAD
             <Input
               className="pl-0"
               label="Client"
@@ -137,6 +148,56 @@ const DetailsList = ({
               }}
               placeholder="Manager name"
             />
+=======
+            {/* <Label className="mb-10">Client</Label> */}
+            <Input
+              label="Client"
+              onChange={(value) => changeInput('client', value)}
+              use="borderless"
+              value={data.client ? data.client : ''}
+              error={errorsFormCreate.client.error}
+              name="client"
+            />
+            {/* <ToggleBlock
+              edit={editForm.client}
+              id="client"
+              editProps={{
+                onChange: changeInput,
+                value: data.client ? data.client : '',
+                error: errorsFormCreate.client.error,
+                errorMessage: errorsFormCreate.client.message,
+                className: errorsFormCreate.client.error ? 'error-border' : '',
+              }}
+              prevProps={{
+                name: activeUser.client ? activeUser.client : '',
+                doubleClick: activateFormEdit,
+              }}
+            /> */}
+          </FieldBlock>
+          <FieldBlock className="field option-edit-select">
+            <Input
+              onChange={(value) => changeInput('manager', value)}
+              use="borderless"
+              value={activeUser.manager}
+              // error={errorsFormCreate.client.error}
+              name="manager"
+              label="Sales"
+            />
+            {/* <UserPicker
+              users={[data.manager]}
+              usersJson={managers}
+              getUsers={(users: Array<{ id: string }>) => {
+                changeInput('manager', users[0].id, null, users[0]);
+              }}
+              title="Sales"
+              deleteUser={(del) => {
+                const deleteUs = del;
+                return deleteUs;
+              }}
+              selected={activeUser.manager}
+              defaultImage={notImage}
+            /> */}
+>>>>>>> 63259ef9ef5e7e58dc03214ab17ccd650e6ee702
           </FieldBlock>
           <FieldBlock className="field">
             {/* <Input
@@ -179,6 +240,7 @@ const DetailsList = ({
             }
           </FieldBlock>
           <FieldBlock className="field">
+<<<<<<< HEAD
             <Combobox
               use="underlined"
               loadOptions={loadOptionsChannels}
@@ -191,6 +253,41 @@ const DetailsList = ({
               }}
               placeholder="Channel"
             />
+=======
+            {/* <Label className="mb-10">Channel</Label> */}
+            <Input
+              onChange={(value) => changeInput('channel', value)}
+              use="borderless"
+              value={data.channel.title}
+              // error={errorsFormCreate.client.error}
+              name="channel"
+              label="Channel"
+            />
+            {/* <select
+              className="toggle-select"
+              id="channel"
+              onChange={
+                (val) => {
+                  const find = channels.find((item) => item.title === val.target.value);
+                  changeInput('channel', find);
+                }
+              }
+            >
+              {
+                Array.isArray(channels) && data.channel && channels.map((item) => {
+                  const channel = item;
+                  return (
+                    <option
+                      key={channel.id}
+                      selected={item.id === data.channel.id}
+                    >
+                      {channel.title}
+                    </option>
+                  );
+                })
+              }
+            </select> */}
+>>>>>>> 63259ef9ef5e7e58dc03214ab17ccd650e6ee702
           </FieldBlock>
           <FieldBlock className="field">
             <Label className="mb-10">Source</Label>

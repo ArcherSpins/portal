@@ -1,9 +1,14 @@
 @import '../variables';
 @import '../mixins';
 
-.cbx__wrap {
+.cbx__wrap.combobox {
   display: flex;
   flex-direction: column;
+  font-size: 1rem;
+
+  .select-component {
+    min-height: 2rem;
+  }
 
   .cbx__menu {
     margin-top: .2rem;
@@ -38,11 +43,6 @@
     }
   }
 
-  .label-combobox {
-    color: $text-color-200;
-    margin-bottom: 0.2rem;
-  }
-
   &.error-select {
     .cbx__control {
       border-style: solid;
@@ -71,7 +71,19 @@
     border-width: 0;
 
     .cbx__control {
-      border: none;
+      border-color: transparent;
+
+      &:hover {
+        border-color: transparent;
+      }
+    }
+
+    .cbx__control--is-focused {
+      border-color: $main-color;
+
+      &:hover {
+        border-color: $main-color;
+      }
     }
 
     .error-text {
@@ -138,6 +150,17 @@
     }
   }
 
+  &.combobox_grey {
+    .cbx__control {
+      border-style: solid;
+      border-color: $grey;
+    }
+
+    .cbx__control--is-focused {
+      border-color: $main-color;
+    }
+  }
+
 
   .default {
     font-size: 1rem;
@@ -155,7 +178,8 @@
   }
 }
 
-
-
-
-
+.cbx__label {
+  font-size: 0.875rem;
+  margin-bottom: 0.25rem;
+  color: $text-color;
+}

@@ -4,7 +4,6 @@ import { compose } from 'redux';
 import {
   requestEmployees,
   checkTokenAction,
-  closeErrorMessage,
 } from '../../redux/actions';
 import {
   searchEmployees,
@@ -16,15 +15,12 @@ const mapStateToProps = (state) => ({
   loadingEmployees: state.employees.loadingEmployees,
   loadingUser: state.user.loadingUser,
   userData: state.user.userData,
-  errorStatus: state.app.errorStatus,
-  errorMessage: state.app.errorMessage,
   search: state.app.searchEmployees,
 });
 
 const mapDispatchToProps = {
   checkTokenAction,
   requestEmployees,
-  closeErrorMessage,
   searchEmployees,
 };
 // TODO: FIX THIS
