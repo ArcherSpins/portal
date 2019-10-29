@@ -1,7 +1,7 @@
 // @flow
 import React, { type Node, Component } from 'react';
-import MaskedInput from 'react-text-mask';
 import noop from 'lodash.noop';
+import Input from 'ui-kit/Input';
 import classNames from 'classnames';
 import styles from './IconInput.module.scss';
 
@@ -33,10 +33,7 @@ type Props = {
   size?: InputSize
 }
 
-type State = {
-  focused: boolean
-}
-class Input extends Component<Props, State> {
+class InputIcon extends Component<Props> {
   static defaultProps = {
     type: 'text',
     placeholder: '',
@@ -55,113 +52,36 @@ class Input extends Component<Props, State> {
     size: 'md',
   };
 
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      focused: false,
-    };
-  }
-
-  handleFocus = (event: SyntheticInputEvent<HTMLInputElement>) => {
-    const { onFocus } = this.props;
-    this.setState({
-      focused: true,
-    });
-
-    if (onFocus) {
-      onFocus(event);
-    }
-  };
-
-  handleBlur = (event: SyntheticInputEvent<HTMLInputElement>) => {
-    const { onBlur } = this.props;
-    this.setState({
-      focused: false,
-    });
-
-    if (onBlur) {
-      onBlur(event);
-    }
-  };
-
   render() {
     const {
-      type,
-      placeholder,
       onChange,
-      error,
-      disabled,
-      value,
       className = '',
-      name,
-      use = 'default',
-      label,
-      onBlur,
       onIconClick,
       icon,
-      mask,
       size,
+      name,
+      label,
       ...restProps
     } = this.props;
-
-    const { focused } = this.state;
 
     return (
       <div
         className={
           classNames(
-            'input-icon',
-            styles[use],
-            styles[size],
-            {
-              [styles.error]: error,
-              [styles.focus]: focused,
-              [styles.disabled]: disabled,
-            },
+            styles['input-icon'],
+            { [styles.label_sm]: size && label },
             className,
           )
         }
       >
-        <label htmlFor={name}>
-          {label}
-        </label>
         <div className={classNames(styles.wrap)}>
-          {
-            mask ? (
-              <MaskedInput
-                mask={mask}
-                placeholder={placeholder}
-                onChange={onChange}
-                id={name}
-                render={(ref, props) => (
-                  <input
-                    ref={ref}
-                    {...restProps}
-                    name={name}
-                    type={type}
-                    placeholder={placeholder}
-                    onFocus={this.handleFocus}
-                    onBlur={this.handleBlur}
-                    disabled={disabled}
-                    value={value}
-                    {...props}
-                  />
-                )}
-              />
-            ) : (
-              <input
-                {...restProps}
-                name={name}
-                type={type}
-                placeholder={placeholder}
-                onChange={onChange}
-                onFocus={this.handleFocus}
-                onBlur={this.handleBlur}
-                disabled={disabled}
-                value={value}
-              />
-            )
-          }
+          <Input
+            name={name}
+            onChange={onChange}
+            size={size}
+            label={label}
+            {...restProps}
+          />
           {icon && (
             <button onClick={onIconClick} className={styles.iconButton} type="button">
               {icon}
@@ -173,4 +93,4 @@ class Input extends Component<Props, State> {
   }
 }
 
-export default Input;
+export default InputIcon;
