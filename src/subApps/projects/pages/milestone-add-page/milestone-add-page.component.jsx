@@ -37,7 +37,6 @@ type Employee = {
 type State = {
   title: string,
   participants: Array<Option>,
-  // taskCreators: Array<Employee>,
   description: string,
   spent: string,
   errors: Array<string>
@@ -57,7 +56,6 @@ type Props = {
 const initialState = {
   title: '',
   participants: [],
-  // taskCreators: [],
   description: '',
   spent: '',
   errors: [],
@@ -69,7 +67,6 @@ class MilestoneAddPage extends React.Component<Props, State> {
     this.state = {
       title: '',
       participants: [],
-      // taskCreators: [],
       description: '',
       spent: '',
       errors: [],
@@ -137,7 +134,6 @@ class MilestoneAddPage extends React.Component<Props, State> {
     e.preventDefault();
     const {
       title,
-      // taskCreators,
       participants,
       spent,
       description,
@@ -150,8 +146,6 @@ class MilestoneAddPage extends React.Component<Props, State> {
     if (isValid.length) {
       this.setState({ errors: isValid });
     } else {
-      // const taskCreatorsIDs = taskCreators.map((w) => w.id.toString());
-
       const participantIDs = participants.map((p) => p.value.toString());
       const newSpent = parseFloat(spent) * 60;
       const newMilestone = {
@@ -159,7 +153,6 @@ class MilestoneAddPage extends React.Component<Props, State> {
         description,
         estTime: newSpent.toString(),
         projectID: project.id || '',
-        // taskCreatorsIDs,
         participantIDs,
       };
       createMilestone(newMilestone, history);

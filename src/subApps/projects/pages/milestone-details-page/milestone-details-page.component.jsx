@@ -177,7 +177,6 @@ class MilestoneDetailsPage extends React.Component<Props, State> {
     if (isValid.length) {
       this.setState({ errors: isValid });
     } else {
-      // const taskCreatorsPropsIDs = milestone.taskCreators.map((w) => w.id.toString());
       const participantsPropsIDs = milestone.participants.map((p) => p.id.toString());
 
       const participantsIDs = participants.map((p) => p.value.toString());
@@ -188,8 +187,6 @@ class MilestoneDetailsPage extends React.Component<Props, State> {
         description,
         estTime: newEst.toString(),
         stateID: 'a9bfe6d2-9a5a-4dda-96b2-daeff3404a20',
-        // unbindTaskCreators: unbindUserId(taskCreatorsPropsIDs, taskCreatorsIDs),
-        // bindTaskCreators: bindUserId(taskCreatorsPropsIDs, taskCreatorsIDs),
         unbindParticipants: unbindUserId(participantsPropsIDs, participantsIDs),
         bindParticipants: bindUserId(participantsPropsIDs, participantsIDs),
       };

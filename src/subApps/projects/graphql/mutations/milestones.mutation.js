@@ -7,7 +7,6 @@ export const createMilestone = async ({
   description,
   estTime,
   projectID,
-  taskCreatorsIDs,
   participantIDs,
 }) => {
   const response = await client.mutate({
@@ -16,7 +15,6 @@ export const createMilestone = async ({
       description,
       estTime,
       projectID,
-      taskCreatorsIDs,
       participantIDs,
     },
     mutation: gql`
@@ -25,7 +23,6 @@ export const createMilestone = async ({
         $description: String!
         $estTime: Int!
         $projectID: ID!
-        $taskCreatorsIDs: [ID!]
         $participantIDs: [ID!]
       ) {
         createMilestone(
@@ -33,7 +30,6 @@ export const createMilestone = async ({
           description: $description
           estTime: $estTime
           projectID: $projectID
-          taskCreatorsIDs: $taskCreatorsIDs
           participantIDs: $participantIDs
         ) {
           id
@@ -44,12 +40,6 @@ export const createMilestone = async ({
           state {
             id
             title
-          }
-          taskCreators {
-            id
-            firstName
-            lastName
-            name
           }
           participants {
             id
@@ -74,9 +64,6 @@ export const updateMilestone = async ({
   title,
   description,
   estTime,
-  // stateID,
-  unbindTaskCreators,
-  bindTaskCreators,
   unbindParticipants,
   bindParticipants,
 }) => {
@@ -86,9 +73,6 @@ export const updateMilestone = async ({
       title,
       description,
       estTime,
-      // stateID,
-      unbindTaskCreators,
-      bindTaskCreators,
       unbindParticipants,
       bindParticipants,
     },
@@ -98,9 +82,6 @@ export const updateMilestone = async ({
         $title: String
         $description: String
         $estTime: Int
-        # $stateID: ID
-        $unbindTaskCreators: [ID!]
-        $bindTaskCreators: [ID!]
         $unbindParticipants: [ID!]
         $bindParticipants: [ID!]
       ) {
@@ -109,9 +90,6 @@ export const updateMilestone = async ({
           title: $title
           description: $description
           estTime: $estTime
-          # stateID: $stateID
-          unbindTaskCreators: $unbindTaskCreators
-          bindTaskCreators: $bindTaskCreators
           unbindParticipants: $unbindParticipants
           bindParticipants: $bindParticipants
         ) {
@@ -123,12 +101,6 @@ export const updateMilestone = async ({
           state {
             id
             title
-          }
-          taskCreators {
-            id
-            firstName
-            lastName
-            name
           }
           participants {
             id
