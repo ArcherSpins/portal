@@ -47,7 +47,7 @@ const HeaderComponent = ({ goBack, deleteEmployee, title }: HeaderProps): Node =
       <RightBlock>
         {
           deleteEmployee && (
-            <Button className="delete-deal-button" use="transparent" onClick={deleteEmployee}>
+            <Button use="transparent" onClick={deleteEmployee}>
               Delete employee
             </Button>
           )
