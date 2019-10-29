@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable react/button-has-type */
 /* eslint-disable react/no-unused-prop-types */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
@@ -7,7 +8,7 @@
 // @flow
 import React from 'react';
 import type { RouterHistory, Match } from 'react-router-dom';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 // import { ROOT } from 'subApps/projects/routes';
 import { spentTimeInHours } from '../../helpers/sumTime';
 
@@ -45,11 +46,12 @@ const MilestoneItem = (props: Props) => (
       </span>
       <span className="milestone-item__status">{props.status}</span>
       <div className="milestone-item__details-wrapper">
-        <button
+        <Link
           className="milestone-item__tasks"
-          onClick={() => props.history.push(
-            `${props.match.url || ''}/milestone${props.number}/tasks`,
-          )}
+          to={`${props.match.url || ''}/milestone${props.number}/tasks`}
+          // onClick={() => props.history.push(
+          //   `${props.match.url || ''}/milestone${props.number}/tasks`,
+          // )}
         >
           <svg
             width="16"
@@ -63,12 +65,13 @@ const MilestoneItem = (props: Props) => (
               fill="black"
             />
           </svg>
-        </button>
-        <button
+        </Link>
+        <Link
+          to={`${props.match.url || ''}/milestone${props.number}`}
           className="milestone-item__details"
-          onClick={() => props.history.push(
-            `${props.match.url || ''}/milestone${props.number}`,
-          )}
+          // onClick={() => props.history.push(
+          //   `${props.match.url || ''}/milestone${props.number}`,
+          // )}
         >
           <svg
             width="15"
@@ -82,7 +85,7 @@ const MilestoneItem = (props: Props) => (
               fill="black"
             />
           </svg>
-        </button>
+        </Link>
       </div>
     </div>
     {props.openDescription && props.description.length > 0 ? (
