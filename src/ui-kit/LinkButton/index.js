@@ -1,45 +1,16 @@
 // @flow
 import React, { type Node } from 'react';
-import { Link } from 'react-router-dom';
-import classNames from 'classnames';
-import noop from 'lodash.noop';
+import { Button } from 'ui-kit';
 import styles from './LinkButton.module.scss';
 
 type Props = {
-    to: string,
-    type?: string,
-    onClick?: (SyntheticMouseEvent<HTMLButtonElement>) => void,
-    className?: string,
-    children: Node,
-    disabled?: boolean
-
+  children: Node
 }
 
-
-const LinkButton = ({
-  to,
-  type,
-  onClick,
-  className,
-  children,
-  disabled,
-}: Props) => (
-  <Link
-    to={to}
-    className={classNames(styles.linkButton, className, { [styles.disabledLinkButton]: disabled })}
-    disabled={disabled}
-    onClick={onClick}
-    type={type}
-  >
+const LinkButton = ({ children, ...rest }: Props) => (
+  <Button {...rest} className={styles.link}>
     {children}
-  </Link>
+  </Button>
 );
-
-LinkButton.defaultProps = {
-  onClick: noop,
-  type: '',
-  disabled: false,
-  className: '',
-};
 
 export default LinkButton;

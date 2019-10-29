@@ -1,23 +1,12 @@
-@import '../variables.scss';
-.linkButton {
-  background-color: #fff;
-  border-radius: 4px;
-  border: 1px solid $text-color-75;
-  padding: 3px;
-  cursor: pointer;
-
-  &:hover {
-    background-color: $grey-300;
-  }
-
-  svg {
-    margin-bottom: -3px;
-  }
+.link {
+  position: relative;
+  padding: 0;
+/* TODO: Place your component styles here */
 }
 
-.disabledLinkButton {
-  @extend .linkButton;
-  //   cursor: not-allowed;
-  pointer-events: none;
-  background-color: $grey-disabled;
+.link a {
+  text-decoration: none;
+  color: inherit;
+  display: inline-block;
+  padding: 0.3rem 1rem;
 }

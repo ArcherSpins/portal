@@ -43,9 +43,7 @@ const Button = (props: ButtonProps) => {
       className={classNames(styles[use], styles[size], className)}
       onClick={onClick}
     >
-      <span>
-        {children}
-      </span>
+      {children}
     </button>
   );
 };
