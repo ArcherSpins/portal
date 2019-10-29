@@ -1,9 +1,8 @@
 /* eslint-disable import/no-cycle */
 // TODO: FIX THIS
-/* eslint-disable react/no-unused-state */
 // @flow
 
-import React, { useState } from 'react';
+import React from 'react';
 import dayjs from 'dayjs';
 import {
   Input,
@@ -16,7 +15,7 @@ import {
   Label,
   Button,
   TabsComponent,
-  ToggleChangeComponent,
+  // ToggleChangeComponent,
   // SelectValid,
 } from './styled';
 import { ModalMessage } from '../index';
@@ -39,8 +38,8 @@ const DetailsList = ({
   const typeProps: PropsType = props;
   const {
     edit,
-    activateFormEdit,
-    editForm,
+    // activateFormEdit,
+    // editForm,
     activeUser,
     statuses,
     channels,
@@ -55,10 +54,10 @@ const DetailsList = ({
     contacts,
   } = state;
 
-  const [tabIndex, toggleTabIdx] = useState(0);
+  // const [tabIndex, toggleTabIdx] = useState(0);
 
   const toggleTabIndex = (idx) => {
-    toggleTabIdx(idx);
+    // toggleTabIdx(idx);
     setSourceData(sources[idx]);
   };
 
@@ -164,7 +163,7 @@ const DetailsList = ({
             </div>
             {
               contacts.map((item) => (
-                <div key={item.id} style={{ marginBottom: 10 }}>
+                <div key={item.id} style={{ marginBottom: 6 }}>
                   <Input
                     className="pl-0"
                     onChange={(e) => changeInput('contact', e.target.value, item.id)}
@@ -176,26 +175,6 @@ const DetailsList = ({
                     placeholder="Contact"
                   />
                 </div>
-                // editForm.contact
-                //   ? (
-                //     <ContactBlock
-                //       index={i}
-                //       editImage={editImage}
-                //       key={item.id || i}
-                //       item={item}
-                //       deleteContact={deleteContact}
-                //       changeInput={changeInput}
-                //       deleteButton={activeUser.id}
-                //     />
-                //   )
-                //   : (
-                //     <ItemIcon
-                //       key={item.id || i}
-                //       toggleEditActive={(e) => activateFormEdit(e, 'contact')}
-                //       text={item.value}
-                //       icon={item.img}
-                //     />
-                //   )
               ))
             }
           </FieldBlock>
@@ -296,7 +275,20 @@ const DetailsList = ({
                 /> */}
               </div>
               <div className="tab-block-content" style={{ display: 'none' }}>
-                <ToggleChangeComponent
+                <div className="field">
+                  <Input
+                    className="pl-0"
+                    onChange={(e) => changeInput('source', e.target.value, 'salesURL', 'upwork')}
+                    use="borderless"
+                    value={data.salesURL}
+                    error={errorsFormCreate.jobProposalURL.error}
+                    name="salesURL"
+                    label="Messages"
+                    placeholder="Sales URL"
+                    require
+                  />
+                </div>
+                {/* <ToggleChangeComponent
                   status={editForm.source && tabIndex === 1}
                   changeBlock={{
                     label: 'Messages',
@@ -313,9 +305,22 @@ const DetailsList = ({
                     value: activeUser.salesURL,
                     idx: 'source',
                   }}
-                />
+                /> */}
+                <div className="field">
+                  <Input
+                    className="pl-0"
+                    onChange={(e) => changeInput('source', e.target.value, 'messagesURL', 'upwork')}
+                    use="borderless"
+                    value={data.messagesURL}
+                    error={errorsFormCreate.jobProposalURL.error}
+                    name="messagesURL"
+                    label="Sales"
+                    placeholder="Messages URL"
+                    require
+                  />
+                </div>
 
-                <ToggleChangeComponent
+                {/* <ToggleChangeComponent
                   status={editForm.source && tabIndex === 1}
                   changeBlock={{
                     label: 'Sales',
@@ -332,7 +337,7 @@ const DetailsList = ({
                     value: activeUser.messagesURL,
                     idx: 'source',
                   }}
-                />
+                /> */}
               </div>
               <div className="tab-block-content" style={{ display: 'none' }} />
             </TabsComponent>

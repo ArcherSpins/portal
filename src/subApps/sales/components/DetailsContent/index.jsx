@@ -3,7 +3,6 @@
 /* eslint-disable lines-between-class-members */
 // @flow
 import React from 'react';
-// $FlowFixMe
 import zenscroll from 'zenscroll';
 import { ChatForm, DetailsListStyled } from '../index';
 import { MessageComponent } from './styled';
