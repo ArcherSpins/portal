@@ -127,7 +127,7 @@ class DetailsContent extends React.Component<Props, State> {
         <div
           className="chat-form-container"
           style={{
-            height: this.inputRef ? `${inputHeight + 20}px` : '85px',
+            height: this.inputRef ? `${inputHeight + 20}px` : '55px',
           }}
         >
           <ChatForm

@@ -10,13 +10,10 @@
     padding: 0;
   }
 
-<<<<<<< HEAD
   .select-component {
     height: 2rem;
   }
 
-=======
->>>>>>> 63259ef9ef5e7e58dc03214ab17ccd650e6ee702
   .cbx__indicator-separator {
     display: none;
   }
@@ -25,16 +22,6 @@
     margin-top: .2rem;
   }
 
-<<<<<<< HEAD
-=======
-  .cbx__control {
-    height: 100%;
-    min-height: 2rem;
-    box-shadow: none;
-    @include default-transition(all);
-  }
-
->>>>>>> 63259ef9ef5e7e58dc03214ab17ccd650e6ee702
   .cbx__option {
     &:hover {
       background-color: rgba($main-color, .6) !important;
@@ -58,36 +45,12 @@
     }
   }
 
-<<<<<<< HEAD
-=======
-  &.dropdown_default {
-    .cbx__control {
-      border: 1px solid $grey;
-      &:hover {
-        border-color: $main-color;
-      }
-    }
-
-    .cbx__control--is-focused {
-      border-color: $main-color;
-    }
-
-    .error-text {
-      padding-left: 0.625rem;
-    }
-  }
-
->>>>>>> 63259ef9ef5e7e58dc03214ab17ccd650e6ee702
   &.dropdown_borderless {
     border: none;
     border-width: 0;
 
     .cbx__control {
       border-color: transparent;
-<<<<<<< HEAD
-
-=======
->>>>>>> 63259ef9ef5e7e58dc03214ab17ccd650e6ee702
       &:hover {
         border-color: transparent;
       }
@@ -106,7 +69,6 @@
     }
   }
 
-<<<<<<< HEAD
 
   .cbx__control {
     height: 100%;
@@ -119,8 +81,6 @@
     }
   }
 
-=======
->>>>>>> 63259ef9ef5e7e58dc03214ab17ccd650e6ee702
   &.dropdown_underlined {
     border: none;
     border-width: 0;
@@ -143,7 +103,6 @@
       border-color: $disabled-color;
     }
   }
-<<<<<<< HEAD
 
   .default {
     font-size: 1rem;
@@ -159,16 +118,10 @@
   .underlined {
     @extend .default;
   }
-=======
->>>>>>> 63259ef9ef5e7e58dc03214ab17ccd650e6ee702
 }
 
 .cbx__label {
   font-size: 0.875rem;
   margin-bottom: 0.25rem;
   color: $text-color;
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 63259ef9ef5e7e58dc03214ab17ccd650e6ee702

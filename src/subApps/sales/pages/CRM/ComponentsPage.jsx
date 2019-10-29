@@ -22,22 +22,10 @@ const LeftBlock = ({
       <Title>Deals</Title>
       <Input
         icon={<i className="icon-search" />}
-<<<<<<< HEAD
         value={searchValue}
         onChange={onChange}
         placeholder="Search"
       />
-=======
-        value={searchValue}
-        onChange={onChange}
-      />
-      {/* <SearchInput
-        className="not-focus"
-        value={searchValue}
-        onChange={onChange}
-        placeholder=""
-      /> */}
->>>>>>> 63259ef9ef5e7e58dc03214ab17ccd650e6ee702
       <Button
         type="submit"
         className="search-button fz-16"

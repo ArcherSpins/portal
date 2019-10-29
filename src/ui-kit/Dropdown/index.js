@@ -4,12 +4,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import Select, { components } from 'react-select';
-<<<<<<< HEAD
 import styles from './style.scss';
-=======
-import styles from './Dropdown.module.scss';
-import './style.scss';
->>>>>>> 63259ef9ef5e7e58dc03214ab17ccd650e6ee702
 
 import type { Option, Action } from '../Combobox';
 
@@ -46,19 +41,7 @@ const Dropdown = ({
   className,
   ...restProps
 }: Props) => (
-<<<<<<< HEAD
   <div className={classNames(styles.wrapper, `cbx__wrap dropdown dropdown_${use || ''}`, className)}>
-=======
-  <div className={classNames(
-    styles.wrapper,
-    {
-      [styles.disabled]: disabled,
-    },
-    `cbx__wrap dropdown dropdown_${use}`,
-    className,
-  )}
-  >
->>>>>>> 63259ef9ef5e7e58dc03214ab17ccd650e6ee702
     <label className={classNames(styles[use], 'cbx__label')} htmlFor="select">{label}</label>
     <Select
       className="select-component"

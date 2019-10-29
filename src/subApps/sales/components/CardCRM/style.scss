@@ -11,6 +11,13 @@ a {
     transition: transform .6s;
     transform: rotate(0deg);
 
+    * {
+        -ms-user-select: none;
+        -moz-user-select: none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
+    }
+
     cursor: move !important;
 
     &.error-drag {

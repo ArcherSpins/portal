@@ -12,3 +12,5 @@
 .icon-right-dir:before { content: '\e80a'; } /* '' */
 .icon-cancel:before { content: '\e80b'; } /* '' */
 .icon-calendar:before { content: '\e80c'; } /* '' */
+
+.icon-ellipsis:before { content: '\2026'; }

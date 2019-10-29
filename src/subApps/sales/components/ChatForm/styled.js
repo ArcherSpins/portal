@@ -21,7 +21,7 @@ export const Input = styled.textarea`
     padding: 5px 10px;
     padding-right: 40px;
     margin-right: 3px;
-    height: 70px;
+    height: 36px;
     max-height: 140px;
     min-height: 30px;
     max-width: 100%;
