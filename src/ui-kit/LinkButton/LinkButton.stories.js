@@ -15,7 +15,7 @@ storiesOf('LinkButton', module)
   .addDecorator(story => (
       <MemoryRouter initialEntries={['/']}>{story()}</MemoryRouter>
   ))
-  .addWithChapters('Link Button with icon', {
+  .addWithChapters('Link Button', {
     chapters: [
         {
             sections: [
