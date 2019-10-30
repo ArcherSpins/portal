@@ -5,6 +5,7 @@ import {
   getColumnsDataAction,
   getEmployeesAction,
 } from '../../redux/actions';
+import { fetchSelfInfoAction } from '../../redux/actions/detailsActions';
 import {
   updateDealReorderAction,
 } from '../../redux/actions/deals';
@@ -16,6 +17,8 @@ export const mapStateToProps = (state: any) => ({
   columnData: state.column.columnsData,
   dealsData: state.deals.deals,
   loadingDeals: state.deals.loadingDeals,
+  activeUser: state.detailsCrm.activeUser,
+  activeManager: state.detailsCrm.activeManager,
 });
 
 export const mapDispatchToProps = {
@@ -24,4 +27,5 @@ export const mapDispatchToProps = {
   getColumnsDataAction,
   updateDealReorderAction,
   getEmployeesAction,
+  fetchSelfInfoAction,
 };

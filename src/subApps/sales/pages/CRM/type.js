@@ -3,6 +3,9 @@ import type {
   CRMContainerState,
   CRMContainerProps,
 } from '../../containers/CRM/type';
+import type {
+  PropsFilterDeals,
+} from '../../redux/actions/types';
 
 export type CrmPageProps = {
   props: CRMContainerProps,
@@ -17,5 +20,6 @@ export type CrmPageProps = {
   toggleShowTab: (boolean) => void,
   closeModal: () => void,
   setSefColumn: (mixed) => mixed,
+  getDealsFilter: (props?: PropsFilterDeals) => void,
   toggleModalShow: () => void,
 }

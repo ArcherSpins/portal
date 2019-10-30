@@ -31,11 +31,12 @@ export async function fetchDeleteDeals(data: { id: string }): Promise<FetchResul
 
 export async function fetchDeals(props: PropsFilterDeals): Promise<FetchResult<Response>> {
   try {
+    console.log(props);
     const response = await client.query({
       query: props ? filterDeals : getDeals,
       variables: {
         ...props,
-        limit: '30',
+        limit: props && props.limit ? props.limit : '30',
         offset: '0',
       },
       fetchPolicy: 'no-cache',

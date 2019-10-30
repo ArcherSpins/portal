@@ -25,15 +25,16 @@ const CRMPage = ({
   toggleShowTab,
   closeModal,
   setSefColumn,
+  getDealsFilter,
   toggleModalShow,
 }: CrmPageProps) => {
   const {
     dealsData,
     columnOrder,
     columns,
+    activeManager,
   } = props;
   const { modalInfo } = state;
-
   return (
     <>
       <ModalMessage
@@ -54,14 +55,24 @@ const CRMPage = ({
         <div className="tab-buttons fz-16">
           <Button
             type="button"
-            onClick={() => toggleShowTab(false)}
+            onClick={() => {
+              toggleShowTab(false);
+              if (state.tabStatus) {
+                getDealsFilter({ limit: '30' });
+              }
+            }}
             className={`left-button ${!state.tabStatus ? 'active' : ''}`}
           >
             My Deals
           </Button>
           <Button
             type="button"
-            onClick={() => toggleShowTab(true)}
+            onClick={() => {
+              toggleShowTab(true);
+              if (!state.tabStatus) {
+                getDealsFilter({ managerID: activeManager.id, limit: '20' });
+              }
+            }}
             className={`right-button ${state.tabStatus ? 'active' : ''}`}
           >
             All Deals

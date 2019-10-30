@@ -1,9 +1,10 @@
 // @flow
 import type { DealType } from '../../types/deal';
-import type { ColumnType, EmployeeType } from '../../types';
+import type { ColumnType, EmployeeType, ManagerType } from '../../types';
 import type {
   UpdateDealReorderPayloadPropsType,
   getEmployeesPayloadType,
+  PropsFilterDeals,
 } from '../../redux/actions/types';
 
 export type CRMContainerState = {
@@ -45,13 +46,18 @@ export type CRMContainerProps = {
     loading: boolean
   },
 
-  getDealsAction: (null, null, columnsState: { [string]: DealType }) => void,
+  getDealsAction: (
+    null, props?: PropsFilterDeals | null, columnsState: { [string]: DealType }
+  ) => void,
   getColumnsDataAction: (
     (columnData: Array<ColumnType>, columnsState: { [string]: DealType }) => void
   ) => void,
   columnData: Array<ColumnType>,
   loadingColumns: boolean,
   loadingDeals: boolean,
+  activeUser: EmployeeType,
+  activeManager: ManagerType,
+  fetchSelfInfoAction: (returnFunc?: (ManagerType) => void) => void,
   updateDealReorderAction: (
     data: { id: string, stageId: string }, props: UpdateDealReorderPayloadPropsType
   ) => void,

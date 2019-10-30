@@ -8,6 +8,7 @@ import { mapStateToProps, mapDispatchToProps } from './CrmHoc';
 import { LoadingContainer } from '../index';
 import type { CRMContainerState, CRMContainerProps } from './type';
 import type { EmployeeType, ColumnType, DealType } from '../../types';
+import type { PropsFilterDeals } from '../../redux/actions/types';
 import '../App/style.scss';
 
 class CRMContainer extends PureComponent<CRMContainerProps, CRMContainerState> {
@@ -38,12 +39,20 @@ class CRMContainer extends PureComponent<CRMContainerProps, CRMContainerState> {
 
   componentDidMount = (): void => {
     const {
+      fetchSelfInfoAction,
+    } = this.props;
+    fetchSelfInfoAction();
+    this.getColumns({ limit: '30' });
+  }
+
+  getColumns = (propsDeal?: PropsFilterDeals | null) => {
+    const {
       getColumnsDataAction,
     } = this.props;
     getColumnsDataAction((
       columnData: Array<ColumnType>, columnsState: { [string]: DealType },
     ) => {
-      this.getData(columnData, columnsState);
+      this.getData(columnData, columnsState, propsDeal);
     });
   }
 
@@ -64,10 +73,14 @@ class CRMContainer extends PureComponent<CRMContainerProps, CRMContainerState> {
     this.refsColumn.push(column);
   }
 
-  getData = (columnData: Array<ColumnType>, columnsState: { [string]: DealType }): void => {
+  getData = (
+    columnData: Array<ColumnType>,
+    columnsState: { [string]: DealType },
+    propsDeal?: PropsFilterDeals | null,
+  ): void => {
     try {
       const { getDealsAction } = this.props;
-      getDealsAction(null, null, columnsState);
+      getDealsAction(null, propsDeal, columnsState);
       this.checkManager('');
       const column = columnData.find((item) => item.title.toLowerCase() === 'lead');
       if (column) {
@@ -196,6 +209,10 @@ class CRMContainer extends PureComponent<CRMContainerProps, CRMContainerState> {
     // $FlowFixMe
     this.setState({ searchValue: e.target.value });
   };
+
+  getDealsFilter = (propsDeal?: PropsFilterDeals | null) => {
+    this.getColumns(propsDeal);
+  }
 
   render() {
     const {

@@ -50,7 +50,7 @@ const BlockListCRM = ({
           }}
           {...provider.droppableProps}
           id={id}
-          className={`block-list-crm column-4 ${className || ''}`}
+          className={`block-list-crm custom-scrollbar column-4 ${className || ''}`}
           style={{
             backgroundColor: snapshot.isDraggingOver ? '#dcdee4' : '#EAEEF6',
           }}
