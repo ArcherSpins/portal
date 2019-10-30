@@ -7,6 +7,7 @@ import {
   delay,
 } from 'redux-saga/effects';
 import type { Saga } from 'redux-saga';
+import { Toast } from 'ui-kit';
 import history from 'utils/history';
 import {
   fetchDeals,
@@ -37,17 +38,22 @@ export function* getDealsSaga(action: {
     const deals = yield call(fetchDeals, props);
     const objCrm = {};
     const newColumns = action.payload.columns || { taskIds: [] };
-    // TODO: refactor this to more readable format
-    for (let task = 0; task < deals.length; task += 1) {
+    deals.forEach((item, task) => {
       objCrm[deals[task].id] = deals[task];
-      try {
+      if (newColumns[deals[task].stage.id]) {
         newColumns[deals[task].stage.id].taskIds.push(deals[task].id);
-      } catch (err) {
-        // TODO: FIX THIS
-        // eslint-disable-next-line no-continue
-        continue;
       }
-    }
+    });
+    // for (let task = 0; task < deals.length; task += 1) {
+    //   objCrm[deals[task].id] = deals[task];
+    //   try {
+    //     newColumns[deals[task].stage.id].taskIds.push(deals[task].id);
+    //   } catch (err) {
+    //     // TODO: FIX THIS
+    //     // eslint-disable-next-line no-continue
+    //     continue;
+    //   }
+    // }
     if (returnDeals && typeof returnDeals === 'function') {
       returnDeals(deals);
     }
@@ -59,36 +65,28 @@ export function* getDealsSaga(action: {
       },
     });
   } catch (error) {
-    yield put({ type: 'OPEN_ERROR_ALERT', payload: error.message });
+    Toast.push({ message: String(error), type: 'danger' });
     yield put({ type: 'GET_DEALS_FAIL' });
-    yield delay(3500);
-    yield put({ type: 'CLOSE_ERROR_ALERT' });
   }
 }
 
 export function* updateDealReorderSaga(action: UpdateDealReorderType): Saga<void> {
   const {
-    toggleModalShow, columns, element,
-  // $FlowFixMe
+    columns, element,
   } = action.payload.props;
   try {
-    // $FlowFixMe
     yield call(fetchUpdateDeal, action.payload.data);
   } catch (error) {
-    toggleModalShow(true, error.message);
+    // toggleModalShow(true, error.message);
+    Toast.push({ message: String(error), type: 'danger' });
     const newState = {
       columns: {
         ...columns,
       },
     };
-    yield put({ type: 'OPEN_ERROR_ALERT', payload: error.message });
     yield put({ type: 'REORDER_CARDS_COLUMNS', payload: newState.columns });
-    yield delay(3500);
-    yield put({ type: 'CLOSE_ERROR_ALERT' });
-    // $FlowFixMe
     element.classList.add('error-drag-column');
     yield delay(500);
-    // $FlowFixMe
     element.classList.remove('error-drag-column');
   }
 }
@@ -101,7 +99,6 @@ export function* updateDealSaga(action: {
   }
 }): Saga<void> {
   try {
-    // $FlowFixMe
     const response = yield call(fetchUpdateDeal, action.payload.data);
     if (typeof action.payload.returnUpdated === 'function') {
       action.payload.returnUpdated(response);
@@ -109,10 +106,8 @@ export function* updateDealSaga(action: {
     yield put({ type: 'UPDATE_DEAL_SUCCESS', payload: response });
     history.push(getRoute(`/details/${response.title.replace(/\s/g, '_').replace('/', '&')}`));
   } catch (error) {
-    yield put({ type: 'OPEN_ERROR_ALERT', payload: error.message });
+    Toast.push({ message: String(error), type: 'danger' });
     yield put({ type: 'UPDATE_DEAL_FAIL' });
-    yield delay(3500);
-    yield put({ type: 'CLOSE_ERROR_ALERT' });
   }
 }
 
@@ -131,10 +126,8 @@ export function* createDealSaga(action: {
     yield put({ type: 'CREATE_DEAL_SUCCESS', payload: response });
     history.push(getRoute('/'));
   } catch (error) {
-    yield put({ type: 'OPEN_ERROR_ALERT', payload: error.message });
+    Toast.push({ message: String(error), type: 'danger' });
     yield put({ type: 'CREATE_DEAL_FAIL' });
-    yield delay(3500);
-    yield put({ type: 'CLOSE_ERROR_ALERT' });
   }
 }
 
@@ -146,10 +139,8 @@ export function* deleteDealSaga(action: {
     yield call(fetchDeleteDeals, action.payload);
     history.push(getRoute('/'));
   } catch (error) {
-    yield put({ type: 'OPEN_ERROR_ALERT', payload: error.message });
+    Toast.push({ message: String(error), type: 'danger' });
     yield put({ type: 'DELETE_DEAL_FAIL' });
-    yield delay(3500);
-    yield put({ type: 'CLOSE_ERROR_ALERT' });
   }
 }
 

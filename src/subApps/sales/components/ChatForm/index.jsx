@@ -2,7 +2,8 @@
 
 import React, { useState } from 'react';
 import autosize from 'autosize';
-import { Button, Input } from './styled';
+import { Button } from 'ui-kit';
+import { Input } from './styled';
 // $FlowFixMe
 import fileIcon from '../Message/file.svg';
 import './style.scss';
@@ -83,6 +84,7 @@ const ChatForm = ({
         </div>
         <Button
           disabled={value === ''}
+          type="submit"
           className={`submit ${value === '' ? 'disabled' : ''}`}
           title={`${buttonDisabled === null || !buttonDisabled ? 'create a deal first' : 'submit'}`}
         >

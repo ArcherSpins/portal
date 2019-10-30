@@ -1,24 +1,22 @@
 /* eslint-disable import/no-cycle */
 // TODO: FIX THIS
-/* eslint-disable react/no-unused-state */
 // @flow
 
-import React, { useState } from 'react';
+import React from 'react';
 import dayjs from 'dayjs';
 import {
   Input,
+  Combobox,
+  IconInput,
 } from 'ui-kit';
 import {
   Header,
   FieldBlock,
   Label,
   Button,
-  ItemIcon,
   TabsComponent,
-  ContactBlock,
-  ToggleChangeComponent,
-  // ToggleBlock,
-  SelectValid,
+  // ToggleChangeComponent,
+  // SelectValid,
 } from './styled';
 import { ModalMessage } from '../index';
 // import notImage from '../../assets/not_image.png';
@@ -31,37 +29,68 @@ const DetailsList = ({
   state,
   changeInput,
   newContact,
-  editImage,
+  // editImage,
   closeEdit,
   onSubmitEdit,
-  deleteContact,
+  // deleteContact,
   setSourceData,
 }: DetailsListProps) => {
   const typeProps: PropsType = props;
   const {
     edit,
-    activateFormEdit,
-    editForm,
+    // activateFormEdit,
+    // editForm,
     activeUser,
     statuses,
-    // channels,
+    channels,
     sources,
-    // managers,
+    managers,
     errorsFormCreate,
     showModalErrorMessage,
     toggleShowModal,
   } = typeProps;
-  const { data, contacts } = state;
+  const {
+    data,
+    contacts,
+  } = state;
 
-  const [tabIndex, toggleTabIdx] = useState(0);
+  // const [tabIndex, toggleTabIdx] = useState(0);
 
   const toggleTabIndex = (idx) => {
-    toggleTabIdx(idx);
+    // toggleTabIdx(idx);
     setSourceData(sources[idx]);
   };
 
-  const dateDetailsList = activeUser.createdAt ? dayjs(activeUser.createdAt).format('DD MMMM YYYY hh:mm') : '';
+  const newManagers = managers.map((item) => ({ ...item, label: item.name, value: item.name }));
+  const loadOptionsManagers = (inputValue, callback) => new Promise(() => {
+    setTimeout(() => {
+      callback(
+        newManagers.filter((item) => item.label.toLowerCase().includes(inputValue.toLowerCase())),
+      );
+    }, 1500);
+  });
 
+  const newChannels = channels.map((item) => ({ ...item, value: item.title, label: item.title }));
+  const loadOptionsChannels = (inputValue, callback) => new Promise(() => {
+    setTimeout(() => {
+      callback(
+        newChannels.filter((item) => item.label.toLowerCase().includes(inputValue.toLowerCase())),
+      );
+    }, 1500);
+  });
+
+  const newStatuses = statuses.map((item) => ({ ...item, value: item.title, label: item.title }));
+  const loadOptionsStatuses = (inputValue, callback) => new Promise(() => {
+    setTimeout(() => {
+      callback(
+        newStatuses.filter((item) => item.label.toLowerCase().includes(inputValue.toLowerCase())),
+      );
+    }, 1500);
+  });
+
+
+  // TODO: change to date-fns
+  const dateDetailsList = activeUser.createdAt ? dayjs(activeUser.createdAt).format('DD MMMM YYYY hh:mm') : '';
   return (
     <div className="details-column">
       <ModalMessage
@@ -83,60 +112,46 @@ const DetailsList = ({
           }}
         >
           <FieldBlock className="field">
-            {/* <Label className="mb-10">Client</Label> */}
             <Input
+              className="pl-0"
               label="Client"
-              onChange={(value) => changeInput('client', value)}
+              onChange={(e) => changeInput('client', e.target.value)}
               use="borderless"
-              value={data.client ? data.client : ''}
+              value={data.client}
               error={errorsFormCreate.client.error}
               name="client"
+              placeholder="Client name"
             />
-            {/* <ToggleBlock
-              edit={editForm.client}
-              id="client"
-              editProps={{
-                onChange: changeInput,
-                value: data.client ? data.client : '',
-                error: errorsFormCreate.client.error,
-                errorMessage: errorsFormCreate.client.message,
-                className: errorsFormCreate.client.error ? 'error-border' : '',
-              }}
-              prevProps={{
-                name: activeUser.client ? activeUser.client : '',
-                doubleClick: activateFormEdit,
-              }}
-            /> */}
           </FieldBlock>
           <FieldBlock className="field option-edit-select">
-            <Input
-              onChange={(value) => changeInput('manager', value)}
-              use="borderless"
-              value={activeUser.manager}
-              // error={errorsFormCreate.client.error}
-              name="manager"
+            <Combobox
+              use="underlined"
+              loadOptions={loadOptionsManagers}
+              onChange={(value) => changeInput('manager', value, null, value)}
               label="Sales"
+              selectedOption={data.manager && {
+                ...data.manager,
+                value: data.manager.name,
+                label: data.manager.name,
+              }}
+              placeholder="Manager name"
             />
-            {/* <UserPicker
-              users={[data.manager]}
-              usersJson={managers}
-              getUsers={(users: Array<{ id: string }>) => {
-                changeInput('manager', users[0].id, null, users[0]);
-              }}
-              title="Sales"
-              deleteUser={(del) => {
-                const deleteUs = del;
-                return deleteUs;
-              }}
-              selected={activeUser.manager}
-              defaultImage={notImage}
-            /> */}
           </FieldBlock>
           <FieldBlock className="field">
+            {/* <Input
+              className="pl-0"
+              onChange={(e) => changeInput('contact', e.target.value)}
+              use="borderless"
+              value={data.contact}
+              // error={errorsFormCreate.client.error}
+              name="contact"
+              label="Contact"
+              placeholder="Contact"
+            /> */}
             <div
-              className="d-flex justify-content-between align-items-center mb-10"
+              className="d-flex justify-content-end align-items-center"
             >
-              <Label>Contact</Label>
+              {/* <Label>Contact</Label> */}
               <button
                 type="button"
                 onClick={newContact}
@@ -146,70 +161,58 @@ const DetailsList = ({
               </button>
             </div>
             {
-              contacts.map((item, i) => (
-                editForm.contact
-                  ? (
-                    <ContactBlock
-                      index={i}
-                      editImage={editImage}
-                      key={item.id || i}
-                      item={item}
-                      deleteContact={deleteContact}
-                      changeInput={changeInput}
-                      deleteButton={activeUser.id}
-                    />
-                  )
-                  : (
-                    <ItemIcon
-                      key={item.id || i}
-                      toggleEditActive={(e) => activateFormEdit(e, 'contact')}
-                      text={item.value}
-                      icon={item.img}
-                    />
-                  )
+              contacts.map((item) => (
+                <div key={item.id} className="contact-container" style={{ marginBottom: 6 }}>
+                  <IconInput
+                    className="pl-0"
+                    onChange={(e) => changeInput('contact', e.target.value, item.id)}
+                    use="borderless"
+                    icon={<i className="icon-ellipsis" />}
+                    value={item.value}
+                    label="Contact"
+                    // error={errorsFormCreate.client.error}
+                    name="contact"
+                    placeholder="Contact"
+                  />
+                </div>
               ))
             }
           </FieldBlock>
           <FieldBlock className="field">
-            {/* <Label className="mb-10">Channel</Label> */}
-            <Input
+            <Combobox
+              use="underlined"
+              loadOptions={loadOptionsChannels}
               onChange={(value) => changeInput('channel', value)}
-              use="borderless"
-              value={data.channel.title}
-              // error={errorsFormCreate.client.error}
-              name="channel"
               label="Channel"
+              selectedOption={data.channel && {
+                ...data.channel,
+                value: data.channel.title,
+                label: data.channel.title,
+              }}
+              placeholder="Channel"
             />
-            {/* <select
-              className="toggle-select"
-              id="channel"
-              onChange={
-                (val) => {
-                  const find = channels.find((item) => item.title === val.target.value);
-                  changeInput('channel', find);
-                }
-              }
-            >
-              {
-                Array.isArray(channels) && data.channel && channels.map((item) => {
-                  const channel = item;
-                  return (
-                    <option
-                      key={channel.id}
-                      selected={item.id === data.channel.id}
-                    >
-                      {channel.title}
-                    </option>
-                  );
-                })
-              }
-            </select> */}
           </FieldBlock>
           <FieldBlock className="field">
             <Label className="mb-10">Source</Label>
-            <TabsComponent tabs={sources} toggleTabIndex={toggleTabIndex}>
+            <TabsComponent
+              tabs={Array.isArray(sources) && sources.map((item) => item.title)}
+              toggleTabIndex={toggleTabIndex}
+            >
               <div className="tab-block-content">
-                <ToggleChangeComponent
+                <div className="field">
+                  <Input
+                    className="pl-0"
+                    onChange={(e) => changeInput('source', e.target.value, 'jobPostingURL', 'upwork')}
+                    use="borderless"
+                    value={data.jobPostingURL}
+                    error={errorsFormCreate.jobPostingURL.error}
+                    name="jobPostingURL"
+                    label="Job Posting URL"
+                    require
+                    placeholder="Job Posting URL"
+                  />
+                </div>
+                {/* <ToggleChangeComponent
                   status={editForm.source && tabIndex === 0}
                   error={{
                     status: errorsFormCreate.jobPostingURL.error,
@@ -232,9 +235,21 @@ const DetailsList = ({
                     value: activeUser.jobPostingURL,
                     idx: 'source',
                   }}
-                />
-
-                <ToggleChangeComponent
+                /> */}
+                <div className="field">
+                  <Input
+                    className="pl-0"
+                    onChange={(e) => changeInput('source', e.target.value, 'jobProposalURL', 'upwork')}
+                    use="borderless"
+                    value={data.jobProposalURL}
+                    error={errorsFormCreate.jobProposalURL.error}
+                    name="jobProposalURL"
+                    label="Proposal URL"
+                    placeholder="Proposal URL"
+                    require
+                  />
+                </div>
+                {/* <ToggleChangeComponent
                   status={editForm.propSource && tabIndex === 0}
                   error={{
                     status: errorsFormCreate.jobProposalURL.error,
@@ -257,10 +272,23 @@ const DetailsList = ({
                     value: activeUser.jobProposalURL,
                     idx: 'propSource',
                   }}
-                />
+                /> */}
               </div>
               <div className="tab-block-content" style={{ display: 'none' }}>
-                <ToggleChangeComponent
+                <div className="field">
+                  <Input
+                    className="pl-0"
+                    onChange={(e) => changeInput('source', e.target.value, 'salesURL', 'upwork')}
+                    use="borderless"
+                    value={data.salesURL}
+                    error={errorsFormCreate.jobProposalURL.error}
+                    name="salesURL"
+                    label="Messages"
+                    placeholder="Sales URL"
+                    require
+                  />
+                </div>
+                {/* <ToggleChangeComponent
                   status={editForm.source && tabIndex === 1}
                   changeBlock={{
                     label: 'Messages',
@@ -277,9 +305,22 @@ const DetailsList = ({
                     value: activeUser.salesURL,
                     idx: 'source',
                   }}
-                />
+                /> */}
+                <div className="field">
+                  <Input
+                    className="pl-0"
+                    onChange={(e) => changeInput('source', e.target.value, 'messagesURL', 'upwork')}
+                    use="borderless"
+                    value={data.messagesURL}
+                    error={errorsFormCreate.jobProposalURL.error}
+                    name="messagesURL"
+                    label="Sales"
+                    placeholder="Messages URL"
+                    require
+                  />
+                </div>
 
-                <ToggleChangeComponent
+                {/* <ToggleChangeComponent
                   status={editForm.source && tabIndex === 1}
                   changeBlock={{
                     label: 'Sales',
@@ -296,14 +337,27 @@ const DetailsList = ({
                     value: activeUser.messagesURL,
                     idx: 'source',
                   }}
-                />
+                /> */}
               </div>
               <div className="tab-block-content" style={{ display: 'none' }} />
             </TabsComponent>
           </FieldBlock>
           <FieldBlock className="field">
-            <Label className="mb-10">Deal status</Label>
-            <SelectValid
+            <Combobox
+              use="underlined"
+              loadOptions={loadOptionsStatuses}
+              onChange={(value) => changeInput('status', value)}
+              label="Deal status"
+              selectedOption={data.stage && {
+                ...data.stage,
+                value: data.stage.title,
+                label: data.stage.title,
+              }}
+              placeholder="Status"
+              error={errorsFormCreate.status.error}
+            />
+            {/* <Label className="mb-10">Deal status</Label> */}
+            {/* <SelectValid
               error={errorsFormCreate.status.error}
               id="status"
               onChange={
@@ -315,7 +369,7 @@ const DetailsList = ({
               options={statuses}
               selectedId={data.stage ? data.stage.id : null}
               errorMessage={errorsFormCreate.status.message}
-            />
+            /> */}
           </FieldBlock>
           <FieldBlock className="field">
             <Label className="mb-10">Deal date</Label>

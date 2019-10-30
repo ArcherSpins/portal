@@ -34,14 +34,14 @@ class DetailsListContainer extends React.PureComponent<Props, State> {
 
       this.getUser();
     }
-    if (!edit && data.channel
-      && (activeUser.channel.id !== data.channel.id
-        || activeUser.stage.id !== data.stage.id
-        || activeUser.manager.name !== data.manager.name
-        || activeUser.jobProposalURL !== data.jobProposalURL)
-    ) {
-      this.getUser();
-    }
+    // if (!edit && data.channel
+    //   && (activeUser.channel.id !== data.channel.id
+    //     || activeUser.stage.id !== data.stage.id
+    //     || activeUser.manager.name !== data.manager.name
+    //     || activeUser.jobProposalURL !== data.jobProposalURL)
+    // ) {
+    //   this.getUser();
+    // }
   }
 
   getUser = () => {
@@ -65,7 +65,7 @@ class DetailsListContainer extends React.PureComponent<Props, State> {
         this.setState({
           data: {
             ...data,
-            manager: obj,
+            manager: value,
           },
         });
         activateFormEdit({}, 'sales');
@@ -81,6 +81,7 @@ class DetailsListContainer extends React.PureComponent<Props, State> {
         activateFormEdit({}, 'channel');
         break;
       case 'contact':
+        this.setState({ data: { ...data, contact: value } });
         findContactIdx = contacts.findIndex((item) => item.id === itemId);
         findContact = contacts[findContactIdx];
 
@@ -91,6 +92,7 @@ class DetailsListContainer extends React.PureComponent<Props, State> {
         this.setState({
           data: { ...data, contacts: contact },
         });
+        activateFormEdit({}, 'contact');
         break;
       case 'source':
         this.setState({
@@ -99,6 +101,7 @@ class DetailsListContainer extends React.PureComponent<Props, State> {
             [itemId]: value,
           },
         });
+        activateFormEdit({}, 'source');
         break;
       case 'status':
         this.setState({
@@ -176,6 +179,7 @@ class DetailsListContainer extends React.PureComponent<Props, State> {
     const { fetchEditForm, deleteContact, toggleShowModal } = this.props;
     const { data, contacts, deletedContacts } = this.state;
     const inputs = document.querySelectorAll('.input-edit');
+    console.log(data);
     // $FlowFixMe
     const status = this.valideInputs(inputs);
     if (deletedContacts.length > 0) {

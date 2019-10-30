@@ -1,8 +1,7 @@
 // @flow
 import React from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
-import { Link } from 'react-router-dom';
-import { Button } from 'ui-kit';
+import { Button, LinkButton } from 'ui-kit';
 import getRoute from '../../helpers/getRoute';
 import { Header, Content } from './styled';
 // TODO: Fix this
@@ -46,6 +45,7 @@ const CRMPage = ({
       />
       <Header>
         <LeftBlock
+          className="search-container_crm"
           submitSearch={submitSearch}
           searchValue={state.searchValue}
           onChange={toggleSearchValue}
@@ -67,10 +67,10 @@ const CRMPage = ({
             All Deals
           </Button>
         </div>
-        <div>
-          <Link to={getRoute('/details')} className="add-deal-button">
+        <div className="d-flex justify-content-end">
+          <LinkButton to={getRoute('/details')}>
             Add deal
-          </Link>
+          </LinkButton>
         </div>
       </Header>
       <HeaderCRMList />

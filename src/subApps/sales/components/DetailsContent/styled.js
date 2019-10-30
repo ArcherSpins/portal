@@ -5,13 +5,13 @@
 import React from 'react';
 import { LoadingContainer } from '../../containers';
 import { Message } from '../index';
-import type { DealType } from '../../types';
+import type { DealType, CommentType } from '../../types';
 
 export type MessageComponentProps = {
   loading: boolean,
   length: number,
   options: {
-    data: [],
+    data: Array<CommentType>,
     activeUser: DealType,
     deleteMessageCrm: ({
       id: number | string

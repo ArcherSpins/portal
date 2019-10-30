@@ -24,13 +24,8 @@ const LeftBlock = ({
         icon={<i className="icon-search" />}
         value={searchValue}
         onChange={onChange}
+        placeholder="Search"
       />
-      {/* <SearchInput
-        className="not-focus"
-        value={searchValue}
-        onChange={onChange}
-        placeholder=""
-      /> */}
       <Button
         type="submit"
         className="search-button fz-16"

@@ -57,6 +57,17 @@
         display: flex;
         align-items: center;
 
+        button {
+            color: #333333;
+            border-color: #C6CCD5;
+            padding-left: 20px;
+            padding-right: 20px;
+
+            &:hover {
+                color: white;
+            }
+        }
+
         .select-details {
             width: 145px;
             margin-left: 10px;

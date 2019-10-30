@@ -3,6 +3,7 @@ import type {
   DealType,
   ContactType,
   ChannelType,
+  ManagerType,
 } from '../../types';
 
 export type Props = {
@@ -38,7 +39,8 @@ export type State = {
     stage: any,
     jobPostingURL: string,
     jobProposalURL: string,
-    manager: { id: string, name: string },
+    manager: ManagerType,
+    contact: string
   },
   error: boolean,
   contacts: Array<ContactType>,

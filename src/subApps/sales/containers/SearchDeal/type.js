@@ -29,13 +29,13 @@ export type SearchDealContainerState = {
 }
 
 export type SearchDealContainerProps = {
-  getColumnsDataAction: ((ColumnsArrayType) => void) => void,
-  getDealsAction: (
+  getColumnsData: ((ColumnsArrayType) => void) => void,
+  getDeals: (
     (Array<DealType>) => void,
     any,
   ) => void,
   loadingDeals: boolean,
-  getEmployeesAction: (
+  getEmployees: (
     search: string,
     returnEmployees: (EmployeesArrayType) => void
   ) => void,

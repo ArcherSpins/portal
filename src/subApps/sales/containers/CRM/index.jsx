@@ -1,9 +1,10 @@
 /* eslint-disable import/no-cycle */
 /* eslint-disable react/no-unused-state */
 // @flow
-import React, { PureComponent } from 'react';
+import React, { PureComponent, type AbstractComponent } from 'react';
+import { connect } from 'react-redux';
 import { CRMPage } from '../../pages';
-import CrmHoc from './CrmHoc';
+import { mapStateToProps, mapDispatchToProps } from './CrmHoc';
 import { LoadingContainer } from '../index';
 import type { CRMContainerState, CRMContainerProps } from './type';
 import type { EmployeeType, ColumnType, DealType } from '../../types';
@@ -211,4 +212,9 @@ class CRMContainer extends PureComponent<CRMContainerProps, CRMContainerState> {
   }
 }
 
-export default CrmHoc(CRMContainer);
+export default (
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  )(CRMContainer): AbstractComponent<CRMContainerProps>
+);

@@ -15,6 +15,7 @@
         height: 89%;
         overflow-y: auto;
         padding-bottom: 40px;
+        position: relative;
         box-sizing: border-box;
         min-height: calc(100% - 170px);
 
@@ -41,7 +42,7 @@
         bottom: 0;
         left: 0;
         right: 0;
-        height: 85px;
+        height: 55px;
         max-height: 170px;
 
         &.focus {

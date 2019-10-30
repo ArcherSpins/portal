@@ -1,10 +1,12 @@
 /* eslint-disable import/no-cycle */
 /* eslint-disable react/no-unused-state */
+/* eslint-disable lines-between-class-members */
 // @flow
 import React from 'react';
+import zenscroll from 'zenscroll';
 import { ChatForm, DetailsListStyled } from '../index';
 import { MessageComponent } from './styled';
-import type { DealType } from '../../types';
+import type { DealType, CommentType } from '../../types';
 import './style.scss';
 
 const { Header } = DetailsListStyled;
@@ -16,7 +18,7 @@ type Props = {
     idx: string,
   }) => void,
   loading: boolean,
-  comments: [],
+  comments: Array<CommentType>,
   deleteMessageCrm: ({
     id: number | string
   }) => void,
@@ -32,7 +34,9 @@ type State = {
 }
 
 class DetailsContent extends React.Component<Props, State> {
+  messagesContainer: ?HTMLDivElement;
   inputRef: ?HTMLInputElement;
+  scroll: any;
 
   constructor() {
     super();
@@ -43,10 +47,23 @@ class DetailsContent extends React.Component<Props, State> {
     };
 
     this.inputRef = null;
+    this.messagesContainer = null;
+  }
+
+  componentDidMount() {
+    this.scroll = zenscroll.createScroller(this.messagesContainer);
+    this.scrollSection();
   }
 
   changeInputText = (el: HTMLInputElement) => {
     this.inputRef = el;
+  }
+
+  scrollSection = () => {
+    if (this.messagesContainer) {
+      // $FlowFixMe
+      this.scroll.toY(this.messagesContainer.scrollHeight);
+    }
   }
 
   submitForm = (e: SyntheticEvent<HTMLFormElement>) => {
@@ -54,6 +71,7 @@ class DetailsContent extends React.Component<Props, State> {
     const { setMessage, activeUser } = this.props;
     const { message } = this.state;
     if (message !== '') {
+      this.scrollSection();
       setMessage({
         message,
         idx: activeUser.id,
@@ -88,6 +106,8 @@ class DetailsContent extends React.Component<Props, State> {
           <span>Log History</span>
         </Header>
         <section
+          // $FlowFixMe
+          ref={(div) => { this.messagesContainer = div; }}
           className="content-section"
           style={{
             height: this.inputRef ? `calc(100% - ${this.inputRef.style.height + 20}px)` : '100%',
@@ -107,7 +127,7 @@ class DetailsContent extends React.Component<Props, State> {
         <div
           className="chat-form-container"
           style={{
-            height: this.inputRef ? `${inputHeight + 20}px` : '85px',
+            height: this.inputRef ? `${inputHeight + 20}px` : '55px',
           }}
         >
           <ChatForm

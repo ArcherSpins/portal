@@ -5,7 +5,7 @@
 /* eslint-disable react/no-unused-state */
 
 // @flow
-import React from 'react';
+import React, { type AbstractComponent } from 'react';
 import { withRouter } from 'react-router-dom';
 import {
   ErrorBoundry,
@@ -55,9 +55,9 @@ class CRMDetailsContainer extends React.PureComponent<PropsCrmDetails, State> {
       modalApproval: true,
     });
 
-    setTimeout(() => {
-      this.setState({ modalApproval: false });
-    }, 5000);
+    // setTimeout(() => {
+    //   this.setState({ modalApproval: false });
+    // }, 5000);
   }
 
   approveDeleteDeal = () => {
@@ -280,7 +280,7 @@ class CRMDetailsContainer extends React.PureComponent<PropsCrmDetails, State> {
       id: activeUser.id,
       title: titleText !== title ? titleText.split('').slice(0, 100).join('').trim() : null,
       managerID: data.manager.id !== activeManager.id ? data.manager.id : null,
-      client: data.client.trim() !== '' ? data.client : null,
+      client: String(data.client).trim() !== '' ? data.client : null,
       sourceID: activeUser.source.id,
       jobPostingURL: data.jobPostingURL ? data.jobPostingURL.trim() : '',
       jobProposalURL: data.jobProposalURL ? data.jobProposalURL.trim() : '',

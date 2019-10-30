@@ -1,124 +1,139 @@
-.filter-block {
-    display: grid !important;
-    grid-template-columns: 4fr 3fr 6fr 3fr 4fr 2fr;
-    
+.pt-6 {
+  padding-top: 6px;
+}
 
-    label {
-        display: block;
-        color: #333;
-        margin-bottom: 5px;
+.align-items-end {
+  align-items: flex-end;
+}
+
+.filter-block {
+  display: grid !important;
+  grid-template-columns: 4fr 3fr 5fr 6fr 3fr;
+
+  .grid-field {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+  }
+
+  button {
+    i {
+      color: #333;
+      padding: 0 0.20em;
     }
+  }
+
+
+  label {
+    display: block;
+    color: #333;
+  }
+
+  .field-block {
+    .cbx__control {
+      height: 34px;
+    }
+
+    &:nth-last-child(1) {
+      align-self: flex-end;
+    }
+
+    &:nth-child(n+2) {
+      margin-left: 20px;
+    }
+
+    .select-details {
+      width: 100%;
+    }
+
+    input {
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .filter-button {
+      background: #61B16F;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      box-sizing: border-box;
+      border-radius: 4px;
+      height: 34px;
+      color: white;
+      width: 100%;
+      cursor: pointer;
+      font-size: 16px !important;
+    }
+  }
+
+  .date-block {
+    padding-top: 6px;
 
     .field-block {
+      margin: 0;
+      width: 50%;
 
-        &:nth-last-child(1) {
-            align-self: flex-end;
-        }
-
-        &:nth-child(n+2) {
-            margin-left: 20px;
-        }
-
-        .select-details {
-            width: 100%;
-        }
-
-        input {
-            background: #FFFFFF;
-            padding: 6px;
-            width: 100%;
-            // width: 200px;
-
-            border: 1px solid #C6CCD5;
-            box-sizing: border-box;
-            border-radius: 4px;
-        }
-
-        .search-button {
-            background: #61B16F;
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            box-sizing: border-box;
-            border-radius: 4px;
-            padding: 6px 10px;
-            height: 30px;
-            color: white;
-            width: 100%;
-            cursor: pointer;
-            font-size: 16px !important;
-        }
+      input {
+        width: 100%;
+      }
     }
 
-    .date-block {
-        // max-width: 250px;
-
-        .field-block {
-            margin: 0;
-            width: 50%;
-
-            input {
-                width: 100%;
-            }
-        }
-
-        .tag {
-            font-size: 29px;
-            color: #9e9e9e;
-            margin: 0 5px;
-        }
+    .tag {
+      font-size: 29px;
+      color: #9e9e9e;
+      margin: 0 5px 5px 5px;
     }
+  }
 }
 
 .justify-content-center {
-    justify-content: center;
+  justify-content: center;
+}
+
+.ml-20 {
+  margin-left: 20px;
 }
 
 .select-details {
-    border-radius: 4px;
-    
-    &.small {
-        width: 147px;
-    }
+  border-radius: 4px;
 
-    &.big {
-        width: 200px;
-    }
+  &.small {
+    width: 147px;
+  }
 
-    span {
-        display: none;
-    }
+  &.big {
+    width: 200px;
+  }
+
+  span {
+    display: none;
+  }
 }
 
 .mb-10 {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .picker-block {
-    &.block {
+  &.block {
 
-        .react-datepicker-wrapper, .react-datepicker__input-container {
-            width: 100%;
-        }
-
-        input {
-            margin-bottom: 15px;
-            display: block;
-            background: #FFFFFF;
-            padding: 6px;
-            width: 100%;
-
-            border: 1px solid #C6CCD5;
-            box-sizing: border-box;
-            border-radius: 4px;
-        }
+    .react-datepicker-wrapper,
+    .react-datepicker__input-container {
+      width: 100%;
     }
+
+    input {
+      display: block;
+      background: #FFFFFF;
+      width: 100%;
+      box-sizing: border-box;
+    }
+  }
 }
 
 .date-double-block {
-    .react-datepicker-wrapper {
-        width: 100%;
+  .react-datepicker-wrapper {
+    width: 100%;
 
-        .react-datepicker__input-container {
-            width: 100%;
-        }
+    .react-datepicker__input-container {
+      width: 100%;
     }
+  }
 }

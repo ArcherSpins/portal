@@ -1,6 +1,7 @@
 import styled from 'styled-components';
-import * as React from 'react';
+import React, { useState } from 'react';
 import Select from 'react-select';
+import { Switcher } from 'ui-kit';
 import {
   mail,
   phone,
@@ -24,6 +25,18 @@ export const Label = styled.label`
 
 export const FieldBlock = styled.div`
     margin-bottom: 15px;
+    label {
+      color: rgba(51, 51, 51, 0.5);
+    }
+
+    * {
+      font-size: 16px;
+      font-family: Proxima Nova;
+    }
+
+    p, input {
+      color: #333333;
+    }
 `;
 
 export const Button = styled.button`
@@ -134,32 +147,38 @@ export const ItemIcon = ({ text, icon, toggleEditActive }: ItemIconProps) => (
 
 type TabsComponentProps = {
   children: React.Node,
-  tabs: [],
+  tabs: Array<string>,
   toggleTabIndex: (string | number) => void
 }
 
 export const TabsComponent = ({ children, tabs, toggleTabIndex }: TabsComponentProps) => {
-  const toggleTab = (e, id) => {
-    e.preventDefault();
-    const tab = e.target;
-    const tabsBut = document.querySelectorAll('.tab-button');
+  const [activeTab, onChangeTab] = useState(tabs[0]);
+
+  const toggleTab = (id) => {
+    // const tabsBut = document.querySelectorAll('.tab-button');
     const blocks = document.querySelectorAll('.tab-block-content');
-    // FIXME: idx обьявлен выше
-    for (let idx = 0; idx < tabsBut.length; idx += 1) {
-      tabsBut[idx].classList.remove('active');
+
+    for (let idx = 0; idx < tabs.length; idx += 1) {
+      // tabsBut[idx].classList.remove('active');
       blocks[idx].style.display = 'none';
     }
-    tab.classList.add('active');
-    // Какой idx тогда сюда приходит?
     blocks[id].style.display = 'block';
-
     toggleTabIndex(id);
   };
 
   return (
     <div className="tabs-container">
       <div className="tabs-buttons d-flex justify-content-between mb-10">
-        <button
+        <Switcher
+          className="switcher"
+          items={tabs}
+          value={activeTab}
+          onChange={(s) => {
+            onChangeTab(s);
+            toggleTab(tabs.findIndex((item) => item === s));
+          }}
+        />
+        {/* <button
           onClick={(e) => toggleTab(e, 0)}
           className="tab-button active"
           type="button"
@@ -179,7 +198,7 @@ export const TabsComponent = ({ children, tabs, toggleTabIndex }: TabsComponentP
           type="button"
         >
           {tabs[2] ? tabs[2].title : 'Loading..'}
-        </button>
+        </button> */}
       </div>
 
       <div>{children}</div>

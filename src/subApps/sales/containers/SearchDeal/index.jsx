@@ -2,9 +2,9 @@
 /* eslint-disable react/no-unused-state */
 // TODO: FIX ESLINT SUPPRESS COMMENTS
 // @flow
-import React from 'react';
+import React, { type AbstractComponent } from 'react';
 import { connect } from 'react-redux';
-import { compose } from 'redux';
+// import { compose } from 'redux';
 import moment from 'moment';
 import { SearchDealPage } from '../../pages';
 import {
@@ -50,12 +50,10 @@ class SearchDealContainer extends React.Component<
 
   getData = (): void => {
     const {
-      // TODO: FIX THIS
-      // eslint-disable-next-line no-shadow
-      getColumnsDataAction, getDealsAction,
+      getColumnsData, getDeals,
     } = this.props;
-    getColumnsDataAction(() => {});
-    getDealsAction(this.getDeals);
+    getColumnsData(() => {});
+    getDeals(this.getDeals);
     this.getManagers();
   }
 
@@ -80,10 +78,8 @@ class SearchDealContainer extends React.Component<
   }
 
   getManagers = (): void => {
-    // TODO: FIX THIS
-    // eslint-disable-next-line no-shadow
-    const { getEmployeesAction } = this.props;
-    getEmployeesAction('', this.setManagers);
+    const { getEmployees } = this.props;
+    getEmployees('', this.setManagers);
   }
 
   setManagers = (employees: EmployeesArrayType): void => {
@@ -142,15 +138,12 @@ class SearchDealContainer extends React.Component<
 
   onSubmitFilter = () => {
     const { filterObject } = this.state;
-    // TODO: Fix this
-    // eslint-disable-next-line no-shadow
-    const { getDealsAction } = this.props;
-    // console.log(moment(filterObject.end.valueOf()).utc().toISOString());
+    const { getDeals } = this.props;
     const toUtc = (date) => moment(date.valueOf()).utc()
       .add(moment().utcOffset(), 'minutes')
       .toISOString();
 
-    getDealsAction(
+    getDeals(
       this.setFilteredDeals,
       {
         stageID: filterObject.status ? filterObject.status.id : null,
@@ -185,13 +178,18 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  getColumnsDataAction,
-  getDealsAction,
-  getEmployeesAction,
+  getColumnsData: getColumnsDataAction,
+  getDeals: getDealsAction,
+  getEmployees: getEmployeesAction,
 };
 
-export default compose(
-  // TODO: FIx this
-  // $FlowFixMe
-  connect(mapStateToProps, mapDispatchToProps),
-)(SearchDealContainer);
+export default (
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  )(SearchDealContainer): AbstractComponent<SearchDealContainerProps>
+);
+
+// export default compose(
+//   connect(mapStateToProps, mapDispatchToProps),
+// )(SearchDealContainer);
