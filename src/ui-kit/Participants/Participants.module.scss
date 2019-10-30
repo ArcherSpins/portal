@@ -3,9 +3,7 @@
 
 .participants {
   box-sizing: border-box;
-  border-bottom: 1px solid $disabled-color;
   padding-bottom: 1rem;
-  margin-bottom: 2rem;
   .chips-list {
     display: flex;
     flex-wrap: wrap;
