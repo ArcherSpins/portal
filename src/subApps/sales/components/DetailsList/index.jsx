@@ -8,12 +8,12 @@ import {
   Input,
   Combobox,
   IconInput,
+  Button,
 } from 'ui-kit';
 import {
   Header,
   FieldBlock,
   Label,
-  Button,
   TabsComponent,
   // ToggleChangeComponent,
   // SelectValid,
@@ -208,7 +208,7 @@ const DetailsList = ({
                     error={errorsFormCreate.jobPostingURL.error}
                     name="jobPostingURL"
                     label="Job Posting URL"
-                    require
+                    required
                     placeholder="Job Posting URL"
                   />
                 </div>
@@ -246,7 +246,7 @@ const DetailsList = ({
                     name="jobProposalURL"
                     label="Proposal URL"
                     placeholder="Proposal URL"
-                    require
+                    required
                   />
                 </div>
                 {/* <ToggleChangeComponent
@@ -285,7 +285,7 @@ const DetailsList = ({
                     name="salesURL"
                     label="Messages"
                     placeholder="Sales URL"
-                    require
+                    required
                   />
                 </div>
                 {/* <ToggleChangeComponent
@@ -316,7 +316,7 @@ const DetailsList = ({
                     name="messagesURL"
                     label="Sales"
                     placeholder="Messages URL"
-                    require
+                    required
                   />
                 </div>
 
@@ -386,20 +386,18 @@ const DetailsList = ({
                   className="d-flex justify-content-between"
                   style={{ padding: '10px' }}
                 >
-                  <button
-                    type="button"
+                  <Button
                     style={{ width: '50%' }}
-                    className="cancel-button"
                     onClick={closeEdit}
+                    use="transparent"
                   >
                     Cancel
-                  </button>
+                  </Button>
                   <Button
                     style={{
                       marginLeft: '3px',
                       width: '50%',
                     }}
-                    className="save-button"
                     onClick={onSubmitEdit}
                   >
                     Save
