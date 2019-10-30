@@ -35,6 +35,7 @@ export type PropsType = {
 export type DetailsListProps = {
   props: PropsType,
   state: State,
+  // TODO: fix types
   changeInput: (string, any, any, any) => void | any,
   newContact: () => void | any,
   editImage: (any, number | string, string, number) => void,
