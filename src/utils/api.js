@@ -15,7 +15,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors) {
     const [firstError] = graphQLErrors;
     graphQLErrors.forEach(async (err) => {
-      if (err.extensions.code === UNAUTHENTICATED_CODE) {
+      if (err.extensions && err.extensions.code === UNAUTHENTICATED_CODE) {
         localStorage.removeItem(AUTH_TOKEN_KEY);
         history.push('/');
       }
