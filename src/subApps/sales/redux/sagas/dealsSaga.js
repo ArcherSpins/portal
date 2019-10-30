@@ -36,7 +36,6 @@ export function* getDealsSaga(action: {
   try {
     const { returnDeals, props } = action.payload;
     const deals = yield call(fetchDeals, props);
-    console.log(deals);
     const objCrm = {};
     const newColumns = action.payload.columns || { taskIds: [] };
     deals.forEach((item, task) => {

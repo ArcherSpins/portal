@@ -47,7 +47,7 @@ export type CRMContainerProps = {
   },
 
   getDealsAction: (
-    null, props?: PropsFilterDeals | null, columnsState: { [string]: DealType }
+    null, props?: PropsFilterDeals, columnsState: { [string]: DealType }
   ) => void,
   getColumnsDataAction: (
     (columnData: Array<ColumnType>, columnsState: { [string]: DealType }) => void

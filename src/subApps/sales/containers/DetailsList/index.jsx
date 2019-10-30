@@ -179,7 +179,6 @@ class DetailsListContainer extends React.PureComponent<Props, State> {
     const { fetchEditForm, deleteContact, toggleShowModal } = this.props;
     const { data, contacts, deletedContacts } = this.state;
     const inputs = document.querySelectorAll('.input-edit');
-    console.log(data);
     // $FlowFixMe
     const status = this.valideInputs(inputs);
     if (deletedContacts.length > 0) {

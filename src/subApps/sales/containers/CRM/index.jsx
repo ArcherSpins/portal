@@ -45,7 +45,7 @@ class CRMContainer extends PureComponent<CRMContainerProps, CRMContainerState> {
     this.getColumns({ limit: '30' });
   }
 
-  getColumns = (propsDeal?: PropsFilterDeals | null) => {
+  getColumns = (propsDeal?: PropsFilterDeals) => {
     const {
       getColumnsDataAction,
     } = this.props;
@@ -76,7 +76,7 @@ class CRMContainer extends PureComponent<CRMContainerProps, CRMContainerState> {
   getData = (
     columnData: Array<ColumnType>,
     columnsState: { [string]: DealType },
-    propsDeal?: PropsFilterDeals | null,
+    propsDeal?: PropsFilterDeals,
   ): void => {
     try {
       const { getDealsAction } = this.props;
@@ -210,7 +210,7 @@ class CRMContainer extends PureComponent<CRMContainerProps, CRMContainerState> {
     this.setState({ searchValue: e.target.value });
   };
 
-  getDealsFilter = (propsDeal?: PropsFilterDeals | null) => {
+  getDealsFilter = (propsDeal?: PropsFilterDeals) => {
     this.getColumns(propsDeal);
   }
 
