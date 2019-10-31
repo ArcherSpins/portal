@@ -1,6 +1,10 @@
 .message {
     padding: 20px 20px 10px 20px;
 
+    a {
+        color: #028198;
+    }
+
     &:hover {
         background-color: #F5F7FB;
     }

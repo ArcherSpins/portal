@@ -6,6 +6,9 @@ import { format } from 'date-fns';
 import { SkillsType } from '../../types';
 import './style.scss';
 
+/* eslint-disable no-useless-escape */
+const regex = /^((ftp|http|https):\/\/)?(www\.)?([A-Za-zА-Яа-я0-9]{1}[A-Za-zА-Яа-я0-9\-]*\.?)*\.{1}[A-Za-zА-Яа-я0-9-]{2,8}(\/([\w#!:.?+=&%@!\-\/])*)?/;
+
 type MessageProps = {
   content: string,
   id: string,
@@ -70,7 +73,21 @@ const Message = ({
               className="word-wrap"
               onDoubleClick={() => toggleActiveText(true)}
             >
-              {content}
+              {
+                content.split(' ').map((word) => (
+                  <span>
+                    {
+                      regex.test(word) ? (
+                        <a target="_blank" rel="noopener noreferrer" href={word}>
+                          {
+                            `${word} `
+                          }
+                        </a>
+                      ) : `${word} `
+                    }
+                  </span>
+                ))
+              }
             </p>
           ) : (
             <textarea
