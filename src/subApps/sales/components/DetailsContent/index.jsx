@@ -75,6 +75,7 @@ class DetailsContent extends React.Component<Props, State> {
       setMessage({
         message,
         idx: activeUser.id,
+        createdAt: new Date(),
       });
       this.changeMessage('');
     }

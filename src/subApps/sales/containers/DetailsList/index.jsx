@@ -130,13 +130,14 @@ class DetailsListContainer extends React.PureComponent<Props, State> {
 
   newContact = (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const { activateFormEdit, contacts } = this.props;
-
+    const { activateFormEdit } = this.props;
+    const { contacts } = this.state;
     activateFormEdit(e, 'contact');
     this.setState({
       contacts: [
         ...contacts,
-        { id: Math.random() * 10000, title: '', newContact: true }],
+        { id: Math.random() * 10000, title: '', newContact: true },
+      ],
     });
   }
 
@@ -206,11 +207,13 @@ class DetailsListContainer extends React.PureComponent<Props, State> {
   deleteContact = (e: SyntheticEvent<HTMLElement>, id: string) => {
     e.preventDefault();
     const { contacts, deletedContacts } = this.state;
+    const { activateFormEdit } = this.props;
+    activateFormEdit(e, 'contact');
     this.setState({
-      contacts: contacts.filter((item) => item.id !== id),
+      contacts: contacts.filter((item) => String(item.id) !== id),
       deletedContacts: [
         ...deletedContacts,
-        contacts.find((item) => item.id === id),
+        contacts.find((item) => String(item.id) === id),
       ],
     });
   }

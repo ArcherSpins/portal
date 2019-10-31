@@ -35,7 +35,7 @@ export const MessageComponent = ({ loading, length, options }: MessageComponentP
   }
 
   return (
-    <div className="h-100">
+    <>
       {
         length > 0
           ? (
@@ -57,6 +57,6 @@ export const MessageComponent = ({ loading, length, options }: MessageComponentP
             </div>
           )
       }
-    </div>
+    </>
   );
 };

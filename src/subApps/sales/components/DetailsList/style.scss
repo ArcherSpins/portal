@@ -1,3 +1,13 @@
+
+
+.justify-content-between {
+    justify-content: space-between;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
 .details-column {
     border: 1px solid #E5E5E5;
     width: 322px;
@@ -108,22 +118,17 @@
     }
 }
 
-.justify-content-between {
-    justify-content: space-between;
-}
-
-.align-items-center {
-    align-items: center;
-}
-
 .cancel-button {
     border: 1px solid #818A95;
     box-sizing: border-box;
     border-radius: 4px;
-    padding: 0 30px;
+    padding: 4px 30px;
     cursor: pointer;
     height: 33px;
+    display: inline-block;
+    width: 50%;
     background-color: white;
+    color: #333333;
 }
 
 .position-relative {

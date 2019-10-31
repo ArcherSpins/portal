@@ -7,11 +7,13 @@ import styles from './IconInput.module.scss';
 
 type Props = {
   onIconClick?: () => void,
+  classNameButton?: string
 } & InputProps
 
 class InputIcon extends Component<Props> {
   static defaultProps = {
     onIconClick: noop,
+    classNameButton: '',
   };
 
   render() {
@@ -21,6 +23,7 @@ class InputIcon extends Component<Props> {
       size,
       label,
       name,
+      classNameButton,
       ...restProps
     } = this.props;
 
@@ -41,7 +44,7 @@ class InputIcon extends Component<Props> {
             {...restProps}
           />
           {icon && (
-            <button onClick={onIconClick} className={styles.iconButton} type="button">
+            <button onClick={onIconClick} className={classNames(styles.iconButton, classNameButton)} type="button">
               {icon}
             </button>
           )}

@@ -7,7 +7,7 @@ import dayjs from 'dayjs';
 import {
   Input,
   Combobox,
-  IconInput,
+  LinkButton,
 } from 'ui-kit';
 import {
   Header,
@@ -15,8 +15,7 @@ import {
   Label,
   Button,
   TabsComponent,
-  // ToggleChangeComponent,
-  // SelectValid,
+  ContactBlock,
 } from './styled';
 import { ModalMessage } from '../index';
 // import notImage from '../../assets/not_image.png';
@@ -29,10 +28,10 @@ const DetailsList = ({
   state,
   changeInput,
   newContact,
-  // editImage,
+  editImage,
   closeEdit,
   onSubmitEdit,
-  // deleteContact,
+  deleteContact,
   setSourceData,
 }: DetailsListProps) => {
   const typeProps: PropsType = props;
@@ -54,10 +53,7 @@ const DetailsList = ({
     contacts,
   } = state;
 
-  // const [tabIndex, toggleTabIdx] = useState(0);
-
   const toggleTabIndex = (idx) => {
-    // toggleTabIdx(idx);
     setSourceData(sources[idx]);
   };
 
@@ -88,7 +84,7 @@ const DetailsList = ({
     }, 1500);
   });
 
-
+  const sourcesArray: Array<string> = sources.map((item) => item.title);
   const dateDetailsList = activeUser.createdAt ? dayjs(activeUser.createdAt).format('DD MMMM YYYY hh:mm') : '';
 
   return (
@@ -138,20 +134,9 @@ const DetailsList = ({
             />
           </FieldBlock>
           <FieldBlock className="field">
-            {/* <Input
-              className="pl-0"
-              onChange={(e) => changeInput('contact', e.target.value)}
-              use="borderless"
-              value={data.contact}
-              // error={errorsFormCreate.client.error}
-              name="contact"
-              label="Contact"
-              placeholder="Contact"
-            /> */}
             <div
               className="d-flex justify-content-end align-items-center"
             >
-              {/* <Label>Contact</Label> */}
               <button
                 type="button"
                 onClick={newContact}
@@ -163,7 +148,7 @@ const DetailsList = ({
             {
               contacts.map((item) => (
                 <div key={item.id} className="contact-container" style={{ marginBottom: 6 }}>
-                  <IconInput
+                  <ContactBlock
                     className="pl-0"
                     onChange={(e) => changeInput('contact', e.target.value, item.id)}
                     use="borderless"
@@ -173,6 +158,11 @@ const DetailsList = ({
                     // error={errorsFormCreate.client.error}
                     name="contact"
                     placeholder="Contact"
+                    editImage={editImage}
+                    key={item.id}
+                    item={item}
+                    deleteContact={deleteContact}
+                    deleteButton={activeUser.id}
                   />
                 </div>
               ))
@@ -195,10 +185,14 @@ const DetailsList = ({
           <FieldBlock className="field">
             <Label className="mb-10">Source</Label>
             <TabsComponent
-              tabs={Array.isArray(sources) && sources.map((item) => item.title)}
+              tabs={sourcesArray}
               toggleTabIndex={toggleTabIndex}
+              activeTab={activeUser.source.title}
             >
-              <div className="tab-block-content">
+              <div
+                className="tab-block-content"
+                style={{ display: activeUser.source.title !== sourcesArray[0] && 'none' }}
+              >
                 <div className="field">
                   <Input
                     className="pl-0"
@@ -212,30 +206,6 @@ const DetailsList = ({
                     placeholder="Job Posting URL"
                   />
                 </div>
-                {/* <ToggleChangeComponent
-                  status={editForm.source && tabIndex === 0}
-                  error={{
-                    status: errorsFormCreate.jobPostingURL.error,
-                    message: errorsFormCreate.jobPostingURL.message,
-                  }}
-                  changeBlock={{
-                    label: 'Job Posting URL',
-                    require: true,
-                    value: data.jobPostingURL,
-                    onChange: changeInput,
-                    idx: 'source',
-                    tabName: 'upwork',
-                    name: 'jobPostingURL',
-                    id: 'jobPostingURL',
-                    className: errorsFormCreate.jobPostingURL.error && 'error-border',
-                  }}
-                  presBlock={{
-                    label: 'Job Posting URL',
-                    activated: activateFormEdit,
-                    value: activeUser.jobPostingURL,
-                    idx: 'source',
-                  }}
-                /> */}
                 <div className="field">
                   <Input
                     className="pl-0"
@@ -249,97 +219,42 @@ const DetailsList = ({
                     require
                   />
                 </div>
-                {/* <ToggleChangeComponent
-                  status={editForm.propSource && tabIndex === 0}
-                  error={{
-                    status: errorsFormCreate.jobProposalURL.error,
-                    message: errorsFormCreate.jobProposalURL.message,
-                  }}
-                  changeBlock={{
-                    label: 'Proposal URL',
-                    require: true,
-                    value: data.jobProposalURL,
-                    onChange: changeInput,
-                    idx: 'source',
-                    tabName: 'upwork',
-                    name: 'jobProposalURL',
-                    id: 'jobProposalURL',
-                    className: errorsFormCreate.jobProposalURL.error && 'error-border',
-                  }}
-                  presBlock={{
-                    label: 'Proposal URL',
-                    activated: activateFormEdit,
-                    value: activeUser.jobProposalURL,
-                    idx: 'propSource',
-                  }}
-                /> */}
               </div>
-              <div className="tab-block-content" style={{ display: 'none' }}>
-                <div className="field">
-                  <Input
-                    className="pl-0"
-                    onChange={(e) => changeInput('source', e.target.value, 'salesURL', 'upwork')}
-                    use="borderless"
-                    value={data.salesURL}
-                    error={errorsFormCreate.jobProposalURL.error}
-                    name="salesURL"
-                    label="Messages"
-                    placeholder="Sales URL"
-                    require
-                  />
-                </div>
-                {/* <ToggleChangeComponent
-                  status={editForm.source && tabIndex === 1}
-                  changeBlock={{
-                    label: 'Messages',
-                    require: true,
-                    value: data.salesURL,
-                    onChange: changeInput,
-                    idx: 'source',
-                    tabName: 'upwork',
-                    name: 'salesURL',
-                  }}
-                  presBlock={{
-                    label: 'Messages',
-                    activated: activateFormEdit,
-                    value: activeUser.salesURL,
-                    idx: 'source',
-                  }}
-                /> */}
+              <div
+                className="tab-block-content"
+                style={{ display: activeUser.source.title !== sourcesArray[1] && 'none' }}
+              >
                 <div className="field">
                   <Input
                     className="pl-0"
                     onChange={(e) => changeInput('source', e.target.value, 'messagesURL', 'upwork')}
                     use="borderless"
                     value={data.messagesURL}
-                    error={errorsFormCreate.jobProposalURL.error}
+                    // error={errorsFormCreate.messagesURL.error}
                     name="messagesURL"
-                    label="Sales"
+                    label="Messages"
                     placeholder="Messages URL"
                     require
                   />
                 </div>
-
-                {/* <ToggleChangeComponent
-                  status={editForm.source && tabIndex === 1}
-                  changeBlock={{
-                    label: 'Sales',
-                    require: true,
-                    value: data.messagesURL,
-                    onChange: changeInput,
-                    idx: 'source',
-                    tabName: 'upwork',
-                    name: 'messagesURL',
-                  }}
-                  presBlock={{
-                    label: 'Sales',
-                    activated: activateFormEdit,
-                    value: activeUser.messagesURL,
-                    idx: 'source',
-                  }}
-                /> */}
+                <div className="field">
+                  <Input
+                    className="pl-0"
+                    onChange={(e) => changeInput('source', e.target.value, 'salesURL', 'upwork')}
+                    use="borderless"
+                    value={data.salesURL}
+                    // error={errorsFormCreate.salesURL.error}
+                    name="salesURL"
+                    label="Sales"
+                    placeholder="Sales URL"
+                    require
+                  />
+                </div>
               </div>
-              <div className="tab-block-content" style={{ display: 'none' }} />
+              <div
+                className="tab-block-content"
+                style={{ display: activeUser.source.title !== sourcesArray[2] && 'none' }}
+              />
             </TabsComponent>
           </FieldBlock>
           <FieldBlock className="field">
@@ -356,20 +271,6 @@ const DetailsList = ({
               placeholder="Status"
               error={errorsFormCreate.status.error}
             />
-            {/* <Label className="mb-10">Deal status</Label> */}
-            {/* <SelectValid
-              error={errorsFormCreate.status.error}
-              id="status"
-              onChange={
-                (val) => {
-                  const find = statuses.find((item) => item.id === val.target.value);
-                  changeInput('status', find);
-                }
-              }
-              options={statuses}
-              selectedId={data.stage ? data.stage.id : null}
-              errorMessage={errorsFormCreate.status.message}
-            /> */}
           </FieldBlock>
           <FieldBlock className="field">
             <Label className="mb-10">Deal date</Label>
@@ -386,14 +287,27 @@ const DetailsList = ({
                   className="d-flex justify-content-between"
                   style={{ padding: '10px' }}
                 >
-                  <button
-                    type="button"
-                    style={{ width: '50%' }}
-                    className="cancel-button"
-                    onClick={closeEdit}
-                  >
-                    Cancel
-                  </button>
+                  {
+                    activeUser.id ? (
+                      <button
+                        type="button"
+                        style={{ width: '50%' }}
+                        className="cancel-button"
+                        onClick={closeEdit}
+                      >
+                        Cancel
+                      </button>
+                    ) : (
+                      <LinkButton
+                        to="/sales"
+                        use="transparent"
+                        style={{ width: '50%' }}
+                        className="cancel-button"
+                      >
+                        Cancel
+                      </LinkButton>
+                    )
+                  }
                   <Button
                     style={{
                       marginLeft: '3px',
