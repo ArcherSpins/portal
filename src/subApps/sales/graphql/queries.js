@@ -310,6 +310,7 @@ const getDealComments = gql`
           title
         }
       }
+      createdAt
     }
   }
 `;
@@ -327,6 +328,7 @@ export const addDealComment = gql`
           title
         }
       }
+      createdAt
     }
   }
 `;
@@ -343,8 +345,14 @@ export const updateDealComment = gql`
       content,
       id,
       user {
-        id , name
+        id , name,
+        email, status,
+        skills {
+          id,
+          title
+        }
       }
+      createdAt
     }
   }
 `;

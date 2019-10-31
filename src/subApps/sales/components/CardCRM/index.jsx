@@ -28,7 +28,7 @@ const CardCRM = React.memo<CardCRMProps>((props: CardCRMProps) => {
     id,
     allStatus,
   } = props;
-  const linkTitle = title.replace(/\s/g, '_').replace('/', '&');
+  const linkTitle = String(title).replace(/\s/g, '_').replace('/', '&');
   return (
     <Draggable
       draggableId={id}

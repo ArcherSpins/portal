@@ -1,15 +1,14 @@
 import styled from 'styled-components';
 import React, { useState } from 'react';
 import Select from 'react-select';
-import { Switcher } from 'ui-kit';
+import { Switcher, IconInput } from 'ui-kit';
 import {
   mail,
   phone,
   linked,
   skype,
 } from '../../assets/icons';
-// $FlowFixMe
-import sitting from './notIcon.svg';
+import './style.scss';
 
 export const Header = styled.header`
     border-bottom: 1px solid #E5E5E5;
@@ -148,18 +147,19 @@ export const ItemIcon = ({ text, icon, toggleEditActive }: ItemIconProps) => (
 type TabsComponentProps = {
   children: React.Node,
   tabs: Array<string>,
-  toggleTabIndex: (string | number) => void
+  toggleTabIndex: (string | number) => void,
+  activeTab: string
 }
 
-export const TabsComponent = ({ children, tabs, toggleTabIndex }: TabsComponentProps) => {
-  const [activeTab, onChangeTab] = useState(tabs[0]);
+export const TabsComponent = ({
+  children, tabs, toggleTabIndex, activeTab,
+}: TabsComponentProps) => {
+  const [active, onChangeTab] = useState(activeTab || tabs[0]);
 
   const toggleTab = (id) => {
-    // const tabsBut = document.querySelectorAll('.tab-button');
     const blocks = document.querySelectorAll('.tab-block-content');
 
     for (let idx = 0; idx < tabs.length; idx += 1) {
-      // tabsBut[idx].classList.remove('active');
       blocks[idx].style.display = 'none';
     }
     blocks[id].style.display = 'block';
@@ -172,33 +172,12 @@ export const TabsComponent = ({ children, tabs, toggleTabIndex }: TabsComponentP
         <Switcher
           className="switcher"
           items={tabs}
-          value={activeTab}
+          value={active}
           onChange={(s) => {
             onChangeTab(s);
             toggleTab(tabs.findIndex((item) => item === s));
           }}
         />
-        {/* <button
-          onClick={(e) => toggleTab(e, 0)}
-          className="tab-button active"
-          type="button"
-        >
-          {tabs[0] ? tabs[0].title : 'Loading..'}
-        </button>
-        <button
-          onClick={(e) => toggleTab(e, 1)}
-          className="tab-button"
-          type="button"
-        >
-          {tabs[1] ? tabs[1].title : 'Loading..'}
-        </button>
-        <button
-          onClick={(e) => toggleTab(e, 2)}
-          className="tab-button"
-          type="button"
-        >
-          {tabs[2] ? tabs[2].title : 'Loading..'}
-        </button> */}
       </div>
 
       <div>{children}</div>
@@ -218,7 +197,10 @@ export const ModalSittingsContact = ({
   deleteContact, id, editImage, index, deleteButton,
 }: ModalSittingsContactProps) => (
   <div className="modal-right">
-    <div className="d-flex justify-content-benween p-10 border-bottom">
+    <div
+      className="d-flex p-10 border-bottom align-items-center"
+      style={{ justifyContent: 'space-between' }}
+    >
       <button
         onClick={(e) => editImage(e, id, skype, index)}
         className="transparent"
@@ -253,7 +235,7 @@ export const ModalSittingsContact = ({
         <div className="p-10">
           <button
             className="transparent delete-span"
-            onClick={(e) => deleteContact(e, id)}
+            onClick={(e) => deleteContact(e, String(id))}
             type="button"
           >
               Delete contact
@@ -273,11 +255,14 @@ type ContactBlockProps = {
   deleteContact: () => {},
   editImage: () => {},
   index: number,
-  deleteButton: Boolean
+  deleteButton: Boolean,
+  inputProps: {
+    [string]: mixed
+  }
 }
 
 export const ContactBlock = ({
-  item, changeInput, deleteContact, editImage, index, deleteButton,
+  deleteContact, editImage, index, deleteButton, item, ...inputProps
 }: ContactBlockProps) => {
   const [modal, func] = React.useState(false);
 
@@ -288,27 +273,22 @@ export const ContactBlock = ({
 
   // FIXME: $FlowFixMe
   document.addEventListener('click', (e) => {
-    if (!e.target.classList.contains('modal-right-button')) {
+    const className = e.target.classList;
+    if (!className.contains('modal-right-button')
+        && !className.contains('icon-ellipsis')
+        && !className.contains('delete-span')) {
       func(false);
     }
   });
 
   return (
-    <div className="mb-5 position-relative" key={item.id}>
-      <input
-        style={{ marginBottom: 0 }}
-        required
-        onChange={(e) => changeInput('contact', e.target.value, item.id)}
-        className="input-edit"
-        value={item.value}
+    <div className="mb-5 position-relative">
+      <IconInput
+        className={`input-icon_${item.id}`}
+        onIconClick={toggleModal}
+        classNameButton="modal-right-button"
+        {...inputProps}
       />
-      <button
-        onClick={toggleModal}
-        className="button-icon-input modal-right-button transparent"
-        type="button"
-      >
-        <img className="modal-right-button" src={sitting} alt="icon" />
-      </button>
       {
         modal ? (
           <ModalSittingsContact

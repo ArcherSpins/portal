@@ -25,14 +25,23 @@ const CRMPage = ({
   toggleShowTab,
   closeModal,
   setSefColumn,
+  getDealsFilter,
   toggleModalShow,
 }: CrmPageProps) => {
   const {
     dealsData,
     columnOrder,
     columns,
+    activeManager,
   } = props;
   const { modalInfo } = state;
+
+  const toggleShowSelfDeals = (status: boolean) => {
+    toggleShowTab(status);
+    const limit = !state.tabStatus ? '30' : '20';
+    const propsDeals = !state.tabStatus ? { limit } : { limit, managerID: activeManager.id };
+    getDealsFilter(propsDeals);
+  };
 
   return (
     <>
@@ -54,14 +63,14 @@ const CRMPage = ({
         <div className="tab-buttons fz-16">
           <Button
             type="button"
-            onClick={() => toggleShowTab(false)}
+            onClick={() => toggleShowSelfDeals(false)}
             className={`left-button ${!state.tabStatus ? 'active' : ''}`}
           >
             My Deals
           </Button>
           <Button
             type="button"
-            onClick={() => toggleShowTab(true)}
+            onClick={() => toggleShowSelfDeals(true)}
             className={`right-button ${state.tabStatus ? 'active' : ''}`}
           >
             All Deals

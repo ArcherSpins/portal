@@ -35,7 +35,7 @@ export async function fetchDeals(props: PropsFilterDeals): Promise<FetchResult<R
       query: props ? filterDeals : getDeals,
       variables: {
         ...props,
-        limit: '30',
+        limit: props && props.limit ? props.limit : '30',
         offset: '0',
       },
       fetchPolicy: 'no-cache',

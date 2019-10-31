@@ -2,6 +2,10 @@
     font-size: 14px !important;
 }
 
+.page {
+  overflow-y: hidden;
+}
+
 body {
     overflow-y: auto;
 
@@ -127,22 +131,6 @@ body {
 
 .word-wrap {
   word-wrap: break-word;
-}
-
-input {
-  outline: none;
-
-  &.not-focus {
-    box-shadow: none;
-  }
-}
-
-select {
-  outline: none;
-
-  &:active {
-    box-shadow: 0px 0px 5px 0px #61B16F;
-  }
 }
 
 .crm-pLinkage {

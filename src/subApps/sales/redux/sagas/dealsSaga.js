@@ -44,16 +44,6 @@ export function* getDealsSaga(action: {
         newColumns[deals[task].stage.id].taskIds.push(deals[task].id);
       }
     });
-    // for (let task = 0; task < deals.length; task += 1) {
-    //   objCrm[deals[task].id] = deals[task];
-    //   try {
-    //     newColumns[deals[task].stage.id].taskIds.push(deals[task].id);
-    //   } catch (err) {
-    //     // TODO: FIX THIS
-    //     // eslint-disable-next-line no-continue
-    //     continue;
-    //   }
-    // }
     if (returnDeals && typeof returnDeals === 'function') {
       returnDeals(deals);
     }

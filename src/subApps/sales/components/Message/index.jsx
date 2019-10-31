@@ -2,13 +2,16 @@
 // @flow
 import React, { useState } from 'react';
 import autosize from 'autosize';
+import { format } from 'date-fns';
 import { SkillsType } from '../../types';
 import './style.scss';
+
+/* eslint-disable no-useless-escape */
+const regex = /^((ftp|http|https):\/\/)?(www\.)?([A-Za-zА-Яа-я0-9]{1}[A-Za-zА-Яа-я0-9\-]*\.?)*\.{1}[A-Za-zА-Яа-я0-9-]{2,8}(\/([\w#!:.?+=&%@!\-\/])*)?/;
 
 type MessageProps = {
   content: string,
   id: string,
-  createdAt: string,
   // files,
   deleteMessageCrm: ({
     id: number | string
@@ -19,19 +22,20 @@ type MessageProps = {
     id: string,
     name: string,
     skills: Array<SkillsType>,
-    status: string
+    status: string,
   },
+  createdAt: string
 }
 
 const Message = ({
   // activeUser,
   content,
   id,
-  createdAt,
   // files,
   deleteMessageCrm,
   updateMessage,
   user,
+  createdAt,
 }: MessageProps) => {
   const [toggleText, toggleActiveText] = useState(false);
   const [textMessage, editText] = useState(content);
@@ -47,12 +51,21 @@ const Message = ({
     }
   };
 
+  const getDate = (data) => {
+    try {
+      const date = format(data, "dd MMM yyyy 'at' hh:mm");
+      return date;
+    } catch (error) {
+      return false;
+    }
+  };
+
   return (
     <div className="message">
       <div className="container">
         <header>
           <h4>{user.name}</h4>
-          <span>{createdAt}</span>
+          <span>{getDate(new Date(createdAt))}</span>
         </header>
         <div className={`content ${toggleText ? '' : 'custom-scrollbar'}`}>
           {!toggleText ? (
@@ -60,7 +73,21 @@ const Message = ({
               className="word-wrap"
               onDoubleClick={() => toggleActiveText(true)}
             >
-              {content}
+              {
+                content.split(' ').map((word) => (
+                  <span>
+                    {
+                      regex.test(word) ? (
+                        <a target="_blank" rel="noopener noreferrer" href={word}>
+                          {
+                            `${word} `
+                          }
+                        </a>
+                      ) : `${word} `
+                    }
+                  </span>
+                ))
+              }
             </p>
           ) : (
             <textarea

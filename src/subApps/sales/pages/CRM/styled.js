@@ -17,6 +17,12 @@ export const Header = styled(HeaderWrap)`
   justify-content: space-between;
   grid-template-columns: 3fr 3fr 1fr;
   padding: 20px 10px;
+
+  button {
+    &:hover {
+      color: white;
+    }
+  }
 `;
 
 export const Label = styled.span`

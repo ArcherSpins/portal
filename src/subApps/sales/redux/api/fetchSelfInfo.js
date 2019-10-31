@@ -6,10 +6,10 @@ import { getSelfInfo } from '../../graphql/queries';
 // eslint-disable-next-line import/prefer-default-export
 export async function fetchFetchInfo(): Promise<void> {
   try {
-    client.query({
+    const result = await client.query({
       query: getSelfInfo,
     });
-    // return response.data.employees.employees;
+    return result.data.selfInfo;
   } catch (err) {
     throw new Error(err.message);
   }

@@ -41,9 +41,9 @@ class CRMDetailsContainer extends React.PureComponent<PropsCrmDetails, State> {
   }
 
 
-  componentDidCatch() {
-    this.setState({ error: true });
-  }
+  // componentDidCatch(error) {
+  //   this.setState({ error: true });
+  // }
 
   toggleModalApproval = (status: boolean) => {
     this.setState({ modalApproval: status });
@@ -151,7 +151,7 @@ class CRMDetailsContainer extends React.PureComponent<PropsCrmDetails, State> {
       });
 
       this.getManagers();
-    } else this.setState({ error: true });
+    }
   }
 
   getFullData = (id) => {

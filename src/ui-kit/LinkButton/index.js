@@ -12,11 +12,12 @@ type Props = {
   children: Node,
   size?: ButtonSize,
   to: string,
-  use?: ButtonUse
+  use?: ButtonUse,
+  className?: string
 }
 
 const LinkButton = ({
-  children, size, use, to,
+  children, size, use, to, className,
 }: Props) => (
   <Link
     to={to}
@@ -24,6 +25,7 @@ const LinkButton = ({
       styles.link,
       buttonStyles[size],
       buttonStyles[use],
+      className,
     )}
   >
     {children}
@@ -33,6 +35,7 @@ const LinkButton = ({
 LinkButton.defaultProps = {
   size: 'md',
   use: 'default',
+  className: '',
 };
 
 export default LinkButton;
