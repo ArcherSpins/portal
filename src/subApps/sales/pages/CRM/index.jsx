@@ -38,8 +38,8 @@ const CRMPage = ({
 
   const toggleShowSelfDeals = (status: boolean) => {
     toggleShowTab(status);
-    const limit = state.tabStatus ? '30' : '20';
-    const propsDeals = state.tabStatus ? { limit } : { limit, managerID: activeManager.id };
+    const limit = !state.tabStatus ? '30' : '20';
+    const propsDeals = !state.tabStatus ? { limit } : { limit, managerID: activeManager.id };
     getDealsFilter(propsDeals);
   };
 

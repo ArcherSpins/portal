@@ -23,7 +23,7 @@ class CRMContainer extends PureComponent<CRMContainerProps, CRMContainerState> {
         client: null,
         idSm: null,
       },
-      tabStatus: false,
+      tabStatus: true,
       searchValue: '',
       redirect: false,
       managers: [],
