@@ -33,6 +33,7 @@ import {
   getEmployeesAction,
   getColumnsDataAction,
   getDealsAction,
+  getDealById,
 } from '../../redux/actions';
 
 const mapStateToProps = (state) => ({
@@ -83,6 +84,7 @@ const mapDispatchToProps = {
   fetchUpdateCommentAction,
   fetchDeleteDealAction,
   fetchUpdateContactAction,
+  getDealById,
 };
 
 // $FlowFixMe
