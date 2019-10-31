@@ -13,7 +13,6 @@ import {
   Header,
   FieldBlock,
   Label,
-  Button,
   TabsComponent,
   ContactBlock,
 } from './styled';
@@ -202,7 +201,7 @@ const DetailsList = ({
                     error={errorsFormCreate.jobPostingURL.error}
                     name="jobPostingURL"
                     label="Job Posting URL"
-                    require
+                    required
                     placeholder="Job Posting URL"
                   />
                 </div>
@@ -216,7 +215,7 @@ const DetailsList = ({
                     name="jobProposalURL"
                     label="Proposal URL"
                     placeholder="Proposal URL"
-                    require
+                    required
                   />
                 </div>
               </div>
@@ -313,7 +312,6 @@ const DetailsList = ({
                       marginLeft: '3px',
                       width: '50%',
                     }}
-                    className="save-button"
                     onClick={onSubmitEdit}
                   >
                     Save

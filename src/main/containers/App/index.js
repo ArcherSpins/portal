@@ -20,7 +20,7 @@ class App extends Component<Props> {
           <ProtectedRoute path="/" component={MainApp} />
         </Switch>
 
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<div />}>
           <Switch>
             <ProtectedRoute path="/sales" component={SalesApp} />
             <ProtectedRoute path="/admin" component={AdminApp} />
