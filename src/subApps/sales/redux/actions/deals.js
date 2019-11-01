@@ -20,6 +20,16 @@ export const getDealsAction = (
   },
 });
 
+export const getDealById = (
+  id: string,
+  returnDeal?: (DealType) => void,
+) => ({
+  type: 'GET_DEAL_BY_ID_REQUEST',
+  payload: {
+    id, returnDeal,
+  },
+});
+
 export const updateDealReorderAction = (
   data: UpdateDealType, props: UpdateDealReorderPayloadPropsType,
 ) => ({

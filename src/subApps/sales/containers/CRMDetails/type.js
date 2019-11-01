@@ -10,6 +10,9 @@ import type {
   CommentType,
   StatusType,
 } from '../../types';
+import type {
+  PropsFilterDeals,
+} from '../../redux/actions/types';
 import type { CreateDealType } from '../../redux/sagas/types';
 
 export type State = {
@@ -91,7 +94,7 @@ export type PropsCrmDetails = {
   ) => void,
   setActiveManagerAction: (manager: ManagerType) => void,
   getColumnsDataAction: () => void,
-  getDealsAction: (returnDeals: (Array<DealType>) => void) => void,
+  getDealsAction: (returnDeals: (Array<DealType>) => void, props?: PropsFilterDeals) => void,
   setErrorForm: (string, message?: string) => void,
   deleteErrorForm: (string) => void,
   editTask: (string, any) => void,

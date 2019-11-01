@@ -154,13 +154,15 @@ class CRMDetailsContainer extends React.PureComponent<PropsCrmDetails, State> {
     }
   }
 
-  getFullData = (id) => {
+  getFullData = (title) => {
     const {
       getDealsAction,
     } = this.props;
     this.getColumns();
     this.getSources();
-    getDealsAction((data: Array<DealType>) => this.setActiveDeal(data, id));
+    getDealsAction((data: Array<DealType>) => {
+      this.setActiveDeal(data, title);
+    }, { limit: '30', title });
     this.getStatuses();
     this.getChannels();
   }
