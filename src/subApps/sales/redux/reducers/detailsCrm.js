@@ -184,7 +184,7 @@ export default (state = initialState, action) => {
             title: 'default',
             updatedAT: new Date(),
           },
-          source: state.sources[0],
+          source: state.sources[0] || {},
           stage: {
             createdAt: new Date(),
             id: '9b102320-e353-4a1d-a076-fba7b38f2bf0',
