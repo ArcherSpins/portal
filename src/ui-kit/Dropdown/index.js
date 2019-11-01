@@ -17,6 +17,7 @@ type Props = {
   className?: string,
   disabled?: boolean,
   options: Array<Option>,
+  error?: string,
   value?: Option,
   name?: string,
   onChange: (option: Option, action: Action) => void,
@@ -39,9 +40,17 @@ const Dropdown = ({
   onChange,
   use = 'default',
   className,
+  error,
   ...restProps
 }: Props) => (
-  <div className={classNames(styles.wrapper, `cbx__wrap dropdown dropdown_${use || ''}`, className)}>
+  <div className={classNames(
+    styles.wrapper, `cbx__wrap dropdown dropdown_${use || ''}`,
+    className,
+    {
+      'error-select': !!error,
+    },
+  )}
+  >
     <label className={classNames(styles[use], 'cbx__label')} htmlFor="select">{label}</label>
     <Select
       className="select-component"
@@ -56,6 +65,9 @@ const Dropdown = ({
       isDisabled={disabled}
       {...restProps}
     />
+    {
+      error && <p className="error-text">{error}</p>
+    }
   </div>
 );
 
@@ -65,6 +77,7 @@ Dropdown.defaultProps = {
   name: '',
   value: '',
   className: '',
+  error: null,
 };
 
 
