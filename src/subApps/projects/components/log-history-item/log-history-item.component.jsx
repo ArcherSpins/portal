@@ -4,6 +4,7 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import type { RouterHistory, Match } from "react-router-dom";
 import moment from "moment";
+import { differenceInHours, addMinutes } from 'date-fns';
 import { ROOT } from '../../routes';
 
 import "./log-history-item.styles.scss";
@@ -30,17 +31,16 @@ class LogHistoryItem extends React.Component<Props, State> {
 
   showTime = () => {
     const { spentTime } = this.props.log;
-    if (spentTime < 60 && spentTime > 10) {
-      return `00:${spentTime}`
-    } else {
-      const hours = spentTime / 60;
-      let minutes = spentTime % 60;
-      if(minutes < 10) {
-        minutes = `0${minutes}`
-      }
-      return `${Math.floor(hours)}:${minutes}`
-    }
+    const hours = parseInt(spentTime / 60, 10);
+    const minutes = spentTime - (hours * 60);
+    
+    return `${this.formatTime(hours)}:${this.formatTime(minutes)}`;
   };
+
+  formatTime = (time: number): string => {
+    if (time < 10) return `0${time}`;
+    return time.toString();
+  }
 
   cutComment = () => {
     return this.props.log.comment.length > 50 ? this.props.log.comment.substring(0, 30) + "..." : this.props.log.comment
