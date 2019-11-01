@@ -68,15 +68,9 @@ class TasksPage extends React.Component<Props, State> {
         <Header>
           <div>
             <H1 className="mb05">
-            Project:
-              {' '}
               {project.title}
             </H1>
             <h2 className="heading-secondary">
-            Milestone #
-              {milestone ? milestone.number : 'null'}
-:
-              {' '}
               {milestone && milestone.title}
             </h2>
           </div>
