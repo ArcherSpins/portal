@@ -237,7 +237,7 @@ class CreateProjectPage extends Component<Props, State> {
         participants: participantsIDs,
       };
       saveProject(newProject, history);
-      this.setState(initialState);
+      // this.setState(initialState);
       // this.props.history.push("/");
     }
   };
