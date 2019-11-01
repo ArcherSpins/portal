@@ -7,14 +7,14 @@ import { createStructuredSelector } from 'reselect';
 import type { RouterHistory, Match } from 'react-router-dom';
 import uniqBy from 'lodash.uniqby';
 import {
-  Input, Button, TextArea, H1, Combobox, Participants,
+  Input, Button, TextArea, H1, Participants,
+  Dropdown,
 } from 'ui-kit';
 import Header from 'subApps/projects/components/header';
 
 import type { Option, Action } from 'ui-kit/Combobox';
 import type { Action as ParticipantsAction } from 'ui-kit/Participants';
 
-import { getEmployees } from '../../graphql/queries/employess.queries';
 import { selectMilestoneByParams } from '../../redux/milestone/milestone.selectors';
 import {
   editMilestone,
@@ -32,6 +32,7 @@ import type {
   MilestoneCreation,
 } from '../../redux/milestone/milestone.flow-types';
 import type { Error } from '../../redux/error/error.flow-types';
+import type { Project } from '../../redux/project/project.flow-types';
 import Modal from '../../components/modal/modal.component';
 
 import './milestone-details-page.styles.scss';
@@ -67,7 +68,8 @@ type Props = {
   // deleteTaskByMilestone: (milestoneId: string) => void,
   // deleteLogByMilestone: (milestoneId: string) => void,
   history: RouterHistory,
-  match: Match
+  match: Match,
+  project: Project,
 };
 
 const initialState = {
@@ -217,11 +219,6 @@ class MilestoneDetailsPage extends React.Component<Props, State> {
     this.setState({ isShowing: false }, () => deleteMilestone(id, pushTo));
   };
 
-  loadEmployees = async (value: string) => {
-    const employees = await getEmployees(value);
-    return this.formatEmployees(employees.data.employees.employees);
-  }
-
   formatEmployees = (employees: Array<Employee>): Array<Option> => employees
     .map((em) => this.formatEmployee(em))
 
@@ -257,7 +254,7 @@ class MilestoneDetailsPage extends React.Component<Props, State> {
       number,
       isShowing,
     } = this.state;
-    const { history, match } = this.props;
+    const { history, match, project } = this.props;
     return (
       <div className="milestone-details">
         <Header className="">
@@ -327,13 +324,13 @@ class MilestoneDetailsPage extends React.Component<Props, State> {
                 onDelete={this.onChipDelete}
                 name="participants"
               >
-                <Combobox
-                  label="Participants"
+                <Dropdown
                   onChange={this.handleChipInputChange}
-                  className="mb05"
-                  loadOptions={this.loadEmployees}
                   name="participants"
-                  use="grey"
+                  options={this.formatEmployees(project.participants)}
+                  required
+                  placeholder="Select"
+                  className="mb05"
                 />
               </Participants>
               {errors.length >= 1 && (

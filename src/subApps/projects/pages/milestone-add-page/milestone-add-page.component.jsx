@@ -8,11 +8,11 @@ import type { RouterHistory } from 'react-router-dom';
 import './milestone-add-page.styles.scss';
 
 import {
-  Input, TextArea, Button, H1, Combobox, Participants,
+  Input, TextArea, Button, H1, Participants,
+  Dropdown,
 } from 'ui-kit';
 import type { Option, Action } from 'ui-kit/Combobox';
 import type { Action as ParticipantsAction } from 'ui-kit/Participants';
-import { getEmployees } from '../../graphql/queries/employess.queries';
 
 import { createMilestone } from '../../redux/milestone/milestone.actions';
 
@@ -160,11 +160,6 @@ class MilestoneAddPage extends React.Component<Props, State> {
     }
   };
 
-  loadEmployees = async (value: string) => {
-    const employees = await getEmployees(value);
-    return this.formatEmployees(employees.data.employees.employees);
-  }
-
   formatEmployees = (employees: Array<Employee>): Array<Option> => employees
     .map((em) => this.formatEmployee(em))
 
@@ -197,7 +192,7 @@ class MilestoneAddPage extends React.Component<Props, State> {
       spent,
       errors,
     } = this.state;
-    const { history } = this.props;
+    const { history, project } = this.props;
     return (
       <div className="milestone-add">
         <Header>
@@ -248,13 +243,13 @@ class MilestoneAddPage extends React.Component<Props, State> {
                 onDelete={this.onChipDelete}
                 name="participants"
               >
-                <Combobox
-                  label="Participants"
+                <Dropdown
                   onChange={this.handleChipInputChange}
-                  className="mb05"
-                  use="grey"
-                  loadOptions={this.loadEmployees}
                   name="participants"
+                  options={this.formatEmployees(project.participants)}
+                  required
+                  placeholder="Select"
+                  className="mb05"
                 />
               </Participants>
               {errors.length >= 1 && (
