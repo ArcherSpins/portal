@@ -99,9 +99,8 @@ class EmployeesComponent extends React.Component<EmployeesProps, EmployeesState>
   togglePaginate = (idx: number) => {
     const { requestEmployees } = this.props;
     this.setState({ activePaginate: idx });
-    // $FlowFixMe
     requestEmployees({
-      offset: idx - 1 > 0 ? ((idx - 1) + PAGE_SIZE).toString() : '0',
+      offset: idx - 1 > 0 ? ((idx - 2) + PAGE_SIZE).toString() : '0',
       limit: PAGE_SIZE.toString(),
     });
   }
@@ -123,7 +122,6 @@ class EmployeesComponent extends React.Component<EmployeesProps, EmployeesState>
       count,
     } = this.props;
     const { activePaginate, search } = this.state;
-
     return (
       <PageContainer style={{ display: 'flex' }}>
         <LeftNavbar />
@@ -142,26 +140,25 @@ class EmployeesComponent extends React.Component<EmployeesProps, EmployeesState>
                   onClear={this.clearSearchBar}
                 />
                 <Main>
+                  <div>
+                    <TablePaginate
+                      items={employees.map((item) => ({
+                        url: `${EMPLOYEES_ROUTE}/${item.id}`,
+                        name: item.name,
+                        department: item.department ? item.department.title : 'Not department',
+                        position: item.position ? item.position.title : 'Not position',
+                        location: `${(item.city.name || 'Not city, ')} ${(item.city.country || 'not country')}`,
+                      }))}
+                      pageSize={PAGE_SIZE}
+                      getNumber={this.togglePaginate}
+                      columns={columns}
+                      activeIndex={activePaginate}
+                      count={Math.ceil(count / PAGE_SIZE)}
+                      manual
+                    />
+                  </div>
                   {
-                    employees.length > 0 ? (
-                      <div>
-                        <TablePaginate
-                          items={employees.map((item) => ({
-                            url: `${EMPLOYEES_ROUTE}/${item.id}`,
-                            name: item.name,
-                            department: item.department ? item.department.title : 'Not department',
-                            position: item.position ? item.position.title : 'Not position',
-                            location: `${(item.city.name || 'Not city, ')} ${(item.city.country || 'not country')}`,
-                          }))}
-                          pageSize={PAGE_SIZE}
-                          getNumber={this.togglePaginate}
-                          columns={columns}
-                          activeIndex={activePaginate}
-                          count={Math.ceil(count / PAGE_SIZE)}
-                          manual
-                        />
-                      </div>
-                    ) : <MessageFound />
+                    employees.length === 0 && <MessageFound />
                   }
                 </Main>
               </div>
