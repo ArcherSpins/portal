@@ -47,6 +47,7 @@ export const projects = async () => {
         }
       }
     `,
+    fetchPolicy: 'network-only',
   });
   return response;
 };
