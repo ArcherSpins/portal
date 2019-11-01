@@ -21,6 +21,7 @@ export async function fetchUpdateComment(
     const response = await client.mutate({
       mutation: updateDealComment,
       variables: data,
+      fetchPolicy: 'no-cache',
     });
     return response.data.updateDealComment;
   } catch (err) {
@@ -35,6 +36,7 @@ export async function fetchDeleteComment(
     const response = await client.mutate({
       mutation: deleteDealComment,
       variables: data,
+      fetchPolicy: 'no-cache',
     });
     return response.data.deleteDealComment;
   } catch (err) {
@@ -49,6 +51,7 @@ export async function fetchCommentsData(
     const response = await client.query({
       query: getDealComments,
       variables: data,
+      fetchPolicy: 'no-cache',
     });
     return response.data.dealComments;
   } catch (err) {
@@ -66,6 +69,7 @@ export async function fetchCreateComment(
     const response = await client.mutate({
       mutation: addDealComment,
       variables: data,
+      fetchPolicy: 'no-cache',
     });
     return response.data.addDealComment;
   } catch (err) {

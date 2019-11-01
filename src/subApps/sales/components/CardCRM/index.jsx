@@ -52,6 +52,7 @@ const CardCRM = React.memo<CardCRMProps>((props: CardCRMProps) => {
                 <h4 className="fz-14">{title}</h4>
                 <div className="content mt-1 mb-2 d-flex drag-card">
                   <span className="fz-14 field-span drag-card mr-1">
+                    {/* react/jsx-curly-brace-presence */}
                     {'Client: '}
                   </span>
                   <span className="fz-14 data-span drag-card">
@@ -62,7 +63,8 @@ const CardCRM = React.memo<CardCRMProps>((props: CardCRMProps) => {
                   ? (
                     <div className="content mt-1 d-flex">
                       <span className="fz-14 field-span mr-1">
-                        {'Manager: '}
+                        {/* react/jsx-curly-brace-presence */}
+                        {'Sales manager: '}
                       </span>
                       <span className="fz-14 data-span">
                         {manager.name || 'not manager'}

@@ -119,6 +119,21 @@ const DetailsList = ({
               placeholder="Client name"
             />
           </FieldBlock>
+          <FieldBlock className="field">
+            <Combobox
+              use="underlined"
+              loadOptions={loadOptionsStatuses}
+              onChange={(value) => changeInput('status', value)}
+              label="Deal status"
+              selectedOption={data.stage && {
+                ...data.stage,
+                value: data.stage.title,
+                label: data.stage.title,
+              }}
+              placeholder="Status"
+              error={errorsFormCreate.status.error}
+            />
+          </FieldBlock>
           <FieldBlock className="field option-edit-select">
             <Combobox
               use="underlined"
@@ -234,7 +249,7 @@ const DetailsList = ({
                     name="messagesURL"
                     label="Messages"
                     placeholder="Messages URL"
-                    require
+                    required
                   />
                 </div>
                 <div className="field">
@@ -245,9 +260,9 @@ const DetailsList = ({
                     value={data.salesURL}
                     // error={errorsFormCreate.salesURL.error}
                     name="salesURL"
-                    label="Sales"
+                    label="Sales manager"
                     placeholder="Sales URL"
-                    require
+                    required
                   />
                 </div>
               </div>
@@ -256,21 +271,6 @@ const DetailsList = ({
                 style={{ display: activeUser.source.title !== sourcesArray[2] && 'none' }}
               />
             </TabsComponent>
-          </FieldBlock>
-          <FieldBlock className="field">
-            <Combobox
-              use="underlined"
-              loadOptions={loadOptionsStatuses}
-              onChange={(value) => changeInput('status', value)}
-              label="Deal status"
-              selectedOption={data.stage && {
-                ...data.stage,
-                value: data.stage.title,
-                label: data.stage.title,
-              }}
-              placeholder="Status"
-              error={errorsFormCreate.status.error}
-            />
           </FieldBlock>
           <FieldBlock className="field">
             <Label className="mb-10">Deal date</Label>
