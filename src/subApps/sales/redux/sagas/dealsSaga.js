@@ -2,6 +2,7 @@
 import {
   put,
   takeEvery,
+  takeLatest,
   call,
   all,
   delay,
@@ -136,7 +137,7 @@ export function* deleteDealSaga(action: {
 
 export default function* watchDealsSaga(): any {
   yield all([
-    takeEvery('GET_DEALS_REQUEST', getDealsSaga),
+    takeLatest('GET_DEALS_REQUEST', getDealsSaga),
     takeEvery('UPDATE_DEAL_REORDER_REQUEST', updateDealReorderSaga),
     takeEvery('UPDATE_DEAL_REQUEST', updateDealSaga),
     takeEvery('CREATE_DEAL_REQUEST', createDealSaga),
