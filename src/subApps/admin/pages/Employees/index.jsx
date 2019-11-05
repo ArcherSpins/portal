@@ -99,8 +99,10 @@ class EmployeesComponent extends React.Component<EmployeesProps, EmployeesState>
   togglePaginate = (idx: number) => {
     const { requestEmployees } = this.props;
     this.setState({ activePaginate: idx });
+
+    const index = ((idx - 2) + PAGE_SIZE).toString();
     requestEmployees({
-      offset: idx - 1 > 0 ? ((idx - 2) + PAGE_SIZE).toString() : '0',
+      offset: (idx - 1) > 0 ? index : '0',
       limit: PAGE_SIZE.toString(),
     });
   }
