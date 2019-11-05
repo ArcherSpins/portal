@@ -2,6 +2,9 @@
   "name": "internal-portal",
   "version": "0.1.0",
   "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "dependencies": {
     "@apollo/react-hooks": "^3.1.2",
     "apollo-cache-inmemory": "^1.6.3",
@@ -38,7 +41,6 @@
     "react-router-dom": "^5.0.1",
     "react-router-dynamic-breadcrumbs": "^2.2.0",
     "react-scripts": "3.1.1",
-    "react-select": "^2.3.0",
     "react-table": "^7.0.0-beta.12",
     "react-text-mask": "^5.4.3",
     "redux": "^4.0.4",
@@ -47,17 +49,11 @@
     "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0",
     "styled-components": "^4.4.0",
-    "zenscroll": "^4.0.2"
+    "zenscroll": "^4.0.2",
+    "ui-kit": "0.1.0"
   },
   "devDependencies": {
-    "@storybook/addon-actions": "^5.2.1",
-    "@storybook/addon-knobs": "^5.2.1",
-    "@storybook/addon-links": "^5.2.1",
-    "@storybook/addons": "^5.2.1",
-    "@storybook/react": "^5.2.1",
     "babel-eslint": "10.0.2",
-    "enzyme": "^3.10.0",
-    "enzyme-adapter-react-16": "^1.14.0",
     "eslint": "6.1.0",
     "eslint-config-airbnb": "18.0.1",
     "eslint-plugin-flowtype": "^4.3.0",
@@ -67,6 +63,7 @@
     "eslint-plugin-react": "^7.14.3",
     "eslint-plugin-react-hooks": "^1.7.0",
     "flow-bin": "^0.107.0",
+    "lerna": "^3.18.3",
     "node-sass": "^4.12.0",
     "plop": "^2.4.0",
     "prettier": "^1.18.2",

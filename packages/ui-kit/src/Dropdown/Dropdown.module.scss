@@ -1,0 +1,22 @@
+@import '../variables';
+@import '../mixins.scss';
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.default {
+  font-size: 1rem;
+  color: #818a95;
+  margin-bottom: 0.2rem;
+}
+
+.borderless {
+  @extend .default;
+  padding-left: 0.625rem;
+}
+
+.disabled {
+  cursor: not-allowed;
+}
