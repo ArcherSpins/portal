@@ -13,8 +13,8 @@ type Props = {
 const Modal = ({
   show, children, onRequestClose, className,
 }: Props) => (
-  /* eslint-disable */
-  <div
+  <button
+    type="button"
     className={classNames(styles.backdrop, { [styles.backdrop__visible]: show }, className)}
     onClick={onRequestClose}
   >
@@ -23,7 +23,7 @@ const Modal = ({
     >
       {children}
     </div>
-  </div>
+  </button>
 );
 
 

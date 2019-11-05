@@ -10,7 +10,7 @@ import {
 import {
   Title,
   Message,
-  CanselButton,
+  CancelButton,
   SaveButton,
 } from './styled';
 import './style.scss';
@@ -34,7 +34,7 @@ export default ({ onCancel, onDelete, isOpen }: ModalProps): React.Node => (
       <Message>Are you sure you want to delete?</Message>
     </ModalBody>
     <ModalFooter>
-      <CanselButton onClick={onCancel}>Cancel</CanselButton>
+      <CancelButton onClick={onCancel}>Cancel</CancelButton>
       <SaveButton onClick={onDelete}>Delete</SaveButton>
     </ModalFooter>
   </Modal>

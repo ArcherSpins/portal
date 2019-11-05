@@ -18,7 +18,7 @@ export const Message = styled.p`
   margin-bottom: 20px;
 `;
 
-export const CanselButton = styled(Button)`
+export const CancelButton = styled(Button)`
   border: 1px solid rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
   border-radius: 4px;
