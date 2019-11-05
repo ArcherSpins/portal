@@ -54,6 +54,8 @@ type EmployeeProps = {
   loadingCities: boolean
 }
 
+type State = { isApproval: boolean }
+
 const LOUNCH_START = [
   {
     hours: 12,
@@ -93,7 +95,15 @@ const WORKING_DAY_START = [
 ];
 
 
-class EmployeeComponent extends React.PureComponent<EmployeeProps> {
+class EmployeeComponent extends React.PureComponent<EmployeeProps, State> {
+  constructor(props: EmployeeProps) {
+    super(props);
+
+    this.state = {
+      isApproval: false,
+    };
+  }
+
   componentDidMount(): void {
     this._getCities();
     this._getEmployee();
@@ -187,6 +197,11 @@ class EmployeeComponent extends React.PureComponent<EmployeeProps> {
     }
   };
 
+  toggleApproval = () => {
+    const { isApproval } = this.state;
+    this.setState({ isApproval: !isApproval });
+  }
+
   // TODO: FIX THIS AND REFACTOR
   // $FlowFixMe
   submitEmployeeForm = (data) => {
@@ -241,9 +256,19 @@ class EmployeeComponent extends React.PureComponent<EmployeeProps> {
       loadingCities,
     } = this.props;
 
+    // const { isApproval } = this.state;
+
     return (
       <PageContainer style={{ display: 'flex' }}>
         <LeftNavbar />
+        {/* {
+          isApproval && (
+            <ModalApproval
+              canselFunc={this.toggleApproval}
+              saveFunc={this.deleteEmployee}
+            />
+          )
+        } */}
         <ContainerContent
           style={{
             marginLeft: `${220}px`,
@@ -260,7 +285,7 @@ class EmployeeComponent extends React.PureComponent<EmployeeProps> {
                     match.params.new_employee === 'new_employee' ? 'New Employee'
                       : employeeById && employeeById.name
                   }
-                  deleteEmployee={match.params.new_employee !== 'new_employee' && this.deleteEmployee}
+                  deleteEmployee={match.params.new_employee !== 'new_employee' && this.toggleApproval}
                   goBack={history.goBack}
                 />
                 <Main>
