@@ -11,6 +11,7 @@ import {
   LeftNavbar,
   HeaderEmployee,
   EmployeeForm,
+  ModalApproval,
 } from '../../components';
 import { LoadingContainer } from '../../containers';
 import {
@@ -208,36 +209,30 @@ class EmployeeComponent extends React.PureComponent<EmployeeProps, State> {
     const {
       updateEmployee, match, createEmployee, cities,
     } = this.props;
+    const defaultData = {
+      city: String(data.city ? data.city.id : cities[0].id),
+      positionId: data.position ? data.position.id : null,
+      workDayStart: data.workDayStart ? [
+        data.workDayStart.label.split(':')[0].trim(),
+        data.workDayStart.label.split(':')[1].trim(),
+      ] : null,
+      lunchStart: data.lunchStart ? [
+        data.lunchStart.label.split(':')[0].trim(),
+        data.lunchStart.label.split(':')[1].trim(),
+      ] : null,
+    };
     if (match.params.id) {
       updateEmployee({
         ...data,
         id: match.params.id,
-        city: String(data.city ? data.city.id : cities[0].id),
-        positionId: data.position ? data.position.id : null,
+        ...defaultData,
         timeZone: data.timeZone ? data.timeZone.label : null,
-        workDayStart: data.workDayStart ? [
-          data.workDayStart.label.split(':')[0].trim(),
-          data.workDayStart.label.split(':')[1].trim(),
-        ] : null,
-        lunchStart: data.lunchStart ? [
-          data.lunchStart.label.split(':')[0].trim(),
-          data.lunchStart.label.split(':')[1].trim(),
-        ] : null,
       });
     } else if (match.params.new_employee) {
       createEmployee({
         ...data,
-        city: String(data.city ? data.city.id : cities[0].id),
-        positionId: data.position ? data.position.id : null,
+        ...defaultData,
         timeZone: data.timeZone ? data.timeZone.label : TIME_ZONE[0].label,
-        workDayStart: data.workDayStart ? [
-          data.workDayStart.label.split(':')[0].trim(),
-          data.workDayStart.label.split(':')[1].trim(),
-        ] : null,
-        lunchStart: data.lunchStart ? [
-          data.lunchStart.label.split(':')[0].trim(),
-          data.lunchStart.label.split(':')[1].trim(),
-        ] : null,
       });
     }
   }
@@ -256,19 +251,16 @@ class EmployeeComponent extends React.PureComponent<EmployeeProps, State> {
       loadingCities,
     } = this.props;
 
-    // const { isApproval } = this.state;
+    const { isApproval } = this.state;
 
     return (
       <PageContainer style={{ display: 'flex' }}>
         <LeftNavbar />
-        {/* {
-          isApproval && (
-            <ModalApproval
-              canselFunc={this.toggleApproval}
-              saveFunc={this.deleteEmployee}
-            />
-          )
-        } */}
+        <ModalApproval
+          isOpen={isApproval}
+          onCansel={this.toggleApproval}
+          onDelete={this.deleteEmployee}
+        />
         <ContainerContent
           style={{
             marginLeft: `${220}px`,
