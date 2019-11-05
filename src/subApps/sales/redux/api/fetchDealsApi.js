@@ -51,6 +51,7 @@ export async function fetchUpdateDeal(data: CreateDealType): Promise<FetchResult
     const response = await client.mutate({
       mutation: updateDeal,
       variables: data,
+      fetchPolicy: 'no-cache',
     });
     return response.data.updateDeal;
   } catch (err) {

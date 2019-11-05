@@ -75,7 +75,7 @@ const Message = ({
             >
               {
                 content.split(' ').map((word) => (
-                  <span>
+                  <span key={word}>
                     {
                       regex.test(word) ? (
                         <a target="_blank" rel="noopener noreferrer" href={word}>
