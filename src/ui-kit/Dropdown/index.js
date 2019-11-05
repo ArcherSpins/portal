@@ -4,6 +4,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import Select, { components } from 'react-select';
+import modules from './Dropdown.module.scss';
 import styles from './style.scss';
 
 import type { Option, Action } from '../Combobox';
@@ -44,7 +45,7 @@ const Dropdown = ({
   ...restProps
 }: Props) => (
   <div className={classNames(
-    styles.wrapper, `cbx__wrap dropdown dropdown_${use || ''}`,
+    modules.wrapper, `cbx__wrap dropdown dropdown_${use || ''}`,
     className,
     {
       'error-select': !!error,
@@ -66,7 +67,7 @@ const Dropdown = ({
       {...restProps}
     />
     {
-      error && <p className="error-text">{error}</p>
+      error && <p className={modules['error-text']}>{error}</p>
     }
   </div>
 );

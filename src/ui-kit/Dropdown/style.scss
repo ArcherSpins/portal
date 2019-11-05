@@ -6,12 +6,6 @@
   flex-direction: column;
   font-size: 1rem;
 
-  .error-text {
-    padding-left: 0.625rem;
-    color: $danger-400;
-    margin-top: .3rem;
-  }
-
   .cbx__indicator {
     padding: 0;
   }
@@ -66,10 +60,6 @@
     .cbx__control--is-focused {
       border-color: $main-color;
     }
-
-    .error-text {
-      padding-left: 0.625rem;
-    }
   }
 
   &.dropdown_borderless {
@@ -89,10 +79,6 @@
       &:hover {
         border-color: $main-color;
       }
-    }
-
-    .error-text {
-      padding-left: 0.625rem;
     }
   }
 
