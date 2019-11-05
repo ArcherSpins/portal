@@ -16,16 +16,16 @@ import {
 import './style.scss';
 
 type ModalProps = {
-  onCansel: () => void,
+  onCancel: () => void,
   onDelete: () => void,
   isOpen: boolean
 }
 
-export default ({ onCansel, onDelete, isOpen }: ModalProps): React.Node => (
+export default ({ onCancel, onDelete, isOpen }: ModalProps): React.Node => (
   <Modal
     className="modal"
     show={isOpen}
-    onRequestClose={onCansel}
+    onRequestClose={onCancel}
   >
     <ModalHeader>
       <Title>Delete Deal</Title>
@@ -34,7 +34,7 @@ export default ({ onCansel, onDelete, isOpen }: ModalProps): React.Node => (
       <Message>Are you sure you want to delete?</Message>
     </ModalBody>
     <ModalFooter>
-      <CanselButton onClick={onCansel}>Cancel</CanselButton>
+      <CanselButton onClick={onCancel}>Cancel</CanselButton>
       <SaveButton onClick={onDelete}>Delete</SaveButton>
     </ModalFooter>
   </Modal>

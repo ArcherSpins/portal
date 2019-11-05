@@ -57,7 +57,7 @@ type EmployeeProps = {
 
 type State = { isApproval: boolean }
 
-const LOUNCH_START = [
+const LAUNCH = [
   {
     hours: 12,
     minutes: 0,
@@ -171,7 +171,7 @@ class EmployeeComponent extends React.PureComponent<EmployeeProps, State> {
     minutes: number,
     label: string,
     active: boolean
-  }> => LOUNCH_START.map((item) => {
+  }> => LAUNCH.map((item) => {
     if (data && item.hours === data.lunchStart.hours
         && item.minutes === data.lunchStart.minutes) {
       return {
@@ -199,8 +199,7 @@ class EmployeeComponent extends React.PureComponent<EmployeeProps, State> {
   };
 
   toggleApproval = () => {
-    const { isApproval } = this.state;
-    this.setState({ isApproval: !isApproval });
+    this.setState(({ isApproval }) => ({ isApproval: !isApproval }));
   }
 
   // TODO: FIX THIS AND REFACTOR
@@ -258,7 +257,7 @@ class EmployeeComponent extends React.PureComponent<EmployeeProps, State> {
         <LeftNavbar />
         <ModalApproval
           isOpen={isApproval}
-          onCansel={this.toggleApproval}
+          onCancel={this.toggleApproval}
           onDelete={this.deleteEmployee}
         />
         <ContainerContent
