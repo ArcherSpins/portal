@@ -2,7 +2,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { H1, H2, H3, H4 } from 'ui-kit/Headings';
+import { H1, H2, H3, H4 } from '.';
 
 storiesOf('Typography', module)
   .addWithChapters('Headings', {

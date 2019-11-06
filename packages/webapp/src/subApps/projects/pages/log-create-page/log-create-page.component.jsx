@@ -12,7 +12,7 @@ import { createStructuredSelector } from 'reselect';
 import Header from 'subApps/projects/components/header';
 import {
   Input, Button, TextArea, Datepicker, H1,
-} from 'ui-kit';
+} from '@sfxdx/ui-kit';
 import { addYears } from 'date-fns';
 
 import type { RouterHistory } from 'react-router-dom';

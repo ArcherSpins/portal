@@ -6,7 +6,7 @@ import {
   all,
 } from 'redux-saga/effects';
 import type { Saga } from 'redux-saga';
-import { Toast } from 'ui-kit';
+import { Toast } from '@sfxdx/ui-kit';
 import {
   fetchDeleteContact,
   fetchCreateContact,

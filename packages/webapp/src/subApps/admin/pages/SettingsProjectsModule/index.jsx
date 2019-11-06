@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import {
   Dropdown,
   Button,
-} from 'ui-kit';
+} from '@sfxdx/ui-kit';
 import {
   LeftNavbar,
   HeaderEmployees,

@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
-import TablePaginate from 'ui-kit/TablePaginate';
+import TablePaginate from '.';
 import { storiesOf } from '@storybook/react';
 import { columns, defaultData } from './default';
 

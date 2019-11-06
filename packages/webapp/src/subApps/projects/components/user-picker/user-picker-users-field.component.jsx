@@ -1,7 +1,7 @@
 // @flow
 // TODO: FIX THIS
 import React from 'react';
-import { Chip } from 'ui-kit';
+import { Chip } from '@sfxdx/ui-kit';
 
 import './user-picker-users-field.styles.scss';
 

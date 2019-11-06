@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import Combobox from 'ui-kit/Combobox';
+import Combobox from '.';
 import { storiesOf } from '@storybook/react';
 
 

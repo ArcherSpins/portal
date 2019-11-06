@@ -8,9 +8,11 @@ import type { RouterHistory } from 'react-router-dom';
 import uniqBy from 'lodash.uniqby';
 import {
   Input, TextArea, Button, Radio, H1, Combobox, Participants,
-} from 'ui-kit';
-import type { Option, Action } from 'ui-kit/Combobox';
-import type { Action as ParticipantsAction } from 'ui-kit/Participants';
+} from '@sfxdx/ui-kit';
+// $FlowFixMe
+import type { Option, Action } from '@sfxdx/ui-kit/src/Combobox';
+// $FlowFixMe
+import type { Action as ParticipantsAction } from '@sfxdx/ui-kit/src/Participants';
 import Header from 'subApps/projects/components/header';
 import { saveProject, getProjectTypes } from '../../redux/project/project.actions';
 import translate from '../../helpers/translator';

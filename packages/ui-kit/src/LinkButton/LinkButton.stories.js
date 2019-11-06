@@ -2,7 +2,7 @@
 import React from 'react';
 import { storiesOf, addDecorator } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import LinkButton from 'ui-kit/LinkButton';
+import LinkButton from '.';
 import { MemoryRouter } from 'react-router';
 
 const onClick = action('link button clicked!');

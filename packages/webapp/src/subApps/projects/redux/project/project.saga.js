@@ -4,7 +4,7 @@ import {
   put, takeEvery, call, all,
 } from 'redux-saga/effects';
 import type { Saga } from 'redux-saga';
-import { Toast } from 'ui-kit';
+import { Toast } from '@sfxdx/ui-kit';
 import { fetchProjectTypes } from './project.api';
 import ProjectActionTypes from './project.types';
 // import { type ProjectAction } from './project.flow-types';

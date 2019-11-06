@@ -2,7 +2,7 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { storiesOf } from '@storybook/react'
-import Datepicker from 'ui-kit/Datepicker';
+import Datepicker from '.';
 
 
 storiesOf('Datepicker', module)

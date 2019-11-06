@@ -4,8 +4,8 @@ import { storiesOf, addDecorator } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import styles from './Modal.module.scss';
 
-import Input from 'ui-kit/Input';
-import { Button } from 'ui-kit/Button';
+import Input from '../Input';
+import { Button } from '../Button';
 import Modal from './Modal';
 import ModalBody from './ModalBody';
 import ModalHeader from './ModalHeader';

@@ -5,8 +5,8 @@ import type { RouterHistory, Match } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import {
   Button, TextArea, Input, H1, Dropdown,
-} from 'ui-kit';
-import type { Option, Action } from 'ui-kit/Combobox';
+} from '@sfxdx/ui-kit';
+import type { Option, Action } from '@sfxdx/ui-kit';
 import Header from 'subApps/projects/components/header';
 
 import { editTask, deleteTask, getTaskStatuses } from '../../redux/task/task.actions';

@@ -2,7 +2,7 @@
 import React from 'react';
 import { storiesOf, addDecorator } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import Dropdown from 'ui-kit/Dropdown';
+import Dropdown from '.';
 
 const onChange = action('Dropdown value changed!');
 

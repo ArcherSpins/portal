@@ -6,7 +6,7 @@ import {
   SINGLE_EMPLOYEE_ROUTE,
   CREATE_EMPLOYEE_ROUTE,
 } from 'subApps/admin/routes';
-import { Button, Breadcrumbs, H1 } from 'ui-kit';
+import { Button, Breadcrumbs, H1 } from '@sfxdx/ui-kit';
 import {
   GoBackButton,
 } from '..';

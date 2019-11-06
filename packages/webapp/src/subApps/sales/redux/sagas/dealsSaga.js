@@ -7,7 +7,7 @@ import {
   delay,
 } from 'redux-saga/effects';
 import type { Saga } from 'redux-saga';
-import { Toast } from 'ui-kit';
+import { Toast } from '@sfxdx/ui-kit';
 import history from 'utils/history';
 import {
   fetchDeals,

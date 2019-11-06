@@ -6,7 +6,7 @@ import { createStructuredSelector } from 'reselect';
 import Header from 'subApps/projects/components/header';
 import './tasks-page.styles.scss';
 
-import { H1, Button } from 'ui-kit';
+import { H1, Button } from '@sfxdx/ui-kit';
 import history from 'utils/history';
 import { getTasks } from '../../redux/task/task.actions';
 

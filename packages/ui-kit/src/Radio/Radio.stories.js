@@ -2,7 +2,7 @@
 import React from 'react';
 import { storiesOf, addDecorator } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import RadioButton from 'ui-kit/Radio';
+import RadioButton from '.';
 
 const onChange = action('Dropdown value changed!');
 

@@ -12,13 +12,14 @@ import uniqBy from 'lodash.uniqby';
 import {
   Input, Button, TextArea,
   Radio, H1, Participants, Combobox,
-} from 'ui-kit';
-import type { Action as ParticipantsAction } from 'ui-kit/Participants';
+} from '@sfxdx/ui-kit';
+// $FlowFixMe
+import type { Action as ParticipantsAction } from '@sfxdx/ui-kit/src/Participants';
 import Header from 'subApps/projects/components/header';
 
 import { ROOT } from 'subApps/projects/routes';
-
-import type { Option, Action } from 'ui-kit/Combobox';
+// $FlowFixMe
+import type { Option, Action } from '@sfxdx/ui-kit/src/Combobox';
 import { editProject, getProjectTypes } from '../../redux/project/project.actions';
 import {
   selectProjectItem,

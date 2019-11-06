@@ -2,7 +2,7 @@
 import React from 'react';
 // import { action } from '@storybook/addon-actions';
 import { storiesOf } from '@storybook/react'
-import Container from 'ui-kit/Container';
+import Container from '.';
 
 
 storiesOf('Containers', module)

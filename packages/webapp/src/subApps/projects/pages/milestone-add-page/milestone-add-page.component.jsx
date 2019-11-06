@@ -10,9 +10,11 @@ import './milestone-add-page.styles.scss';
 import {
   Input, TextArea, Button, H1, Participants,
   Dropdown,
-} from 'ui-kit';
-import type { Option, Action } from 'ui-kit/Combobox';
-import type { Action as ParticipantsAction } from 'ui-kit/Participants';
+} from '@sfxdx/ui-kit';
+// $FlowFixMe
+import type { Option, Action } from '@sfxdx/ui-kit/src/Combobox';
+// $FlowFixMe
+import type { Action as ParticipantsAction } from '@sfxdx/ui-kit/src/Participants';
 
 import { createMilestone } from '../../redux/milestone/milestone.actions';
 

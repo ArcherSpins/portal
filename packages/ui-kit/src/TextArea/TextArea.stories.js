@@ -2,7 +2,7 @@
 import React from 'react';
 import { storiesOf, addDecorator } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import TextArea from 'ui-kit/TextArea'
+import TextArea from '.'
 
 const onChange = action('TextArea value changed!');
 

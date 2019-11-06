@@ -3,7 +3,7 @@
 // TODO: FIX
 // @flow
 import React from 'react';
-import { TablePaginate } from 'ui-kit';
+import { TablePaginate } from '@sfxdx/ui-kit';
 import { EMPLOYEES_ROUTE } from '../../routes';
 import {
   LeftNavbar,

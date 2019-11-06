@@ -2,7 +2,7 @@
 import React from 'react';
 import { storiesOf, addDecorator } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import IconInput from 'ui-kit/IconInput';
+import IconInput from '.';
 
 const onChange = action('Input value changed!');
 const onIconClick = action('clicked on icon');

@@ -11,7 +11,7 @@ import { AUTH_TOKEN_KEY, ROOT_PAGE_ROUTE } from 'utils/constants';
 import { SIGN_IN, type SignInResponse } from 'graphql/auth';
 import {
   Button, ButtonWithProgress, H1, Input, Separator,
-} from 'ui-kit';
+} from '@sfxdx/ui-kit';
 import styles from '../Auth.module.scss';
 
 type Props = {};

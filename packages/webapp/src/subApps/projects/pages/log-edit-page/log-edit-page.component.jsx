@@ -10,7 +10,7 @@ import type { RouterHistory } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import {
   Input, Button, TextArea, Datepicker, H1,
-} from 'ui-kit';
+} from '@sfxdx/ui-kit';
 import Header from 'subApps/projects/components/header';
 import { addYears } from 'date-fns';
 import { editLog } from '../../redux/log/log.actions';

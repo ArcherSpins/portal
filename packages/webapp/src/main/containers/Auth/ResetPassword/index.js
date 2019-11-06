@@ -10,7 +10,7 @@ import { AUTH_TOKEN_KEY, ROOT_PAGE_ROUTE } from 'utils/constants';
 import { SET_NEW_PASSWORD } from 'graphql/auth';
 import {
   ButtonWithProgress, H1, Input, Separator, Toast, ErrorText,
-} from 'ui-kit';
+} from '@sfxdx/ui-kit';
 import styles from '../Auth.module.scss';
 
 type Props = {

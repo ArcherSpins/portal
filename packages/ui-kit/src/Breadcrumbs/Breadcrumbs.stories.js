@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import Breadcrumbs from 'ui-kit/Breadcrumbs';
+import Breadcrumbs from './';
 import { storiesOf } from '@storybook/react';
 
 const routes = {

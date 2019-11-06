@@ -5,7 +5,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import type { RouterHistory, Match } from 'react-router-dom';
-import { Button, H1 } from 'ui-kit';
+import { Button, H1 } from '@sfxdx/ui-kit';
 
 import './log-history-page.styles.scss';
 

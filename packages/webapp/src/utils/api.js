@@ -5,7 +5,7 @@ import { onError } from 'apollo-link-error';
 import { ApolloLink } from 'apollo-link';
 import { setContext } from 'apollo-link-context';
 
-import { Toast } from 'ui-kit';
+import { Toast } from '@sfxdx/ui-kit';
 import history from 'utils/history';
 import { AUTH_TOKEN_KEY, UNAUTHENTICATED_CODE } from './constants';
 

@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import type { Match } from 'react-router-dom';
 import Header from 'subApps/projects/components/header';
-import { H1, Button } from 'ui-kit';
+import { H1, Button } from '@sfxdx/ui-kit';
 import history from 'utils/history';
 import { selectProjectsMolestones } from '../../redux/milestone/milestone.selectors';
 import { selectProjectItem } from '../../redux/project/project.selectors';

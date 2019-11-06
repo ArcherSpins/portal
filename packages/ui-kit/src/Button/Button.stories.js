@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean } from '@storybook/addon-knobs';
 
-import { Button, ButtonWithProgress } from 'ui-kit/Button';
+import { Button, ButtonWithProgress } from './';
 
 const onClick = action('button clicked!');
 

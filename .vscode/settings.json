@@ -1,0 +1,7 @@
+{
+  "eslint.workingDirectories": [
+    {
+      // "directory": "/packages/webapp", "changeProcessCWD": true
+    }
+  ]
+}

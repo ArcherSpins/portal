@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { CREATE_PROJECT_ROUTE } from 'subApps/projects/routes';
-import { H1, Button } from 'ui-kit';
+import { H1, Button } from '@sfxdx/ui-kit';
 import history from 'utils/history';
 import ProjectItem from '../../components/project-item/project-item.component';
 import type { Project } from '../../redux/project/project.flow-types';

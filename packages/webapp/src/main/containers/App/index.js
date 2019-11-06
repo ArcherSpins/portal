@@ -1,10 +1,10 @@
 import React, { Component, Suspense, lazy } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
-import ProtectedRoute from 'main/containers/ProtectedRoute';
 
-import Auth from 'main/containers/Auth';
-import MainApp from 'main/containers/MainApp';
+import Auth from '../Auth';
+import MainApp from '../MainApp';
+import ProtectedRoute from '../ProtectedRoute';
 import styles from './App.module.scss';
 // apps
 const SalesApp = lazy(() => import('subApps/sales'));

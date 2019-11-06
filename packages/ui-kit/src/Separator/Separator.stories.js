@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React from 'react';
 // import { action } from '@storybook/addon-actions';
-import Separator from 'ui-kit/Separator';
+import Separator from '.';
 
 export default {
   title: 'Separator',

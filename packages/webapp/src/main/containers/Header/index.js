@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
-import { Navbar } from 'ui-kit';
+import { Navbar } from '@sfxdx/ui-kit';
 import { GET_SELF_INFO } from 'graphql/auth';
 import styles from './Header.module.scss';
 

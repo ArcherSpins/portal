@@ -1,10 +1,9 @@
 [ignore]
-.*/node_modules/.*
 .*/build/.*
 .*/src/serviceWorker.js*
 [include]
-
 [libs]
+flow-typed
 [lints]
 
 [options]

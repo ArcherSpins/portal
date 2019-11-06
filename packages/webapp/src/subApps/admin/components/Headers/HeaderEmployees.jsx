@@ -6,7 +6,7 @@ import React from 'react';
 import type { Node } from 'react';
 import { Link } from 'react-router-dom';
 import { CREATE_EMPLOYEE_ROUTE } from 'subApps/admin/routes';
-import { Input, Button } from 'ui-kit';
+import { Input, Button } from '@sfxdx/ui-kit';
 import { TitleAdminPanel } from '../styled';
 import { Header, RightBlock } from './styled';
 

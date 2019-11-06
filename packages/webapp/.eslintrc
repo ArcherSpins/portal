@@ -27,6 +27,8 @@
     "react/jsx-filename-extension": 0,
     "react/jsx-props-no-spreading": 0,
     "react/static-property-placement": 0,
+    // TODO: fix problem with absolute imports
+    "import/no-unresolved": 0,
     "import/no-extraneous-dependencies": [
       "error",
       {

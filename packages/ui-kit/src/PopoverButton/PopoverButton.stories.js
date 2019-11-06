@@ -2,7 +2,7 @@
 import React from 'react';
 import { storiesOf, addDecorator } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import PopoverButton from 'ui-kit/PopoverButton';
+import PopoverButton from '.';
 
 const onClick = action('add button clicked!');
 

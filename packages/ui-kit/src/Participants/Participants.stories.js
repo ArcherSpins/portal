@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import Participants from 'ui-kit/Participants';
+import Participants from '.';
 import { storiesOf } from '@storybook/react';
 
 const data = [

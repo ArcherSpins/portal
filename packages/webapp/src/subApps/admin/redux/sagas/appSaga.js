@@ -4,7 +4,7 @@ import {
   takeEvery,
   delay,
 } from 'redux-saga/effects';
-import { Toast } from 'ui-kit';
+import { Toast } from '@sfxdx/ui-kit';
 import type { Saga } from 'redux-saga';
 
 export function* toggleErrorMessage(action: { payload: string }): Saga<void> {

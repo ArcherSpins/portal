@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React from 'react';
 // import { action } from '@storybook/addon-actions';
-import ErrorText from 'ui-kit/ErrorText';
+import ErrorText from '.';
 
 export default {
   title: 'ErrorText',

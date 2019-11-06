@@ -2,7 +2,7 @@
 // TODO: FIX THIS
 // @flow
 import React from 'react';
-import TablePaginate from 'ui-kit/src/TablePaginate';
+import { TablePaginate } from '@sfxdx/ui-kit';
 import {
   LeftNavbar,
   HeaderEmployees,

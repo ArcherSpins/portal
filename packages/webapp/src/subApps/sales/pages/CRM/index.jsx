@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
-import { Button, LinkButton } from 'ui-kit';
+import { Button, LinkButton } from '@sfxdx/ui-kit';
 import getRoute from '../../helpers/getRoute';
 import { Header, Content } from './styled';
 // TODO: Fix this

@@ -9,11 +9,12 @@ import uniqBy from 'lodash.uniqby';
 import {
   Input, Button, TextArea, H1, Participants,
   Dropdown,
-} from 'ui-kit';
+} from '@sfxdx/ui-kit';
 import Header from 'subApps/projects/components/header';
-
-import type { Option, Action } from 'ui-kit/Combobox';
-import type { Action as ParticipantsAction } from 'ui-kit/Participants';
+// $FlowFixMe
+import type { Option, Action } from '@sfxdx/ui-kit/src/Combobox';
+// $FlowFixMe
+import type { Action as ParticipantsAction } from '@sfxdx/ui-kit/src/Participants';
 
 import { selectMilestoneByParams } from '../../redux/milestone/milestone.selectors';
 import {

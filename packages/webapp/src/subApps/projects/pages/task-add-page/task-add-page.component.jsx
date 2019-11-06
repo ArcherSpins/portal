@@ -7,8 +7,9 @@ import { createStructuredSelector } from 'reselect';
 import Header from 'subApps/projects/components/header';
 import {
   Input, TextArea, Button, H1, Dropdown,
-} from 'ui-kit';
-import type { Option, Action } from 'ui-kit/Combobox';
+} from '@sfxdx/ui-kit';
+// $FlowFixMe
+import type { Option, Action } from '@sfxdx/ui-kit/src/Combobox';
 
 import { selectMilestoneByParams } from '../../redux/milestone/milestone.selectors';
 import { selectProjectItem } from '../../redux/project/project.selectors';

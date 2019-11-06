@@ -12,7 +12,7 @@ import { format } from 'date-fns';
 // $FlowFixMe
 import {
   Dropdown, Combobox, Input, Datepicker, Toast, Button,
-} from 'ui-kit';
+} from '@sfxdx/ui-kit';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import { getCities } from '../../graphql/queries';
 import type { Employee, CityType } from '../../types';
