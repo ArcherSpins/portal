@@ -48,6 +48,15 @@
   align-items: center;
   height: 100%;
   z-index: -1;
+
+  .button_modal {
+    position: absolute;
+    width: 100%;
+    display: block;
+    height: 100%;
+    border: none;
+    background: transparent;
+  }
   @include default-transition(all);
 }
 

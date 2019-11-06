@@ -13,17 +13,22 @@ type Props = {
 const Modal = ({
   show, children, onRequestClose, className,
 }: Props) => (
-  <button
-    type="button"
+  <div
     className={classNames(styles.backdrop, { [styles.backdrop__visible]: show }, className)}
-    onClick={onRequestClose}
   >
+    <button
+      className={styles.button_modal}
+      type="button"
+      onClick={onRequestClose}
+    >
+      {' '}
+    </button>
     <div
       className={classNames(styles['modal-wrapper'], { [styles.visible]: show })}
     >
       {children}
     </div>
-  </button>
+  </div>
 );
 
 
