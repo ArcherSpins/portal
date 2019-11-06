@@ -22,7 +22,7 @@ export { default as DepartmentsItem } from './ItemsTable/DepartmentsItem';
 export { default as Calendar } from './Calendar';
 export { default as ChooseYear } from './ChooseYear';
 export { default as MessageFound } from './NotFound';
-
+export { default as ModalApproval } from './ModalApproval';
 
 export {
   AuthForm,

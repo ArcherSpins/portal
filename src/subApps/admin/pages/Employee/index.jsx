@@ -11,6 +11,7 @@ import {
   LeftNavbar,
   HeaderEmployee,
   EmployeeForm,
+  ModalApproval,
 } from '../../components';
 import { LoadingContainer } from '../../containers';
 import {
@@ -54,7 +55,9 @@ type EmployeeProps = {
   loadingCities: boolean
 }
 
-const LOUNCH_START = [
+type State = { isApproval: boolean }
+
+const LAUNCH = [
   {
     hours: 12,
     minutes: 0,
@@ -93,7 +96,15 @@ const WORKING_DAY_START = [
 ];
 
 
-class EmployeeComponent extends React.PureComponent<EmployeeProps> {
+class EmployeeComponent extends React.PureComponent<EmployeeProps, State> {
+  constructor(props: EmployeeProps) {
+    super(props);
+
+    this.state = {
+      isApproval: false,
+    };
+  }
+
   componentDidMount(): void {
     this._getCities();
     this._getEmployee();
@@ -160,7 +171,7 @@ class EmployeeComponent extends React.PureComponent<EmployeeProps> {
     minutes: number,
     label: string,
     active: boolean
-  }> => LOUNCH_START.map((item) => {
+  }> => LAUNCH.map((item) => {
     if (data && item.hours === data.lunchStart.hours
         && item.minutes === data.lunchStart.minutes) {
       return {
@@ -187,42 +198,40 @@ class EmployeeComponent extends React.PureComponent<EmployeeProps> {
     }
   };
 
+  toggleApproval = () => {
+    this.setState(({ isApproval }) => ({ isApproval: !isApproval }));
+  }
+
   // TODO: FIX THIS AND REFACTOR
   // $FlowFixMe
   submitEmployeeForm = (data) => {
     const {
       updateEmployee, match, createEmployee, cities,
     } = this.props;
+    const defaultData = {
+      city: String(data.city ? data.city.id : cities[0].id),
+      positionId: data.position ? data.position.id : null,
+      workDayStart: data.workDayStart ? [
+        data.workDayStart.label.split(':')[0].trim(),
+        data.workDayStart.label.split(':')[1].trim(),
+      ] : null,
+      lunchStart: data.lunchStart ? [
+        data.lunchStart.label.split(':')[0].trim(),
+        data.lunchStart.label.split(':')[1].trim(),
+      ] : null,
+    };
     if (match.params.id) {
       updateEmployee({
         ...data,
         id: match.params.id,
-        city: String(data.city ? data.city.id : cities[0].id),
-        positionId: data.position ? data.position.id : null,
+        ...defaultData,
         timeZone: data.timeZone ? data.timeZone.label : null,
-        workDayStart: data.workDayStart ? [
-          data.workDayStart.label.split(':')[0].trim(),
-          data.workDayStart.label.split(':')[1].trim(),
-        ] : null,
-        lunchStart: data.lunchStart ? [
-          data.lunchStart.label.split(':')[0].trim(),
-          data.lunchStart.label.split(':')[1].trim(),
-        ] : null,
       });
     } else if (match.params.new_employee) {
       createEmployee({
         ...data,
-        city: String(data.city ? data.city.id : cities[0].id),
-        positionId: data.position ? data.position.id : null,
+        ...defaultData,
         timeZone: data.timeZone ? data.timeZone.label : TIME_ZONE[0].label,
-        workDayStart: data.workDayStart ? [
-          data.workDayStart.label.split(':')[0].trim(),
-          data.workDayStart.label.split(':')[1].trim(),
-        ] : null,
-        lunchStart: data.lunchStart ? [
-          data.lunchStart.label.split(':')[0].trim(),
-          data.lunchStart.label.split(':')[1].trim(),
-        ] : null,
       });
     }
   }
@@ -241,9 +250,16 @@ class EmployeeComponent extends React.PureComponent<EmployeeProps> {
       loadingCities,
     } = this.props;
 
+    const { isApproval } = this.state;
+
     return (
       <PageContainer style={{ display: 'flex' }}>
         <LeftNavbar />
+        <ModalApproval
+          isOpen={isApproval}
+          onCancel={this.toggleApproval}
+          onDelete={this.deleteEmployee}
+        />
         <ContainerContent
           style={{
             marginLeft: `${220}px`,
@@ -260,7 +276,7 @@ class EmployeeComponent extends React.PureComponent<EmployeeProps> {
                     match.params.new_employee === 'new_employee' ? 'New Employee'
                       : employeeById && employeeById.name
                   }
-                  deleteEmployee={match.params.new_employee !== 'new_employee' && this.deleteEmployee}
+                  deleteEmployee={match.params.new_employee !== 'new_employee' && this.toggleApproval}
                   goBack={history.goBack}
                 />
                 <Main>

@@ -44,7 +44,6 @@ export const RightBlock = styled.div`
   }
 
   .delete-deal-button {
-    color: #333333;
     border: 1px solid #C6CCD5;
 
     &:hover {
