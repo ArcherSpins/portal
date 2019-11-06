@@ -1,23 +1,5 @@
 import styled from 'styled-components';
-
-export const Container = styled.div`
-  position: fixed;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0,0,0,0.3);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 100;
-`;
-
-export const Modal = styled.div`
-  padding: 15px;
-  background-color: #fff;
-  border-radius: 4px;
-`;
+import { Button } from 'ui-kit';
 
 export const Title = styled.h4`
   font-family: Proxima Nova;
@@ -36,7 +18,7 @@ export const Message = styled.p`
   margin-bottom: 20px;
 `;
 
-export const CanselButton = styled.button`
+export const CancelButton = styled(Button)`
   border: 1px solid rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
   border-radius: 4px;
@@ -44,10 +26,14 @@ export const CanselButton = styled.button`
   font-family: Proxima Nova;
   font-size: 16px;
   color: #4F4F4F;
-  padding: 6px 35px;
+  padding: 6px 38px;
+
+  &:hover {
+    background-color: transparent;
+  }
 `;
 
-export const SaveButton = styled.button`
+export const SaveButton = styled(Button)`
   background: #EB5757;
   border: 1px solid rgba(0, 0, 0, 0.05);
   font-family: Proxima Nova;
@@ -55,7 +41,11 @@ export const SaveButton = styled.button`
   color: white;
   box-sizing: border-box;
   border-radius: 4px;
-  padding: 6px 35px;
+  padding: 6px 38px;
   float: right;
   margin-left: 12px;
+
+  &:hover {
+    background-color: #EB5757;
+  }
 `;

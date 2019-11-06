@@ -1,28 +1,40 @@
 // @flow
-
 import * as React from 'react';
 import {
-  Container,
   Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+} from 'ui-kit';
+
+import {
   Title,
   Message,
-  CanselButton,
+  CancelButton,
   SaveButton,
 } from './styled';
-import './style.scss';
 
 type ModalProps = {
-  canselFunc: () => void,
-  saveFunc: () => void
+  onCancel: () => void,
+  onDelete: () => void,
+  isOpen: boolean
 }
 
-export default ({ canselFunc, saveFunc }: ModalProps): React.Node => (
-  <Container className="modal-approve">
-    <Modal>
+export default ({ onCancel, onDelete, isOpen }: ModalProps): React.Node => (
+  <Modal
+    className="modal"
+    show={isOpen}
+    onRequestClose={onCancel}
+  >
+    <ModalHeader>
       <Title>Delete Deal</Title>
+    </ModalHeader>
+    <ModalBody>
       <Message>Are you sure you want to delete?</Message>
-      <CanselButton onClick={canselFunc}>Cancel</CanselButton>
-      <SaveButton onClick={saveFunc}>Delete</SaveButton>
-    </Modal>
-  </Container>
+    </ModalBody>
+    <ModalFooter>
+      <CancelButton onClick={onCancel}>Cancel</CancelButton>
+      <SaveButton onClick={onDelete}>Delete</SaveButton>
+    </ModalFooter>
+  </Modal>
 );
