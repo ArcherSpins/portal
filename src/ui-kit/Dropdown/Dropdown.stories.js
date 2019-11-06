@@ -29,6 +29,10 @@ storiesOf('Dropdown', module).addWithChapters('Just Dropdown', {
                 {
                     title: 'Disabled',
                     sectionFn: withDecorator(<Dropdown options={optionsArray} use='default' value={optionsArray[1]} onChange={onChange} label='Title' disabled={true} />)
+                },
+                {
+                    title: 'Error',
+                    sectionFn: withDecorator(<Dropdown options={optionsArray} use='default' value={optionsArray[1]} onChange={onChange} label='Title' error="Error selected" />)
                 }
             ]
         }
