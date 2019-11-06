@@ -314,7 +314,6 @@ class EmployeeForm extends React.Component<
           <Input
             className="block"
             label="Login"
-            maxLength={15}
             value={formData.email}
             placeholder="Your lastname"
             error={errorBoundry.email}
