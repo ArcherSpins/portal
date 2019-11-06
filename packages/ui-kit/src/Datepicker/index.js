@@ -3,7 +3,6 @@ import React from 'react';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import { DateUtils } from 'react-day-picker';
 import { format as dateFnsFormat, parse as dateFnsParse } from 'date-fns';
-
 import classNames from 'classnames';
 // $FlowFixMe
 import 'react-day-picker/lib/style.css';

@@ -1,9 +1,8 @@
 
 // @flow
 import React, { useState } from 'react';
+import { type RouterHistory } from 'react-router-dom';
 import classNames from 'classnames';
-import history from 'utils/history';
-// $FlowFixMe
 import { useTable, useBlockLayout, useResizeColumns } from 'react-table';
 import Paginate from './Paginate';
 import styles from './TablePaginate.module.scss';
@@ -30,7 +29,8 @@ type Props = {
   getNumber?: (number) => void,
   columns: Array<ColumnType>,
   manual?: boolean,
-  count?: number
+  count?: number,
+  history: RouterHistory
 };
 
 const getPageItems = (array: Array<any>, chunkSize: number): Array<any> => {
@@ -50,7 +50,9 @@ function deleteStyle(props: { [string]: mixed }) {
 }
 
 const Table = (
-  { columns, data, ...restProps }: { columns: Array<ColumnType>, data: Array<any> },
+  {
+    columns, data, history, ...restProps
+  }: { columns: Array<ColumnType>, data: Array<any>, history: RouterHistory },
 ) => {
   const {
     getTableProps,
@@ -123,6 +125,7 @@ const TablePaginate = ({
   columns,
   manual,
   count,
+  history,
   ...restProps
 }: Props) => {
   const [index, setIndex] = useState(activeIndex || 1);
@@ -152,6 +155,7 @@ const TablePaginate = ({
         className={className}
         columns={columns}
         data={data}
+        history={history}
         {...restProps}
       />
     </div>

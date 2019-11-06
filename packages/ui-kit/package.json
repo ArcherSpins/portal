@@ -1,20 +1,31 @@
 {
-  "name": "ui-kit",
+  "name": "@sfxdx/ui-kit",
   "version": "0.1.0",
   "description": "UI components of sfxdx internal project",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "NODE_ENV=production webpack"
+    "build": "NODE_ENV=production webpack",
+    "lint": "eslint src/ --ext .js,.jsx",
+    "flow": "flow",
+    "test": "jest",
+    "new": "plop --plopfile generators/index.js",
+    "storybook": "start-storybook -p 9009 -s public",
+    "build-storybook": "build-storybook -s public"
   },
   "dependencies": {
     "classnames": "^2.2.6",
     "date-fns": "^2.6.0",
+    "jest": "^24.9.0",
+    "lodash.noop": "^3.0.1",
     "react": "^16.10.2",
     "react-day-picker": "^7.4.0",
     "react-dom": "^16.9.0",
     "react-router-dom": "^5.0.1",
-    "react-select": "^2.3.0"
+    "react-router-dynamic-breadcrumbs": "^2.2.0",
+    "react-select": "^2.3.0",
+    "react-table": "^7.0.0-beta.12",
+    "react-text-mask": "^5.4.3",
+    "react-transition-group": "^4.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.6.4",
@@ -26,18 +37,40 @@
     "@storybook/addons": "^5.2.1",
     "@storybook/react": "^5.2.1",
     "autoprefixer": "^9.7.1",
+    "babel-eslint": "10.0.2",
+    "babel-jest": "^24.9.0",
     "babel-loader": "^8.0.6",
+    "babel-plugin-transform-flow-strip-types": "^6.22.0",
     "enzyme": "^3.10.0",
-    "enzyme-adapter-react-16": "^1.14.0",
+    "enzyme-adapter-react-16": "^1.15.1",
+    "eslint": "6.1.0",
+    "eslint-config-airbnb": "18.0.1",
+    "eslint-plugin-flowtype": "^4.3.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jest": "^22.17.0",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.14.3",
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "flow-bin": "^0.107.0",
+    "identity-obj-proxy": "^3.0.0",
     "mini-css-extract-plugin": "^0.8.0",
+    "plop": "^2.4.0",
     "postcss-flexbugs-fixes": "^4.1.0",
     "postcss-loader": "^3.0.0",
     "postcss-normalize": "^8.0.1",
     "postcss-preset-env": "^6.7.0",
     "postcss-scss": "^2.0.0",
-    "sass-loader": "^8.0.0",
-    "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.10"
+    "prettier": "^1.18.2",
+    "react-storybook-addon-chapters": "^3.1.6",
+    "react-test-renderer": "^16.9.0",
+    "sass-loader": "^8.0.0"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(scss|less|css)$": "identity-obj-proxy"
+    },
+    "setupFilesAfterEnv": ["<rootDir>src/setupTests.js"]
   },
   "author": "",
   "license": "ISC"

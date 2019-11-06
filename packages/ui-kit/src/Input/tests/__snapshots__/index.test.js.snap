@@ -2,34 +2,48 @@
 
 exports[`The Input component borderless input renders correctly 1`] = `
 <div
-  className="
-      borderless
-      
-    "
+  className="borderless md"
 >
-  <input
-    disabled={false}
-    onChange={[Function]}
-    placeholder=""
-    type="text"
-    value=""
-  />
+  <label>
+    
+  </label>
+  <div
+    className="wrap"
+  >
+    
+    <input
+      disabled={false}
+      onBlur={[Function]}
+      onChange={[Function]}
+      onFocus={[Function]}
+      placeholder=""
+      type="text"
+      value=""
+    />
+  </div>
 </div>
 `;
 
 exports[`The Input component default input renders correctly 1`] = `
 <div
-  className="
-      default
-      
-    "
+  className="default md"
 >
-  <input
-    disabled={false}
-    onChange={[Function]}
-    placeholder=""
-    type="text"
-    value=""
-  />
+  <label>
+    
+  </label>
+  <div
+    className="wrap"
+  >
+    
+    <input
+      disabled={false}
+      onBlur={[Function]}
+      onChange={[Function]}
+      onFocus={[Function]}
+      placeholder=""
+      type="text"
+      value=""
+    />
+  </div>
 </div>
 `;

@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React from 'react';
 // import { action } from '@storybook/addon-actions';
-import { Toast } from 'ui-kit';
+import Toast from './';
 import { storiesOf } from '@storybook/react';
 
 storiesOf('Toast', module)

@@ -2,39 +2,27 @@
 
 exports[`The Button default button renders correctly 1`] = `
 <button
-  className="
-        default
-      "
+  className="default md"
   disabled={false}
   onClick={[Function]}
   type="button"
->
-  <span />
-</button>
+/>
 `;
 
 exports[`The Button grey button renders correctly 1`] = `
 <button
-  className="
-        grey
-      "
+  className="grey md"
   disabled={false}
   onClick={[Function]}
   type="button"
->
-  <span />
-</button>
+/>
 `;
 
 exports[`The Button transparent button renders correctly 1`] = `
 <button
-  className="
-        transparent
-      "
+  className="transparent md"
   disabled={false}
   onClick={[Function]}
   type="button"
->
-  <span />
-</button>
+/>
 `;

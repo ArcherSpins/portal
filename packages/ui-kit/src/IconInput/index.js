@@ -1,8 +1,8 @@
 // @flow
 import React, { Component } from 'react';
 import noop from 'lodash.noop';
-import Input, { type InputProps } from '../Input';
 import classNames from 'classnames';
+import Input, { type InputProps } from '../Input';
 import styles from './IconInput.module.scss';
 
 type Props = {

@@ -36,7 +36,6 @@ class Switcher extends Component<Props> {
     const {
       items, value: swValue, size, className,
     } = this.props;
-
     return (
       <div className={classNames(styles.switcher, className)}>
         {items.map((item) => {

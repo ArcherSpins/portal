@@ -1,0 +1,108 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The Combobox component renders correctly 1`] = `
+<div
+  className="cbx__wrap wrapper combobox combobox_default"
+>
+  <label
+    className="cbx__label"
+    htmlFor="select"
+  >
+    
+  </label>
+  <div
+    className="css-1pcexqc-container select-component"
+    onKeyDown={[Function]}
+  >
+    <div
+      className="css-bg1rzq-control cbx__control"
+      onMouseDown={[Function]}
+      onTouchEnd={[Function]}
+    >
+      <div
+        className="css-1hwfws3 cbx__value-container"
+      >
+        <div
+          className="css-151xaom-placeholder cbx__placeholder"
+        >
+          Select...
+        </div>
+        <div
+          className="css-1g6gooi"
+        >
+          <div
+            className="cbx__input"
+            style={
+              Object {
+                "display": "inline-block",
+              }
+            }
+          >
+            <input
+              aria-autocomplete="list"
+              autoCapitalize="none"
+              autoComplete="off"
+              autoCorrect="off"
+              disabled={false}
+              id="react-select-2-input"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              spellCheck="false"
+              style={
+                Object {
+                  "background": 0,
+                  "border": 0,
+                  "boxSizing": "content-box",
+                  "color": "inherit",
+                  "fontSize": "inherit",
+                  "label": "input",
+                  "opacity": 1,
+                  "outline": 0,
+                  "padding": 0,
+                  "width": "1px",
+                }
+              }
+              tabIndex="0"
+              type="text"
+              value=""
+            />
+            <div
+              style={
+                Object {
+                  "height": 0,
+                  "left": 0,
+                  "overflow": "scroll",
+                  "position": "absolute",
+                  "top": 0,
+                  "visibility": "hidden",
+                  "whiteSpace": "pre",
+                }
+              }
+            >
+              
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="css-1wy0on6 cbx__indicators"
+      >
+        <span
+          className="css-bgvzuu-indicatorSeparator cbx__indicator-separator"
+        />
+        <div
+          aria-hidden="true"
+          className="css-16pqwjk-indicatorContainer cbx__indicator cbx__dropdown-indicator"
+          onMouseDown={[Function]}
+          onTouchEnd={[Function]}
+        >
+          <i
+            className="icon-down-dir"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

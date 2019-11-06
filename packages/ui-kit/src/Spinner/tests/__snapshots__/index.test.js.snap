@@ -2,10 +2,7 @@
 
 exports[`The Spinner component renders correctly 1`] = `
 <div
-  className="
-      spinner
-      
-    "
+  className="spinner"
   type="spinner"
 />
 `;

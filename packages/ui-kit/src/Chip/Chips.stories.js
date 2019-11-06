@@ -1,7 +1,7 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import Chip from 'ui-kit/Chip';
 import { storiesOf } from '@storybook/react';
+import Chip from '.';
 
 const onDelete = action('chip onDelete clicked!');
 
