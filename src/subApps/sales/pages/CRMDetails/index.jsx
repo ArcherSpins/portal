@@ -58,14 +58,6 @@ const CRMDetailsPage = ({
   const { goBack } = history;
   return (
     <div className="details-page">
-      {
-        modalApproval && (
-          <ModalApproval
-            canselFunc={() => toggleModalApproval(false)}
-            saveFunc={approveDeleteDeal}
-          />
-        )
-      }
       <HeaderDetails
         goBack={goBack}
         title={activeUser.title}
@@ -81,6 +73,11 @@ const CRMDetailsPage = ({
         setTitleComponent={setTitleComponent}
       />
       <div className="content-page d-flex fz-14">
+        <ModalApproval
+          isOpen={modalApproval}
+          onCancel={() => toggleModalApproval(false)}
+          onDelete={approveDeleteDeal}
+        />
         <DetailsListContainer
           statuses={statuses}
           activateFormEdit={activateFormEdit}
