@@ -1,3 +1,25 @@
+.statuses-crm-list {
+    display: flex;
+    justify-content: center;
+
+    p {
+        font-size: 14px;
+        padding: 12px 20px;
+
+        &.success_status {
+            color: #61B16F;
+        }
+
+        &.error_status {
+            color: #EB5757;
+        }
+
+        &.default_status {
+            color: #818A95;
+        }
+    }
+}
+
 .header-crm-list {
     border-top: 1px solid #f1f1f1;
 
