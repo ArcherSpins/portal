@@ -49,10 +49,16 @@ class SearchDealContainer extends React.Component<
 
   getData = (): void => {
     const {
-      getColumnsData, getDeals,
+      getColumnsData, getDeals, match,
     } = this.props;
+    const searchText = match.params.search;
     getColumnsData(() => {});
-    getDeals(this.getDeals);
+    getDeals(
+      this.getDeals,
+      {
+        title: searchText,
+      },
+    );
     this.getManagers();
   }
 
@@ -61,8 +67,7 @@ class SearchDealContainer extends React.Component<
     const searchText = match.params.search;
     if (searchText) {
       this.setState({
-        dataDeals:
-          array.filter((item) => item.title.toLowerCase().indexOf(searchText.toLowerCase()) !== -1),
+        dataDeals: array,
         data: array,
         filterDeals: array,
         searchValue: searchText,
