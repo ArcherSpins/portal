@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import styled from 'styled-components';
-import { Input, Button } from 'ui-kit';
+import { Input, Button } from '@sfxdx/ui-kit';
 import { Heading } from '../shared/styled';
 
 import './style.scss';

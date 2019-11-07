@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import autosize from 'autosize';
-import { Button } from 'ui-kit';
+import { Button } from '@sfxdx/ui-kit';
 import { Input } from './styled';
 // $FlowFixMe
 import fileIcon from '../Message/file.svg';

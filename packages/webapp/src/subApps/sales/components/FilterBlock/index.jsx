@@ -9,7 +9,7 @@ import {
   Datepicker,
   Dropdown,
   Button,
-} from 'ui-kit';
+} from '@sfxdx/ui-kit';
 // import { Picker } from '..';
 import type { FilterBlockProps } from './type';
 import './style.scss';

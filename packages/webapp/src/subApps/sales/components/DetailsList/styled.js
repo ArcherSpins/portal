@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import React, { useState } from 'react';
 import Select from 'react-select';
-import { Switcher, IconInput } from 'ui-kit';
+import { Switcher, IconInput } from '@sfxdx/ui-kit';
 import {
   mail,
   phone,

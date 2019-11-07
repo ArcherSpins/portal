@@ -4,6 +4,9 @@
   "main": "packages/webapp/src/index.js",
   "license": "MIT",
   "private": true,
+  "scripts": {
+    "build-ui": "cd packages/ui-kit && yarn build && lerna bootstrap && cd ../../"
+  },
   "workspaces": [
     "packages/*"
   ],

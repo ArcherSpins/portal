@@ -2,7 +2,7 @@
 /* eslint-disable react/no-unused-state */
 // @flow
 import React, { useEffect } from 'react';
-import { Button } from 'ui-kit';
+import { Button } from '@sfxdx/ui-kit';
 import arrow from '../../assets/icons/arrow-left.png';
 // import { Heading } from '../shared/styled';
 import { InputForTitle, Title } from './styled';

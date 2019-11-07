@@ -9,7 +9,7 @@ import {
   Combobox,
   LinkButton,
   Button,
-} from 'ui-kit';
+} from '@sfxdx/ui-kit';
 import {
   Header,
   FieldBlock,

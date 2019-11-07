@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-import { Input, Button } from 'ui-kit';
+import { Input, Button } from '@sfxdx/ui-kit';
 import { Title, LeftTitleBlock } from './styled';
 import getRoute from '../../helpers/getRoute';
 // import SearchInput from '../../components/shared/Input/SearchInput';
