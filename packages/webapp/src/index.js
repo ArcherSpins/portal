@@ -9,7 +9,6 @@ import client from 'utils/api';
 import App from 'main/containers/App';
 import * as serviceWorker from './serviceWorker';
 import '@sfxdx/ui-kit/assets/main.css';
-import '@sfxdx/ui-kit/dist/index.css';
 
 const MOUNT_NODE = document.getElementById('root');
 

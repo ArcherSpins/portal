@@ -1,3 +1,4 @@
+
 import babel from 'rollup-plugin-babel';
 import flow from 'rollup-plugin-flow';
 import commonjs from 'rollup-plugin-commonjs';
@@ -8,6 +9,14 @@ import url from 'rollup-plugin-url';
 import svgr from '@svgr/rollup';
 
 import pkg from './package.json';
+
+const nanoid = require('nanoid');
+const path = require('path');
+
+const sassModuleRegex = /\.module\.(scss|sass)$/;
+
+
+const hash = nanoid(5);
 
 export default {
   input: 'src/index.js',
@@ -23,9 +32,20 @@ export default {
     external(),
     babel(),
     postcss({
-      modules: true,
-      extract: true,
+      modules: {
+        generateScopedName(name, filename) {
+          const isCssModule = sassModuleRegex.test(filename);
+          if (isCssModule) {
+            const file = path.basename(filename, '.module.scss');
+            return `${file}_${name}__${hash}`;
+          }
+
+          return name;
+        },
+      },
+      extract: false,
       minimize: true,
+      autoModules: true,
     }),
     url(),
     svgr(),

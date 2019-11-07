@@ -1,34 +1,34 @@
-{
-  "parser": "babel-eslint",
-  "env": {
+const path = require('path');
+
+module.exports = {
+  parser: "babel-eslint",
+  env: {
     "browser": true,
     "es6": true
   },
-  "extends": [
+  extends: [
     "airbnb",
     "plugin:flowtype/recommended",
     "plugin:jest/recommended"
   ],
-  "globals": {
+  globals: {
     "Atomics": "readonly",
     "SharedArrayBuffer": "readonly"
   },
-  "parserOptions": {
+  parserOptions: {
     "ecmaFeatures": {
       "jsx": true
     },
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
-  "plugins": ["react", "flowtype", "jest"],
-  "rules": {
+  plugins: ["react", "flowtype", "jest"],
+  rules: {
     "linebreak-style": 0,
     "react/prefer-stateless-function": 0,
     "react/jsx-filename-extension": 0,
     "react/jsx-props-no-spreading": 0,
     "react/static-property-placement": 0,
-    // TODO: fix problem with absolute imports
-    "import/no-unresolved": 0,
     "import/no-extraneous-dependencies": [
       "error",
       {
@@ -40,10 +40,16 @@
       }
     ]
   },
-  "settings": {
+
+  settings: {
     "import/resolver": {
       "node": {
-        "paths": ["src"]
+        "paths": [ 
+          path.resolve(__dirname, 'src') 
+        ]
+      },
+      "eslint-import-resolver-lerna": {
+        "packages": path.resolve(__dirname, '..')
       }
     }
   }
