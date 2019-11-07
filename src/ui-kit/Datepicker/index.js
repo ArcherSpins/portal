@@ -25,7 +25,8 @@ type Props = {
   label?: string,
   style?: {
     [string]: mixed
-  }
+  },
+  error?: boolean
 };
 
 type NavbarElementProps = {
@@ -88,11 +89,15 @@ const Datepicker = ({
   name,
   label,
   style,
+  error,
   ...props
 }: Props) => {
   const inputRef = React.createRef();
   return (
-    <div style={style} className={classNames(styles.datepicker, className)}>
+    <div
+      style={style}
+      className={classNames(styles.datepicker, { [styles.error_picker]: error }, className)}
+    >
       <label htmlFor={name}>{label}</label>
       {/* <span className={styles.label}>{label}</span> */}
       <DayPickerInput
@@ -136,6 +141,7 @@ Datepicker.defaultProps = {
   label: '',
   className: '',
   style: {},
+  error: false,
 };
 
 export default Datepicker;
