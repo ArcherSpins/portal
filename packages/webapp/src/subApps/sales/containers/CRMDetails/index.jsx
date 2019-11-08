@@ -283,7 +283,7 @@ class CRMDetailsContainer extends React.PureComponent<PropsCrmDetails, State> {
       title: titleText !== title ? titleText.split('').slice(0, 100).join('').trim() : null,
       managerID: data.manager.id !== activeManager.id ? data.manager.id : null,
       client: String(data.client).trim() !== '' ? data.client : null,
-      sourceID: activeUser.source.id,
+      sourceID: data.source.id,
       jobPostingURL: data.jobPostingURL ? data.jobPostingURL.trim() : '',
       jobProposalURL: data.jobProposalURL ? data.jobProposalURL.trim() : '',
       messagesURL: data.messagesURL ? data.messagesURL.trim() : '',
@@ -293,10 +293,10 @@ class CRMDetailsContainer extends React.PureComponent<PropsCrmDetails, State> {
       setActiveUser(deal);
       fetchUpdateDealAction({
         id: activeUser.id,
-        title: titleText !== title ? titleText.split('').slice(0, 100).join('').trim() : null,
-        managerID: data.manager.id !== activeManager.id ? data.manager.id : null,
-        client: data.client.trim() !== '' ? data.client : null,
-        sourceID: activeUser.source.id,
+        // title: titleText !== title ? titleText.split('').slice(0, 100).join('').trim() : null,
+        // managerID: data.manager.id !== activeManager.id ? data.manager.id : null,
+        // client: data.client.trim() !== '' ? data.client : null,
+        sourceID: data.source.id,
         jobPostingURL: data.jobPostingURL ? data.jobPostingURL.trim() : '',
         jobProposalURL: data.jobProposalURL ? data.jobProposalURL.trim() : '',
         messagesURL: data.messagesURL ? data.messagesURL.trim() : '',

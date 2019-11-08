@@ -12,7 +12,6 @@ import {
   getColumnsDataAction,
   getEmployeesAction,
 } from '../../redux/actions';
-import { LoadingContainer } from '../index';
 import type { DealType } from '../../types';
 import type {
   SearchDealContainerProps,
@@ -50,10 +49,16 @@ class SearchDealContainer extends React.Component<
 
   getData = (): void => {
     const {
-      getColumnsData, getDeals,
+      getColumnsData, getDeals, match,
     } = this.props;
+    const searchText = match.params.search;
     getColumnsData(() => {});
-    getDeals(this.getDeals);
+    getDeals(
+      this.getDeals,
+      {
+        title: searchText,
+      },
+    );
     this.getManagers();
   }
 
@@ -62,8 +67,7 @@ class SearchDealContainer extends React.Component<
     const searchText = match.params.search;
     if (searchText) {
       this.setState({
-        dataDeals:
-          array.filter((item) => item.title.toLowerCase().indexOf(searchText.toLowerCase()) !== -1),
+        dataDeals: array,
         data: array,
         filterDeals: array,
         searchValue: searchText,
@@ -100,8 +104,25 @@ class SearchDealContainer extends React.Component<
   }
 
   changeSearch = (e: SyntheticInputEvent<HTMLInputElement>) => {
-    const { data, filterDeals, search } = this.state;
+    const {
+      data, filterDeals, filterObject, search,
+    } = this.state;
+    const { getDeals } = this.props;
     const searchText = e.target.value;
+
+    getDeals(
+      this.setFilteredDeals,
+      {
+        stageID: filterObject.status ? filterObject.status.id : null,
+        managerID: filterObject.manager ? filterObject.manager.id : null,
+        client: filterObject.client,
+        title: searchText,
+        createdBefore:
+          filterObject.end ? this.toUtc(filterObject.end) : null,
+        createdAfter:
+          filterObject.start ? this.toUtc(filterObject.start) : null,
+      },
+    );
 
     if (search) {
       this.setState({
@@ -136,12 +157,13 @@ class SearchDealContainer extends React.Component<
     });
   }
 
+  toUtc = (date) => moment(date.valueOf()).utc()
+    .add(moment().utcOffset(), 'minutes')
+    .toISOString();
+
   onSubmitFilter = () => {
     const { filterObject } = this.state;
     const { getDeals } = this.props;
-    const toUtc = (date) => moment(date.valueOf()).utc()
-      .add(moment().utcOffset(), 'minutes')
-      .toISOString();
 
     getDeals(
       this.setFilteredDeals,
@@ -151,19 +173,14 @@ class SearchDealContainer extends React.Component<
         client: filterObject.client,
         title: filterObject.deal,
         createdBefore:
-          filterObject.end ? toUtc(filterObject.end) : null,
+          filterObject.end ? this.toUtc(filterObject.end) : null,
         createdAfter:
-          filterObject.start ? toUtc(filterObject.start) : null,
+          filterObject.start ? this.toUtc(filterObject.start) : null,
       },
     );
   };
 
   render() {
-    const { loadingDeals, loadingColumns } = this.props;
-    if (loadingDeals || loadingColumns) {
-      return <LoadingContainer />;
-    }
-
     return (
       <SearchDealPage {...this} />
     );

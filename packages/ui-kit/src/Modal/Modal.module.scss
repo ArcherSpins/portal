@@ -8,7 +8,7 @@
   border: 1px solid $border-color;
   margin: 0% auto;
   min-width: 20rem;
-  width: 30%;
+  width: 20%;
   border-radius: 0.25rem;
   padding: 1.625rem;
   opacity: 0;
@@ -19,12 +19,10 @@
 .modal-header {
   display: flex;
   justify-content: center;
-  margin-bottom: 2rem;
 }
 
 .modal-body {
   text-align: center;
-  margin-bottom: 2rem;
 }
 
 .modal-footer {
@@ -45,12 +43,24 @@
   right: 0px;
   width: 100%;
   outline: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 100%;
   z-index: -1;
+
+  .button_modal {
+    position: absolute;
+    width: 100%;
+    display: block;
+    height: 100%;
+    border: none;
+    background: transparent;
+  }
   @include default-transition(all);
 }
 
 .backdrop__visible {
-  z-index: 1;
+  z-index: 2000000;
   background: rgba($text-color, .3);
 }

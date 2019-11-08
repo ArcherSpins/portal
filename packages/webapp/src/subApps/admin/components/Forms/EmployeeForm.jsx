@@ -488,8 +488,9 @@ class EmployeeForm extends React.Component<
           </p>
         </FieldBlock>
 
-        <FieldBlock>
+        <FieldBlock className="flex-block dropdown-field-block col-6">
           <Dropdown
+            className="block"
             use="borderless"
             options={defaultData.lunchStart}
             onChange={(value) => {

@@ -3,8 +3,15 @@
 // @flow
 
 import React from 'react';
-import { SearchHeader, SearchItem, FilterBlock } from '../../components';
+import {
+  SearchHeader,
+  SearchItem,
+  FilterBlock,
+} from '../../components';
 import type { StatusType, ManagerType, DealType } from '../../types';
+import {
+  LoadingContainer,
+} from '../../containers';
 import './style.scss';
 
 type SearchDealPageProps = {
@@ -23,7 +30,9 @@ type SearchDealPageProps = {
     managers: Array<ManagerType>,
   },
   props: {
-    statuses: Array<StatusType>
+    statuses: Array<StatusType>,
+    loadingDeals: boolean,
+    loadingColumns: boolean,
   },
   toggleSearchShow: () => void,
   changeSearch: (string | mixed) => void,
@@ -46,10 +55,12 @@ const SearchDealPage = ({
   } = state;
 
   const typeProps: {
-    statuses: Array<StatusType>
+    statuses: Array<StatusType>,
+    loadingDeals: boolean,
+    loadingColumns: boolean
   } = props;
 
-  const { statuses } = typeProps;
+  const { statuses, loadingDeals, loadingColumns } = typeProps;
 
   return (
     <div className="search-deal-page fz-14">
@@ -76,19 +87,25 @@ const SearchDealPage = ({
             />
           ) : null
         }
-        <ul>
-          {
-            dataDeals.length > 0
-              ? dataDeals.map((item, i) => (
-                <SearchItem
-                  key={item.id || i}
-                  path={`/details/${item.title.replace(/\s/g, '_')}`}
-                  {...item}
-                />
-              ))
-              : <div>Not found!</div>
-          }
-        </ul>
+        {
+          loadingDeals || loadingColumns ? (
+            <LoadingContainer />
+          ) : (
+            <ul>
+              {
+                dataDeals.length > 0
+                  ? dataDeals.map((item, i) => (
+                    <SearchItem
+                      key={item.id || i}
+                      path={`/details/${item.title.replace(/\s/g, '_')}`}
+                      {...item}
+                    />
+                  ))
+                  : <div>Not found!</div>
+              }
+            </ul>
+          )
+        }
       </main>
     </div>
   );

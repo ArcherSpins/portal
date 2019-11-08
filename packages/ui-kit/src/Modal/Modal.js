@@ -4,18 +4,21 @@ import classNames from 'classnames';
 import styles from './Modal.module.scss';
 
 type Props = {
-    show?: boolean,
-    children: Node,
-    onRequestClose: () => void
+  show?: boolean,
+  children: Node,
+  onRequestClose: () => void,
+  className?: string
 };
 
 const Modal = ({
-  show, children, onRequestClose,
+  show, children, onRequestClose, className,
 }: Props) => (
-  <>
+  <div
+    className={classNames(styles.backdrop, { [styles.backdrop__visible]: show }, className)}
+  >
     <button
+      className={styles.button_modal}
       type="button"
-      className={classNames(styles.backdrop, { [styles.backdrop__visible]: show })}
       onClick={onRequestClose}
     >
       {' '}
@@ -25,13 +28,13 @@ const Modal = ({
     >
       {children}
     </div>
-  </>
-
+  </div>
 );
 
 
 Modal.defaultProps = {
   show: false,
+  className: '',
 };
 
 export default Modal;

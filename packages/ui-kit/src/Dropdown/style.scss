@@ -60,10 +60,6 @@
     .cbx__control--is-focused {
       border-color: $main-color;
     }
-
-    .error-text {
-      padding-left: 0.625rem;
-    }
   }
 
   &.dropdown_borderless {
@@ -83,10 +79,6 @@
       &:hover {
         border-color: $main-color;
       }
-    }
-
-    .error-text {
-      padding-left: 0.625rem;
     }
   }
 
@@ -110,6 +102,21 @@
 
     input:disabled .cbx__control {
       border-color: $disabled-color;
+    }
+  }
+
+  &.error-select {
+    .cbx__control {
+      border-style: solid;
+      border-color: $danger-400;
+
+      &:hover {
+        border-color: $danger-400;
+      }
+    }
+
+    label {
+      color: $danger-400;
     }
   }
 }
