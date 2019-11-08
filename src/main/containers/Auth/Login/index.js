@@ -110,6 +110,7 @@ class Login extends Component<Props> {
                     onClick={handleSubmit}
                     disabled={!isValid}
                     type="submit"
+                    data-test="auth__login-button"
                   >
                     Log In
                   </ButtonWithProgress>
