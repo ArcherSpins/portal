@@ -271,8 +271,7 @@ class EmployeeForm extends React.Component<
     return arr;
   }
 
-  onDateChange = (selectedDay: Date, modifiers: mixed, dayPickerInput: DayPickerInput) => {
-    const { name } = dayPickerInput.props;
+  onDateChange = (selectedDay: Date, modifiers: mixed, name: string) => {
     const { formData } = this.state;
     if (name) {
       this.setState({
