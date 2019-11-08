@@ -368,7 +368,7 @@ class EmployeeForm extends React.Component<
             name="birthday"
             error={errorBoundry.birthday}
             onDayChange={(value) => {
-              this.onDateChange(value, 'birthday');
+              this.onChange('birthday', value);
               this.toggleEdit(true);
             }}
           />
