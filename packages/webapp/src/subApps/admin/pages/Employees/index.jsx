@@ -4,6 +4,7 @@
 // @flow
 import React from 'react';
 import { TablePaginate } from '@sfxdx/ui-kit';
+import history from 'utils/history';
 import { EMPLOYEES_ROUTE } from '../../routes';
 import {
   LeftNavbar,
@@ -158,6 +159,7 @@ class EmployeesComponent extends React.Component<EmployeesProps, EmployeesState>
                           columns={columns}
                           activeIndex={activePaginate}
                           count={Math.ceil(count / PAGE_SIZE)}
+                          history={history}
                           manual
                         />
                       </div>

@@ -9,7 +9,6 @@ import React from 'react';
 import { compose } from 'redux';
 import { graphql } from 'react-apollo';
 import { format } from 'date-fns';
-// $FlowFixMe
 import {
   Dropdown, Combobox, Input, Datepicker, Toast, Button,
 } from '@sfxdx/ui-kit';

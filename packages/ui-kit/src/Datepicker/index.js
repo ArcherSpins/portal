@@ -1,15 +1,15 @@
 // @flow
 import React from 'react';
-import DayPickerInput from 'react-day-picker/DayPickerInput';
+import DayPickerInput from 'react-day-picker/lib/src/DayPickerInput';
 import { DateUtils } from 'react-day-picker';
 import { format as dateFnsFormat, parse as dateFnsParse } from 'date-fns';
 import classNames from 'classnames';
+import Input from '../Input/index';
+import styles from './Datepicker.module.scss';
+import overlayStyles from './Overlay.module.scss';
 // $FlowFixMe
 import 'react-day-picker/lib/style.css';
 
-import Input from '../Input';
-import styles from './Datepicker.module.scss';
-import overlayStyles from './Overlay.module.scss';
 
 const DEFAULT_FORMAT = 'd.L.y';
 
