@@ -5,7 +5,7 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
-} from 'ui-kit';
+} from '@sfxdx/ui-kit';
 
 import {
   Title,

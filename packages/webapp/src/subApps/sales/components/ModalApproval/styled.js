@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Button } from 'ui-kit';
+import { Button } from '@sfxdx/ui-kit';
 
 export const Title = styled.h4`
   font-family: Proxima Nova;
