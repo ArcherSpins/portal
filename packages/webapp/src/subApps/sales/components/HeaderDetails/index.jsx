@@ -3,11 +3,14 @@
 // @flow
 import React, { useEffect } from 'react';
 import { Button } from '@sfxdx/ui-kit';
+import createTestContext from 'utils/createTestContext';
 import arrow from '../../assets/icons/arrow-left.png';
 // import { Heading } from '../shared/styled';
 import { InputForTitle, Title } from './styled';
 import type { HeaderDetailsProps } from './type';
 import './style.scss';
+
+const createTestAttr = createTestContext('header');
 
 const HeaderDetails = ({
   title,
@@ -46,6 +49,7 @@ const HeaderDetails = ({
           onClick={goBack}
           className="fz-14"
           to="/crm"
+          data-test={createTestAttr('go-back-button')}
         >
           <img src={arrow} alt="arrow" />
         </button>
@@ -60,6 +64,7 @@ const HeaderDetails = ({
                   style={{ width: `${(titleText.length + 1) * 15}px` }}
                   required
                   className={errorsFormCreate.title.error && 'error-border'}
+                  data-test={createTestAttr('title-input')}
                 />
                 {
                   errorsFormCreate.title.error
@@ -77,6 +82,7 @@ const HeaderDetails = ({
                 <Title
                   onDoubleClick={() => toggleActiveTitle(true)}
                   title={title}
+                  data-test={createTestAttr('title-input')}
                   style={{
                     width: `${(title.length + 1) * 20}px`,
                     minWidth: '500px',
@@ -95,6 +101,7 @@ const HeaderDetails = ({
               type="button"
               onClick={clickDeleteButton}
               use="transparent"
+              data-test={createTestAttr('delete-button')}
             >
                 Delete deal
             </Button>

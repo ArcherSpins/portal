@@ -280,13 +280,13 @@ export const ContactBlock = ({
       func(false);
     }
   });
-
   return (
     <div className="mb-5 position-relative">
       <IconInput
         className={`input-icon_${item.id}`}
         onIconClick={toggleModal}
         classNameButton="modal-right-button"
+        data-test={`deal__channel-input-${item.id}`}
         {...inputProps}
       />
       {

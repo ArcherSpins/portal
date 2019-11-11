@@ -2,6 +2,8 @@
 import React from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { Button, LinkButton } from '@sfxdx/ui-kit';
+
+import createTestContext from 'utils/createTestContext';
 import getRoute from '../../helpers/getRoute';
 import { Header, Content } from './styled';
 // TODO: Fix this
@@ -15,6 +17,8 @@ import {
 import { LeftBlock } from './ComponentsPage';
 import type { CrmPageProps } from './type';
 import './style.scss';
+
+const createTestAttr = createTestContext('crm');
 
 const CRMPage = ({
   props,
@@ -65,6 +69,7 @@ const CRMPage = ({
             type="button"
             onClick={() => toggleShowSelfDeals(false)}
             className={`left-button ${!state.tabStatus ? 'active' : ''}`}
+            data-test={createTestAttr('my-deals-button')}
           >
             My Deals
           </Button>
@@ -72,12 +77,13 @@ const CRMPage = ({
             type="button"
             onClick={() => toggleShowSelfDeals(true)}
             className={`right-button ${state.tabStatus ? 'active' : ''}`}
+            data-test={createTestAttr('all-deals-button')}
           >
             All Deals
           </Button>
         </div>
         <div className="d-flex justify-content-end">
-          <LinkButton to={getRoute('/details')}>
+          <LinkButton data-test={createTestAttr('my-deals-button')} to={getRoute('/details')}>
             Add deal
           </LinkButton>
         </div>

@@ -66,7 +66,7 @@ const CalendarWrap = ({
     >
       <Wrap>
         {getAllMonthsOfGivenYear(currentYear || 2019).map((month) => (
-          <Monthly data={data} key={month} month={month} />
+          <Monthly data={data} key={month.toTimeString()} month={month} />
         ))}
       </Wrap>
     </Calendar>

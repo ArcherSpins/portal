@@ -3,10 +3,13 @@
 import React, { useState } from 'react';
 import autosize from 'autosize';
 import { Button } from '@sfxdx/ui-kit';
+import createTestContext from 'utils/createTestContext';
 import { Input } from './styled';
 // $FlowFixMe
 import fileIcon from '../Message/file.svg';
 import './style.scss';
+
+const createTestAttr = createTestContext('chat');
 
 type ChatFormProps = {
   change: (string) => void,
@@ -77,8 +80,9 @@ const ChatForm = ({
             onChange={(e) => change(e.target.value)}
             placeholder="Add comment to this deal"
             style={{ width: `${(value.length + 1) * 10}px` }}
+            data-test={createTestAttr('comment-input')}
           />
-          <button type="button">
+          <button type="button" data-test={createTestAttr('file-pin-button')}>
             <img src={fileIcon} alt="icon" />
           </button>
         </div>
@@ -87,6 +91,7 @@ const ChatForm = ({
           type="submit"
           className={`submit ${value === '' ? 'disabled' : ''}`}
           title={`${buttonDisabled === null || !buttonDisabled ? 'create a deal first' : 'submit'}`}
+          data-test={createTestAttr('send-button')}
         >
           Send
         </Button>

@@ -2,9 +2,12 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { Input, Button } from '@sfxdx/ui-kit';
+import createTestContext from 'utils/createTestContext';
 import { Title, LeftTitleBlock } from './styled';
 import getRoute from '../../helpers/getRoute';
 // import SearchInput from '../../components/shared/Input/SearchInput';
+
+const createTestAttr = createTestContext('deal');
 
 type LeftBlockProps = {
   submitSearch: (SyntheticEvent<any>) => void,
@@ -25,11 +28,13 @@ const LeftBlock = ({
         value={searchValue}
         onChange={onChange}
         placeholder="Search"
+        data-test={createTestAttr('search-input')}
       />
       <Button
         use="transparent"
         type="submit"
         className="search-button fz-16"
+        data-test={createTestAttr('search-button')}
       >
         Search
       </Button>

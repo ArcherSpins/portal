@@ -3,8 +3,11 @@
 import React, { useState } from 'react';
 import autosize from 'autosize';
 import { format } from 'date-fns';
+import createTestContext from 'utils/createTestContext';
 import { SkillsType } from '../../types';
 import './style.scss';
+
+const createTestAttr = createTestContext('message');
 
 /* eslint-disable no-useless-escape */
 const regex = /^((ftp|http|https):\/\/)?(www\.)?([A-Za-zА-Яа-я0-9]{1}[A-Za-zА-Яа-я0-9\-]*\.?)*\.{1}[A-Za-zА-Яа-я0-9-]{2,8}(\/([\w#!:.?+=&%@!\-\/])*)?/;
@@ -72,6 +75,7 @@ const Message = ({
             <p
               className="word-wrap"
               onDoubleClick={() => toggleActiveText(true)}
+              data-test={createTestAttr('content')}
             >
               {
                 content.split(' ').map((word) => (
@@ -94,6 +98,7 @@ const Message = ({
               ref={getInputRef}
               onChange={(e) => editText(e.target.value)}
               className="textareaContent custom-scrollbar"
+              data-test={createTestAttr('edit-input')}
               value={textMessage}
             />
           )}
@@ -104,6 +109,7 @@ const Message = ({
             <button
               type="button"
               onClick={() => toggleActiveText(true)}
+              data-test={createTestAttr('edit-button')}
             >
               <svg
                 className="icon"
@@ -125,6 +131,7 @@ const Message = ({
                 type="button"
                 className="button-toggle-edit"
                 onClick={() => toggleActiveText(false)}
+                data-test={createTestAttr('close-button')}
               >
                 close
               </button>
@@ -132,6 +139,7 @@ const Message = ({
                 type="button"
                 className="button-toggle-edit"
                 onClick={saveFunc}
+                data-test={createTestAttr('save-button')}
               >
                 save
               </button>
@@ -141,6 +149,7 @@ const Message = ({
             type="button"
             className="delete-button-message"
             onClick={() => deleteMessageCrm({ id })}
+            data-test={createTestAttr('delete-button')}
           >
             <svg
               className="icon"
