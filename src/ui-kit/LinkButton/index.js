@@ -17,9 +17,10 @@ type Props = {
 }
 
 const LinkButton = ({
-  children, size, use, to, className,
+  children, size, use, to, className, ...restProps
 }: Props) => (
   <Link
+    {...restProps}
     to={to}
     className={classNames(
       styles.link,

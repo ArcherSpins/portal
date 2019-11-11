@@ -117,6 +117,7 @@ const DetailsList = ({
               error={errorsFormCreate.client.error}
               name="client"
               placeholder="Client name"
+              data-test="deal__client-name-input"
             />
           </FieldBlock>
           <FieldBlock className="field">
@@ -131,6 +132,7 @@ const DetailsList = ({
                 label: data.stage.title,
               }}
               placeholder="Status"
+              dataTest="deal__deal-status-select"
               error={errorsFormCreate.status.error}
             />
           </FieldBlock>
@@ -146,6 +148,7 @@ const DetailsList = ({
                 label: data.manager.name,
               }}
               placeholder="Manager name"
+              dataTest="deal__sales-select"
             />
           </FieldBlock>
           <FieldBlock className="field">
@@ -156,6 +159,7 @@ const DetailsList = ({
                 type="button"
                 onClick={newContact}
                 className="add-button"
+                data-test="deal__add-button"
               >
                 +
               </button>
@@ -195,6 +199,7 @@ const DetailsList = ({
                 label: data.channel.title,
               }}
               placeholder="Channel"
+              dataTest="deal__channel-select"
             />
           </FieldBlock>
           <FieldBlock className="field">
@@ -219,6 +224,7 @@ const DetailsList = ({
                     label="Job Posting URL"
                     required
                     placeholder="Job Posting URL"
+                    data-test="deal__job-url-input"
                   />
                 </div>
                 <div className="field">
@@ -232,6 +238,7 @@ const DetailsList = ({
                     label="Proposal URL"
                     placeholder="Proposal URL"
                     required
+                    data-test="deal__proposal-url-input"
                   />
                 </div>
               </div>
@@ -250,6 +257,7 @@ const DetailsList = ({
                     label="Messages"
                     placeholder="Messages URL"
                     required
+                    data-test="deal__messages-url-input"
                   />
                 </div>
                 <div className="field">
@@ -263,6 +271,7 @@ const DetailsList = ({
                     label="Sales manager"
                     placeholder="Sales URL"
                     required
+                    data-test="deal__sales-url-input"
                   />
                 </div>
               </div>
@@ -289,20 +298,19 @@ const DetailsList = ({
                 >
                   {
                     activeUser.id ? (
-                      <button
-                        type="button"
+                      <Button
                         style={{ width: '50%' }}
-                        className="cancel-button"
                         onClick={closeEdit}
+                        data-test="deal__cancel-button"
                       >
                         Cancel
-                      </button>
+                      </Button>
                     ) : (
                       <LinkButton
                         to="/sales"
                         use="transparent"
                         style={{ width: '50%' }}
-                        className="cancel-button"
+                        data-test="deal__cancel-button"
                       >
                         Cancel
                       </LinkButton>
@@ -314,6 +322,7 @@ const DetailsList = ({
                       width: '50%',
                     }}
                     onClick={onSubmitEdit}
+                    data-test="deal__save-button"
                   >
                     Save
                   </Button>
