@@ -27,10 +27,11 @@ const LeftBlock = ({
         placeholder="Search"
       />
       <Button
+        use="transparent"
         type="submit"
         className="search-button fz-16"
       >
-        Search page
+        Search
       </Button>
     </form>
     {

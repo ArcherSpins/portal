@@ -18,10 +18,8 @@ html, body, #root {
 }
 
 .search-button {
-    background-color: #61B16F;
-    color: white;
-    border: 1px solid #61A06C;
-    padding: 4px 9px;
+    border-color: #61B16F;
+    padding: 4px 35px;
     font-size: 1rem;
     font-weight: normal;
     border-radius: 0.25rem;
@@ -40,17 +38,17 @@ html, body, #root {
 }
 
 .tab-buttons {
-    display: flex;  
+    display: flex;
+    align-items: center;
 
-    button {
-        padding-left: 15px;
-        padding-right: 15px;
+    button {    
+        height: 30px;
+        padding: 0 12px;
         border: none;
         background-color: #E9EEF2;
         border: 1px solid #e0dede;
         color: #333333;
         cursor: pointer;
-        height: 36px;
     }
 
     .left-button {
