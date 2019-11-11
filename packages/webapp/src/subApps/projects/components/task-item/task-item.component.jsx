@@ -4,12 +4,14 @@ import { withRouter } from 'react-router-dom';
 import type { RouterHistory, Match } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
+import createTestContext from 'utils/createTestContext';
 import './task-item.styles.scss';
 
 import { logEditHours, logEditMinutes } from '../../helpers/sumTime';
 
 import type { Task } from '../../redux/task/task.flow-types';
 
+const createTestAttr = createTestContext('task-item');
 // import { selectAllLogsByTaskIdProps } from "../../redux/log/log.selectors";
 
 type Props = {
@@ -49,6 +51,7 @@ const TaskItem = (props: Props) => {
             className="name"
             type="button"
             onClick={() => history.push(`${match.url || ''}/task${number}`)}
+            data-test={createTestAttr('title')}
           >
             {title}
           </button>
@@ -64,6 +67,7 @@ const TaskItem = (props: Props) => {
             className="options"
             type="button"
             onClick={() => history.push(`${props.match.url || ''}/task${number}`)}
+            data-test={createTestAttr('details-button')}
           >
             <svg
               width="15"
@@ -82,6 +86,7 @@ const TaskItem = (props: Props) => {
             className="trash"
             type="button"
             onClick={() => history.push(`${props.match.url || ''}/task${number}/logs`)}
+            data-test={createTestAttr('logs-button')}
           >
             <svg
               width="15"
