@@ -6,6 +6,7 @@ import {
   ModalBody,
   ModalFooter,
 } from '@sfxdx/ui-kit';
+import createTestContext from 'utils/createTestContext';
 
 import {
   Title,
@@ -13,6 +14,8 @@ import {
   CancelButton,
   SaveButton,
 } from './styled';
+
+const createTestAttr = createTestContext('delete-deal');
 
 type ModalProps = {
   onCancel: () => void,
@@ -33,8 +36,8 @@ export default ({ onCancel, onDelete, isOpen }: ModalProps): React.Node => (
       <Message>Are you sure you want to delete?</Message>
     </ModalBody>
     <ModalFooter>
-      <CancelButton onClick={onCancel}>Cancel</CancelButton>
-      <SaveButton onClick={onDelete}>Delete</SaveButton>
+      <CancelButton data-test={createTestAttr('cancel-button')} onClick={onCancel}>Cancel</CancelButton>
+      <SaveButton data-test={createTestAttr('delete-button')} onClick={onDelete}>Delete</SaveButton>
     </ModalFooter>
   </Modal>
 );

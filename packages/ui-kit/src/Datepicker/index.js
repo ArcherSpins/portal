@@ -25,6 +25,9 @@ type Props = {
   style?: {
     [string]: mixed
   },
+  containerProps?: {
+    [string]: any
+  },
   error?: boolean
 };
 
@@ -89,11 +92,13 @@ const Datepicker = ({
   label,
   style,
   error,
+  containerProps,
   ...props
 }: Props) => {
   const inputRef = React.createRef();
   return (
     <div
+      {...containerProps}
       style={style}
       className={classNames(styles.datepicker, { [styles.error_picker]: error }, className)}
     >
@@ -141,6 +146,7 @@ Datepicker.defaultProps = {
   className: '',
   style: {},
   error: false,
+  containerProps: {},
 };
 
 export default Datepicker;

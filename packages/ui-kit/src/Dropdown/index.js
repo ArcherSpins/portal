@@ -21,6 +21,7 @@ type Props = {
   error?: string,
   value?: Option,
   name?: string,
+  dataTest?: string,
   onChange: (option: Option, action: Action) => void,
 }
 
@@ -42,15 +43,18 @@ const Dropdown = ({
   use = 'default',
   className,
   error,
+  dataTest,
   ...restProps
 }: Props) => (
-  <div className={classNames(
-    modules.wrapper, `cbx__wrap dropdown dropdown_${use || ''}`,
-    className,
-    {
-      'error-select': !!error,
-    },
-  )}
+  <div
+    data-test={dataTest}
+    className={classNames(
+      modules.wrapper, `cbx__wrap dropdown dropdown_${use || ''}`,
+      className,
+      {
+        'error-select': !!error,
+      },
+    )}
   >
     <label className={classNames(styles[use], 'cbx__label')} htmlFor="select">{label}</label>
     <Select
@@ -79,6 +83,7 @@ Dropdown.defaultProps = {
   value: '',
   className: '',
   error: null,
+  dataTest: '',
 };
 
 

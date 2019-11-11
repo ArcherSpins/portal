@@ -10,9 +10,12 @@ import {
   Dropdown,
   Button,
 } from '@sfxdx/ui-kit';
+import createTestContext from 'utils/createTestContext';
 // import { Picker } from '..';
 import type { FilterBlockProps } from './type';
 import './style.scss';
+
+const createTestAttr = createTestContext('filter');
 
 const customStyles = {
   control: (base) => ({
@@ -71,6 +74,7 @@ const FilterBlock = ({
           value={filterObject.deal}
           className="big"
           placeholder="Not specified"
+          data-test={createTestAttr('deal-title-input')}
         />
       </div>
       <div className="field-block">
@@ -82,6 +86,7 @@ const FilterBlock = ({
           }}
           value={filterObject.client}
           placeholder="Not specified"
+          data-test={createTestAttr('client-name-input')}
         />
       </div>
       <div className="date-block field-block">
@@ -93,6 +98,9 @@ const FilterBlock = ({
               label="Date"
               value={date}
               onDayChange={(dateRes) => changeFilter('start', dateRes)}
+              containerProps={{
+                'data-test': createTestAttr('datepicker-start'),
+              }}
             />
           </div>
           <span className="tag"> - </span>
@@ -101,6 +109,9 @@ const FilterBlock = ({
               value={endDate}
               onDayChange={(dateRes) => {
                 changeFilter('end', dateRes);
+              }}
+              containerProps={{
+                'data-test': createTestAttr('datepicker-end'),
               }}
             />
           </div>
@@ -119,6 +130,7 @@ const FilterBlock = ({
             ].map((item) => ({ ...item, label: item.title, value: item.title }))}
             id="status"
             label="Status"
+            dataTest={createTestAttr('status-select')}
           />
         </div>
         <div className="field-block">
@@ -130,6 +142,7 @@ const FilterBlock = ({
             options={managers.map((item) => ({ ...item, label: item.name, value: item.name }))}
             label="Manager"
             id="manager"
+            dataTest={createTestAttr('manager-select')}
           />
         </div>
       </div>
@@ -138,6 +151,7 @@ const FilterBlock = ({
           type="button"
           onClick={submitFilter}
           className="filter-button"
+          data-test={createTestAttr('search-button')}
         >
           Search
         </Button>
