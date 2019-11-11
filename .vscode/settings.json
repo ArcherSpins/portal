@@ -1,3 +1,8 @@
 {
+  "eslint.workingDirectories": [
+    {
+      // "directory": "/packages/webapp", "changeProcessCWD": true
+    }
+  ],
   "javascript.validate.enable": false
 }

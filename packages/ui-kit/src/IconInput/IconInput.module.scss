@@ -1,0 +1,33 @@
+@import "../variables";
+@import '../mixins.scss';
+
+.input-icon {
+  .wrap {
+    position: relative;
+    button {
+      @include default-transition(background);
+
+      cursor: pointer;
+      position: absolute;
+      right: .5rem;
+      top: .5rem;
+      color: gray;
+
+      &:hover {
+        background: rgba($grey, .5);
+      }
+    }
+  }
+  
+  &.label_sm {
+    .wrap {
+      font-size: 0.875rem;
+      padding: 0.3rem 0.35rem;
+
+      button {
+        top: 2.2rem;
+      }
+    }
+  }
+}
+

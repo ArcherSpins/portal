@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The Datepicker component renders correctly 1`] = `
+<div
+  className="datepicker"
+  style={Object {}}
+>
+  <label>
+    
+  </label>
+  <div
+    className="container"
+  >
+    <div
+      className="input"
+    >
+      <div
+        className="default md"
+      >
+        <label>
+          
+        </label>
+        <div
+          className="wrap"
+        >
+          
+          <input
+            disabled={false}
+            onBlur={[Function]}
+            onChange={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+            placeholder="DD.MM.YYYY"
+            type="text"
+            value=""
+          />
+        </div>
+      </div>
+      <button
+        className="icon__wrap"
+        onBlur={[Function]}
+        onClick={[Function]}
+        type="button"
+      >
+        <i
+          className="icon-calendar"
+        />
+      </button>
+    </div>
+  </div>
+</div>
+`;
