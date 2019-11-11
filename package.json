@@ -7,7 +7,7 @@
   "scripts": {
     "build-ui": "cd packages/ui-kit && yarn build && lerna bootstrap && cd ../../",
     "start": "cd packages/webapp && yarn start",
-    "build": "npx lerna init && npx lerna bootstrap && cd packages/webapp && yarn build && rm -rf ../../build && mv build ../../",
+    "build": "yarb build-ui && npx lerna bootstrap && cd packages/webapp && yarn build && rm -rf ../../build && mv build ../../",
     "clean": "rm -rf node_modules/ && lerna clean"
   },
   "workspaces": [
