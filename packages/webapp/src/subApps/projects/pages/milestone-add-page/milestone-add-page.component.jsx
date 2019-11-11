@@ -11,6 +11,7 @@ import {
   Input, TextArea, Button, H1, Participants,
   Dropdown,
 } from '@sfxdx/ui-kit';
+import createTestContext from 'utils/createTestContext';
 // $FlowFixMe
 import type { Option, Action } from '@sfxdx/ui-kit/src/Combobox';
 // $FlowFixMe
@@ -28,6 +29,8 @@ import type { Project } from '../../redux/project/project.flow-types';
 import type { Error } from '../../redux/error/error.flow-types';
 
 import Header from '../../components/header';
+
+const createTestAttr = createTestContext('milestone-add');
 
 type Employee = {
   id: string,
@@ -214,6 +217,7 @@ class MilestoneAddPage extends React.Component<Props, State> {
               className="estimation-input"
               onChange={this.handleSpentChange}
               value={spent}
+              data-test={createTestAttr('estimation-input')}
             />
           </div>
         </div>
@@ -227,6 +231,7 @@ class MilestoneAddPage extends React.Component<Props, State> {
                 labelClassName="cpp__textarea"
                 className="project__input"
                 onChange={this.handleChange}
+                data-test={createTestAttr('description-input')}
               />
             </div>
             <div style={{ width: '45%' }}>
@@ -239,6 +244,7 @@ class MilestoneAddPage extends React.Component<Props, State> {
                 className="project__input"
                 maxLength="100"
                 required
+                data-test={createTestAttr('title-input')}
               />
               <Participants
                 chips={participants}
@@ -252,6 +258,7 @@ class MilestoneAddPage extends React.Component<Props, State> {
                   required
                   placeholder="Select"
                   className="mb05"
+                  dataTest={createTestAttr('participants-select')}
                 />
               </Participants>
               {errors.length >= 1 && (
@@ -273,6 +280,7 @@ class MilestoneAddPage extends React.Component<Props, State> {
           <div className="cpp__buttons-group">
             <Button
               type="submit"
+              data-test={createTestAttr('save-button')}
             >
                 Save
             </Button>
@@ -280,6 +288,7 @@ class MilestoneAddPage extends React.Component<Props, State> {
               use="transparent"
               type="button"
               onClick={() => history.goBack()}
+              data-test={createTestAttr('cancel-button')}
             >
               Cancel
             </Button>

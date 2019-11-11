@@ -18,7 +18,7 @@ const BackButton = ({ location, history }: Props) => {
   }
 
   return (
-    <button type="button" className="back-button" onClick={() => history.goBack()}>
+    <button data-test="nav__back-button" type="button" className="back-button" onClick={() => history.goBack()}>
       <i className="icon-left-open" />
     </button>
   );

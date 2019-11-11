@@ -6,6 +6,7 @@ import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import type { RouterHistory } from 'react-router-dom';
 import uniqBy from 'lodash.uniqby';
+import createTestContext from 'utils/createTestContext';
 import {
   Input, TextArea, Button, Radio, H1, Combobox, Participants,
 } from '@sfxdx/ui-kit';
@@ -34,6 +35,8 @@ import type {
 import { getEmployees } from '../../graphql/queries/employess.queries';
 
 import './project-create-page.styles.scss';
+
+const createTestAttr = createTestContext('project-create');
 
 type Employee = {
   id: string,
@@ -297,6 +300,7 @@ class CreateProjectPage extends Component<Props, State> {
                 labelClassName="cpp__textarea"
                 className="project__input"
                 onChange={this.handleChange}
+                data-test={createTestAttr('description-input')}
               />
             </div>
             <div style={{ marginRight: '5%', width: '40%' }}>
@@ -311,6 +315,7 @@ class CreateProjectPage extends Component<Props, State> {
                 required
                 maxLength="100"
                 pattern="(?=.*[\p{L}]).{2,}"
+                data-test={createTestAttr('title-input')}
               />
               <div className="url-wrapper">
                 <Input
@@ -323,6 +328,7 @@ class CreateProjectPage extends Component<Props, State> {
                   onChange={this.handleUrlChange}
                   required
                   maxLength="66"
+                  data-test={createTestAttr('project-url-input')}
                 />
               </div>
               <p className="text-gray margin-bottom-md" style={{ width: '100%' }}>
@@ -348,6 +354,7 @@ class CreateProjectPage extends Component<Props, State> {
                         onChange={this.handleChange}
                         htmlFor={pr.title}
                         spanText={pr.title}
+                        data-test={createTestAttr('project-type')}
                       />
                     ))}
                   </div>
@@ -370,6 +377,7 @@ class CreateProjectPage extends Component<Props, State> {
                         onChange={this.handleChange}
                         htmlFor={model.title}
                         spanText={model.title}
+                        data-test={createTestAttr('engagement-type')}
                       />
                     ))}
                   </div>
@@ -384,6 +392,7 @@ class CreateProjectPage extends Component<Props, State> {
                 label="Project Manager"
                 use="grey"
                 className="mb1"
+                data-test={createTestAttr('project-manager-select')}
               />
               <Participants
                 chips={participants}
@@ -397,6 +406,7 @@ class CreateProjectPage extends Component<Props, State> {
                   label="Participants"
                   use="grey"
                   className="mb05"
+                  data-test={createTestAttr('participants-select')}
                 />
               </Participants>
               <Participants
@@ -411,6 +421,7 @@ class CreateProjectPage extends Component<Props, State> {
                   label="Watchers"
                   className="mb1"
                   use="grey"
+                  data-test={createTestAttr('watchers-select')}
                 />
               </Participants>
               {Array.isArray(errors) && errors.length >= 1 && (
@@ -432,6 +443,7 @@ class CreateProjectPage extends Component<Props, State> {
           <div className="cpp__buttons-group">
             <Button
               type="submit"
+              data-test={createTestAttr('create-button')}
             >
                 Create
             </Button>
@@ -439,8 +451,9 @@ class CreateProjectPage extends Component<Props, State> {
               type="button"
               use="transparent"
               onClick={() => history.goBack()}
+              data-test={createTestAttr('cancel-button')}
             >
-                Cancel
+              Cancel
             </Button>
           </div>
         </form>

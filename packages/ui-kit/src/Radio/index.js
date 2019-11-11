@@ -23,8 +23,9 @@ const RadioButton = ({
   htmlFor,
   spanText,
   checked,
+  ...restProps
 }: Props) => (
-  <div className="radio-group">
+  <div {...restProps} className="radio-group">
     <input
       defaultChecked={checked}
       type={type}

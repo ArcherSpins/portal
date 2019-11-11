@@ -286,7 +286,7 @@ export const ContactBlock = ({
         className={`input-icon_${item.id}`}
         onIconClick={toggleModal}
         classNameButton="modal-right-button"
-        data-test={`deal__channel-input-${item.id}`}
+        data-test={`deal__channel-input-${index}`}
         {...inputProps}
       />
       {

@@ -8,6 +8,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import type { RouterHistory } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
+import createTestContext from 'utils/createTestContext';
 import {
   Input, Button, TextArea, Datepicker, H1,
 } from '@sfxdx/ui-kit';
@@ -32,6 +33,8 @@ import type { Project } from '../../redux/project/project.flow-types';
 import type { Milestone } from '../../redux/milestone/milestone.flow-types';
 import type { Error } from '../../redux/error/error.flow-types';
 import type { Log, LogCreation } from '../../redux/log/log.flow-types';
+
+const createTestAttr = createTestContext('edit-log');
 
 type State = {
   logId: string,
@@ -292,6 +295,7 @@ class LogEditPage extends React.Component<Props, State> {
                 label="Hours"
                 onChange={this.handleHoursChange}
                 value={hours}
+                data-test={createTestAttr('hours-input')}
               />
             </div>
             <div className="minutes-wrapper mr1">
@@ -299,6 +303,7 @@ class LogEditPage extends React.Component<Props, State> {
                 label="Minutes"
                 onChange={this.handleMinutesChange}
                 value={minutes}
+                data-test={createTestAttr('minutes-input')}
               />
             </div>
             <span className="time-note">{this.showAbleToLog()}</span>
@@ -309,6 +314,9 @@ class LogEditPage extends React.Component<Props, State> {
               label="Date"
               onChange={this.handleDateChange}
               value={date}
+              containerProps={{
+                'data-test': createTestAttr('datepicker'),
+              }}
               disabledDays={{
                 before: now,
                 after: addYears(now, 2),
@@ -321,6 +329,7 @@ class LogEditPage extends React.Component<Props, State> {
             value={comment}
             className="mb1"
             onChange={this.handleChange}
+            data-test={createTestAttr('comment-input')}
           />
           {errors.length >= 1 && (
             <div
@@ -336,7 +345,7 @@ class LogEditPage extends React.Component<Props, State> {
 .
             </div>
           )}
-          <Button type="submit">
+          <Button data-test={createTestAttr('save-button')} type="submit">
             Save
           </Button>
         </form>

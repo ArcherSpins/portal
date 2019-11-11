@@ -13,6 +13,7 @@ import Header from 'subApps/projects/components/header';
 import {
   Input, Button, TextArea, Datepicker, H1,
 } from '@sfxdx/ui-kit';
+import createTestContext from 'utils/createTestContext';
 import { addYears } from 'date-fns';
 
 import type { RouterHistory } from 'react-router-dom';
@@ -37,6 +38,7 @@ import type { Log, LogCreation } from '../../redux/log/log.flow-types';
 import 'react-datepicker/dist/react-datepicker.css';
 import './log-create-page.styles.scss';
 
+const createTestAttr = createTestContext('create-log');
 
 type State = {
   date: Date,
@@ -289,6 +291,7 @@ class LogCreate extends React.Component<Props, State> {
                 label="Hours"
                 onChange={this.handleHoursChange}
                 value={hours}
+                data-test={createTestAttr('hours-input')}
               />
             </div>
             <div className="minutes-wrapper mr1">
@@ -296,6 +299,7 @@ class LogCreate extends React.Component<Props, State> {
                 label="Minutes"
                 onChange={this.handleMinutesChange}
                 value={minutes}
+                data-test={createTestAttr('minutes-input')}
               />
             </div>
             <span className="time-note">{this.showAbleToLog()}</span>
@@ -306,6 +310,9 @@ class LogCreate extends React.Component<Props, State> {
               label="Date"
               onDayChange={this.handleDateChange}
               value={date}
+              containerProps={{
+                'data-test': createTestAttr('datepicker'),
+              }}
               disabledDays={{
                 before: now,
                 after: addYears(now, 2),
@@ -318,6 +325,7 @@ class LogCreate extends React.Component<Props, State> {
             placeholder="Please describe the work you have done"
             className="mb1"
             value={comment}
+            data-test={createTestAttr('comment-input')}
             onChange={this.handleChange}
           />
           {errors.length >= 1 && (
@@ -334,7 +342,10 @@ class LogCreate extends React.Component<Props, State> {
 .
             </div>
           )}
-          <Button type="submit">
+          <Button
+            type="submit"
+            data-test={createTestAttr('log-button')}
+          >
             Log It
           </Button>
         </form>

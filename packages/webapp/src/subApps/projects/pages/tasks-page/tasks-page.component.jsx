@@ -8,6 +8,7 @@ import './tasks-page.styles.scss';
 
 import { H1, Button } from '@sfxdx/ui-kit';
 import history from 'utils/history';
+import createTestContext from 'utils/createTestContext';
 import { getTasks } from '../../redux/task/task.actions';
 
 import { selectMilestoneByParams } from '../../redux/milestone/milestone.selectors';
@@ -20,6 +21,7 @@ import type { Project } from '../../redux/project/project.flow-types';
 import PaginationComponent from '../../components/pagination/pagination.component';
 import TaskItem from '../../components/task-item/task-item.component';
 
+const createTestAttr = createTestContext('tasks');
 
 type State = {
   openDescription: boolean,
@@ -86,6 +88,7 @@ class TasksPage extends React.Component<Props, State> {
                   className={`${
                     !openDescription ? 'active' : ''
                   } tasks__subheader-sort`}
+                  data-test={createTestAttr('detailed-view-off')}
                   onClick={() => this.setState({ openDescription: false })}
                 >
                   <svg
@@ -106,6 +109,7 @@ class TasksPage extends React.Component<Props, State> {
                   className={`${
                     openDescription ? 'active' : ''
                   } tasks__subheader-sort`}
+                  data-test={createTestAttr('detailed-view-on')}
                   onClick={() => this.setState({ openDescription: true })}
                 >
                   <svg
@@ -128,6 +132,7 @@ class TasksPage extends React.Component<Props, State> {
                 use="transparent"
                 size="sm"
                 onClick={this.onAddTaskClick}
+                data-test={createTestAttr('add-button')}
               >
                 Add Task
               </Button>

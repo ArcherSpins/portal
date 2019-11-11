@@ -31,6 +31,7 @@ class ProjectItem extends React.Component {
       <div
         className="project__item"
         onClick={() => history.push(`${ROOT}/${getUrlFromProject(url)}`)}
+        data-test="projects__project-item"
       >
         <div className="project__item-left">
           <h2 className="project__item-header">

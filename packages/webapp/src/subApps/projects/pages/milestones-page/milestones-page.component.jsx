@@ -8,6 +8,7 @@ import type { Match } from 'react-router-dom';
 import Header from 'subApps/projects/components/header';
 import { H1, Button } from '@sfxdx/ui-kit';
 import history from 'utils/history';
+import createTestContext from 'utils/createTestContext';
 import { selectProjectsMolestones } from '../../redux/milestone/milestone.selectors';
 import { selectProjectItem } from '../../redux/project/project.selectors';
 import { getAllMilestones } from '../../redux/milestone/milestone.actions';
@@ -32,6 +33,7 @@ type Props = {
   getAllMilestones: (id: string) => Array<Milestone>
 };
 
+const createTestAttr = createTestContext('milestones');
 class MilestonePage extends React.Component<Props, State> {
   constructor() {
     super();
@@ -82,6 +84,7 @@ class MilestonePage extends React.Component<Props, State> {
                     !openDescription ? 'active' : ''
                   } milestones__subheader-sort`}
                   onClick={() => this.setState({ openDescription: false })}
+                  data-test={createTestAttr('detailed-view-off')}
                 >
                   <svg
                     width="12"
@@ -101,6 +104,7 @@ class MilestonePage extends React.Component<Props, State> {
                   className={`${
                     openDescription ? 'active' : ''
                   } milestones__subheader-sort`}
+                  data-test={createTestAttr('detailed-view-on')}
                   onClick={() => this.setState({ openDescription: true })}
                 >
                   <svg
@@ -122,6 +126,7 @@ class MilestonePage extends React.Component<Props, State> {
               use="transparent"
               onClick={this.onAddMilestone}
               size="sm"
+              data-test={createTestAttr('add-button')}
             >
               Add Milestone
             </Button>

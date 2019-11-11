@@ -10,6 +10,7 @@ import {
   Input, Button, TextArea, H1, Participants,
   Dropdown,
 } from '@sfxdx/ui-kit';
+import createTestContext from 'utils/createTestContext';
 import Header from 'subApps/projects/components/header';
 // $FlowFixMe
 import type { Option, Action } from '@sfxdx/ui-kit/src/Combobox';
@@ -37,6 +38,8 @@ import type { Project } from '../../redux/project/project.flow-types';
 import Modal from '../../components/modal/modal.component';
 
 import './milestone-details-page.styles.scss';
+
+const createTestAttr = createTestContext('milestone-details');
 
 type Employee = {
   id: string,
@@ -271,6 +274,7 @@ class MilestoneDetailsPage extends React.Component<Props, State> {
             use="danger"
             size="sm"
             onClick={this.openModalHandler}
+            data-test={createTestAttr('delete-button')}
           >
             Delete Milestone
           </Button>
@@ -280,6 +284,7 @@ class MilestoneDetailsPage extends React.Component<Props, State> {
             type="button"
             size="sm"
             onClick={() => history.push(`${match.url || ''}/tasks`)}
+            data-test={createTestAttr('tasks-button')}
           >
             Tasks
           </Button>
@@ -296,6 +301,7 @@ class MilestoneDetailsPage extends React.Component<Props, State> {
               size="sm"
               onChange={this.handleSpentChange}
               value={estimatedTime}
+              data-test={createTestAttr('estimation-input')}
             />
           </div>
         </div>
@@ -307,6 +313,7 @@ class MilestoneDetailsPage extends React.Component<Props, State> {
                 value={description}
                 name="description"
                 onChange={this.handleChange}
+                data-test={createTestAttr('description-input')}
               />
             </div>
             <div style={{ width: '45%' }}>
@@ -319,6 +326,7 @@ class MilestoneDetailsPage extends React.Component<Props, State> {
                 maxLength="100"
                 onChange={this.handleChange}
                 required
+                data-test={createTestAttr('title-input')}
               />
               <Participants
                 chips={participants}
@@ -332,6 +340,7 @@ class MilestoneDetailsPage extends React.Component<Props, State> {
                   required
                   placeholder="Select"
                   className="mb05"
+                  dataTest={createTestAttr('participants-select')}
                 />
               </Participants>
               {errors.length >= 1 && (
@@ -353,6 +362,7 @@ class MilestoneDetailsPage extends React.Component<Props, State> {
           <div className="cpp__buttons-group">
             <Button
               type="submit"
+              data-test={createTestAttr('save-button')}
             >
               Save
             </Button>

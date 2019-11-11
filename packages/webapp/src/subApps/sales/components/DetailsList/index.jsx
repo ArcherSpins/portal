@@ -167,7 +167,7 @@ const DetailsList = ({
               </button>
             </div>
             {
-              contacts.map((item) => (
+              contacts.map((item, i) => (
                 <div key={item.id} className="contact-container" style={{ marginBottom: 6 }}>
                   <ContactBlock
                     className="pl-0"
@@ -176,6 +176,7 @@ const DetailsList = ({
                     icon={<i className="icon-ellipsis" />}
                     value={item.value}
                     label="Contact"
+                    index={i}
                     // error={errorsFormCreate.client.error}
                     name="contact"
                     placeholder="Contact"

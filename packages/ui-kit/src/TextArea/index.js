@@ -34,10 +34,12 @@ const TextArea = ({
   label,
   disabled,
   labelClassName,
+  ...restProps
 }: Props) => (
   <label htmlFor={name} className={classNames(styles.label, labelClassName)}>
     <span>{label}</span>
     <textarea
+      {...restProps}
       style={style}
       className={classNames(styles.textarea, className)}
       placeholder={placeholder}

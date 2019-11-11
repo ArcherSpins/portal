@@ -14,21 +14,24 @@ type Props = {
 const PaginationComponent = ({
   activePage, totalItemsCount, itemsCountPerPage, onChange,
 }: Props) => (
-  <Pagination
-    prevPageText="Prev"
-    nextPageText="Next"
-    lastPageText="Last"
-    firstPageText="First"
-    hideFirstLastPages
-    innerClass="pagination"
-    itemClass="page-number"
-    linkClass="link"
-    activeClass="active-page"
-    activePage={activePage}
-    totalItemsCount={totalItemsCount}
-    itemsCountPerPage={itemsCountPerPage}
-    onChange={onChange}
-  />
+  <div data-test="projects__pagination">
+    <Pagination
+      prevPageText="Prev"
+      data-test="nav__pagination"
+      nextPageText="Next"
+      lastPageText="Last"
+      firstPageText="First"
+      hideFirstLastPages
+      innerClass="pagination"
+      itemClass="page-number"
+      linkClass="link"
+      activeClass="active-page"
+      activePage={activePage}
+      totalItemsCount={totalItemsCount}
+      itemsCountPerPage={itemsCountPerPage}
+      onChange={onChange}
+    />
+  </div>
 );
 
 export default PaginationComponent;

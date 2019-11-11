@@ -20,6 +20,7 @@ import Header from 'subApps/projects/components/header';
 import { ROOT } from 'subApps/projects/routes';
 // $FlowFixMe
 import type { Option, Action } from '@sfxdx/ui-kit/src/Combobox';
+import createTestContext from 'utils/createTestContext';
 import { editProject, getProjectTypes } from '../../redux/project/project.actions';
 import {
   selectProjectItem,
@@ -104,6 +105,8 @@ const initialState = {
   spentTime: 0,
   errors: [],
 };
+
+const createTestAttr = createTestContext('project-item');
 
 class ProjectDetailPage extends Component<Props, State> {
   constructor(props: Props) {
@@ -328,6 +331,7 @@ class ProjectDetailPage extends Component<Props, State> {
           <Button
             use="transparent"
             onClick={() => this.props.history.push(`${ROOT}/${url}/milestones`)}
+            data-test={createTestAttr('milestones-button')}
           >
             Milestones
           </Button>
@@ -354,6 +358,7 @@ h
                 value={description}
                 name="description"
                 onChange={this.handleChange}
+                data-test={createTestAttr('description-input')}
               />
             </div>
             <div style={{ marginRight: '5%', width: '40%' }}>
@@ -367,6 +372,7 @@ h
                 required
                 pattern="(?=.*[\p{L}]).{2,}"
                 maxLength="100"
+                data-test={createTestAttr('title-input')}
               />
               <Input
                 name="url"
@@ -378,6 +384,7 @@ h
                 className="project__input"
                 required
                 maxLength="66"
+                data-test={createTestAttr('project-url-input')}
               />
               <p className="text-gray margin-bottom-md" style={{ width: '100%' }}>
               URL should be 1–100 characters length. Only lower case letters
@@ -402,6 +409,7 @@ h
                         onChange={this.handleChange}
                         htmlFor={pr.title}
                         spanText={pr.title}
+                        data-test={createTestAttr('project-type-input')}
                       />
                     ))}
                   </div>
@@ -424,6 +432,7 @@ h
                         onChange={this.handleChange}
                         htmlFor={model.title}
                         spanText={model.title}
+                        data-test={createTestAttr('engagement-type-input')}
                       />
                     ))}
                   </div>
@@ -438,6 +447,7 @@ h
                 label="Project Manager"
                 className="mb1"
                 use="grey"
+                dataTest={createTestAttr('project-manager-select')}
               />
 
               <Participants
@@ -452,6 +462,7 @@ h
                   label="Participants"
                   className="mb05"
                   use="grey"
+                  dataTest={createTestAttr('participants-select')}
                 />
               </Participants>
               <Participants
@@ -466,6 +477,7 @@ h
                   label="Watchers"
                   className="mb1"
                   use="grey"
+                  dataTest={createTestAttr('watchers-select')}
                 />
               </Participants>
               {this.state.errors.length >= 1 && (
@@ -487,6 +499,7 @@ h
           <div className="cpp__buttons-group">
             <Button
               type="submit"
+              data-test={createTestAttr('save-button')}
             >
                 Save
             </Button>
@@ -494,6 +507,7 @@ h
               type="button"
               onClick={() => this.props.history.goBack()}
               use="transparent"
+              data-test={createTestAttr('cancel-button')}
             >
                 Cancel
             </Button>

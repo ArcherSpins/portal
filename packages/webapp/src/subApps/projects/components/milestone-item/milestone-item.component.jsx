@@ -9,10 +9,13 @@
 import React from 'react';
 import type { RouterHistory, Match } from 'react-router-dom';
 import { withRouter, Link } from 'react-router-dom';
+import createTestContext from 'utils/createTestContext';
 // import { ROOT } from 'subApps/projects/routes';
 import { spentTimeInHours } from '../../helpers/sumTime';
 
 import './milestone-item.styles.scss';
+
+const createTestAttr = createTestContext('milestone');
 
 type Props = {
   title: string,
@@ -33,6 +36,7 @@ const MilestoneItem = (props: Props) => (
       <span className="milestone-item__number">{props.number || 'null'}</span>
       <span
         className="milestone-item__title"
+        data-test={createTestAttr('milestone-title')}
         onClick={() => props.history.push(
           `${props.match.url || ''}/milestone${props.number}`,
         )}
@@ -48,6 +52,7 @@ const MilestoneItem = (props: Props) => (
       <div className="milestone-item__details-wrapper">
         <Link
           className="milestone-item__tasks"
+          data-test={createTestAttr('tasks')}
           to={`${props.match.url || ''}/milestone${props.number}/tasks`}
           // onClick={() => props.history.push(
           //   `${props.match.url || ''}/milestone${props.number}/tasks`,
@@ -69,6 +74,7 @@ const MilestoneItem = (props: Props) => (
         <Link
           to={`${props.match.url || ''}/milestone${props.number}`}
           className="milestone-item__details"
+          data-test={createTestAttr('details')}
           // onClick={() => props.history.push(
           //   `${props.match.url || ''}/milestone${props.number}`,
           // )}
