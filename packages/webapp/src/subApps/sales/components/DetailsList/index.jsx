@@ -10,6 +10,7 @@ import {
   LinkButton,
   Button,
 } from '@sfxdx/ui-kit';
+import createTestContext from 'utils/createTestContext';
 import {
   Header,
   FieldBlock,
@@ -22,6 +23,7 @@ import { ModalMessage } from '../index';
 import type { DetailsListProps, PropsType } from './type';
 import './style.scss';
 
+const createTestAttr = createTestContext('deal');
 
 const DetailsList = ({
   props,
@@ -117,7 +119,7 @@ const DetailsList = ({
               error={errorsFormCreate.client.error}
               name="client"
               placeholder="Client name"
-              data-test="deal__client-name-input"
+              data-test={createTestAttr('client-name-input')}
             />
           </FieldBlock>
           <FieldBlock className="field">
@@ -132,7 +134,7 @@ const DetailsList = ({
                 label: data.stage.title,
               }}
               placeholder="Status"
-              dataTest="deal__deal-status-select"
+              dataTest={createTestAttr('status-select')}
               error={errorsFormCreate.status.error}
             />
           </FieldBlock>
@@ -148,7 +150,7 @@ const DetailsList = ({
                 label: data.manager.name,
               }}
               placeholder="Manager name"
-              dataTest="deal__sales-select"
+              dataTest={createTestAttr('sales-select')}
             />
           </FieldBlock>
           <FieldBlock className="field">
@@ -159,7 +161,7 @@ const DetailsList = ({
                 type="button"
                 onClick={newContact}
                 className="add-button"
-                data-test="deal__add-button"
+                data-test={createTestAttr('add-button')}
               >
                 +
               </button>
@@ -199,7 +201,7 @@ const DetailsList = ({
                 label: data.channel.title,
               }}
               placeholder="Channel"
-              dataTest="deal__channel-select"
+              dataTest={createTestAttr('channel-select')}
             />
           </FieldBlock>
           <FieldBlock className="field">
@@ -224,7 +226,7 @@ const DetailsList = ({
                     label="Job Posting URL"
                     required
                     placeholder="Job Posting URL"
-                    data-test="deal__job-url-input"
+                    data-test={createTestAttr('job-url-input')}
                   />
                 </div>
                 <div className="field">
@@ -238,7 +240,7 @@ const DetailsList = ({
                     label="Proposal URL"
                     placeholder="Proposal URL"
                     required
-                    data-test="deal__proposal-url-input"
+                    data-test={createTestAttr('proposal-url-input')}
                   />
                 </div>
               </div>
@@ -257,7 +259,7 @@ const DetailsList = ({
                     label="Messages"
                     placeholder="Messages URL"
                     required
-                    data-test="deal__messages-url-input"
+                    data-test={createTestAttr('messages-url-input')}
                   />
                 </div>
                 <div className="field">
@@ -271,7 +273,7 @@ const DetailsList = ({
                     label="Sales manager"
                     placeholder="Sales URL"
                     required
-                    data-test="deal__sales-url-input"
+                    data-test={createTestAttr('sales-url-input')}
                   />
                 </div>
               </div>
@@ -301,7 +303,7 @@ const DetailsList = ({
                       <Button
                         style={{ width: '50%' }}
                         onClick={closeEdit}
-                        data-test="deal__cancel-button"
+                        data-test={createTestAttr('cancel-button')}
                       >
                         Cancel
                       </Button>
@@ -310,7 +312,7 @@ const DetailsList = ({
                         to="/sales"
                         use="transparent"
                         style={{ width: '50%' }}
-                        data-test="deal__cancel-button"
+                        data-test={createTestAttr('cancel-button')}
                       >
                         Cancel
                       </LinkButton>
@@ -322,7 +324,7 @@ const DetailsList = ({
                       width: '50%',
                     }}
                     onClick={onSubmitEdit}
-                    data-test="deal__save-button"
+                    data-test={createTestAttr('save-button')}
                   >
                     Save
                   </Button>
