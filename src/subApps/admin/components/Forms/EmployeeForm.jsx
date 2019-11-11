@@ -271,8 +271,7 @@ class EmployeeForm extends React.Component<
     return arr;
   }
 
-  onDateChange = (selectedDay: Date, modifiers: mixed, dayPickerInput: DayPickerInput) => {
-    const { name } = dayPickerInput.props;
+  onDateChange = (selectedDay: Date, name: string) => {
     const { formData } = this.state;
     if (name) {
       this.setState({
@@ -369,7 +368,7 @@ class EmployeeForm extends React.Component<
             name="birthday"
             error={errorBoundry.birthday}
             onDayChange={(value) => {
-              this.onDateChange(value, null, 'birthday');
+              this.onChange('birthday', value);
               this.toggleEdit(true);
             }}
           />
