@@ -52,7 +52,9 @@ type EmployeeFormState = {
     position: boolean,
     lastName: boolean,
     middleName: boolean,
-    phoneNumber: boolean
+    phoneNumber: boolean,
+    birthday: boolean,
+    dateOfEmployment: boolean
   },
   showEdit: boolean
 }
@@ -77,6 +79,8 @@ class EmployeeForm extends React.Component<
         lastName: false,
         middleName: false,
         phoneNumber: false,
+        birthday: false,
+        dateOfEmployment: false,
       },
       formData: {
         department: true,
@@ -136,6 +140,7 @@ class EmployeeForm extends React.Component<
       'position',
       'phoneNumber',
       'middleName',
+      'dateOfEmployment',
     ];
     const errors = { ...errorBoundry };
     for (let i = 0; i < arrayValidate.length; i += 1) {
@@ -361,7 +366,11 @@ class EmployeeForm extends React.Component<
             className="form-datepicker pr-1 col-6"
             value={formData.birthday}
             name="birthday"
-            onDayChange={this.onDateChange}
+            error={errorBoundry.birthday}
+            onDayChange={(value) => {
+              this.onDateChange(value, null, 'birthday');
+              this.toggleEdit(true);
+            }}
           />
         </FieldBlock>
 
@@ -457,6 +466,7 @@ class EmployeeForm extends React.Component<
           <Datepicker
             label="Date of employment"
             className="form-datepicker pr-1 col-6"
+            error={errorBoundry.dateOfEmployment}
             value={formData.dateOfEmployment}
             onDayChange={(value) => {
               this.onChange('dateOfEmployment', value);

@@ -29,7 +29,8 @@ type Props = {
   use?: ComboboxType,
   label?: string,
   onChange: (option: Option, action: Action) => void,
-  className?: string
+  className?: string,
+  dataTest?: string
 }
 
 const DropdownIndicator = (props) => (
@@ -59,12 +60,14 @@ const Combobox = ({
   onChange,
   selectedOption,
   error,
-  label,
+  label = '',
+  dataTest,
   className,
   use = 'default',
   ...restProps
 }: Props) => (
   <div
+    data-test={dataTest}
     className={
       classNames(
         'cbx__wrap wrapper combobox',
@@ -78,6 +81,7 @@ const Combobox = ({
     }
   >
     <label className="cbx__label" htmlFor="select">{label}</label>
+    {console.log(restProps)}
     <AsyncSelect
       className="select-component"
       loadOptions={loadOptions}
