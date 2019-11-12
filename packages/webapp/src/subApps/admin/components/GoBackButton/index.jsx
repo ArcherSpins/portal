@@ -14,8 +14,9 @@ export default ({
   onClick,
   style,
   className,
+  ...rest
 }: ButtonProps) => (
-  <Button className={className} onClick={onClick} style={style}>
+  <Button {...rest} className={className} onClick={onClick} style={style}>
     <i className="icon-left-open" />
   </Button>
 );

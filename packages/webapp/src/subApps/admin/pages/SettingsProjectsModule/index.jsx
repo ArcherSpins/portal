@@ -9,6 +9,7 @@ import {
   Dropdown,
   Button,
 } from '@sfxdx/ui-kit';
+import createTestContext from 'utils/createTestContext';
 import {
   LeftNavbar,
   HeaderEmployees,
@@ -28,6 +29,9 @@ import {
 } from '../../redux/actions/spentTimeBounds';
 import type { SpentTimeBoundsType } from '../../types';
 import './style.scss';
+
+const createTestAttr = createTestContext('settings-projects');
+
 
 type Props = {
   getSpentTimeBounds: () => void,
@@ -190,6 +194,7 @@ class SittingsProjectsModulePage extends React.Component<Props, State> {
                       }}
                       value={this.getDays().selected}
                       label="Working days"
+                      dataTest={createTestAttr('working-days-select')}
                     />
                   </FieldBlock>
                   <FieldBlock>
@@ -201,6 +206,7 @@ class SittingsProjectsModulePage extends React.Component<Props, State> {
                       }}
                       value={this.getTimes().selected}
                       label="Working hours and minutes"
+                      dataTest={createTestAttr('working-hours-select')}
                     />
                   </FieldBlock>
                   <div className="footer-settings_form">
@@ -209,6 +215,7 @@ class SittingsProjectsModulePage extends React.Component<Props, State> {
                         <Button
                           onClick={this.saveFunc}
                           style={{ minWidth: '110px', marginTop: '20px' }}
+                          data-test={createTestAttr('save-button')}
                         >
                           Save
                         </Button>

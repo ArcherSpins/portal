@@ -6,6 +6,7 @@ import {
   EMPLOYEES_ROUTE, EMPLOYEES_SETTINGS_ROUTE,
   PROJECTS_SETTINGS_ROUTE,
 } from 'subApps/admin/routes';
+import createTestContext from 'utils/createTestContext';
 import {
   Container,
   Title,
@@ -22,12 +23,16 @@ type ItemLinkProps = {
   // active: boolean
 }
 
+const createTestAttr = createTestContext('sidebar');
+
 export const ItemLink = ({
   to,
   children,
+  ...props
   // active,
 }: ItemLinkProps) => (
   <NavLink
+    {...props}
     exact
     to={to}
     activeClassName="navbar-active-link"
@@ -45,14 +50,21 @@ export default () => (
     <Title>Admin Panel</Title>
     <List>
       <Item>
-        <ItemLink active to={EMPLOYEES_ROUTE}>Employees</ItemLink>
+        <ItemLink
+          data-test={createTestAttr('employees-link')}
+          active
+          to={EMPLOYEES_ROUTE}
+        >
+          Employees
+        </ItemLink>
       </Item>
       <Item>
-        <ItemLink to={ACCESS_MAP_ROUTE}>Access management</ItemLink>
+        <ItemLink data-test={createTestAttr('access-management-link')} to={ACCESS_MAP_ROUTE}>Access management</ItemLink>
       </Item>
       <Item>
         <ItemLink
           to={EMPLOYEES_SETTINGS_ROUTE}
+          data-test={createTestAttr('settings-employees-link')}
         >
           Settings employees module
         </ItemLink>
@@ -60,12 +72,13 @@ export default () => (
       <Item>
         <ItemLink
           to={PROJECTS_SETTINGS_ROUTE}
+          data-test={createTestAttr('settings-projects-link')}
         >
           Settings projects module
         </ItemLink>
       </Item>
       <Item>
-        <ItemLink to={CALENDAR_ROUTE}>Calendar</ItemLink>
+        <ItemLink data-test={createTestAttr('calendar-link')} to={CALENDAR_ROUTE}>Calendar</ItemLink>
       </Item>
     </List>
   </Container>

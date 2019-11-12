@@ -63,6 +63,7 @@ class AccessMap extends React.Component<State> {
                 activeIndex={1}
                 count={1}
                 manual
+                data-test="access__table"
               />
             </div>
           </Main>

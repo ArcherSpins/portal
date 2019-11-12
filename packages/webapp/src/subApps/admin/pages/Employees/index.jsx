@@ -159,6 +159,7 @@ class EmployeesComponent extends React.Component<EmployeesProps, EmployeesState>
                       count={Math.ceil(count / PAGE_SIZE)}
                       history={history}
                       manual
+                      data-test="employees__table"
                     />
                   </div>
                   {

@@ -34,8 +34,8 @@ export default ({ onCancel, onDelete, isOpen }: ModalProps): React.Node => (
       <Message>Are you sure you want to delete?</Message>
     </ModalBody>
     <ModalFooter>
-      <CancelButton onClick={onCancel}>Cancel</CancelButton>
-      <SaveButton onClick={onDelete}>Delete</SaveButton>
+      <CancelButton data-test="modal-approval__cancel-button" onClick={onCancel}>Cancel</CancelButton>
+      <SaveButton data-test="modal-approval__delete-button" onClick={onDelete}>Delete</SaveButton>
     </ModalFooter>
   </Modal>
 );

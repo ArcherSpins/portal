@@ -12,6 +12,7 @@ import { format } from 'date-fns';
 import {
   Dropdown, Combobox, Input, Datepicker, Toast, Button,
 } from '@sfxdx/ui-kit';
+import createTestContext from 'utils/createTestContext';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import { getCities } from '../../graphql/queries';
 import type { Employee, CityType } from '../../types';
@@ -22,6 +23,8 @@ import {
 } from './styled';
 import './style.scss';
 import TIME_ZONE from './TIME_ZONE';
+
+const createTestAttr = createTestContext('employee-form');
 
 type EmployeeFormProps = {
   submit: ({
@@ -313,6 +316,7 @@ class EmployeeForm extends React.Component<
               this.onChange('firstName', e.target.value);
               this.toggleEdit(true);
             }}
+            data-test={createTestAttr('firstname-input')}
           />
           <Input
             className="block"
@@ -327,6 +331,7 @@ class EmployeeForm extends React.Component<
               this.toggleEdit(true);
             }}
             type="email"
+            data-test={createTestAttr('lastname-input')}
           />
         </FieldBlock>
 
@@ -343,6 +348,7 @@ class EmployeeForm extends React.Component<
               this.onChange('lastName', e.target.value);
               this.toggleEdit(true);
             }}
+            data-test={createTestAttr('surname-input')}
           />
         </FieldBlock>
 
@@ -359,6 +365,7 @@ class EmployeeForm extends React.Component<
               this.onChange('middleName', e.target.value);
               this.toggleEdit(true);
             }}
+            data-test={createTestAttr('middlename-input')}
           />
           <Datepicker
             label="Date of birth"
@@ -370,6 +377,7 @@ class EmployeeForm extends React.Component<
               this.onChange('birthday', value);
               this.toggleEdit(true);
             }}
+            data-test={createTestAttr('birthdate-input')}
           />
         </FieldBlock>
 
@@ -388,6 +396,7 @@ class EmployeeForm extends React.Component<
             }
             idx="department"
             label="Department"
+            dataTest={createTestAttr('department-select')}
           />
           <Dropdown
             className="block col-6"
@@ -404,6 +413,7 @@ class EmployeeForm extends React.Component<
             }
             idx="position"
             label="Position"
+            dataTest={createTestAttr('positions-select')}
           />
         </FieldBlock>
 
@@ -421,6 +431,7 @@ class EmployeeForm extends React.Component<
               this.onChange('phoneNumber', e.target.value);
               this.toggleEdit(true);
             }}
+            data-test={createTestAttr('phone-input')}
           />
         </FieldBlock>
 
@@ -444,6 +455,7 @@ class EmployeeForm extends React.Component<
             }
             label="City"
             error={errorBoundry.city}
+            dataTest={createTestAttr('city-select')}
           />
           <Dropdown
             className="block col-6"
@@ -458,6 +470,7 @@ class EmployeeForm extends React.Component<
                 || (timeZones.length > 0 ? timeZones.find((item) => item.active) || timeZones[0] : '')
             }
             label="Time zone"
+            dataTest={createTestAttr('timezone-select')}
           />
         </FieldBlock>
 
@@ -471,6 +484,7 @@ class EmployeeForm extends React.Component<
               this.onChange('dateOfEmployment', value);
               this.toggleEdit(true);
             }}
+            data-test={createTestAttr('employment-date-input')}
           />
         </FieldBlock>
 
@@ -490,6 +504,7 @@ class EmployeeForm extends React.Component<
                   || defaultData.workDayStart[0] : '')
             }
             label="Working day starts at"
+            dataTest={createTestAttr('working-hour-select')}
           />
           <p className="block col-6 pl-2">
             {`Working day ends at ${(defaultData.workDayEnd && String(defaultData.workDayEnd.hours).padStart(2, '0')) || 18}
@@ -513,6 +528,7 @@ class EmployeeForm extends React.Component<
                   || defaultData.lunchStart[0] : '')
             }
             label="Lunch starts at"
+            dataTest={createTestAttr('lunch-hour-select')}
           />
         </FieldBlock>
 
@@ -520,6 +536,7 @@ class EmployeeForm extends React.Component<
           showEdit && (
             <Button
               type="submit"
+              data-test={createTestAttr('save-button')}
             >
               Save
             </Button>
