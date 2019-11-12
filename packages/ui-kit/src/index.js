@@ -19,6 +19,7 @@ export { default as Participants } from './Participants';
 export { default as ErrorText } from './ErrorText';
 export { default as LinkButton } from './LinkButton';
 export { default as IconInput } from './IconInput';
+export { default as PopoverButton } from './PopoverButton';
 export {
   Modal, ModalHeader, ModalBody, ModalFooter,
 } from './Modal';

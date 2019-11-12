@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import autosize from 'autosize';
-import { Button } from '@sfxdx/ui-kit';
+import { Button, PopoverButton } from '@sfxdx/ui-kit';
 import createTestContext from 'utils/createTestContext';
 import { Input } from './styled';
 // $FlowFixMe
@@ -18,6 +18,8 @@ type ChatFormProps = {
   changeFocus: (boolean) => void,
   buttonDisabled: null | boolean,
   changeInputText: (any) => void,
+  toggleOpenModalNewDeal: (boolean) => void,
+  isNewDeal: boolean
 }
 
 const ChatForm = ({
@@ -27,6 +29,8 @@ const ChatForm = ({
   changeFocus,
   buttonDisabled,
   changeInputText,
+  toggleOpenModalNewDeal,
+  isNewDeal,
 }: ChatFormProps) => {
   const [shift, func] = useState(false);
 
@@ -86,15 +90,24 @@ const ChatForm = ({
             <img src={fileIcon} alt="icon" />
           </button>
         </div>
-        <Button
-          disabled={value === ''}
-          type="submit"
-          className={`submit ${value === '' ? 'disabled' : ''}`}
-          title={`${buttonDisabled === null || !buttonDisabled ? 'create a deal first' : 'submit'}`}
-          data-test={createTestAttr('send-button')}
-        >
-          Send
-        </Button>
+        <div className="mr-10">
+          <Button
+            disabled={value === ''}
+            type="submit"
+            className={`submit ${value === '' ? 'disabled' : ''}`}
+            title={`${buttonDisabled === null || !buttonDisabled ? 'create a deal first' : 'submit'}`}
+            data-test={createTestAttr('send-button')}
+          >
+            Send
+          </Button>
+        </div>
+        <PopoverButton
+          className="add-task"
+          popover="Add Task"
+          onClick={toggleOpenModalNewDeal}
+          disabled={isNewDeal}
+          data-test={createTestAttr('add-button')}
+        />
       </div>
     </form>
   );

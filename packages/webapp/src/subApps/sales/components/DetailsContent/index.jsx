@@ -26,6 +26,8 @@ type Props = {
     id: number | string,
     content: string
   }) => {} | void,
+  toggleOpenModalNewDeal: (boolean) => void,
+  isNewDeal: boolean
 }
 
 type State = {
@@ -97,8 +99,10 @@ class DetailsContent extends React.Component<Props, State> {
       loading,
       comments,
       updateMessage,
+      toggleOpenModalNewDeal,
+      isNewDeal,
     } = this.props;
-
+    console.log(ChatForm);
     const { message } = this.state;
     const inputHeight = this.inputRef ? Number(this.inputRef.style.height.replace('px', '')) : this.inputRef;
     return (
@@ -132,6 +136,8 @@ class DetailsContent extends React.Component<Props, State> {
           }}
         >
           <ChatForm
+            isNewDeal={isNewDeal}
+            toggleOpenModalNewDeal={toggleOpenModalNewDeal}
             changeFocus={this.funcFocus}
             value={message}
             submitForm={this.submitForm}

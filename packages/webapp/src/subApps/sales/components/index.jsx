@@ -24,9 +24,11 @@ export * from './shared/styled';
 export * from './Message';
 export * from './ChatForm';
 export * from './InputSearchBlock';
+export * from './Modals';
 
 export { default as AlertMessage } from './AlertMessage';
 export { default as ModalApproval } from './ModalApproval';
+export { default as InputsCouple } from './InputsCouple';
 
 export {
   // Dropdown,

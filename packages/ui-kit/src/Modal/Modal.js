@@ -24,7 +24,7 @@ const Modal = ({
       {' '}
     </button>
     <div
-      className={classNames(styles['modal-wrapper'], { [styles.visible]: show })}
+      className={classNames(styles['modal-wrapper'], 'modal_wrapper', { [styles.visible]: show })}
     >
       {children}
     </div>
