@@ -83,7 +83,7 @@ const CRMPage = ({
           </Button>
         </div>
         <div className="d-flex justify-content-end">
-          <LinkButton data-test={createTestAttr('my-deals-button')} to={getRoute('/details')}>
+          <LinkButton data-test={createTestAttr('add-deals-button')} to={getRoute('/details')}>
             Add deal
           </LinkButton>
         </div>

@@ -5,10 +5,11 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "build-ui": "cd packages/ui-kit && yarn build && lerna bootstrap && cd ../../",
+    "postinstall": "npx lerna bootstrap",
+    "build-ui": "cd packages/ui-kit && yarn build && cd ../../",
     "start": "cd packages/webapp && yarn start",
     "build": "npx lerna bootstrap && yarn build-ui && cd packages/webapp && yarn build && rm -rf ../../build && mv build ../../",
-    "clean": "rm -rf node_modules/ && lerna clean"
+    "clean": "rm -rf node_modules/ && npx lerna clean"
   },
   "workspaces": [
     "packages/*"

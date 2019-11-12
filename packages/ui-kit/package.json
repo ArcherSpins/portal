@@ -12,7 +12,7 @@
     "new": "plop --plopfile generators/index.js",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public",
-    "build": "rollup -c"
+    "build": "npx rollup -c"
   },
   "dependencies": {
     "classnames": "^2.2.6",
