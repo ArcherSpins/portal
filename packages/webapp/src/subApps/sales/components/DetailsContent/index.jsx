@@ -4,7 +4,7 @@
 // @flow
 import React from 'react';
 import zenscroll from 'zenscroll';
-import { ChatForm, DetailsListStyled } from '../index';
+import { ChatForm, DetailsListStyled, TaskMessage } from '../index';
 import { MessageComponent } from './styled';
 import type { DealType, CommentType } from '../../types';
 import './style.scss';
@@ -102,9 +102,7 @@ class DetailsContent extends React.Component<Props, State> {
       toggleOpenModalNewDeal,
       isNewDeal,
     } = this.props;
-    console.log(ChatForm);
     const { message } = this.state;
-    const inputHeight = this.inputRef ? Number(this.inputRef.style.height.replace('px', '')) : this.inputRef;
     return (
       <div className="details-content">
         <Header className="header-content">
@@ -128,12 +126,10 @@ class DetailsContent extends React.Component<Props, State> {
               updateMessage,
             }}
           />
+          <TaskMessage onClick={toggleOpenModalNewDeal} />
         </section>
         <div
           className="chat-form-container"
-          style={{
-            height: this.inputRef ? `${inputHeight + 20}px` : '55px',
-          }}
         >
           <ChatForm
             isNewDeal={isNewDeal}

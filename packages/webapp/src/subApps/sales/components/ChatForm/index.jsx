@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import autosize from 'autosize';
 import { Button, PopoverButton } from '@sfxdx/ui-kit';
 import createTestContext from 'utils/createTestContext';
+import FilesComponent from './files';
 import { Input } from './styled';
 // $FlowFixMe
 import fileIcon from '../Message/file.svg';
@@ -33,6 +34,7 @@ const ChatForm = ({
   isNewDeal,
 }: ChatFormProps) => {
   const [shift, func] = useState(false);
+  const [isFiles, toggleFiles] = useState(false);
 
   const focusInput = (status) => {
     changeFocus(status);
@@ -72,6 +74,9 @@ const ChatForm = ({
 
   return (
     <form onSubmit={submitForm}>
+      {
+        isFiles && <FilesComponent files={[{ label: 'Fich', id: '1' }, { label: 'Fich', id: '2' }]} />
+      }
       <div className="chat-form d-flex align-items-start">
         <div className="input-block">
           <Input
@@ -86,7 +91,11 @@ const ChatForm = ({
             style={{ width: `${(value.length + 1) * 10}px` }}
             data-test={createTestAttr('comment-input')}
           />
-          <button type="button" data-test={createTestAttr('file-pin-button')}>
+          <button
+            type="button"
+            data-test={createTestAttr('file-pin-button')}
+            onClick={() => toggleFiles(!isFiles)}
+          >
             <img src={fileIcon} alt="icon" />
           </button>
         </div>

@@ -76,7 +76,7 @@ export default ({
               </DealNameContainer>
             </div>
             <div className="mb-20 fz-14 col-6 borderless">
-              <Datepicker label="Date" />
+              <Datepicker className="overlay-right-90" label="Date" />
               {/* <Dropdown
                 label="Date"
                 options={optionsArray}

@@ -29,6 +29,7 @@ export * from './Modals';
 export { default as AlertMessage } from './AlertMessage';
 export { default as ModalApproval } from './ModalApproval';
 export { default as InputsCouple } from './InputsCouple';
+export { default as TaskMessage } from './TaskMessage';
 
 export {
   // Dropdown,
