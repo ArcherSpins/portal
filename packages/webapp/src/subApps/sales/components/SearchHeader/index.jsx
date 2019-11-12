@@ -33,12 +33,14 @@ export const SearchHeader = ({
       icon={<i className="icon-search" />}
       value={searchValue}
       placeholder="Search..."
+      data-test="header-search__input"
     />
     <Button
       type="button"
       onClick={toggleSearchShow}
       className="filters"
       use="transparent"
+      data-test="header-search__filter-button"
     >
       {!search ? 'Show ' : 'Hide '}
       Filters
