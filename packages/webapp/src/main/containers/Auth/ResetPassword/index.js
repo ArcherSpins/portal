@@ -5,6 +5,7 @@ import { type Match } from 'react-router-dom';
 
 import history from 'utils/history';
 import client from 'utils/api';
+import createTestContext from 'utils/createTestContext';
 import { AUTH_TOKEN_KEY, ROOT_PAGE_ROUTE } from 'utils/constants';
 
 import { SET_NEW_PASSWORD } from 'graphql/auth';
@@ -16,6 +17,8 @@ import styles from '../Auth.module.scss';
 type Props = {
   match: Match
 };
+
+const createTestAttr = createTestContext('auth');
 
 class ResetPassword extends Component<Props> {
   onReset = async (values: FormikValues, { setSubmitting }: FormikActions) => {
@@ -104,6 +107,7 @@ class ResetPassword extends Component<Props> {
                   onBlur={handleBlur}
                   error={touched.newPassword && errors.newPassword}
                   onChange={handleChange}
+                  data-test={createTestAttr('new-password-input')}
                 />
                 <Input
                   placeholder="Repeat your new password"
@@ -115,6 +119,7 @@ class ResetPassword extends Component<Props> {
                   type="password"
                   error={touched.oldPassword && errors.oldPassword}
                   onChange={handleChange}
+                  data-test={createTestAttr('repeat-password-input')}
                 />
                 <ErrorText>
                   {touched.newPassword && touched.oldPassword && errors.confirm}
@@ -126,6 +131,7 @@ class ResetPassword extends Component<Props> {
                     onClick={handleSubmit}
                     disabled={!isValid}
                     type="submit"
+                    data-test={createTestAttr('submit-button')}
                   >
                     Save
                   </ButtonWithProgress>

@@ -8,6 +8,7 @@ import Header from 'subApps/projects/components/header';
 import {
   Input, TextArea, Button, H1, Dropdown,
 } from '@sfxdx/ui-kit';
+import createTestContext from 'utils/createTestContext';
 // $FlowFixMe
 import type { Option, Action } from '@sfxdx/ui-kit/src/Combobox';
 
@@ -23,6 +24,7 @@ import type { Error } from '../../redux/error/error.flow-types';
 
 import './task-add.page.styles.scss';
 
+const createTestAttr = createTestContext('task-create');
 
 type State = {
   subject: string,
@@ -152,6 +154,7 @@ class TaskAdd extends React.Component<Props, State> {
               value={subject}
               name="subject"
               className="project__input"
+              data-test={createTestAttr('subject-input')}
             />
             <TextArea
               label="Description"
@@ -159,6 +162,7 @@ class TaskAdd extends React.Component<Props, State> {
               value={description}
               onChange={this.handleChange}
               className="project__input"
+              data-test={createTestAttr('description-input')}
             />
             <div className="select-wrapper">
               <h3 className="heading-tertiarry">Assignee</h3>
@@ -168,6 +172,7 @@ class TaskAdd extends React.Component<Props, State> {
                 name="assignee"
                 options={participants.map((p) => ({ value: p.id, label: p.name }))}
                 required
+                dataTest={createTestAttr('assignee-select')}
               />
             </div>
             {errors.length >= 1 && (
@@ -184,7 +189,7 @@ class TaskAdd extends React.Component<Props, State> {
 .
               </div>
             )}
-            <Button type="submit">
+            <Button data-test={createTestAttr('create-button')} type="submit">
               Create
             </Button>
           </div>

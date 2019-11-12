@@ -86,6 +86,7 @@ class SendResetToken extends Component<Props> {
                   name="login"
                   error={touched.login && errors.login}
                   onChange={handleChange}
+                  data-test="auth__login-input"
                 />
                 <div className={styles.actions}>
                   <ButtonWithProgress
@@ -94,6 +95,7 @@ class SendResetToken extends Component<Props> {
                     onClick={handleSubmit}
                     disabled={!isValid}
                     type="submit"
+                    data-test="auth__recover-button"
                   >
                     Recover
                   </ButtonWithProgress>

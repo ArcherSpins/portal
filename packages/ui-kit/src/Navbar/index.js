@@ -18,27 +18,33 @@ const Navbar = ({ username, className }: Props) => (
       className={styles.container}
     >
       <div>
-        <NavLink exact className={styles.logo} to="/">
+        <NavLink data-test="header__logo" exact className={styles.logo} to="/">
           <img className={styles.logo} src={logo} alt="Logo" />
         </NavLink>
-        <NavLink activeClassName={styles.active} className={styles.link} to="/sales">
+        <NavLink data-test="header__sales-link" activeClassName={styles.active} className={styles.link} to="/sales">
           Sales
         </NavLink>
-        <NavLink activeClassName={styles.active} className={styles.link} to="/projects">
+        <NavLink data-test="header__projects-link" activeClassName={styles.active} className={styles.link} to="/projects">
           Projects
         </NavLink>
-        <NavLink activeClassName={styles.active} className={styles.link} to="/admin">
+        <NavLink data-test="header__admin-link" activeClassName={styles.active} className={styles.link} to="/admin">
           Admin panel
         </NavLink>
       </div>
       <div>
-        <NavLink activeClassName={styles.active} className={styles.link} to="/profile">
+        <NavLink
+          activeClassName={styles.active}
+          className={styles.link}
+          to="/profile"
+          data-test="header__profile-link"
+        >
           {username}
         </NavLink>
         <NavLink
           activeClassName={styles.active}
           className={styles.link}
           to="/auth/logout"
+          data-test="header__logout"
         >
           Log Out
         </NavLink>

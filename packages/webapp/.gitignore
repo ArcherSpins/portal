@@ -5,6 +5,7 @@
 /.pnp
 .pnp.js
 /.idea
+/*/.size-snapshot.json
 
 # testing
 /coverage

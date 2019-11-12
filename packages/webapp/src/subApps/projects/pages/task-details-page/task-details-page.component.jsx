@@ -7,6 +7,7 @@ import {
   Button, TextArea, Input, H1, Dropdown,
 } from '@sfxdx/ui-kit';
 import type { Option, Action } from '@sfxdx/ui-kit';
+import createTestContext from 'utils/createTestContext';
 import Header from 'subApps/projects/components/header';
 
 import { editTask, deleteTask, getTaskStatuses } from '../../redux/task/task.actions';
@@ -20,6 +21,8 @@ import type { Error } from '../../redux/error/error.flow-types';
 import './task-details-page.styles.scss';
 
 import Modal from '../../components/modal/modal.component';
+
+const createTestAttr = createTestContext('task-edit');
 
 type State = {
   status: Option,
@@ -195,6 +198,7 @@ class TaskDetails extends React.Component<Props, State> {
               use="danger"
               size="sm"
               onClick={this.openModalHandler}
+              data-test={createTestAttr('delete-button')}
             >
               Delete task
             </Button>
@@ -210,6 +214,7 @@ class TaskDetails extends React.Component<Props, State> {
               value={subject}
               onChange={this.handleChange}
               className="project__input"
+              data-test={createTestAttr('subject-input')}
             />
             <TextArea
               label="Description"
@@ -217,6 +222,7 @@ class TaskDetails extends React.Component<Props, State> {
               value={description}
               onChange={this.handleChange}
               className="project__input"
+              data-test={createTestAttr('description-input')}
             />
             <div className="status-wrapper">
               <h3 className="heading-tertiarry">Status</h3>
@@ -225,6 +231,7 @@ class TaskDetails extends React.Component<Props, State> {
                 name="status"
                 value={status}
                 options={taskStates}
+                dataTest={createTestAttr('status-select')}
               />
               {/* <select
                 onChange={this.handleChange}
@@ -248,6 +255,7 @@ class TaskDetails extends React.Component<Props, State> {
                 name="assignee"
                 options={participants.map((p) => ({ value: p.id, label: p.name }))}
                 required
+                dataTest={createTestAttr('assignee-select')}
               />
             </div>
             <div>
@@ -266,7 +274,7 @@ class TaskDetails extends React.Component<Props, State> {
                 </div>
               )}
               <div className="body-buttons">
-                <Button type="submit">
+                <Button data-test={createTestAttr('save-button')} type="submit">
                   Save
                 </Button>
                 <div>
@@ -276,6 +284,7 @@ class TaskDetails extends React.Component<Props, State> {
                     )}
                     className="mr1"
                     use="transparent"
+                    data-test={createTestAttr('add-button')}
                   >
                     Add Log
                   </Button>
@@ -284,6 +293,7 @@ class TaskDetails extends React.Component<Props, State> {
                       `${match.url || ''}/logs`,
                     )}
                     use="transparent"
+                    data-test={createTestAttr('log-history-button')}
                   >
                     Log History
                   </Button>

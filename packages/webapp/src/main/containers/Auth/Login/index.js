@@ -12,7 +12,10 @@ import { SIGN_IN, type SignInResponse } from 'graphql/auth';
 import {
   Button, ButtonWithProgress, H1, Input, Separator,
 } from '@sfxdx/ui-kit';
+import createTestContext from 'utils/createTestContext';
 import styles from '../Auth.module.scss';
+
+const createTestAttr = createTestContext('auth');
 
 type Props = {};
 
@@ -92,6 +95,7 @@ class Login extends Component<Props> {
                   name="login"
                   error={touched.login && errors.login}
                   onChange={handleChange}
+                  data-test={createTestAttr('login-input')}
                 />
                 <Input
                   placeholder="Your password"
@@ -102,6 +106,7 @@ class Login extends Component<Props> {
                   error={touched.login && errors.password}
                   label="Password"
                   onChange={handleChange}
+                  data-test={createTestAttr('password-input')}
                 />
                 <div className={styles.actions}>
                   <ButtonWithProgress
@@ -110,7 +115,7 @@ class Login extends Component<Props> {
                     onClick={handleSubmit}
                     disabled={!isValid}
                     type="submit"
-                    data-test="auth__login-button"
+                    data-test={createTestAttr('login-button')}
                   >
                     Log In
                   </ButtonWithProgress>
@@ -120,6 +125,7 @@ class Login extends Component<Props> {
                     className={styles.button}
                     use="simple"
                     size="sm"
+                    data-test={createTestAttr('forgot-password-link')}
                   >
                     <Link to="/auth/reset-password">Forgot password?</Link>
                   </Button>
