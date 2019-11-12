@@ -3,6 +3,7 @@ FROM	node:10.15.3-alpine as builder
 WORKDIR	/app
 
 COPY	package.json .
+COPY  lerna.json .
 RUN	yarn
 
 COPY	. .
