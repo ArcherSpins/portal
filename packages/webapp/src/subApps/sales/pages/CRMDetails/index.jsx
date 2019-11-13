@@ -59,7 +59,6 @@ const CRMDetailsPage = ({
     modalApproval,
     isNewDeal,
   } = state;
-
   if (redirectNewDeal.redirect) {
     return <Redirect to={redirectNewDeal.url} />;
   }
