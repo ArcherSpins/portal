@@ -143,7 +143,7 @@ const DetailsList = ({
               use="underlined"
               loadOptions={loadOptionsManagers}
               onChange={(value) => changeInput('manager', value, null, value)}
-              label="Sales"
+              label="Sales manager"
               selectedOption={data.manager && {
                 ...data.manager,
                 value: data.manager.name,

@@ -140,7 +140,7 @@ const FilterBlock = ({
             onChange={changeManager}
             className="select-details big"
             options={managers.map((item) => ({ ...item, label: item.name, value: item.name }))}
-            label="Manager"
+            label="Sales manager"
             id="manager"
             dataTest={createTestAttr('manager-select')}
           />
