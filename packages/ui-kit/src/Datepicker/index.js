@@ -13,10 +13,13 @@ import 'react-day-picker/lib/style.css';
 
 const DEFAULT_FORMAT = 'd.L.y';
 
+type OverlayAlign = 'left' | 'right';
+
 type Props = {
   onDayChange: Date => void,
   format?: string,
   placeholder?: string,
+  overlayAlign?: OverlayAlign,
   value?: Date,
   label?: string,
   className?: string,
@@ -33,13 +36,14 @@ type Props = {
 
 type NavbarElementProps = {
   onNextClick: () => void,
-  onPreviousClick: () => void
+  onPreviousClick: () => void,
+  overlayAlign: string
 }
 
 const weekdaysShort = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 
-const Navbar = ({ onNextClick, onPreviousClick }: NavbarElementProps) => (
-  <div className={overlayStyles.nav}>
+const Navbar = ({ onNextClick, onPreviousClick, overlayAlign }: NavbarElementProps) => (
+  <div className={classNames(overlayStyles.nav, { [overlayAlign]: true })}>
     <button
       type="button"
       onClick={() => onPreviousClick()}
@@ -93,6 +97,7 @@ const Datepicker = ({
   style,
   error,
   containerProps,
+  overlayAlign,
   ...props
 }: Props) => {
   const inputRef = React.createRef();
@@ -110,7 +115,7 @@ const Datepicker = ({
           ...props,
           classNames: overlayStyles,
           weekdaysShort,
-          navbarElement: Navbar,
+          navbarElement: (propsNabar) => <Navbar {...propsNabar} overlayAlign={overlayAlign} />,
           selectedDays: value,
           onBlur: (e: SyntheticMouseEvent<HTMLElement>) => {
             // hack for hiding day picker
@@ -147,6 +152,7 @@ Datepicker.defaultProps = {
   style: {},
   error: false,
   containerProps: {},
+  overlayAlign: 'right',
 };
 
 export default Datepicker;
