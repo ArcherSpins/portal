@@ -8,9 +8,21 @@
   box-shadow: 0px 2px 23px rgba($text-color, 0.1);
   border-radius: 0.25em;
   background: #fff;
-  right: 0;
   margin-top: 0.5rem;
   z-index: 9999999999;
+  right: 0;
+}
+
+.container_align-left {
+  display: inline-block;
+  font-size: 1rem;
+  position: absolute;
+  box-shadow: 0px 2px 23px rgba($text-color, 0.1);
+  border-radius: 0.25em;
+  background: #fff;
+  margin-top: 0.5rem;
+  z-index: 9999999999;
+  left: 0;
 }
 
 .wrapper {

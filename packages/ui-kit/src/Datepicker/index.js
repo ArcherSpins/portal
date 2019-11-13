@@ -37,13 +37,12 @@ type Props = {
 type NavbarElementProps = {
   onNextClick: () => void,
   onPreviousClick: () => void,
-  overlayAlign: string
 }
 
 const weekdaysShort = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 
-const Navbar = ({ onNextClick, onPreviousClick, overlayAlign }: NavbarElementProps) => (
-  <div className={classNames(overlayStyles.nav, { [overlayAlign]: true })}>
+const Navbar = ({ onNextClick, onPreviousClick }: NavbarElementProps) => (
+  <div className={classNames(overlayStyles.nav)}>
     <button
       type="button"
       onClick={() => onPreviousClick()}
@@ -113,9 +112,13 @@ const Datepicker = ({
         name={name}
         dayPickerProps={{
           ...props,
-          classNames: overlayStyles,
+          classNames: {
+            ...overlayStyles,
+            container: overlayAlign === 'left'
+              ? overlayStyles['container_align-left'] : overlayStyles.container,
+          },
           weekdaysShort,
-          navbarElement: (propsNabar) => <Navbar {...propsNabar} overlayAlign={overlayAlign} />,
+          navbarElement: Navbar,
           selectedDays: value,
           onBlur: (e: SyntheticMouseEvent<HTMLElement>) => {
             // hack for hiding day picker
