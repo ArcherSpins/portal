@@ -31,6 +31,15 @@
     }
 }
 
+
+.block-files {
+    margin-bottom: 15px;
+    
+    .files {
+        padding-bottom: 20px;
+    }
+}
+
 .div_input {
     background: #FFFFFF;
     border: 1px solid #C6CCD5;
@@ -56,4 +65,8 @@ button {
         background-color: rgb(190, 190, 190);
         cursor: not-allowed;
     }
+}
+
+.add-task {
+    border: 1px solid #65a771;
 }

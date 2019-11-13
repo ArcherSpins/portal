@@ -22,6 +22,7 @@ export type State = {
   modalApproval: boolean,
   redirectDeleteDeal: boolean,
   dataDealForDelete: any,
+  isNewDeal: boolean,
   editForm: {
     client: boolean,
     sales: boolean,

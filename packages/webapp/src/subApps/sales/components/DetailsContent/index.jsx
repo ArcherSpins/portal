@@ -4,7 +4,7 @@
 // @flow
 import React from 'react';
 import zenscroll from 'zenscroll';
-import { ChatForm, DetailsListStyled } from '../index';
+import { ChatForm, DetailsListStyled, TaskMessage } from '../index';
 import { MessageComponent } from './styled';
 import type { DealType, CommentType } from '../../types';
 import './style.scss';
@@ -26,6 +26,8 @@ type Props = {
     id: number | string,
     content: string
   }) => {} | void,
+  toggleOpenModalNewDeal: (boolean) => void,
+  isNewDeal: boolean
 }
 
 type State = {
@@ -97,10 +99,10 @@ class DetailsContent extends React.Component<Props, State> {
       loading,
       comments,
       updateMessage,
+      toggleOpenModalNewDeal,
+      isNewDeal,
     } = this.props;
-
     const { message } = this.state;
-    const inputHeight = this.inputRef ? Number(this.inputRef.style.height.replace('px', '')) : this.inputRef;
     return (
       <div className="details-content">
         <Header className="header-content">
@@ -124,14 +126,14 @@ class DetailsContent extends React.Component<Props, State> {
               updateMessage,
             }}
           />
+          <TaskMessage onClick={toggleOpenModalNewDeal} />
         </section>
         <div
           className="chat-form-container"
-          style={{
-            height: this.inputRef ? `${inputHeight + 20}px` : '55px',
-          }}
         >
           <ChatForm
+            isNewDeal={isNewDeal}
+            toggleOpenModalNewDeal={toggleOpenModalNewDeal}
             changeFocus={this.funcFocus}
             value={message}
             submitForm={this.submitForm}

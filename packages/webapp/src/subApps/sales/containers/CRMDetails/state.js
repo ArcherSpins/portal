@@ -23,4 +23,5 @@ export const initialState = {
   modalApproval: false,
   dataDealForDelete: {},
   redirectDeleteDeal: false,
+  isNewDeal: false,
 };

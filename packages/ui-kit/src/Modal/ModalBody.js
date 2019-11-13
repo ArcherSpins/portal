@@ -1,5 +1,6 @@
 // @flow
 import React, { type Node } from 'react';
+import classNames from 'classnames';
 import styles from './Modal.module.scss';
 
 type Props = {
@@ -8,7 +9,7 @@ type Props = {
 
 
 const ModalBody = ({ children }: Props) => (
-  <div className={styles['modal-body']}>
+  <div className={classNames(styles['modal-body'], 'modal_body')}>
     {children}
   </div>
 );

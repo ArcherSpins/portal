@@ -8,6 +8,7 @@ import {
   HeaderDetails,
   ModalApproval,
 } from '../../components';
+import { ModalNewTask } from '../../components/Modals';
 import { DetailsListContainer } from '../../containers';
 import './style.scss';
 import type { CRMDetailsPageProps } from './type';
@@ -29,6 +30,7 @@ const CRMDetailsPage = ({
   toggleShowModal,
   toggleModalApproval,
   setDeleteDataDeal,
+  toggleModalNewDeal,
   approveDeleteDeal,
 }: CRMDetailsPageProps) => {
   const {
@@ -48,7 +50,14 @@ const CRMDetailsPage = ({
   } = props;
 
   const {
-    editForm, edit, editTitle, titleText, redirectNewDeal, showModalErrorMessage, modalApproval,
+    editForm,
+    edit,
+    editTitle,
+    titleText,
+    redirectNewDeal,
+    showModalErrorMessage,
+    modalApproval,
+    isNewDeal,
   } = state;
 
   if (redirectNewDeal.redirect) {
@@ -58,6 +67,11 @@ const CRMDetailsPage = ({
   const { goBack } = history;
   return (
     <div className="details-page">
+      <ModalNewTask
+        isOpen={isNewDeal}
+        onClose={() => toggleModalNewDeal(false)}
+        onCreate={() => null}
+      />
       <HeaderDetails
         goBack={goBack}
         title={activeUser.title}
@@ -105,6 +119,8 @@ const CRMDetailsPage = ({
           activeUser={activeUser}
           comments={comments}
           updateMessage={updateMessage}
+          toggleModalNewDeal={toggleModalNewDeal}
+          isNewDeal={isNewDeal}
         />
       </div>
     </div>

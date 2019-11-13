@@ -293,9 +293,6 @@ class CRMDetailsContainer extends React.PureComponent<PropsCrmDetails, State> {
       setActiveUser(deal);
       fetchUpdateDealAction({
         id: activeUser.id,
-        // title: titleText !== title ? titleText.split('').slice(0, 100).join('').trim() : null,
-        // managerID: data.manager.id !== activeManager.id ? data.manager.id : null,
-        // client: data.client.trim() !== '' ? data.client : null,
         sourceID: data.source.id,
         jobPostingURL: data.jobPostingURL ? data.jobPostingURL.trim() : '',
         jobProposalURL: data.jobProposalURL ? data.jobProposalURL.trim() : '',
@@ -496,6 +493,10 @@ class CRMDetailsContainer extends React.PureComponent<PropsCrmDetails, State> {
         });
       });
     }
+  }
+
+  toggleModalNewDeal = (status: boolean) => {
+    this.setState({ isNewDeal: status });
   }
 
   render() {
