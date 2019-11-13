@@ -26,7 +26,7 @@ type Props = {
     id: number | string,
     content: string
   }) => {} | void,
-  toggleOpenModalNewDeal: (boolean) => void,
+  toggleModalNewDeal: (boolean) => void,
   isNewDeal: boolean
 }
 
@@ -99,7 +99,7 @@ class DetailsContent extends React.Component<Props, State> {
       loading,
       comments,
       updateMessage,
-      toggleOpenModalNewDeal,
+      toggleModalNewDeal,
       isNewDeal,
     } = this.props;
     const { message } = this.state;
@@ -126,14 +126,14 @@ class DetailsContent extends React.Component<Props, State> {
               updateMessage,
             }}
           />
-          <TaskMessage onClick={toggleOpenModalNewDeal} />
+          <TaskMessage onClick={toggleModalNewDeal} />
         </section>
         <div
           className="chat-form-container"
         >
           <ChatForm
             isNewDeal={isNewDeal}
-            toggleOpenModalNewDeal={toggleOpenModalNewDeal}
+            toggleModalNewDeal={toggleModalNewDeal}
             changeFocus={this.funcFocus}
             value={message}
             submitForm={this.submitForm}

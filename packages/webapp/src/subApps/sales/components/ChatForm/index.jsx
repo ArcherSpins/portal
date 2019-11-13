@@ -19,7 +19,7 @@ type ChatFormProps = {
   changeFocus: (boolean) => void,
   // buttonDisabled: null | boolean,
   changeInputText: (any) => void,
-  toggleOpenModalNewDeal: (boolean) => void,
+  toggleModalNewDeal: (boolean) => void,
   isNewDeal: boolean
 }
 
@@ -29,7 +29,7 @@ const ChatForm = ({
   value,
   changeFocus,
   changeInputText,
-  toggleOpenModalNewDeal,
+  toggleModalNewDeal,
   isNewDeal,
 }: ChatFormProps) => {
   const [shift, func] = useState(false);
@@ -111,7 +111,7 @@ const ChatForm = ({
         <PopoverButton
           className="add-task"
           popover="Add Task"
-          onClick={toggleOpenModalNewDeal}
+          onClick={() => toggleModalNewDeal(true)}
           disabled={isNewDeal}
           data-test={createTestAttr('add-button')}
         />
