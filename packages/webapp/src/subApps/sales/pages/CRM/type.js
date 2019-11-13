@@ -22,4 +22,5 @@ export type CrmPageProps = {
   setSefColumn: (mixed) => mixed,
   getDealsFilter: (props?: PropsFilterDeals) => void,
   toggleModalShow: () => void,
+  loading: boolean
 }
