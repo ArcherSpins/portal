@@ -39,7 +39,7 @@ export const SearchItem = ({
           {title}
         </h4>
         <div className="name">{client}</div>
-        <div>
+        <div className="date">
           <p>{dayjs(createdAt).format('DD MMMM YYYY hh:mm')}</p>
         </div>
         <div className="status">{stage.title}</div>

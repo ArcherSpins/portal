@@ -10,7 +10,7 @@ import type { DealType, CommentType } from '../../types';
 export type MessageComponentProps = {
   loading: boolean,
   length: number,
-  toggleModalNewDeal: () => void,
+  toggleModalNewDeal: (boolean) => void,
   options: {
     data: Array<CommentType>,
     activeUser: DealType,
@@ -52,7 +52,7 @@ export const MessageComponent = ({
                   {...message}
                 />
               ))}
-              <TaskMessage toggleModalNewDeal={toggleModalNewDeal} />
+              <TaskMessage onClick={() => toggleModalNewDeal(true)} />
             </div>
           )
           : (

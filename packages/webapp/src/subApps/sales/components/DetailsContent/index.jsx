@@ -26,7 +26,7 @@ type Props = {
     id: number | string,
     content: string
   }) => {} | void,
-  toggleModalNewDeal: () => void,
+  toggleModalNewDeal: (boolean) => void,
   isNewDeal: boolean
 }
 
