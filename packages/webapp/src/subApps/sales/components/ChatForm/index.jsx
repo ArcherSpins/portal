@@ -17,7 +17,7 @@ type ChatFormProps = {
   submitForm: (event?: SyntheticKeyboardEvent<HTMLFormElement>) => void,
   value: string,
   changeFocus: (boolean) => void,
-  buttonDisabled: null | boolean,
+  // buttonDisabled: null | boolean,
   changeInputText: (any) => void,
   toggleOpenModalNewDeal: (boolean) => void,
   isNewDeal: boolean
@@ -28,7 +28,6 @@ const ChatForm = ({
   submitForm,
   value,
   changeFocus,
-  buttonDisabled,
   changeInputText,
   toggleOpenModalNewDeal,
   isNewDeal,
@@ -103,8 +102,7 @@ const ChatForm = ({
           <Button
             disabled={value === ''}
             type="submit"
-            className={`submit ${value === '' ? 'disabled' : ''}`}
-            title={`${buttonDisabled === null || !buttonDisabled ? 'create a deal first' : 'submit'}`}
+            className="submit"
             data-test={createTestAttr('send-button')}
           >
             Send

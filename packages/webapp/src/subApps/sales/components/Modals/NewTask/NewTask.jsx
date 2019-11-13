@@ -53,14 +53,14 @@ export default ({
       <H1 className="fz-24 d-flex align-items-center">
         <span className="mr-10">New Task</span>
         <EditButton
-          dataTest={createTestAttr('edit-button')}
+          data-test={createTestAttr('edit-button')}
         >
           <img src={pencilIcon} alt="pencil icon" />
         </EditButton>
       </H1>
       <CloseButton
         onClick={onClose}
-        dataTest={createTestAttr('close-button')}
+        data-test={createTestAttr('close-button')}
       >
         <i className="icon-cancel" />
       </CloseButton>
@@ -105,13 +105,13 @@ export default ({
                 label="Comment"
                 placeholder="Task comment"
                 onChange={() => null}
-                dataTest={createTestAttr('comment-text')}
+                data-test={createTestAttr('comment-text')}
               />
             </div>
           </div>
         </div>
         <div className="d-flex justify-content-end mt-3">
-          <Button dataTest={createTestAttr('close-button')} onClick={onCreate}>Create</Button>
+          <Button data-test={createTestAttr('close-button')} onClick={onCreate}>Create</Button>
         </div>
       </div>
       <EditComment value="" />

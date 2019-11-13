@@ -495,7 +495,7 @@ class CRMDetailsContainer extends React.PureComponent<PropsCrmDetails, State> {
     }
   }
 
-  toggleOpenModalNewDeal = (status: boolean) => {
+  toggleModalNewDeal = (status: boolean) => {
     this.setState({ isNewDeal: status });
   }
 

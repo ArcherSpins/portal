@@ -19,5 +19,5 @@ export type CRMDetailsPageProps = {
   toggleModalApproval: (boolean) => void,
   setDeleteDataDeal: ({ id: string }) => void,
   approveDeleteDeal: () => void,
-  toggleOpenModalNewDeal: (boolean) => void
+  toggleModalNewDeal: (boolean) => void
 }

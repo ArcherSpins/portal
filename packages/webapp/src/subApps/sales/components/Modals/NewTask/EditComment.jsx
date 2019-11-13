@@ -30,11 +30,11 @@ export default ({
         label="Comment"
         placeholder="Edit comment"
         value={value}
-        dataTest={createTestAttr('comment-text')}
+        data-test={createTestAttr('comment-text')}
       />
     </div>
     <div className="d-flex justify-content-end mt-3">
-      <Button dataTest={createTestAttr('task-resolved')}>Task Resolved</Button>
+      <Button data-test={createTestAttr('task-resolved')}>Task Resolved</Button>
     </div>
   </div>
 );

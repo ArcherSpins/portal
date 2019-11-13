@@ -30,7 +30,7 @@ const CRMDetailsPage = ({
   toggleShowModal,
   toggleModalApproval,
   setDeleteDataDeal,
-  toggleOpenModalNewDeal,
+  toggleModalNewDeal,
   approveDeleteDeal,
 }: CRMDetailsPageProps) => {
   const {
@@ -69,7 +69,7 @@ const CRMDetailsPage = ({
     <div className="details-page">
       <ModalNewTask
         isOpen={isNewDeal}
-        onClose={() => toggleOpenModalNewDeal(false)}
+        onClose={() => toggleModalNewDeal(false)}
         onCreate={() => null}
       />
       <HeaderDetails
@@ -119,7 +119,7 @@ const CRMDetailsPage = ({
           activeUser={activeUser}
           comments={comments}
           updateMessage={updateMessage}
-          toggleOpenModalNewDeal={toggleOpenModalNewDeal}
+          toggleModalNewDeal={toggleModalNewDeal}
           isNewDeal={isNewDeal}
         />
       </div>
