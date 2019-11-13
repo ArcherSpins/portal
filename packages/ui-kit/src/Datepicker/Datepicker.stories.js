@@ -23,6 +23,14 @@ storiesOf('Datepicker', module)
                 <Datepicker value={new Date()} onDayChange={action('day changed!')} />
               </div>
             )
+          },
+          {
+            title: 'With overlayAlign=left',
+            sectionFn: () => (
+              <div style={{ width: '300px'}}>
+                <Datepicker overlayAlign="left" value={new Date()} onDayChange={action('day changed!')} />
+              </div>
+            )
           }
         ],
       },
