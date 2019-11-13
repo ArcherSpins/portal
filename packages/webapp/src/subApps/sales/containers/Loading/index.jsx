@@ -6,15 +6,22 @@ import { Loading } from '../../components/Loading/Loading';
 import { Container } from './styled';
 
 type LoadingProps = {
-  children: Node,
-  style: {
+  children?: Node,
+  style?: {
     [string]: mixed
   },
 }
 
-export default ({ children, style }: LoadingProps) => (
+const LoadingContainer = ({ children, style }: LoadingProps) => (
   <Container style={style}>
     <Loading />
     {children}
   </Container>
 );
+
+LoadingContainer.defaultProps = {
+  children: null,
+  style: {},
+};
+
+export default LoadingContainer;

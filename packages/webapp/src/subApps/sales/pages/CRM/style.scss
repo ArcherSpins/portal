@@ -44,27 +44,7 @@ html, body, #root {
     button {    
         height: 30px;
         padding: 0 12px;
-        border: none;
-        background-color: #E9EEF2;
-        border: 1px solid #e0dede;
-        color: #333333;
         cursor: pointer;
-    }
-
-    .left-button {
-        border-top-right-radius: 0;
-        border-bottom-right-radius: 0;
-    }
-
-    .right-button {
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0;
-    }
-
-    .active {
-        color: white;
-        background-color: #61B16F;
-        border: 1px solid #61A06C;
     }
 }
 

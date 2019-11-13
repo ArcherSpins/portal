@@ -5,7 +5,6 @@ import React, { PureComponent, type AbstractComponent } from 'react';
 import { connect } from 'react-redux';
 import { CRMPage } from '../../pages';
 import { mapStateToProps, mapDispatchToProps } from './CrmHoc';
-import { LoadingContainer } from '../index';
 import type { CRMContainerState, CRMContainerProps } from './type';
 import type { EmployeeType, ColumnType, DealType } from '../../types';
 import type { PropsFilterDeals } from '../../redux/actions/types';
@@ -221,9 +220,7 @@ class CRMContainer extends PureComponent<CRMContainerProps, CRMContainerState> {
     } = this.props;
     return (
       <div className="crm-pLinkage">
-        {loadingDeals || loadingColumns ? (
-          <LoadingContainer />
-        ) : <CRMPage {...this} />}
+        <CRMPage loading={loadingDeals || loadingColumns} {...this} />
       </div>
     );
   }
