@@ -8,10 +8,10 @@ build:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
   script:
     - docker build --target builder -t internal-portal-front-builder -f ci_cd/docker/Dockerfile .
-    - docker build --target web -t $CI_REGISTRY/$CI_PROJECT_PATH/${GIT_BRANCH}:latest -f ci_cd/docker/Dockerfile .
-    - docker tag ${GIT_BRANCH} $CI_REGISTRY/$CI_PROJECT_PATH/${GIT_BRANCH}:latest
-    - docker push $CI_REGISTRY/$CI_PROJECT_PATH/${GIT_BRANCH}:latest
-    - docker rmi $CI_REGISTRY/$CI_PROJECT_PATH/${GIT_BRANCH}:latest
+    - docker build --target web -t $CI_REGISTRY/$CI_PROJECT_PATH/$GIT_BRANCH:latest -f ci_cd/docker/Dockerfile .
+    - docker tag ${GIT_BRANCH} $CI_REGISTRY/$CI_PROJECT_PATH/$GIT_BRANCH:latest
+    - docker push $CI_REGISTRY/$CI_PROJECT_PATH/$GIT_BRANCH:latest
+    - docker rmi $CI_REGISTRY/$CI_PROJECT_PATH/$GIT_BRANCH:latest
   tags:
     - build
 #  only:
