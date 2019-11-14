@@ -66,6 +66,7 @@ const DateInput = (props: any) => {
       className={styles.input}
     >
       <Input
+        mask={[/\d/, /\d/, '.', /\d/, /\d/, '.', /\d/, /\d/, /\d/, /\d/]}
         {...props}
       />
       <button type="button" onClick={onFocus} onBlur={onBlur} className={styles.icon__wrap}>
