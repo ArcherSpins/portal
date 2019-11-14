@@ -28,9 +28,9 @@ const createTestAttr = createTestContext('modal');
 
 
 const optionsArray = [
-  { value: 'chocolate', label: 'Chocolate' },
-  { value: 'strawberry', label: 'Strawberry' },
-  { value: 'vanilla', label: 'Vanilla' },
+  { value: 'estimation', label: 'Estimation' },
+  { value: 'contact client', label: 'Contact client' },
+  { value: 'managing project', label: 'Managing project' },
 ];
 
 type Props = {
@@ -76,7 +76,7 @@ export default ({
               </DealNameContainer>
             </div>
             <div className="mb-20 fz-14 col-6 borderless">
-              <Datepicker className="overlay-right-90" label="Date" />
+              <Datepicker dateFormat="DD.MM.YYYY" overlayAlign="left" label="Date" />
               {/* <Dropdown
                 label="Date"
                 options={optionsArray}

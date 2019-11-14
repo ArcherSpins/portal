@@ -4,7 +4,7 @@
 // @flow
 import React from 'react';
 import zenscroll from 'zenscroll';
-import { ChatForm, DetailsListStyled, TaskMessage } from '../index';
+import { ChatForm, DetailsListStyled } from '../index';
 import { MessageComponent } from './styled';
 import type { DealType, CommentType } from '../../types';
 import './style.scss';
@@ -119,6 +119,7 @@ class DetailsContent extends React.Component<Props, State> {
           <MessageComponent
             loading={loading}
             length={comments.length}
+            toggleModalNewDeal={toggleModalNewDeal}
             options={{
               data: comments,
               activeUser,
@@ -126,7 +127,6 @@ class DetailsContent extends React.Component<Props, State> {
               updateMessage,
             }}
           />
-          <TaskMessage onClick={toggleModalNewDeal} />
         </section>
         <div
           className="chat-form-container"

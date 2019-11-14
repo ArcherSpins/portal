@@ -4,12 +4,13 @@
 // @flow
 import React from 'react';
 import { LoadingContainer } from '../../containers';
-import { Message } from '../index';
+import { Message, TaskMessage } from '../index';
 import type { DealType, CommentType } from '../../types';
 
 export type MessageComponentProps = {
   loading: boolean,
   length: number,
+  toggleModalNewDeal: (boolean) => void,
   options: {
     data: Array<CommentType>,
     activeUser: DealType,
@@ -25,7 +26,9 @@ export type MessageComponentProps = {
 
 
 // eslint-disable-next-line import/prefer-default-export
-export const MessageComponent = ({ loading, length, options }: MessageComponentProps) => {
+export const MessageComponent = ({
+  loading, length, options, toggleModalNewDeal,
+}: MessageComponentProps) => {
   const {
     data, activeUser, deleteMessageCrm, updateMessage,
   } = options;
@@ -49,6 +52,7 @@ export const MessageComponent = ({ loading, length, options }: MessageComponentP
                   {...message}
                 />
               ))}
+              <TaskMessage onClick={() => toggleModalNewDeal(true)} />
             </div>
           )
           : (

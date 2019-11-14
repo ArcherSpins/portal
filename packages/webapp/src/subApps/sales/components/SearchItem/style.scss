@@ -1,6 +1,18 @@
 .search-item {
     list-style-type: none;
 
+    a {
+        text-decoration: none;
+    }
+
+    .date, .search-item-title {
+        color: #333;
+    }
+
+    .search-item-title {
+        font-weight: bold;
+    }
+
     .search-item-block {
         background: #FFFFFF;
         border: 1px solid #DDDFE2;
