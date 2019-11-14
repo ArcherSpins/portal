@@ -10,6 +10,7 @@ import styles from './App.module.scss';
 const SalesApp = lazy(() => import('subApps/sales'));
 const AdminApp = lazy(() => import('subApps/admin'));
 const ProjectsApp = lazy(() => import('subApps/projects'));
+const LeadsApp = lazy(() => import('subApps/leads'));
 
 class App extends Component<Props> {
   render() {
@@ -25,6 +26,7 @@ class App extends Component<Props> {
             <ProtectedRoute path="/sales" component={SalesApp} />
             <ProtectedRoute path="/admin" component={AdminApp} />
             <ProtectedRoute path="/projects" component={ProjectsApp} />
+            <ProtectedRoute path="/leads" component={LeadsApp} />
             <ProtectedRoute exact path="/">
               <Redirect to="/sales" />
             </ProtectedRoute>
