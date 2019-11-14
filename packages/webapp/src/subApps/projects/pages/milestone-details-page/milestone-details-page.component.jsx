@@ -332,6 +332,7 @@ class MilestoneDetailsPage extends React.Component<Props, State> {
                 chips={participants}
                 onDelete={this.onChipDelete}
                 name="participants"
+                data-test={createTestAttr('participants-wrap')}
               >
                 <Dropdown
                   onChange={this.handleChipInputChange}

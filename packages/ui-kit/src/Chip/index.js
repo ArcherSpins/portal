@@ -6,7 +6,7 @@ import styles from './Chips.module.scss';
 type Props = {
   id: string,
   title: string,
-  onDelete: (string) => void,
+  onDelete?: (string) => void,
   className?: string,
   style?: {
     [string]: number | string
@@ -25,13 +25,15 @@ const Chip = (props: Props): Node => {
   return (
     <span style={style} className={classNames(styles.chip, className)} {...restProps}>
       {title}
-      <button
-        type="button"
-        onClick={() => onDelete(id)}
-        className={styles['close-button']}
-      >
-        <i className="icon-cancel" />
-      </button>
+      {onDelete && (
+        <button
+          type="button"
+          onClick={() => onDelete(id)}
+          className={styles['close-button']}
+        >
+          <i className="icon-cancel" />
+        </button>
+      )}
     </span>
   );
 };
@@ -39,6 +41,7 @@ const Chip = (props: Props): Node => {
 Chip.defaultProps = {
   className: '',
   style: {},
+  onDelete: null,
 };
 
 export default Chip;

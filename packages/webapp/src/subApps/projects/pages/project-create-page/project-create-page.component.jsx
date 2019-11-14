@@ -398,6 +398,7 @@ class CreateProjectPage extends Component<Props, State> {
                 chips={participants}
                 onDelete={this.onChipDelete}
                 name="participants"
+                data-test={createTestAttr('participants-wrap')}
               >
                 <Combobox
                   loadOptions={this.loadEmployees}
@@ -413,6 +414,7 @@ class CreateProjectPage extends Component<Props, State> {
                 chips={watchers}
                 onDelete={this.onChipDelete}
                 name="watchers"
+                data-test={createTestAttr('watchers-wrap')}
               >
                 <Combobox
                   loadOptions={this.loadEmployees}

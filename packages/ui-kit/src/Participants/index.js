@@ -24,7 +24,7 @@ const Participants = ({
 }: Props) => (
   <div className={classNames(styles.participants, className)} {...restProps}>
     {children}
-    <div className={styles['chips-list']}>
+    <div className={styles['chips-list']} data-test="chips-list">
       {Array.isArray(chips) && chips.map((item) => (
         <Chip
           key={item.id}
