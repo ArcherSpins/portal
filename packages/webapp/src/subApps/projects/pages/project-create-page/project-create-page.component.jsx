@@ -392,7 +392,7 @@ class CreateProjectPage extends Component<Props, State> {
                 label="Project Manager"
                 use="grey"
                 className="mb1"
-                data-test={createTestAttr('project-manager-select')}
+                dataTest={createTestAttr('project-manager-select')}
               />
               <Participants
                 chips={participants}
@@ -406,7 +406,7 @@ class CreateProjectPage extends Component<Props, State> {
                   label="Participants"
                   use="grey"
                   className="mb05"
-                  data-test={createTestAttr('participants-select')}
+                  dataTest={createTestAttr('participants-select')}
                 />
               </Participants>
               <Participants
@@ -421,7 +421,7 @@ class CreateProjectPage extends Component<Props, State> {
                   label="Watchers"
                   className="mb1"
                   use="grey"
-                  data-test={createTestAttr('watchers-select')}
+                  dataTest={createTestAttr('watchers-select')}
                 />
               </Participants>
               {Array.isArray(errors) && errors.length >= 1 && (
