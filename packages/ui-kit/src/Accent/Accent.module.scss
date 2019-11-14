@@ -1,0 +1,19 @@
+@import "../variables.scss";
+@import "../mixins.scss";
+
+.wrapper {
+  border-radius: calculateRem(4px);
+  padding: calculateRem(9px) calculateRem(12px);
+}
+
+.info {
+  background: rgba($grey-200, .4);
+}
+
+.success {
+  background: rgba($main-color, .1);
+}
+
+.danger {
+  background: rgba($danger-400, .1);
+}
