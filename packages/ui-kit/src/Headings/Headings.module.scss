@@ -1,5 +1,13 @@
+@import "../mixins.scss";
+
 .h1 {
   font-size: 1.75rem;
   font-weight: normal;
   font-family: 'Proxima Nova Black';
+}
+
+.h2 {
+  font-size: calculateRem(24px);
+  font-family: 'Proxima Nova';
+  font-weight: bold;
 }
