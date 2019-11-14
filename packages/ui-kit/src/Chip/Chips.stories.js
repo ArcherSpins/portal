@@ -9,12 +9,23 @@ storiesOf('Chip', module)
   .addWithChapters('Chips', {
     chapters: [
       {
-        info: 'Компонент Chip',
+        info: 'Chip with onDelete',
         sections: [
           {
             title: 'Chip',
             sectionFn: () => (
               <Chip title="Tatyana Andreeva" id="12" onDelete={onDelete} />
+            ),
+          },
+        ],
+      },
+      {
+        info: 'Without onDelete handler',
+        sections: [
+          {
+            title: 'Chip',
+            sectionFn: () => (
+              <Chip title="Tatyana Andreeva" id="12" />
             ),
           },
         ],
