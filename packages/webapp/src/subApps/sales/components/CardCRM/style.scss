@@ -1,7 +1,11 @@
 .container-crm-card {
     text-decoration: none;
     color: #333;
-    cursor: default;
+    cursor: grabbing;
+
+    div {
+        cursor: pointer;
+    }
 
     .footer-card_crm {
         display: flex;
@@ -20,9 +24,9 @@
             margin-right: 5px;
         }
 
-        &:hover {
-            cursor: move;
-        }
+        // &:hover {
+        //     cursor: move;
+        // }
     }
 }
 
@@ -35,10 +39,12 @@
     transition: transform .6s;
     transform: rotate(0deg);
     position: relative;
+    cursor: pointer !important;
 
     .body-card_crm {
         padding: 10px 15px;
-        cursor: pointer;
+        cursor: pointer !important;
+        // cursor: pointer;
     }
 
     * {
@@ -47,8 +53,6 @@
         -khtml-user-select: none;
         -webkit-user-select: none;
     }
-
-    cursor: move !important;
 
     &.error-drag {
         background-color: red;

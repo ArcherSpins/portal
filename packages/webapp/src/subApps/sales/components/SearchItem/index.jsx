@@ -44,7 +44,6 @@ export const SearchItem = ({
         </div>
         <div className="status">{stage.title}</div>
         <div className="info">
-          <span>Manager:</span>
           {manager.name}
         </div>
       </div>
