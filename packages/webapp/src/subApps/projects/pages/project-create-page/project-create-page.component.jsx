@@ -392,12 +392,13 @@ class CreateProjectPage extends Component<Props, State> {
                 label="Project Manager"
                 use="grey"
                 className="mb1"
-                data-test={createTestAttr('project-manager-select')}
+                dataTest={createTestAttr('project-manager-select')}
               />
               <Participants
                 chips={participants}
                 onDelete={this.onChipDelete}
                 name="participants"
+                data-test={createTestAttr('participants-wrap')}
               >
                 <Combobox
                   loadOptions={this.loadEmployees}
@@ -406,13 +407,14 @@ class CreateProjectPage extends Component<Props, State> {
                   label="Participants"
                   use="grey"
                   className="mb05"
-                  data-test={createTestAttr('participants-select')}
+                  dataTest={createTestAttr('participants-select')}
                 />
               </Participants>
               <Participants
                 chips={watchers}
                 onDelete={this.onChipDelete}
                 name="watchers"
+                data-test={createTestAttr('watchers-wrap')}
               >
                 <Combobox
                   loadOptions={this.loadEmployees}
@@ -421,7 +423,7 @@ class CreateProjectPage extends Component<Props, State> {
                   label="Watchers"
                   className="mb1"
                   use="grey"
-                  data-test={createTestAttr('watchers-select')}
+                  dataTest={createTestAttr('watchers-select')}
                 />
               </Participants>
               {Array.isArray(errors) && errors.length >= 1 && (

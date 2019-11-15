@@ -8,14 +8,15 @@ export const Container = styled.button`
   cursor: pointer;
   border: none;
   padding: 10px;
-  width: 75%;
+  width: 100%;
   border-radius: 4px;
-  background-color: ${({ status }) => {
+  background-color: transparent;
+  /* background-color: ${({ status }) => {
     if (status === 'error') return '#FFF5F5';
     if (status === 'success') return '#ECFDEF';
 
     return '#F5F7FB';
-  }};
+  }}; */
 `;
 
 export const Status = styled.p`
@@ -65,4 +66,22 @@ export const HeaderTitle = styled.p`
       align-items: center;
     }
   }
+`;
+
+
+export const LineContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+export const Line = styled.div`
+  flex-grow: 1;
+  background-color: #2F80ED;
+  height: 1px;
+  margin-right: 5px;
+`;
+
+export const LineText = styled.p`
+  color: #2F80ED;
+  font-size: font-size: 12px;;
 `;

@@ -68,7 +68,9 @@
   "scripts": {
     "start": "react-scripts start",
     "new": "plop --plopfile generators/index.js",
-    "build": "react-scripts build",
+    "build:test": "REACT_APP_API_URL=http://backend.erp-test.sfxdx.ru/api/graphql react-scripts build",
+    "build:dev": "REACT_APP_API_URL=http://internal.sfxdx.ru/api/graphql react-scripts build",
+    "build": "yarn build:dev",
     "analyze": "source-map-explorer 'build/static/js/*.js'",
     "test": "react-scripts test",
     "eject": "react-scripts eject",

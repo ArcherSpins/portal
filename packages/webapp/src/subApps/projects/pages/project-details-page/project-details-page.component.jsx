@@ -454,6 +454,7 @@ h
                 chips={participants}
                 onDelete={this.onChipDelete}
                 name="participants"
+                data-test={createTestAttr('participants-wrap')}
               >
                 <Combobox
                   loadOptions={this.loadEmployees}
@@ -469,6 +470,7 @@ h
                 chips={watchers}
                 onDelete={this.onChipDelete}
                 name="watchers"
+                data-test={createTestAttr('watchers-wrap')}
               >
                 <Combobox
                   loadOptions={this.loadEmployees}

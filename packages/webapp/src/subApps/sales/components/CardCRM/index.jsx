@@ -42,6 +42,7 @@ const CardCRM = React.memo<CardCRMProps>((props: CardCRMProps) => {
             className="container-crm-card"
           >
             <div
+              style={{ outline: 'none' }}
               {...provider.dragHandleProps}
               {...provider.draggableProps}
               ref={provider.innerRef}

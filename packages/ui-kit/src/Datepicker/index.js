@@ -11,7 +11,7 @@ import overlayStyles from './Overlay.module.scss';
 import 'react-day-picker/lib/style.css';
 
 
-const DEFAULT_FORMAT = 'd.L.y';
+const DEFAULT_FORMAT = 'dd.MM.y';
 
 type OverlayAlign = 'left' | 'right';
 
@@ -37,13 +37,12 @@ type Props = {
 type NavbarElementProps = {
   onNextClick: () => void,
   onPreviousClick: () => void,
-  overlayAlign: string
 }
 
 const weekdaysShort = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 
-const Navbar = ({ onNextClick, onPreviousClick, overlayAlign }: NavbarElementProps) => (
-  <div className={classNames(overlayStyles.nav, { [overlayAlign]: true })}>
+const Navbar = ({ onNextClick, onPreviousClick }: NavbarElementProps) => (
+  <div className={classNames(overlayStyles.nav)}>
     <button
       type="button"
       onClick={() => onPreviousClick()}
@@ -67,6 +66,7 @@ const DateInput = (props: any) => {
       className={styles.input}
     >
       <Input
+        mask={[/\d/, /\d/, '.', /\d/, /\d/, '.', /\d/, /\d/, /\d/, /\d/]}
         {...props}
       />
       <button type="button" onClick={onFocus} onBlur={onBlur} className={styles.icon__wrap}>
@@ -97,6 +97,7 @@ const Datepicker = ({
   style,
   error,
   containerProps,
+  overlayAlign,
   ...props
 }: Props) => {
   const inputRef = React.createRef();
@@ -112,7 +113,11 @@ const Datepicker = ({
         name={name}
         dayPickerProps={{
           ...props,
-          classNames: overlayStyles,
+          classNames: {
+            ...overlayStyles,
+            container: overlayAlign === 'left'
+              ? overlayStyles['container_align-left'] : overlayStyles.container,
+          },
           weekdaysShort,
           navbarElement: Navbar,
           selectedDays: value,
