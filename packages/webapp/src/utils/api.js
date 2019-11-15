@@ -9,7 +9,7 @@ import { Toast } from '@sfxdx/ui-kit';
 import history from 'utils/history';
 import { AUTH_TOKEN_KEY, UNAUTHENTICATED_CODE } from './constants';
 
-const apiUrl = 'http://internal.sfxdx.ru/api/graphql';
+const apiUrl = process.env.REACT_APP_API_URL;
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors) {
