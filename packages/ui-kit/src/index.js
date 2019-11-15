@@ -20,6 +20,7 @@ export { default as ErrorText } from './ErrorText';
 export { default as LinkButton } from './LinkButton';
 export { default as IconInput } from './IconInput';
 export { default as PopoverButton } from './PopoverButton';
+export { default as Accent } from './Accent';
 export {
   Modal, ModalHeader, ModalBody, ModalFooter,
 } from './Modal';
