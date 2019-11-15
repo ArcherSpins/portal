@@ -31,6 +31,7 @@ export default ({
         placeholder="Edit comment"
         value={value}
         data-test={createTestAttr('comment-text')}
+        onChange={() => {}}
       />
     </div>
     <div className="d-flex justify-content-end mt-3">

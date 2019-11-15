@@ -27,10 +27,10 @@ export default ({ onClick }: Props) => (
       <Container onClick={onClick}>
         <HeaderTitle>
           <div className="main-title">
-            <p>
+            <div className="p">
               <img alt="task" src={taskIcon} />
               <span className="task-title">Estimate</span>
-            </p>
+            </div>
             <span>
               26 March 2019 at 11:00
             </span>
