@@ -11,7 +11,7 @@ import overlayStyles from './Overlay.module.scss';
 import 'react-day-picker/lib/style.css';
 
 
-const DEFAULT_FORMAT = 'dd.L.y';
+const DEFAULT_FORMAT = 'dd.MM.y';
 
 type OverlayAlign = 'left' | 'right';
 
