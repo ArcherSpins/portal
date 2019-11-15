@@ -11,7 +11,7 @@ import overlayStyles from './Overlay.module.scss';
 import 'react-day-picker/lib/style.css';
 
 
-const DEFAULT_FORMAT = 'd.L.y';
+const DEFAULT_FORMAT = 'dd.L.y';
 
 type OverlayAlign = 'left' | 'right';
 
@@ -60,7 +60,7 @@ const Navbar = ({ onNextClick, onPreviousClick }: NavbarElementProps) => (
 
 const DateInput = (props: any) => {
   const { onFocus, onBlur } = props;
-  console.log(props);
+
   return (
     <div
       className={styles.input}
