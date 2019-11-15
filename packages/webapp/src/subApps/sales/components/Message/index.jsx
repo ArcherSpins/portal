@@ -9,9 +9,7 @@ import './style.scss';
 
 const createTestAttr = createTestContext('message');
 
-/* eslint-disable no-useless-escape */
-/* eslint-disable max-len */
-const regex = /^((ftp|http|https):\/\/)?(www\.)?([A-Za-zА-Яа-я0-9]{1}[A-Za-zА-Яа-я0-9\-]*\.?)*\.{1}[A-Za-zА-Яа-я0-9-]{2,8}(\/([\w#!:.?+=&%@!\-\/])*)?/;
+const regex = /(http[s]?:\/\/)?[^\s(["<,>]*\.[^\s[",><]*/;
 
 type MessageProps = {
   content: string,
