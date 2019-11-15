@@ -60,12 +60,13 @@ const Navbar = ({ onNextClick, onPreviousClick }: NavbarElementProps) => (
 
 const DateInput = (props: any) => {
   const { onFocus, onBlur } = props;
-
+  console.log(props);
   return (
     <div
       className={styles.input}
     >
       <Input
+        mask={[/\d/, /\d/, '.', /\d/, /\d/, '.', /\d/, /\d/, /\d/, /\d/]}
         {...props}
       />
       <button type="button" onClick={onFocus} onBlur={onBlur} className={styles.icon__wrap}>
