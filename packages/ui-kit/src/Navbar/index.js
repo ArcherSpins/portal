@@ -1,4 +1,5 @@
 // @flow
+// TODO: Move this component to packages/webapp
 
 import React from 'react';
 import { NavLink } from 'react-router-dom';
@@ -29,6 +30,9 @@ const Navbar = ({ username, className }: Props) => (
         </NavLink>
         <NavLink data-test="header__admin-link" activeClassName={styles.active} className={styles.link} to="/admin">
           Admin panel
+        </NavLink>
+        <NavLink data-test="header__admin-link" activeClassName={styles.active} className={styles.link} to="/leads">
+          Leads
         </NavLink>
       </div>
       <div>

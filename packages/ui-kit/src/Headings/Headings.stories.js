@@ -13,6 +13,10 @@ storiesOf('Typography', module)
             title: "H1 Heading:",
             sectionFn: () => <H1>Lorem Ipsum</H1>,
           },
+          {
+            title: "H2 Heading:",
+            sectionFn: () => <H2>Lorem Ipsum</H2>,
+          },
         ]
       }
     ]
