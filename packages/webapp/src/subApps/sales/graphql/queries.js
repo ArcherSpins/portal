@@ -533,6 +533,49 @@ const getSelfInfo = gql`
   }
 `;
 
+export const getDealTasksType = gql`
+  query dealTaskTypes {
+    dealTaskTypes(limit: 10, offset:0) {
+      id,
+      title,
+      createdAt,
+      updatedAt,
+    }
+  }
+`;
+
+export const getDealTaskTypeId = gql`
+  query dealTaskType {
+    dealTaskType(id: ID!) {
+      id,
+      title,
+      createdAt,
+      updatedAt,
+    }
+  }
+`;
+
+export const getDealTasks = gql`
+  query dealTasks {
+    dealTasks(dealID: ID!) {
+      id,
+      type {
+        id, 
+        title,
+      },
+      deal {
+        id,
+        title,
+      },
+      description,
+      startDate,
+      endDate,
+      resolved,
+      resolvedComment,
+    }
+  }
+`;
+
 export {
   getEmployees,
   getDeals,

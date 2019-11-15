@@ -8,20 +8,41 @@ build:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
   script:
     - docker build --target builder -t internal-portal-front-builder -f ci_cd/docker/Dockerfile .
-    - docker build --target web -t $CI_REGISTRY/$CI_PROJECT_PATH:latest -f ci_cd/docker/Dockerfile .
-    - docker push $CI_REGISTRY/$CI_PROJECT_PATH:latest
-    - docker rmi $CI_REGISTRY/$CI_PROJECT_PATH:latest
+    - docker build --target web -t $CI_REGISTRY/$CI_PROJECT_PATH/$CI_COMMIT_REF_NAME:latest -f ci_cd/docker/Dockerfile .
+    - docker tag $CI_REGISTRY/$CI_PROJECT_PATH/$CI_COMMIT_REF_NAME $CI_REGISTRY/$CI_PROJECT_PATH/$CI_COMMIT_REF_NAME:latest
+    - docker push $CI_REGISTRY/$CI_PROJECT_PATH/$CI_COMMIT_REF_NAME:latest
+    - docker rmi $CI_REGISTRY/$CI_PROJECT_PATH/$CI_COMMIT_REF_NAME:latest
   tags:
     - build
-  only:
-    - develop
+#  only:
+#    - develop
 
-deploy:
+.deploy: &deploy_template
   stage: deploy
+  variables:
+    TARGET: ''
   script:
-    - cd ci_cd/ansible && ansible-playbook books/deploy.yml -i inventories/develop -e docker_registry=$CI_REGISTRY -e docker_login="gitlab-ci-token" -e docker_pass=$CI_JOB_TOKEN -e docker_image=$CI_REGISTRY/$CI_PROJECT_PATH:latest
+    - cd ci_cd/ansible && ansible-playbook books/deploy.yml -i inventories/$TARGET -e docker_registry=$CI_REGISTRY -e docker_login="gitlab-ci-token" -e docker_pass=$CI_JOB_TOKEN -e docker_image=$CI_REGISTRY/$CI_PROJECT_PATH/${CI_COMMIT_REF_NAME}:latest
   tags:
     - deploy
+
+deploy_dev:
+  <<: *deploy_template
+  variables:
+    TARGET: develop
   only:
     - develop
 
+deploy_testing:
+  <<: *deploy_template
+  variables:
+    TARGET: testing
+  only:
+    - testing
+
+deploy_prod:
+  <<: *deploy_template
+  variables:
+    TARGET: prod
+  only:
+    - prod
