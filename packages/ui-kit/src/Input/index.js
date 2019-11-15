@@ -106,7 +106,10 @@ const Input = ({
               mask={mask}
               placeholder={placeholder}
               onChange={onChange}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
               id={name}
+              {...restProps}
               render={(ref, props) => (
                 <input
                   ref={ref}
@@ -114,8 +117,6 @@ const Input = ({
                   name={name}
                   type={type}
                   placeholder={placeholder}
-                  onFocus={handleFocus}
-                  onBlur={handleBlur}
                   disabled={disabled}
                   value={value}
                   {...props}

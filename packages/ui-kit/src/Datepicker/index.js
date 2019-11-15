@@ -60,7 +60,7 @@ const Navbar = ({ onNextClick, onPreviousClick }: NavbarElementProps) => (
 
 const DateInput = (props: any) => {
   const { onFocus, onBlur } = props;
-
+  console.log(props);
   return (
     <div
       className={styles.input}
