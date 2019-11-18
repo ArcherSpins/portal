@@ -2,12 +2,16 @@
 import type {
   GetDealsType,
   UpdateDealType,
+  getTypeTaskDeal,
 } from '../actions/types';
 import initial, { type CRMType } from './initialStateCrm';
 
 const initialState: CRMType = initial;
 
-export default (state: CRMType = initialState, action: GetDealsType | UpdateDealType): CRMType => {
+export default (
+  state: CRMType = initialState,
+  action: GetDealsType | UpdateDealType | getTypeTaskDeal,
+): CRMType => {
   switch (action.type) {
     case 'GET_DEALS_REQUEST':
       return {
@@ -41,6 +45,16 @@ export default (state: CRMType = initialState, action: GetDealsType | UpdateDeal
       return {
         ...state,
         loadingById: false,
+      };
+    case 'GET_DEAL_TYPES_SUCCESS':
+      return {
+        ...state,
+        dealTypes: action.payload,
+      };
+    case 'GET_DEAL_TASKS_SUCCESS':
+      return {
+        ...state,
+        dealTasks: action.payload,
       };
     default: return state;
   }

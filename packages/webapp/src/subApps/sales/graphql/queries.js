@@ -545,8 +545,8 @@ export const getDealTasksType = gql`
 `;
 
 export const getDealTaskTypeId = gql`
-  query dealTaskType {
-    dealTaskType(id: ID!) {
+  query dealTaskType($id: ID!) {
+    dealTaskType(id: $id) {
       id,
       title,
       createdAt,
@@ -556,8 +556,83 @@ export const getDealTaskTypeId = gql`
 `;
 
 export const getDealTasks = gql`
-  query dealTasks {
-    dealTasks(dealID: ID!) {
+  query dealTasks($dealID: ID!) {
+    dealTasks(dealID: $dealID) {
+      id,
+      type {
+        id, 
+        title,
+      },
+      deal {
+        id,
+        title,
+      },
+      description,
+      startDate,
+      endDate,
+      resolved,
+      resolvedComment,
+    }
+  }
+`;
+
+export const createDealTask = gql`
+  mutation createDealTask(
+    $dealID: ID!,
+    $typeID: ID!,
+    $description: String,
+    $startDate: Time,
+    $endDate: Time
+  ) {
+    createDealTask(
+      dealID: $dealID,
+      typeID: $typeID,
+      description: $description,
+      startDate: $startDate,
+      endDate: $endDate
+    ) {
+      id,
+      type {
+        id, 
+        title,
+      },
+      deal {
+        id,
+        title,
+      },
+      description,
+      startDate,
+      endDate,
+      resolved,
+      resolvedComment,
+    }
+  }
+`;
+
+export const getDealTaskId = gql`
+  query dealTask($id: ID!) {
+    dealTask(id: $id) {
+      id,
+      type {
+        id, 
+        title,
+      },
+      deal {
+        id,
+        title,
+      },
+      description,
+      startDate,
+      endDate,
+      resolved,
+      resolvedComment,
+    }
+  }
+`;
+
+export const updateDealTask = gql`
+  mutation updateDealTask($id: ID!, $resolveComment: String = "done") {
+    updateDealTask(id: $id, resolveComment: $resolveComment) {
       id,
       type {
         id, 

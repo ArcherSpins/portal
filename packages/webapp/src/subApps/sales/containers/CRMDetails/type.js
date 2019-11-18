@@ -9,6 +9,8 @@ import type {
   ManagerType,
   CommentType,
   StatusType,
+  DealTask,
+  TypeDeal,
 } from '../../types';
 import type {
   PropsFilterDeals,
@@ -50,6 +52,8 @@ export type PropsCrmDetails = {
     },
   },
   match: Match,
+  dealTasks: Array<DealTask>,
+  dealTypes: Array<TypeDeal>,
   history: RouterHistory,
   comments: Array<CommentType>,
   contacts: Array<ContactType>,
@@ -66,6 +70,9 @@ export type PropsCrmDetails = {
   loadingChannels: boolean,
   loadingById: boolean,
   loadingSources: boolean,
+  fetchDealTypeIdRequest: (string) => void,
+  fetchDealTypesRequest: () => void,
+  fetchDealTasksRequest: (string) => void,
   errorAlert: {
     status: boolean,
     message: string

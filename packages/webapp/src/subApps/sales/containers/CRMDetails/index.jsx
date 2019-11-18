@@ -32,6 +32,8 @@ class CRMDetailsContainer extends React.PureComponent<PropsCrmDetails, State> {
   }
 
   componentDidMount = () => {
+    const { dealTypes, dealTasks } = this.props;
+    console.log(dealTypes, dealTasks);
     this.getData();
   }
 
@@ -39,11 +41,6 @@ class CRMDetailsContainer extends React.PureComponent<PropsCrmDetails, State> {
     const { errorsFormCreate, deleteErrorForm } = this.props;
     Object.keys(errorsFormCreate).forEach((key) => deleteErrorForm(key));
   }
-
-
-  // componentDidCatch(error) {
-  //   this.setState({ error: true });
-  // }
 
   toggleModalApproval = (status: boolean) => {
     this.setState({ modalApproval: status });
@@ -54,10 +51,6 @@ class CRMDetailsContainer extends React.PureComponent<PropsCrmDetails, State> {
       dataDealForDelete: data,
       modalApproval: true,
     });
-
-    // setTimeout(() => {
-    //   this.setState({ modalApproval: false });
-    // }, 5000);
   }
 
   approveDeleteDeal = () => {
@@ -135,12 +128,18 @@ class CRMDetailsContainer extends React.PureComponent<PropsCrmDetails, State> {
       setContactsDeal,
       fetchCommentsAction,
       fetchDealParametersAction,
+      fetchDealTypesRequest,
+      fetchDealTypeIdRequest,
+      fetchDealTasksRequest,
     } = this.props;
     const activeDeal = data.find((item) => item.title === id);
     if (activeDeal) {
       fetchCommentsAction(activeDeal.id);
+      fetchDealTypesRequest();
       setContactsDeal(activeDeal.customFields);
       setActiveUser(activeDeal);
+      fetchDealTypeIdRequest(activeDeal.id);
+      fetchDealTasksRequest(activeDeal.id);
 
       fetchDealParametersAction((parameters: Array<ParameterType>) => {
         this.setState({

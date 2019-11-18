@@ -4,6 +4,8 @@ import type {
   StatusType,
   DealType,
   ColumnType,
+  DealTask,
+  TypeDeal,
 } from '../../types';
 
 
@@ -21,7 +23,9 @@ export type CRMType = {
   deals?: Array<DealType>,
   loadingDeals?: boolean,
   activeDeal?: DealType,
-  loadingById?: boolean
+  loadingById?: boolean,
+  dealTypes: TypeDeal,
+  dealTasks: Array<DealTask>
 }
 
 export default {
@@ -57,4 +61,6 @@ export default {
   createCrmCard: false,
   columnOrder: {},
   loaded: false,
+  dealTypes: [],
+  dealTasks: [],
 };

@@ -4,6 +4,8 @@ import type {
   DealType,
   ColumnType,
   EmployeeType,
+  TypeDeal,
+  DealTask,
 } from '../../types';
 
 export type PropsFilterDeals = {
@@ -25,6 +27,12 @@ export type GetDealsSuccess = {
       [string]: ColumnType
     },
   }
+}
+
+export type getTypeTaskDeal = {
+  type: 'GET_DEAL_TYPES_SUCCESS' |
+        'GET_DEAL_TASKS_SUCCESS',
+  payload: Array<TypeDeal> | Array<DealTask>
 }
 
 export type GetDealsType = {

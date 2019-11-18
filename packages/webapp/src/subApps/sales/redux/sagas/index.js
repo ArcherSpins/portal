@@ -10,6 +10,7 @@ import sourcesSaga from './sourcesSaga';
 import commentSaga from './commentsSaga';
 import dealParameter from './parametersSaga';
 import contactSaga from './contactsSaga';
+import dealTypeSaga from './dealTaskSaga';
 
 export default function* root(): any {
   yield all([
@@ -22,5 +23,6 @@ export default function* root(): any {
     commentSaga(),
     dealParameter(),
     contactSaga(),
+    dealTypeSaga(),
   ]);
 }

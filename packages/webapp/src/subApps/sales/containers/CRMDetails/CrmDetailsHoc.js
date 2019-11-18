@@ -34,12 +34,16 @@ import {
   getColumnsDataAction,
   getDealsAction,
   getDealById,
+  fetchDealTypesRequest,
+  fetchDealTypeIdRequest,
+  fetchDealTasksRequest,
 } from '../../redux/actions';
 
 const mapStateToProps = (state) => ({
   activeUser: state.detailsCrm.activeUser,
   contacts: state.detailsCrm.contacts,
   comments: state.detailsCrm.comments,
+  dealTypes: state.deals.dealTypes,
   activeManager: state.detailsCrm.activeManager,
   errorsFormCreate: state.errorFormCreate.errorsFormCreate,
   errorAlert: state.errorFormCreate.errorAlert,
@@ -48,6 +52,7 @@ const mapStateToProps = (state) => ({
   statuses: state.column.columnsData,
   loadingColumns: state.column.loadingColumns,
   crm: state.deals.deals,
+  dealTasks: state.deals.dealTasks,
   loadingDeals: state.deals.loadingDeals,
   loadingById: state.deals.loadingById,
   loadingChannels: state.detailsCrm.loadingChannels,
@@ -85,6 +90,9 @@ const mapDispatchToProps = {
   fetchDeleteDealAction,
   fetchUpdateContactAction,
   getDealById,
+  fetchDealTypesRequest,
+  fetchDealTypeIdRequest,
+  fetchDealTasksRequest,
 };
 
 // $FlowFixMe
