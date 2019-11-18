@@ -37,6 +37,7 @@ import {
   fetchDealTypesRequest,
   fetchDealTypeIdRequest,
   fetchDealTasksRequest,
+  getCalendarData,
 } from '../../redux/actions';
 
 const mapStateToProps = (state) => ({
@@ -93,6 +94,7 @@ const mapDispatchToProps = {
   fetchDealTypesRequest,
   fetchDealTypeIdRequest,
   fetchDealTasksRequest,
+  getCalendarData,
 };
 
 // $FlowFixMe

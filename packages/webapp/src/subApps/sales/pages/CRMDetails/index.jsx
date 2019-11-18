@@ -47,6 +47,8 @@ const CRMDetailsPage = ({
     errorsFormCreate,
     deleteErrorForm,
     history,
+    getCalendarData,
+    dealTypes,
   } = props;
 
   const {
@@ -67,7 +69,9 @@ const CRMDetailsPage = ({
   return (
     <div className="details-page">
       <ModalNewTask
+        getCalendarData={getCalendarData}
         isOpen={isNewDeal}
+        dealTypes={dealTypes}
         onClose={() => toggleModalNewDeal(false)}
         onCreate={() => null}
       />

@@ -533,6 +533,30 @@ const getSelfInfo = gql`
   }
 `;
 
+export const queryCalendar = gql`
+  query calendar(
+    $year: String = "2019"
+  ) {
+    calendar(
+      year: $year
+    ) {
+      year,
+      january,
+      february,
+      march,
+      april,
+      may,
+      june,
+      july,
+      august,
+      september,
+      october,
+      november,
+      december
+    }
+  }
+`;
+
 export const getDealTasksType = gql`
   query dealTaskTypes {
     dealTaskTypes(limit: 10, offset:0) {

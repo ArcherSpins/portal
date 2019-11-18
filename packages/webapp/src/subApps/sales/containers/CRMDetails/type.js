@@ -11,6 +11,7 @@ import type {
   StatusType,
   DealTask,
   TypeDeal,
+  CalendarType,
 } from '../../types';
 import type {
   PropsFilterDeals,
@@ -52,6 +53,7 @@ export type PropsCrmDetails = {
     },
   },
   match: Match,
+  getCalendarData: (string, returnFunc?: (Array<CalendarType>) => void) => void,
   dealTasks: Array<DealTask>,
   dealTypes: Array<TypeDeal>,
   history: RouterHistory,

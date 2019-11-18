@@ -11,6 +11,7 @@ import commentSaga from './commentsSaga';
 import dealParameter from './parametersSaga';
 import contactSaga from './contactsSaga';
 import dealTypeSaga from './dealTaskSaga';
+import calendarSaga from './calendarSaga';
 
 export default function* root(): any {
   yield all([
@@ -24,5 +25,7 @@ export default function* root(): any {
     dealParameter(),
     contactSaga(),
     dealTypeSaga(),
+    // $FlowFixMe
+    calendarSaga(),
   ]);
 }
