@@ -11,11 +11,12 @@ import { TextEdit } from './styled';
 const createTestAttr = createTestContext('modal');
 
 type Props = {
-  value: string
+  value: string,
+  onChange: (e: SyntheticEvent<HTMLInputElement>) => void,
 }
 
 export default ({
-  value,
+  value, onChange,
 }: Props) => (
   <div className="edit-comment">
     <H1 className="fz-24">Resolve Task</H1>
@@ -31,7 +32,7 @@ export default ({
         placeholder="Edit comment"
         value={value}
         data-test={createTestAttr('comment-text')}
-        onChange={() => {}}
+        onChange={onChange}
       />
     </div>
     <div className="d-flex justify-content-end mt-3">

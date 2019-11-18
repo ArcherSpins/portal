@@ -50,7 +50,7 @@ export const HeaderTitle = styled.div`
     display: flex;
     align-items: center;
 
-    span {
+    .date-info {
       margin-left: 7px;
     }
 
@@ -61,7 +61,7 @@ export const HeaderTitle = styled.div`
       color: #333333;
     }
 
-    .p {
+    .title {
       display: flex;
       align-items: center;
     }
