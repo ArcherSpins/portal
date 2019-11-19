@@ -11,15 +11,17 @@ import { TextEdit } from './styled';
 const createTestAttr = createTestContext('modal');
 
 type Props = {
-  value: string
+  value: string,
+  onResolved: () => void,
+  onChange: (string) => void
 }
 
 export default ({
-  value,
+  value, onResolved, onChange,
 }: Props) => (
   <div className="edit-comment">
     <H1 className="fz-24">Resolve Task</H1>
-    <TextEdit className="mb-5">
+    <TextEdit onChange={(e) => onChange(e.target.value)} className="mb-5">
       Do you want to confirm the task?
       <br />
       Please tell us about successes. Thanks!
@@ -34,7 +36,7 @@ export default ({
       />
     </div>
     <div className="d-flex justify-content-end mt-3">
-      <Button data-test={createTestAttr('task-resolved')}>Task Resolved</Button>
+      <Button onClick={onResolved} data-test={createTestAttr('task-resolved')}>Task Resolved</Button>
     </div>
   </div>
 );

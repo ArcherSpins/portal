@@ -1,5 +1,5 @@
 // @flow
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Modal,
   ModalHeader,
@@ -18,10 +18,13 @@ import {
   DealNameContainer,
   EditButton,
 } from './styled';
-import type { CalendarType, TypeDeal } from '../../../types';
+import type { CalendarType, TypeDeal, DealTask } from '../../../types';
 import EditComment from './EditComment';
 import InputsCouple from '../../InputsCouple';
 import pencilIcon from './pencil.svg';
+import {
+  getModify,
+} from './helper';
 import './style.scss';
 
 const createTestAttr = createTestContext('modal');
@@ -29,9 +32,12 @@ const createTestAttr = createTestContext('modal');
 type Props = {
   isOpen: boolean,
   onClose: () => void,
-  onCreate: () => void,
+  onCreate: (typeID: string, description: string, startDate: Date, endDate: Date,) => void,
   dealTypes: Array<TypeDeal>,
-  getCalendarData: (string, returnFunc?: (Array<CalendarType>) => void) => void
+  getCalendarData: (string, returnFunc?: (Array<CalendarType>) => void) => void,
+  isNewTask: boolean,
+  onUpdate: (string, string) => void,
+  data: DealTask
 }
 
 export default ({
@@ -40,13 +46,24 @@ export default ({
   onCreate,
   getCalendarData,
   dealTypes,
+  isNewTask,
+  data,
+  onUpdate,
 }: Props) => {
+  const [calendar, onChangeCalendar] = useState(null);
+  const [dateValue, onChangeDate] = useState(new Date());
+  const [description, onChangeDescription] = useState('');
+  const [resolveDescription, onChangeResolveDescription] = useState('');
+  const [activeType, onChangeTypes] = useState({ label: 'Not selected', id: '' });
+
   useEffect(() => {
-    getCalendarData('2019', (data) => console.log(data));
+    getCalendarData('2019', (date) => onChangeCalendar(date[0]));
   }, []);
+
   const types = dealTypes.map(
     (item) => ({ ...item, label: item.title, value: item.id }),
   );
+  console.log(activeType, calendar);
   return (
     <Modal
       show={isOpen}
@@ -56,11 +73,15 @@ export default ({
       <ModalHeader>
         <H1 className="fz-24 d-flex align-items-center">
           <span className="mr-10">New Task</span>
-          <EditButton
-            data-test={createTestAttr('edit-button')}
-          >
-            <img src={pencilIcon} alt="pencil icon" />
-          </EditButton>
+          {
+            !isNewTask && (
+              <EditButton
+                data-test={createTestAttr('edit-button')}
+              >
+                <img src={pencilIcon} alt="pencil icon" />
+              </EditButton>
+            )
+          }
         </H1>
         <CloseButton
           onClick={onClose}
@@ -84,45 +105,95 @@ export default ({
                   dateFormat="DD.MM.YYYY"
                   overlayAlign="left"
                   label="Date"
+                  value={dateValue}
+                  modifiers={getModify(calendar, dateValue).days}
+                  onMonthChange={(date) => {
+                    getCalendarData(String(date.getFullYear()), (d) => onChangeCalendar(d[0]));
+                  }}
+                  onDayChange={(date) => {
+                    onChangeDate(date);
+                  }}
+                  disabledDays={{ daysOfWeek: [0, 6] }}
+                  modifiersStyles={getModify(calendar, dateValue).modifiersStyles}
                 />
-                {/* <Dropdown
-                  label="Date"
-                  options={optionsArray}
-                  use="default"
-                  value={optionsArray[1]}
-                />
-                <CloseButton>
-                  <i className="icon-calendar" />
-                </CloseButton> */}
               </div>
               <InputsCouple dataTest={createTestAttr('inputs-couple')} />
             </div>
             <div className="col-6 fz-14">
-              <div className="mb-2 dropdown_not-padding">
-                <Dropdown
-                  label="Task type"
-                  options={types}
-                  use="borderless"
-                  value={types[0]}
-                  dataTest={createTestAttr('task-type')}
-                />
+              <div className="mb-2 color-gray dropdown_not-padding">
+                {
+                  isNewTask ? (
+                    <Dropdown
+                      label="Task type"
+                      options={types}
+                      use="borderless"
+                      value={activeType}
+                      onChange={onChangeTypes}
+                      dataTest={createTestAttr('task-type')}
+                    />
+                  ) : (
+                    <div>
+                      <span className="cbx__label mt-2 mb-5 color-gray d-block">Task type</span>
+                      <p
+                        className="fz-16 color-black line-height-24"
+                      >
+                        {activeType.label}
+                      </p>
+                    </div>
+                  )
+                }
               </div>
               <div className="color-gray">
-                <TextArea
-                  className="fz-14 comment-parent"
-                  label="Comment"
-                  placeholder="Task comment"
-                  onChange={() => null}
-                  data-test={createTestAttr('comment-text')}
-                />
+                {
+                  isNewTask ? (
+                    <TextArea
+                      className="fz-14 comment-parent"
+                      label="Comment"
+                      placeholder="Task comment"
+                      value={description}
+                      onChange={(e) => onChangeDescription(e.target.value)}
+                      data-test={createTestAttr('comment-text')}
+                    />
+                  ) : (
+                    <div>
+                      <span className="cbx__label mt-2 mb-5 color-gray d-block">Comment</span>
+                      <p
+                        className="fz-16 color-black line-height-24 break-word"
+                        style={{ maxHeight: '127px', overflowY: 'auto' }}
+                      >
+                        {description}
+                      </p>
+                    </div>
+                  )
+                }
               </div>
             </div>
           </div>
-          <div className="d-flex justify-content-end mt-3">
-            <Button data-test={createTestAttr('close-button')} onClick={onCreate}>Create</Button>
-          </div>
+          {
+            isNewTask && (
+              <div className="d-flex justify-content-end mt-3">
+                <Button
+                  data-test={createTestAttr('close-button')}
+                  onClick={() => {
+                    onCreate(activeType.id, description, dateValue, dateValue);
+                    onClose();
+                  }}
+                >
+                  Create
+                </Button>
+              </div>
+            )
+          }
         </div>
-        <EditComment value="" />
+        {
+          !isNewTask && (
+            <EditComment
+              onResolved={() => onUpdate(data.id, resolveDescription)}
+              value={resolveDescription}
+              onChange={onChangeResolveDescription}
+            />
+          )
+        }
       </ModalBody>
     </Modal>
   );

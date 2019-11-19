@@ -1,7 +1,7 @@
 /* eslint-disable import/no-cycle */
 /* eslint-disable react/no-unused-state */
 // @flow
-import React from 'react';
+import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import {
   DetailsContent,
@@ -33,6 +33,7 @@ const CRMDetailsPage = ({
   toggleModalNewDeal,
   approveDeleteDeal,
 }: CRMDetailsPageProps) => {
+  const [isNewTask, toggleNewTask] = useState(true);
   const {
     activeUser,
     comments,
@@ -47,6 +48,8 @@ const CRMDetailsPage = ({
     errorsFormCreate,
     deleteErrorForm,
     history,
+    fetchCreateDealTask,
+    fetchUpdateDealTask,
     getCalendarData,
     dealTypes,
   } = props;
@@ -64,6 +67,7 @@ const CRMDetailsPage = ({
   if (redirectNewDeal.redirect) {
     return <Redirect to={redirectNewDeal.url} />;
   }
+  console.log(comments);
 
   const { goBack } = history;
   return (
@@ -71,9 +75,22 @@ const CRMDetailsPage = ({
       <ModalNewTask
         getCalendarData={getCalendarData}
         isOpen={isNewDeal}
+        isNewTask={isNewTask}
         dealTypes={dealTypes}
         onClose={() => toggleModalNewDeal(false)}
-        onCreate={() => null}
+        onUpdate={(id, resolveComment) => fetchUpdateDealTask({
+          id,
+          resolveComment,
+        })}
+        onCreate={(
+          typeID: string, description: string, startDate: Date, endDate: Date,
+        ) => fetchCreateDealTask({
+          dealID: activeUser.id,
+          typeID,
+          description,
+          startDate,
+          endDate,
+        })}
       />
       <HeaderDetails
         goBack={goBack}
@@ -122,6 +139,7 @@ const CRMDetailsPage = ({
           activeUser={activeUser}
           comments={comments}
           updateMessage={updateMessage}
+          toggleNewTask={toggleNewTask}
           toggleModalNewDeal={toggleModalNewDeal}
           isNewDeal={isNewDeal}
         />

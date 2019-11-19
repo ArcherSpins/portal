@@ -66,6 +66,15 @@ export type PropsCrmDetails = {
   activeManager: ManagerType,
   activeUser: DealType,
   loadingEmployees: boolean,
+  fetchUpdateDealTask: ({
+    id: string,
+    resolveComment: string
+  }) => void,
+  fetchCreateDealTask: ({
+    dealID: string,
+    typeID: string,
+    description: string,
+  }) => void,
   loadingColumns: boolean,
   loadingComments: boolean,
   loadingDeals: boolean,

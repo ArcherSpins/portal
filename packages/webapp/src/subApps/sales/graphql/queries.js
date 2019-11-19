@@ -604,9 +604,9 @@ export const createDealTask = gql`
   mutation createDealTask(
     $dealID: ID!,
     $typeID: ID!,
-    $description: String,
-    $startDate: Time,
-    $endDate: Time
+    $description: String!,
+    $startDate: Time!,
+    $endDate: Time!
   ) {
     createDealTask(
       dealID: $dealID,

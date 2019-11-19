@@ -97,6 +97,7 @@ const FilterBlock = ({
             <Datepicker
               label="Date"
               value={date}
+              disabledDays={{ daysOfWeek: [0, 6] }}
               onDayChange={(dateRes) => changeFilter('start', dateRes)}
               containerProps={{
                 'data-test': createTestAttr('datepicker-start'),
@@ -107,6 +108,8 @@ const FilterBlock = ({
           <div className="field-block">
             <Datepicker
               value={endDate}
+              firstDayOfWeek={1}
+              disabledDays={{ daysOfWeek: [0, 6] }}
               onDayChange={(dateRes) => {
                 changeFilter('end', dateRes);
               }}

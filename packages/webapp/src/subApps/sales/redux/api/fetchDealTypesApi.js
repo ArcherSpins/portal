@@ -7,6 +7,7 @@ import {
   getDealTaskTypeId,
   getDealTaskId,
   getDealTasks,
+  createDealTask,
   updateDealTask,
 } from '../../graphql/queries';
 
@@ -69,8 +70,9 @@ export async function fetchCreateDealTask(data: {
   description: string,
 }): Promise<void> {
   try {
+    console.log(data);
     const result = await client.mutate({
-      mutation: getDealTaskId,
+      mutation: createDealTask,
       variables: data,
     });
     console.log(result);

@@ -38,6 +38,8 @@ import {
   fetchDealTypeIdRequest,
   fetchDealTasksRequest,
   getCalendarData,
+  fetchCreateDealTask,
+  fetchUpdateDealTask,
 } from '../../redux/actions';
 
 const mapStateToProps = (state) => ({
@@ -82,6 +84,7 @@ const mapDispatchToProps = {
   fetchDealParametersAction,
   fetchDeleteContactAction,
   fetchUpdateDealAction,
+  fetchCreateDealTask,
   closeErrorAlert,
   fetchCreateDealAction,
   fetchCreateCommentAction,
@@ -95,6 +98,7 @@ const mapDispatchToProps = {
   fetchDealTypeIdRequest,
   fetchDealTasksRequest,
   getCalendarData,
+  fetchUpdateDealTask,
 };
 
 // $FlowFixMe

@@ -21,13 +21,14 @@ export type MessageComponentProps = {
       id: number | string,
     content: string
     }) => {} | void,
-  }
+  },
+  toggleNewTask: (boolean) => void
 }
 
 
 // eslint-disable-next-line import/prefer-default-export
 export const MessageComponent = ({
-  loading, length, options, toggleModalNewDeal,
+  loading, length, options, toggleModalNewDeal, toggleNewTask,
 }: MessageComponentProps) => {
   const {
     data, activeUser, deleteMessageCrm, updateMessage,
@@ -52,7 +53,11 @@ export const MessageComponent = ({
                   {...message}
                 />
               ))}
-              <TaskMessage onClick={() => toggleModalNewDeal(true)} />
+              <TaskMessage onClick={() => {
+                toggleModalNewDeal(true);
+                toggleNewTask(false);
+              }}
+              />
             </div>
           )
           : (
