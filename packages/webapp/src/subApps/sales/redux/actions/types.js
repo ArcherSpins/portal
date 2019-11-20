@@ -5,6 +5,7 @@ import type {
   ColumnType,
   EmployeeType,
   TypeDeal,
+  CommentType,
   DealTask,
 } from '../../types';
 
@@ -31,8 +32,10 @@ export type GetDealsSuccess = {
 
 export type getTypeTaskDeal = {
   type: 'GET_DEAL_TYPES_SUCCESS' |
-        'GET_DEAL_TASKS_SUCCESS',
-  payload: Array<TypeDeal> | Array<DealTask>
+        'GET_DEAL_TASKS_SUCCESS' |
+        'GET_DEAL_LOGS_SUCCESS' |
+        'GET_DEAL_LOGS_REQUEST',
+  payload: Array<TypeDeal> | Array<DealTask> | Array<CommentType>
 }
 
 export type GetDealsType = {

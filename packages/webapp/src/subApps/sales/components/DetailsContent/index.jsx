@@ -6,7 +6,7 @@ import React from 'react';
 import zenscroll from 'zenscroll';
 import { ChatForm, DetailsListStyled } from '../index';
 import { MessageComponent } from './styled';
-import type { DealType, CommentType } from '../../types';
+import type { DealType, CommentType, DealTask } from '../../types';
 import './style.scss';
 
 const { Header } = DetailsListStyled;
@@ -26,7 +26,7 @@ type Props = {
     id: number | string,
     content: string
   }) => {} | void,
-  toggleModalNewDeal: (boolean) => void,
+  toggleModalNewDeal: (boolean, data?: DealTask) => void,
   isNewDeal: boolean,
   toggleNewTask: (boolean) => void
 }
@@ -123,6 +123,7 @@ class DetailsContent extends React.Component<Props, State> {
             length={comments.length}
             toggleModalNewDeal={toggleModalNewDeal}
             toggleNewTask={toggleNewTask}
+            activeUser={activeUser}
             options={{
               data: comments,
               activeUser,

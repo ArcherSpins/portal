@@ -9,9 +9,23 @@ import {
   getDealTasks,
   createDealTask,
   updateDealTask,
+  getDealLogs,
 } from '../../graphql/queries';
 
 type Response = Array<TaskDeal> | TaskDeal
+
+export async function fetchDealLogs(data: { dealID: string }): Promise<void> {
+  try {
+    const result = await client.query({
+      query: getDealLogs,
+      variables: data,
+      fetchPolicy: 'no-cache',
+    });
+    return result.data.dealLogs;
+  } catch (err) {
+    throw new Error(err.message);
+  }
+}
 
 export async function fetchDealTypes(): Promise<FetchResult<Response>> {
   try {
@@ -31,7 +45,6 @@ export async function fetchDealTypeId(data: { id: string }): Promise<FetchResult
       query: getDealTaskTypeId,
       variables: data,
     });
-    console.log(result);
     return result;
   } catch (err) {
     throw new Error(err.message);
@@ -57,7 +70,6 @@ export async function fetchDealTaskId(data: { id: string }): Promise<FetchResult
       query: getDealTaskId,
       variables: data,
     });
-    console.log(result);
     return result;
   } catch (err) {
     throw new Error(err.message);
@@ -70,12 +82,10 @@ export async function fetchCreateDealTask(data: {
   description: string,
 }): Promise<void> {
   try {
-    console.log(data);
     const result = await client.mutate({
       mutation: createDealTask,
       variables: data,
     });
-    console.log(result);
     return result;
   } catch (err) {
     throw new Error(err.message);
@@ -87,11 +97,11 @@ export async function fetchUpdateDealTask(data: {
   resolveComment: string
 }): Promise<void> {
   try {
+    console.log(data);
     const result = await client.mutate({
       mutation: updateDealTask,
       variables: data,
     });
-    console.log(result);
     return result;
   } catch (err) {
     throw new Error(err.message);

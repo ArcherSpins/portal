@@ -14,7 +14,23 @@ import {
   fetchDealTaskId,
   fetchCreateDealTask,
   fetchUpdateDealTask,
+  fetchDealLogs,
 } from '../api/fetchDealTypesApi';
+
+export function* getDealLogs(action: {
+  type: 'GET_DEAL_LOGS_REQUEST',
+  payload: {
+    dealID: string
+  }
+}): Saga<void> {
+  try {
+    const response = yield call(fetchDealLogs, action.payload);
+    yield put({ type: 'GET_DEAL_LOGS_SUCCESS', payload: response.reverse() });
+  } catch (error) {
+    Toast.push({ message: String(error), type: 'danger' });
+    yield put({ type: 'GET_DEAL_LOGS_FAIL' });
+  }
+}
 
 export function* getDealTypes(): Saga<void> {
   try {
@@ -37,6 +53,7 @@ export function* createDealTask(action: {
   try {
     const response = yield call(fetchCreateDealTask, action.payload);
     yield put({ type: 'CREATE_DEAL_TASK_SUCCESS', payload: response });
+    yield put({ type: 'GET_DEAL_LOGS_REQUEST', payload: { dealID: action.payload.dealID } });
   } catch (error) {
     Toast.push({ message: String(error), type: 'danger' });
     yield put({ type: 'CREATE_DEAL_TASK_FAIL' });
@@ -106,5 +123,6 @@ export default function* watchTypesSaga(): any {
     takeEvery('GET_DEAL_TASK_REQUEST', getDealTaskId),
     takeEvery('CREATE_DEAL_TASK_REQUEST', createDealTask),
     takeEvery('UPDATE_DEAL_TASK_REQUEST', updateDealTask),
+    takeEvery('GET_DEAL_LOGS_REQUEST', getDealLogs),
   ]);
 }

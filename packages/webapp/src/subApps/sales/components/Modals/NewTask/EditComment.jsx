@@ -21,7 +21,7 @@ export default ({
 }: Props) => (
   <div className="edit-comment">
     <H1 className="fz-24">Resolve Task</H1>
-    <TextEdit onChange={(e) => onChange(e.target.value)} className="mb-5">
+    <TextEdit className="mb-5">
       Do you want to confirm the task?
       <br />
       Please tell us about successes. Thanks!
@@ -32,6 +32,7 @@ export default ({
         label="Comment"
         placeholder="Edit comment"
         value={value}
+        onChange={(e) => onChange(e.target.value)}
         data-test={createTestAttr('comment-text')}
       />
     </div>

@@ -22,6 +22,7 @@ export type State = {
   title: string,
   error: boolean,
   edit: boolean,
+  taskData: DealTask,
   modalApproval: boolean,
   redirectDeleteDeal: boolean,
   dataDealForDelete: any,
@@ -55,6 +56,7 @@ export type PropsCrmDetails = {
   match: Match,
   getCalendarData: (string, returnFunc?: (Array<CalendarType>) => void) => void,
   dealTasks: Array<DealTask>,
+  logDeals: Array<DealTask & DealType>,
   dealTypes: Array<TypeDeal>,
   history: RouterHistory,
   comments: Array<CommentType>,
@@ -66,6 +68,7 @@ export type PropsCrmDetails = {
   activeManager: ManagerType,
   activeUser: DealType,
   loadingEmployees: boolean,
+  fetchDealLogs: ({ dealID: string }) => void,
   fetchUpdateDealTask: ({
     id: string,
     resolveComment: string

@@ -1,4 +1,5 @@
 // @flow
+import { DealTask } from '../../types';
 import type { PropsCrmDetails, State } from '../../containers/CRMDetails/type';
 
 export type CRMDetailsPageProps = {
@@ -19,5 +20,5 @@ export type CRMDetailsPageProps = {
   toggleModalApproval: (boolean) => void,
   setDeleteDataDeal: ({ id: string }) => void,
   approveDeleteDeal: () => void,
-  toggleModalNewDeal: (boolean) => void
+  toggleModalNewDeal: (boolean, data?: DealTask) => void
 }

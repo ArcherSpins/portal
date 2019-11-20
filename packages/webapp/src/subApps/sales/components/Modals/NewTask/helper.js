@@ -3,9 +3,7 @@ export function getDays(findDays, daysWeek, dateValue) {
     .split(',')
     .reduce((obj, item, idx) => {
       const date = new Date(dateValue.getFullYear(), dateValue.getMonth(), Number(item.replace(/\*|\+/, '')));
-      console.log(
-        daysWeek[Number(date.getDay())], daysWeek,
-      );
+
       if (daysWeek[Number(date.getDay())] !== 'Sunday' && daysWeek[Number(date.getDay())] !== 'Saturday') {
         return (
           {
@@ -19,13 +17,15 @@ export function getDays(findDays, daysWeek, dateValue) {
 }
 
 export function getStylesDate(findDays) {
+  console.log(findDays);
   return findDays
     .split(',')
     .reduce((obj, item, idx) => (
       {
         ...obj,
         [idx]: {
-          color: '#7dd28c',
+          color: '#6d9fef',
+          backgroundColor: '#6d9fef52',
         },
       }), {});
 }

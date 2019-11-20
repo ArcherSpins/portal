@@ -37,7 +37,7 @@ type Props = {
   getCalendarData: (string, returnFunc?: (Array<CalendarType>) => void) => void,
   isNewTask: boolean,
   onUpdate: (string, string) => void,
-  data: DealTask
+  data: DealTask,
 }
 
 export default ({
@@ -52,18 +52,21 @@ export default ({
 }: Props) => {
   const [calendar, onChangeCalendar] = useState(null);
   const [dateValue, onChangeDate] = useState(new Date());
+  const [month, onMonthChange] = useState(new Date());
   const [description, onChangeDescription] = useState('');
   const [resolveDescription, onChangeResolveDescription] = useState('');
   const [activeType, onChangeTypes] = useState({ label: 'Not selected', id: '' });
 
   useEffect(() => {
-    getCalendarData('2019', (date) => onChangeCalendar(date[0]));
-  }, []);
+    getCalendarData(String(month.getFullYear()), (date) => onChangeCalendar(date[0]));
+  }, [month]);
 
   const types = dealTypes.map(
     (item) => ({ ...item, label: item.title, value: item.id }),
   );
-  console.log(activeType, calendar);
+
+  const modifDays = getModify(calendar, month).days;
+
   return (
     <Modal
       show={isOpen}
@@ -72,7 +75,7 @@ export default ({
     >
       <ModalHeader>
         <H1 className="fz-24 d-flex align-items-center">
-          <span className="mr-10">New Task</span>
+          <span className="mr-10">{isNewTask ? 'New Task' : data.deal.title}</span>
           {
             !isNewTask && (
               <EditButton
@@ -105,11 +108,10 @@ export default ({
                   dateFormat="DD.MM.YYYY"
                   overlayAlign="left"
                   label="Date"
+                  month={month}
                   value={dateValue}
-                  modifiers={getModify(calendar, dateValue).days}
-                  onMonthChange={(date) => {
-                    getCalendarData(String(date.getFullYear()), (d) => onChangeCalendar(d[0]));
-                  }}
+                  modifiers={modifDays}
+                  onMonthChange={onMonthChange}
                   onDayChange={(date) => {
                     onChangeDate(date);
                   }}
@@ -137,7 +139,7 @@ export default ({
                       <p
                         className="fz-16 color-black line-height-24"
                       >
-                        {activeType.label}
+                        {data.type ? data.type.title : activeType.label}
                       </p>
                     </div>
                   )
@@ -161,7 +163,7 @@ export default ({
                         className="fz-16 color-black line-height-24 break-word"
                         style={{ maxHeight: '127px', overflowY: 'auto' }}
                       >
-                        {description}
+                        {data.description}
                       </p>
                     </div>
                   )
@@ -175,7 +177,7 @@ export default ({
                 <Button
                   data-test={createTestAttr('close-button')}
                   onClick={() => {
-                    onCreate(activeType.id, description, dateValue, dateValue);
+                    onCreate(activeType.id, description, dateValue, new Date(2020, 11, 2));
                     onClose();
                   }}
                 >
@@ -188,7 +190,10 @@ export default ({
         {
           !isNewTask && (
             <EditComment
-              onResolved={() => onUpdate(data.id, resolveDescription)}
+              onResolved={() => {
+                onUpdate(data.id, resolveDescription);
+                onClose();
+              }}
               value={resolveDescription}
               onChange={onChangeResolveDescription}
             />

@@ -66,6 +66,10 @@ export const createDeal = gql`
         createdAt,
         updatedAT,
       }
+      dealInfo {
+        overdueTasks,
+        tasksForToday
+      }
       stage {
         id,
         title
@@ -142,6 +146,10 @@ export const updateDeal = gql`
         createdAt,
         updatedAT,
       }
+      dealInfo {
+        overdueTasks,
+        tasksForToday
+      }
       stage {
         id,
         title
@@ -201,6 +209,10 @@ const getDeals = gql`
         createdAt,
         updatedAT,
       }
+      dealInfo {
+        overdueTasks,
+        tasksForToday
+      }
       stage {
         id,
         title
@@ -249,6 +261,10 @@ const getDealById = gql`
       title,
       createdAt,
       updatedAT,
+      dealInfo {
+        overdueTasks,
+        tasksForToday
+      }
       pipeline {
         id,
         title
@@ -477,6 +493,10 @@ const filterDeals = gql`
       title,
       createdAt,
       updatedAT,
+      dealInfo {
+        overdueTasks,
+        tasksForToday
+      }
       pipeline {
         id,
         title
@@ -671,6 +691,45 @@ export const updateDealTask = gql`
       endDate,
       resolved,
       resolvedComment,
+    }
+  }
+`;
+
+export const getDealLogs = gql`
+  query dealLogs($dealID: ID!) {
+    dealLogs(dealID: $dealID) {
+      __typename,
+      id,
+      createdAt,
+      updatedAt,
+      ... on DealComment {
+        content,
+        id,
+        user {
+          id , name,
+          email, status,
+          skills {
+            id,
+            title
+          }
+        }
+      }
+      ... on DealTask {
+        id,
+        type {
+          id, 
+          title,
+        },
+        deal {
+          id,
+          title,
+        },
+        description,
+        startDate,
+        endDate,
+        resolved,
+        resolvedComment,
+      }
     }
   }
 `;

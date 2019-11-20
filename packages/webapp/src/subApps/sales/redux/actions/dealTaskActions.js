@@ -30,3 +30,10 @@ export const fetchUpdateDealTask = (data: {
   type: 'UPDATE_DEAL_TASK_REQUEST',
   payload: data,
 });
+
+export const fetchDealLogs = (data: {
+  dealID: string
+}) => ({
+  type: 'GET_DEAL_LOGS_REQUEST',
+  payload: data,
+});

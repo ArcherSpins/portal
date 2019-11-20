@@ -5,6 +5,7 @@ import type {
   DealType,
   ColumnType,
   DealTask,
+  CommentType,
   TypeDeal,
 } from '../../types';
 
@@ -25,7 +26,9 @@ export type CRMType = {
   activeDeal?: DealType,
   loadingById?: boolean,
   dealTypes: TypeDeal,
-  dealTasks: Array<DealTask>
+  dealTasks: Array<DealTask>,
+  logDeals: Array<DealTask & CommentType>,
+  loadingComments: boolean
 }
 
 export default {
@@ -63,4 +66,6 @@ export default {
   loaded: false,
   dealTypes: [],
   dealTasks: [],
+  logDeals: [],
+  loadingComments: false,
 };

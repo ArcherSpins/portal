@@ -36,7 +36,6 @@ const CRMDetailsPage = ({
   const [isNewTask, toggleNewTask] = useState(true);
   const {
     activeUser,
-    comments,
     setActiveUser,
     statuses,
     loadingComments,
@@ -51,6 +50,7 @@ const CRMDetailsPage = ({
     fetchCreateDealTask,
     fetchUpdateDealTask,
     getCalendarData,
+    logDeals,
     dealTypes,
   } = props;
 
@@ -63,12 +63,11 @@ const CRMDetailsPage = ({
     showModalErrorMessage,
     modalApproval,
     isNewDeal,
+    taskData,
   } = state;
   if (redirectNewDeal.redirect) {
     return <Redirect to={redirectNewDeal.url} />;
   }
-  console.log(comments);
-
   const { goBack } = history;
   return (
     <div className="details-page">
@@ -77,6 +76,8 @@ const CRMDetailsPage = ({
         isOpen={isNewDeal}
         isNewTask={isNewTask}
         dealTypes={dealTypes}
+        titleDeal={activeUser.title}
+        data={taskData}
         onClose={() => toggleModalNewDeal(false)}
         onUpdate={(id, resolveComment) => fetchUpdateDealTask({
           id,
@@ -137,7 +138,7 @@ const CRMDetailsPage = ({
           deleteMessageCrm={deleteMessage}
           setMessage={setMessage}
           activeUser={activeUser}
-          comments={comments}
+          comments={logDeals}
           updateMessage={updateMessage}
           toggleNewTask={toggleNewTask}
           toggleModalNewDeal={toggleModalNewDeal}

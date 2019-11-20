@@ -5,12 +5,12 @@
 import React from 'react';
 import { LoadingContainer } from '../../containers';
 import { Message, TaskMessage } from '../index';
-import type { DealType, CommentType } from '../../types';
+import type { DealType, CommentType, DealTask } from '../../types';
 
 export type MessageComponentProps = {
   loading: boolean,
   length: number,
-  toggleModalNewDeal: (boolean) => void,
+  toggleModalNewDeal: (boolean, data?: DealTask) => void,
   options: {
     data: Array<CommentType>,
     activeUser: DealType,
@@ -35,7 +35,7 @@ export const MessageComponent = ({
   } = options;
 
   if (loading) {
-    return <LoadingContainer style={{ paddingBottom: '100px' }} />;
+    return <LoadingContainer />;
   }
 
   return (
@@ -44,20 +44,31 @@ export const MessageComponent = ({
         length > 0
           ? (
             <div className="block-messages">
-              {data.map((message) => (
-                <Message
-                  activeUser={activeUser}
-                  deleteMessageCrm={deleteMessageCrm}
-                  key={message.id}
-                  updateMessage={updateMessage}
-                  {...message}
-                />
-              ))}
-              <TaskMessage onClick={() => {
-                toggleModalNewDeal(true);
-                toggleNewTask(false);
-              }}
-              />
+              {data.map((message, i) => {
+                /* eslint-disable no-underscore-dangle */
+                if (message.__typename === 'DealTask') {
+                  return (
+                    <TaskMessage
+                      onClick={(task) => {
+                        toggleModalNewDeal(true, task);
+                        toggleNewTask(false);
+                      }}
+                      lineRect={data[i - 1] && data[i - 1].__typename === 'DealComment'}
+                      data={message}
+                    />
+                  );
+                }
+
+                return (
+                  <Message
+                    activeUser={activeUser}
+                    deleteMessageCrm={deleteMessageCrm}
+                    key={message.id}
+                    updateMessage={updateMessage}
+                    {...message}
+                  />
+                );
+              })}
             </div>
           )
           : (

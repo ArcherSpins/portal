@@ -19,6 +19,7 @@ import type {
   DealType,
   ParameterType,
   ContactType,
+  DealTask,
 } from '../../types';
 import { initialState } from './state';
 
@@ -32,8 +33,8 @@ class CRMDetailsContainer extends React.PureComponent<PropsCrmDetails, State> {
   }
 
   componentDidMount = () => {
-    const { dealTypes, dealTasks } = this.props;
-    console.log(dealTypes, dealTasks);
+    const { logDeals, dealTasks } = this.props;
+    console.log(logDeals, dealTasks);
     this.getData();
   }
 
@@ -131,6 +132,7 @@ class CRMDetailsContainer extends React.PureComponent<PropsCrmDetails, State> {
       fetchDealTypesRequest,
       fetchDealTypeIdRequest,
       fetchDealTasksRequest,
+      fetchDealLogs,
     } = this.props;
     const activeDeal = data.find((item) => item.title === id);
     if (activeDeal) {
@@ -140,6 +142,7 @@ class CRMDetailsContainer extends React.PureComponent<PropsCrmDetails, State> {
       setActiveUser(activeDeal);
       fetchDealTypeIdRequest(activeDeal.id);
       fetchDealTasksRequest(activeDeal.id);
+      fetchDealLogs({ dealID: activeDeal.id });
 
       fetchDealParametersAction((parameters: Array<ParameterType>) => {
         this.setState({
@@ -494,8 +497,8 @@ class CRMDetailsContainer extends React.PureComponent<PropsCrmDetails, State> {
     }
   }
 
-  toggleModalNewDeal = (status: boolean) => {
-    this.setState({ isNewDeal: status });
+  toggleModalNewDeal = (status: boolean, data?: DealTask) => {
+    this.setState({ isNewDeal: status, taskData: data || {} });
   }
 
   render() {
@@ -514,15 +517,12 @@ class CRMDetailsContainer extends React.PureComponent<PropsCrmDetails, State> {
       return <ErrorBoundry message="Ops, error! Page not found" />;
     }
 
-    const loading = loadingComments
-      // || getDealById.loading
-      || loadingById
+    const loading = loadingById
       || loadingChannels
       || loadingSources
       || loadingEmployees
       || loadingColumns
       || loadingDeals;
-
     return (
       <div style={{ height: '100%' }}>
         { loading ? <LoadingContainer /> : <CRMDetailsPage {...this} /> }
