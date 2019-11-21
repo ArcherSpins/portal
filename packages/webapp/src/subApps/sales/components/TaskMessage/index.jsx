@@ -44,7 +44,7 @@ export default ({ onClick, data, lineRect }: Props) => (
       <Container onClick={() => onClick(data)}>
         <HeaderTitle>
           <div className="main-title">
-            <p>
+            <span className="title">
               <img alt="task" src={taskIcon} />
               <span className="task-title">Estimate</span>
             </p>

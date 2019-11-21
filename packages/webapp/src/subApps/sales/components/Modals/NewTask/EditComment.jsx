@@ -34,6 +34,7 @@ export default ({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         data-test={createTestAttr('comment-text')}
+        onChange={onChange}
       />
     </div>
     <div className="d-flex justify-content-end mt-3">

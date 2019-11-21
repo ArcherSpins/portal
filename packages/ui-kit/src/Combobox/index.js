@@ -81,7 +81,6 @@ const Combobox = ({
     }
   >
     <label className="cbx__label" htmlFor="select">{label}</label>
-    {console.log(restProps)}
     <AsyncSelect
       className="select-component"
       loadOptions={loadOptions}
