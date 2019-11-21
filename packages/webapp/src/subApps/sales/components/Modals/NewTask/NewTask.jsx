@@ -75,7 +75,7 @@ export default ({
     >
       <ModalHeader>
         <H1 className="fz-24 d-flex align-items-center">
-          <span className="mr-10">{isNewTask ? 'New Task' : data.deal.title}</span>
+          <span className="mr-10">{isNewTask ? 'New Task' : data.deal && data.deal.title}</span>
           {
             !isNewTask && (
               <EditButton
@@ -110,6 +110,7 @@ export default ({
                   label="Date"
                   month={month}
                   value={dateValue}
+                  firstDayOfWeek={1}
                   modifiers={modifDays}
                   onMonthChange={onMonthChange}
                   onDayChange={(date) => {

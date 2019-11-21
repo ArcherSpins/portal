@@ -11,6 +11,7 @@ export const Container = styled.button`
   width: 100%;
   border-radius: 4px;
   background-color: transparent;
+  outline: none;
   /* background-color: ${({ status }) => {
     if (status === 'error') return '#FFF5F5';
     if (status === 'success') return '#ECFDEF';

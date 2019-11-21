@@ -23,8 +23,7 @@ export function getStylesDate(findDays) {
       {
         ...obj,
         [idx]: {
-          color: '#6d9fef',
-          backgroundColor: '#6d9fef52',
+          color: 'rgb(223, 22, 10)',
         },
       }), {});
 }

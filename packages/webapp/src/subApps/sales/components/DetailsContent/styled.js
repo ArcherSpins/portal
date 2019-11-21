@@ -38,17 +38,32 @@ export const MessageComponent = ({
     return <LoadingContainer />;
   }
 
+  function getFilter(a, b) {
+    let idx = 0;
+    const testTrueA = (new Date(a.endDate) > new Date() || new Date(a.endDate) < new Date());
+    const testTrueB = (new Date(b.endDate) > new Date() || new Date(b.endDate) < new Date());
+    if ((testTrueA && !a.resolved) && !(new Date(b.endDate) > new Date() && !b.resolved)) {
+      idx = 1;
+    } else if ((testTrueB && !b.resolved) && !(new Date(a.endDate) > new Date() && !a.resolved)) {
+      idx = -1;
+    }
+    return idx;
+  }
+
+  const filterData = data.sort(getFilter);
+
   return (
     <>
       {
         length > 0
           ? (
             <div className="block-messages">
-              {data.map((message, i) => {
+              {filterData.map((message, i) => {
                 /* eslint-disable no-underscore-dangle */
                 if (message.__typename === 'DealTask') {
                   return (
                     <TaskMessage
+                      key={message.id}
                       onClick={(task) => {
                         toggleModalNewDeal(true, task);
                         toggleNewTask(false);

@@ -108,6 +108,7 @@ const FilterBlock = ({
             <Datepicker
               label="Date"
               value={date}
+              firstDayOfWeek={1}
               disabledDays={{ daysOfWeek: [0, 6] }}
               onMonthChange={onChangeStartMonth}
               modifiers={getModify(calendarStart, startMonth).days}
@@ -125,6 +126,7 @@ const FilterBlock = ({
               value={endDate}
               disabledDays={{ daysOfWeek: [0, 6] }}
               onMonthChange={onChangeEndMonth}
+              firstDayOfWeek={1}
               modifiers={getModify(calendarEnd, endMonth).days}
               month={endMonth}
               modifiersStyles={getModify(calendarEnd, endMonth).modifiersStyles}
