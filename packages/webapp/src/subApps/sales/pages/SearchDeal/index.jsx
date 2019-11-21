@@ -8,7 +8,12 @@ import {
   SearchItem,
   FilterBlock,
 } from '../../components';
-import type { StatusType, ManagerType, DealType } from '../../types';
+import type {
+  StatusType,
+  ManagerType,
+  DealType,
+  CalendarType,
+} from '../../types';
 import {
   LoadingContainer,
 } from '../../containers';
@@ -33,6 +38,7 @@ type SearchDealPageProps = {
     statuses: Array<StatusType>,
     loadingDeals: boolean,
     loadingColumns: boolean,
+    getCalendarData: (string, returnFunc?: (Array<CalendarType>) => void) => void
   },
   toggleSearchShow: () => void,
   changeSearch: (string | mixed) => void,
@@ -57,10 +63,13 @@ const SearchDealPage = ({
   const typeProps: {
     statuses: Array<StatusType>,
     loadingDeals: boolean,
-    loadingColumns: boolean
+    loadingColumns: boolean,
+    getCalendarData: (string, returnFunc?: (Array<CalendarType>) => void) => void
   } = props;
 
-  const { statuses, loadingDeals, loadingColumns } = typeProps;
+  const {
+    statuses, loadingDeals, loadingColumns, getCalendarData,
+  } = typeProps;
 
   return (
     <div className="search-deal-page fz-14">
@@ -83,6 +92,7 @@ const SearchDealPage = ({
               changeFilter={changeFilter}
               filterObject={filterObject}
               idStatus="status"
+              getCalendarData={getCalendarData}
               idManager="manager"
             />
           ) : null

@@ -17,7 +17,6 @@ export function getDays(findDays, daysWeek, dateValue) {
 }
 
 export function getStylesDate(findDays) {
-  console.log(findDays);
   return findDays
     .split(',')
     .reduce((obj, item, idx) => (

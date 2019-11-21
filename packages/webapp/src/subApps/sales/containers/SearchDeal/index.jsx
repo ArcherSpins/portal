@@ -11,6 +11,7 @@ import {
   getDealsAction,
   getColumnsDataAction,
   getEmployeesAction,
+  getCalendarData,
 } from '../../redux/actions';
 import type { DealType } from '../../types';
 import type {
@@ -198,6 +199,7 @@ const mapDispatchToProps = {
   getColumnsData: getColumnsDataAction,
   getDeals: getDealsAction,
   getEmployees: getEmployeesAction,
+  getCalendarData,
 };
 
 export default (

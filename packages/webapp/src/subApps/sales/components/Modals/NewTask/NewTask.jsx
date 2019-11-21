@@ -24,7 +24,7 @@ import InputsCouple from '../../InputsCouple';
 import pencilIcon from './pencil.svg';
 import {
   getModify,
-} from './helper';
+} from '../../../helpers/helperHappeDays';
 import './style.scss';
 
 const createTestAttr = createTestContext('modal');
@@ -116,7 +116,7 @@ export default ({
                     onChangeDate(date);
                   }}
                   disabledDays={{ daysOfWeek: [0, 6] }}
-                  modifiersStyles={getModify(calendar, dateValue).modifiersStyles}
+                  modifiersStyles={getModify(calendar, month).modifiersStyles}
                 />
               </div>
               <InputsCouple dataTest={createTestAttr('inputs-couple')} />
