@@ -47,7 +47,7 @@ export default ({ onClick, data, lineRect }: Props) => (
             <span className="title">
               <img alt="task" src={taskIcon} />
               <span className="task-title">Estimate</span>
-            </p>
+            </span>
             <span>
               {getDate(new Date(data.createdAt))}
             </span>
