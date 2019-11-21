@@ -58,6 +58,7 @@ export function* createCommentSaga(action: {
       action.payload.returnComment(response);
     }
     yield put({ type: 'CREATE_COMMENT_SUCCESS', payload: response });
+    yield put({ type: 'GET_DEAL_LOGS_REQUEST', payload: { dealID: action.payload.data.dealId } });
   } catch (error) {
     yield put({ type: 'OPEN_ERROR_ALERT', payload: error.message });
     yield put({ type: 'CREATE_COMMENT_FAIL' });

@@ -3,6 +3,7 @@ export const initialState = {
   title: '',
   error: false,
   edit: false,
+  taskData: {},
   editForm: {
     client: false,
     sales: false,

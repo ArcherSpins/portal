@@ -9,6 +9,9 @@ import type {
   ManagerType,
   CommentType,
   StatusType,
+  DealTask,
+  TypeDeal,
+  CalendarType,
 } from '../../types';
 import type {
   PropsFilterDeals,
@@ -19,6 +22,7 @@ export type State = {
   title: string,
   error: boolean,
   edit: boolean,
+  taskData: DealTask,
   modalApproval: boolean,
   redirectDeleteDeal: boolean,
   dataDealForDelete: any,
@@ -50,6 +54,10 @@ export type PropsCrmDetails = {
     },
   },
   match: Match,
+  getCalendarData: (string, returnFunc?: (Array<CalendarType>) => void) => void,
+  dealTasks: Array<DealTask>,
+  logDeals: Array<DealTask & DealType>,
+  dealTypes: Array<TypeDeal>,
   history: RouterHistory,
   comments: Array<CommentType>,
   contacts: Array<ContactType>,
@@ -60,12 +68,25 @@ export type PropsCrmDetails = {
   activeManager: ManagerType,
   activeUser: DealType,
   loadingEmployees: boolean,
+  fetchDealLogs: ({ dealID: string }) => void,
+  fetchUpdateDealTask: ({
+    id: string,
+    resolveComment: string
+  }) => void,
+  fetchCreateDealTask: ({
+    dealID: string,
+    typeID: string,
+    description: string,
+  }) => void,
   loadingColumns: boolean,
   loadingComments: boolean,
   loadingDeals: boolean,
   loadingChannels: boolean,
   loadingById: boolean,
   loadingSources: boolean,
+  fetchDealTypeIdRequest: (string) => void,
+  fetchDealTypesRequest: () => void,
+  fetchDealTasksRequest: (string) => void,
   errorAlert: {
     status: boolean,
     message: string

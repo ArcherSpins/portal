@@ -1,5 +1,6 @@
 // @flow
 import React from 'react';
+import { format } from 'date-fns';
 import { Accent } from '@sfxdx/ui-kit';
 import {
   Container,
@@ -11,41 +12,54 @@ import {
   Line,
   LineText,
 } from './styled';
+import { DealTask } from '../../types';
 import taskIcon from './taskIcon.svg';
 
 type Props = {
-  onClick: () => void
+  onClick: (DealTask) => void,
+  data: DealTask,
+  lineRect: boolean
 }
 
-export default ({ onClick }: Props) => (
+const getDate = (data) => {
+  try {
+    const date = format(data, "dd MMM yyyy 'at' hh:mm");
+    return date;
+  } catch (error) {
+    return false;
+  }
+};
+
+export default ({ onClick, data, lineRect }: Props) => (
   <TaskBlock>
-    <LineContainer>
-      <Line />
-      <LineText>Pay Attention</LineText>
-    </LineContainer>
-    <Accent color="success" style={{ width: '75%' }}>
-      <Container onClick={onClick}>
+    {
+      lineRect && (
+        <LineContainer>
+          <Line />
+          <LineText>Pay Attention</LineText>
+        </LineContainer>
+      )
+    }
+    <Accent style={{ width: '75%' }}>
+      <Container onClick={() => onClick(data)}>
         <HeaderTitle>
           <div className="main-title">
             <span className="title">
               <img alt="task" src={taskIcon} />
               <span className="task-title">Estimate</span>
             </span>
-            <span className="date-info">
-              26 March 2019 at 11:00
+            <span>
+              {getDate(new Date(data.createdAt))}
             </span>
           </div>
           <Status status="success">Open</Status>
         </HeaderTitle>
         <Content>
-          So strongly and metaphysically did
-          I conceive of my situation then, that while earnestly watching his motions,
-          I seemed distinctly to perceive that my own
-          individuality was now merged in a joint stock company of two
+          {data.description}
         </Content>
         <div className="d-flex justify-content-end align-items-center" style={{ color: '#818A95' }}>
           <i className="icon-calendar ml-10" />
-          <span style={{ marginLeft: 1 }}>Today, 11:00 - 18:00</span>
+          <span style={{ marginLeft: 1 }}>{getDate(new Date(data.endDate))}</span>
         </div>
       </Container>
     </Accent>

@@ -45,6 +45,7 @@ const initialState = {
   loadingChannels: false,
   loadingSources: false,
   loadingComments: false,
+  logDeals: [],
 };
 
 
@@ -69,6 +70,17 @@ export default (state = initialState, action) => {
       return {
         ...state,
         loadingComments: true,
+      };
+    case 'GET_DEAL_LOGS_REQUEST':
+      return {
+        ...state,
+        loadingComments: true,
+      };
+    case 'GET_DEAL_LOGS_SUCCESS':
+      return {
+        ...state,
+        logDeals: action.payload,
+        loadingComments: false,
       };
     case 'GET_COMMENTS_SUCCESS':
       return {

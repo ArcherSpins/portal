@@ -12,11 +12,12 @@ const createTestAttr = createTestContext('modal');
 
 type Props = {
   value: string,
-  onChange: (e: SyntheticEvent<HTMLInputElement>) => void,
+  onResolved: () => void,
+  onChange: (string) => void
 }
 
 export default ({
-  value, onChange,
+  value, onResolved, onChange,
 }: Props) => (
   <div className="edit-comment">
     <H1 className="fz-24">Resolve Task</H1>
@@ -31,12 +32,12 @@ export default ({
         label="Comment"
         placeholder="Edit comment"
         value={value}
+        onChange={(e) => onChange(e.target.value)}
         data-test={createTestAttr('comment-text')}
-        onChange={onChange}
       />
     </div>
     <div className="d-flex justify-content-end mt-3">
-      <Button data-test={createTestAttr('task-resolved')}>Task Resolved</Button>
+      <Button onClick={onResolved} data-test={createTestAttr('task-resolved')}>Task Resolved</Button>
     </div>
   </div>
 );

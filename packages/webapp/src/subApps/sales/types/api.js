@@ -10,6 +10,22 @@ export type ParameterType = {
   title: string
 }
 
+export type CalendarType = {
+  year: string,
+  january: string,
+  february: string,
+  march: string,
+  april: string,
+  may: string,
+  june: string,
+  july: string,
+  august: string,
+  september: string,
+  october: string,
+  november: string,
+  december: string
+}
+
 export type PositionType = {
   id: string,
   title: string

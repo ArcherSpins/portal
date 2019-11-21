@@ -1,5 +1,5 @@
 // @flow
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Modal,
   ModalHeader,
@@ -18,37 +18,54 @@ import {
   DealNameContainer,
   EditButton,
 } from './styled';
+import type { CalendarType, TypeDeal, DealTask } from '../../../types';
 import EditComment from './EditComment';
 import InputsCouple from '../../InputsCouple';
 import pencilIcon from './pencil.svg';
+import {
+  getModify,
+} from '../../../helpers/helperHappeDays';
 import './style.scss';
 
-
 const createTestAttr = createTestContext('modal');
-
-
-const optionsArray = [
-  { value: 'estimation', label: 'Estimation' },
-  { value: 'contact client', label: 'Contact client' },
-  { value: 'managing project', label: 'Managing project' },
-];
 
 type Props = {
   isOpen: boolean,
   onClose: () => void,
-  onCreate: () => void
+  onCreate: (typeID: string, description: string, startDate: Date, endDate: Date,) => void,
+  dealTypes: Array<TypeDeal>,
+  getCalendarData: (string, returnFunc?: (Array<CalendarType>) => void) => void,
+  isNewTask: boolean,
+  onUpdate: (string, string) => void,
+  data: DealTask,
 }
 
 export default ({
   isOpen,
   onClose,
   onCreate,
+  getCalendarData,
+  dealTypes,
+  isNewTask,
+  data,
+  onUpdate,
 }: Props) => {
-  const [editCommentValue, onChangeComment] = useState('');
+  const [calendar, onChangeCalendar] = useState(null);
+  const [dateValue, onChangeDate] = useState(new Date());
+  const [month, onMonthChange] = useState(new Date());
+  const [description, onChangeDescription] = useState('');
+  const [resolveDescription, onChangeResolveDescription] = useState('');
+  const [activeType, onChangeTypes] = useState({ label: 'Not selected', id: '' });
 
-  const onChange = (e: SyntheticEvent<HTMLInputElement>) => {
-    onChangeComment(e.currentTarget.value);
-  };
+  useEffect(() => {
+    getCalendarData(String(month.getFullYear()), (date) => onChangeCalendar(date[0]));
+  }, [month]);
+
+  const types = dealTypes.map(
+    (item) => ({ ...item, label: item.title, value: item.id }),
+  );
+
+  const modifDays = getModify(calendar, month).days;
 
   return (
     <Modal
@@ -58,12 +75,16 @@ export default ({
     >
       <ModalHeader>
         <H1 className="fz-24 d-flex align-items-center">
-          <span className="mr-10">New Task</span>
-          <EditButton
-            data-test={createTestAttr('edit-button')}
-          >
-            <img src={pencilIcon} alt="pencil icon" />
-          </EditButton>
+          <span className="mr-10">{isNewTask ? 'New Task' : data.deal.title}</span>
+          {
+            !isNewTask && (
+              <EditButton
+                data-test={createTestAttr('edit-button')}
+              >
+                <img src={pencilIcon} alt="pencil icon" />
+              </EditButton>
+            )
+          }
         </H1>
         <CloseButton
           onClick={onClose}
@@ -83,36 +104,101 @@ export default ({
                 </DealNameContainer>
               </div>
               <div className="mb-20 fz-14 col-6 borderless">
-                <Datepicker dateFormat="DD.MM.YYYY" overlayAlign="left" label="Date" />
+                <Datepicker
+                  dateFormat="DD.MM.YYYY"
+                  overlayAlign="left"
+                  label="Date"
+                  month={month}
+                  value={dateValue}
+                  modifiers={modifDays}
+                  onMonthChange={onMonthChange}
+                  onDayChange={(date) => {
+                    onChangeDate(date);
+                  }}
+                  disabledDays={{ daysOfWeek: [0, 6] }}
+                  modifiersStyles={getModify(calendar, month).modifiersStyles}
+                />
               </div>
               <InputsCouple dataTest={createTestAttr('inputs-couple')} />
             </div>
             <div className="col-6 fz-14">
-              <div className="mb-2 dropdown_not-padding">
-                <Dropdown
-                  label="Task type"
-                  options={optionsArray}
-                  use="borderless"
-                  value={optionsArray[1]}
-                  dataTest={createTestAttr('task-type')}
-                />
+              <div className="mb-2 color-gray dropdown_not-padding">
+                {
+                  isNewTask ? (
+                    <Dropdown
+                      label="Task type"
+                      options={types}
+                      use="borderless"
+                      value={activeType}
+                      onChange={onChangeTypes}
+                      dataTest={createTestAttr('task-type')}
+                    />
+                  ) : (
+                    <div>
+                      <span className="cbx__label mt-2 mb-5 color-gray d-block">Task type</span>
+                      <p
+                        className="fz-16 color-black line-height-24"
+                      >
+                        {data.type ? data.type.title : activeType.label}
+                      </p>
+                    </div>
+                  )
+                }
               </div>
               <div className="color-gray">
-                <TextArea
-                  className="fz-14 comment-parent"
-                  label="Comment"
-                  placeholder="Task comment"
-                  onChange={onChange}
-                  data-test={createTestAttr('comment-text')}
-                />
+                {
+                  isNewTask ? (
+                    <TextArea
+                      className="fz-14 comment-parent"
+                      label="Comment"
+                      placeholder="Task comment"
+                      value={description}
+                      onChange={(e) => onChangeDescription(e.target.value)}
+                      data-test={createTestAttr('comment-text')}
+                    />
+                  ) : (
+                    <div>
+                      <span className="cbx__label mt-2 mb-5 color-gray d-block">Comment</span>
+                      <p
+                        className="fz-16 color-black line-height-24 break-word"
+                        style={{ maxHeight: '127px', overflowY: 'auto' }}
+                      >
+                        {data.description}
+                      </p>
+                    </div>
+                  )
+                }
               </div>
             </div>
           </div>
-          <div className="d-flex justify-content-end mt-3">
-            <Button data-test={createTestAttr('close-button')} onClick={onCreate}>Create</Button>
-          </div>
+          {
+            isNewTask && (
+              <div className="d-flex justify-content-end mt-3">
+                <Button
+                  data-test={createTestAttr('close-button')}
+                  onClick={() => {
+                    onCreate(activeType.id, description, dateValue, new Date(2020, 11, 2));
+                    onClose();
+                  }}
+                >
+                  Create
+                </Button>
+              </div>
+            )
+          }
         </div>
-        <EditComment onChange={onChange} value={editCommentValue} />
+        {
+          !isNewTask && (
+            <EditComment
+              onResolved={() => {
+                onUpdate(data.id, resolveDescription);
+                onClose();
+              }}
+              value={resolveDescription}
+              onChange={onChangeResolveDescription}
+            />
+          )
+        }
       </ModalBody>
     </Modal>
   );

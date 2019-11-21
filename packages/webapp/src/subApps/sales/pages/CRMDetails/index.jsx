@@ -1,7 +1,7 @@
 /* eslint-disable import/no-cycle */
 /* eslint-disable react/no-unused-state */
 // @flow
-import React from 'react';
+import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import {
   DetailsContent,
@@ -33,9 +33,9 @@ const CRMDetailsPage = ({
   toggleModalNewDeal,
   approveDeleteDeal,
 }: CRMDetailsPageProps) => {
+  const [isNewTask, toggleNewTask] = useState(true);
   const {
     activeUser,
-    comments,
     setActiveUser,
     statuses,
     loadingComments,
@@ -47,6 +47,11 @@ const CRMDetailsPage = ({
     errorsFormCreate,
     deleteErrorForm,
     history,
+    fetchCreateDealTask,
+    fetchUpdateDealTask,
+    getCalendarData,
+    logDeals,
+    dealTypes,
   } = props;
 
   const {
@@ -58,18 +63,35 @@ const CRMDetailsPage = ({
     showModalErrorMessage,
     modalApproval,
     isNewDeal,
+    taskData,
   } = state;
   if (redirectNewDeal.redirect) {
     return <Redirect to={redirectNewDeal.url} />;
   }
-
   const { goBack } = history;
   return (
     <div className="details-page">
       <ModalNewTask
+        getCalendarData={getCalendarData}
         isOpen={isNewDeal}
+        isNewTask={isNewTask}
+        dealTypes={dealTypes}
+        titleDeal={activeUser.title}
+        data={taskData}
         onClose={() => toggleModalNewDeal(false)}
-        onCreate={() => null}
+        onUpdate={(id, resolveComment) => fetchUpdateDealTask({
+          id,
+          resolveComment,
+        })}
+        onCreate={(
+          typeID: string, description: string, startDate: Date, endDate: Date,
+        ) => fetchCreateDealTask({
+          dealID: activeUser.id,
+          typeID,
+          description,
+          startDate,
+          endDate,
+        })}
       />
       <HeaderDetails
         goBack={goBack}
@@ -116,8 +138,9 @@ const CRMDetailsPage = ({
           deleteMessageCrm={deleteMessage}
           setMessage={setMessage}
           activeUser={activeUser}
-          comments={comments}
+          comments={logDeals}
           updateMessage={updateMessage}
+          toggleNewTask={toggleNewTask}
           toggleModalNewDeal={toggleModalNewDeal}
           isNewDeal={isNewDeal}
         />

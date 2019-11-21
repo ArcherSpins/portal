@@ -19,6 +19,7 @@ import type {
   DealType,
   ParameterType,
   ContactType,
+  DealTask,
 } from '../../types';
 import { initialState } from './state';
 
@@ -32,6 +33,8 @@ class CRMDetailsContainer extends React.PureComponent<PropsCrmDetails, State> {
   }
 
   componentDidMount = () => {
+    const { logDeals, dealTasks } = this.props;
+    console.log(logDeals, dealTasks);
     this.getData();
   }
 
@@ -39,11 +42,6 @@ class CRMDetailsContainer extends React.PureComponent<PropsCrmDetails, State> {
     const { errorsFormCreate, deleteErrorForm } = this.props;
     Object.keys(errorsFormCreate).forEach((key) => deleteErrorForm(key));
   }
-
-
-  // componentDidCatch(error) {
-  //   this.setState({ error: true });
-  // }
 
   toggleModalApproval = (status: boolean) => {
     this.setState({ modalApproval: status });
@@ -54,10 +52,6 @@ class CRMDetailsContainer extends React.PureComponent<PropsCrmDetails, State> {
       dataDealForDelete: data,
       modalApproval: true,
     });
-
-    // setTimeout(() => {
-    //   this.setState({ modalApproval: false });
-    // }, 5000);
   }
 
   approveDeleteDeal = () => {
@@ -135,12 +129,20 @@ class CRMDetailsContainer extends React.PureComponent<PropsCrmDetails, State> {
       setContactsDeal,
       fetchCommentsAction,
       fetchDealParametersAction,
+      fetchDealTypesRequest,
+      fetchDealTypeIdRequest,
+      fetchDealTasksRequest,
+      fetchDealLogs,
     } = this.props;
     const activeDeal = data.find((item) => item.title === id);
     if (activeDeal) {
       fetchCommentsAction(activeDeal.id);
+      fetchDealTypesRequest();
       setContactsDeal(activeDeal.customFields);
       setActiveUser(activeDeal);
+      fetchDealTypeIdRequest(activeDeal.id);
+      fetchDealTasksRequest(activeDeal.id);
+      fetchDealLogs({ dealID: activeDeal.id });
 
       fetchDealParametersAction((parameters: Array<ParameterType>) => {
         this.setState({
@@ -495,8 +497,8 @@ class CRMDetailsContainer extends React.PureComponent<PropsCrmDetails, State> {
     }
   }
 
-  toggleModalNewDeal = (status: boolean) => {
-    this.setState({ isNewDeal: status });
+  toggleModalNewDeal = (status: boolean, data?: DealTask) => {
+    this.setState({ isNewDeal: status, taskData: data || {} });
   }
 
   render() {
@@ -515,15 +517,12 @@ class CRMDetailsContainer extends React.PureComponent<PropsCrmDetails, State> {
       return <ErrorBoundry message="Ops, error! Page not found" />;
     }
 
-    const loading = loadingComments
-      // || getDealById.loading
-      || loadingById
+    const loading = loadingById
       || loadingChannels
       || loadingSources
       || loadingEmployees
       || loadingColumns
       || loadingDeals;
-
     return (
       <div style={{ height: '100%' }}>
         { loading ? <LoadingContainer /> : <CRMDetailsPage {...this} /> }

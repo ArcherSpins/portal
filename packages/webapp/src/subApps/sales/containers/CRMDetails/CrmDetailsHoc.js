@@ -34,12 +34,21 @@ import {
   getColumnsDataAction,
   getDealsAction,
   getDealById,
+  fetchDealTypesRequest,
+  fetchDealTypeIdRequest,
+  fetchDealTasksRequest,
+  getCalendarData,
+  fetchCreateDealTask,
+  fetchUpdateDealTask,
+  fetchDealLogs,
 } from '../../redux/actions';
 
 const mapStateToProps = (state) => ({
   activeUser: state.detailsCrm.activeUser,
   contacts: state.detailsCrm.contacts,
   comments: state.detailsCrm.comments,
+  dealTypes: state.deals.dealTypes,
+  logDeals: state.detailsCrm.logDeals,
   activeManager: state.detailsCrm.activeManager,
   errorsFormCreate: state.errorFormCreate.errorsFormCreate,
   errorAlert: state.errorFormCreate.errorAlert,
@@ -48,6 +57,7 @@ const mapStateToProps = (state) => ({
   statuses: state.column.columnsData,
   loadingColumns: state.column.loadingColumns,
   crm: state.deals.deals,
+  dealTasks: state.deals.dealTasks,
   loadingDeals: state.deals.loadingDeals,
   loadingById: state.deals.loadingById,
   loadingChannels: state.detailsCrm.loadingChannels,
@@ -76,6 +86,7 @@ const mapDispatchToProps = {
   fetchDealParametersAction,
   fetchDeleteContactAction,
   fetchUpdateDealAction,
+  fetchCreateDealTask,
   closeErrorAlert,
   fetchCreateDealAction,
   fetchCreateCommentAction,
@@ -85,6 +96,12 @@ const mapDispatchToProps = {
   fetchDeleteDealAction,
   fetchUpdateContactAction,
   getDealById,
+  fetchDealTypesRequest,
+  fetchDealTypeIdRequest,
+  fetchDealTasksRequest,
+  getCalendarData,
+  fetchUpdateDealTask,
+  fetchDealLogs,
 };
 
 // $FlowFixMe

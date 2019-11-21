@@ -2,13 +2,14 @@
 import type {
   StatusType,
   ManagerType,
+  CalendarType,
 } from '../../types';
 
 
 export type FilterBlockProps = {
-  date: string,
-  endDate: string,
-  // changeDate: (string) => void,
+  date: Date,
+  endDate: Date,
+  getCalendarData: (string, returnFunc?: (Array<CalendarType>) => void) => void,
   changeFilter: (string | number, {
     label: string,
       value: string,

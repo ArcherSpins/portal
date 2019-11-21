@@ -6,7 +6,7 @@ import React from 'react';
 import zenscroll from 'zenscroll';
 import { ChatForm, DetailsListStyled } from '../index';
 import { MessageComponent } from './styled';
-import type { DealType, CommentType } from '../../types';
+import type { DealType, CommentType, DealTask } from '../../types';
 import './style.scss';
 
 const { Header } = DetailsListStyled;
@@ -26,8 +26,9 @@ type Props = {
     id: number | string,
     content: string
   }) => {} | void,
-  toggleModalNewDeal: (boolean) => void,
-  isNewDeal: boolean
+  toggleModalNewDeal: (boolean, data?: DealTask) => void,
+  isNewDeal: boolean,
+  toggleNewTask: (boolean) => void
 }
 
 type State = {
@@ -101,6 +102,7 @@ class DetailsContent extends React.Component<Props, State> {
       updateMessage,
       toggleModalNewDeal,
       isNewDeal,
+      toggleNewTask,
     } = this.props;
     const { message } = this.state;
     return (
@@ -120,6 +122,8 @@ class DetailsContent extends React.Component<Props, State> {
             loading={loading}
             length={comments.length}
             toggleModalNewDeal={toggleModalNewDeal}
+            toggleNewTask={toggleNewTask}
+            activeUser={activeUser}
             options={{
               data: comments,
               activeUser,
@@ -132,6 +136,7 @@ class DetailsContent extends React.Component<Props, State> {
           className="chat-form-container"
         >
           <ChatForm
+            toggleNewTask={toggleNewTask}
             isNewDeal={isNewDeal}
             toggleModalNewDeal={toggleModalNewDeal}
             changeFocus={this.funcFocus}

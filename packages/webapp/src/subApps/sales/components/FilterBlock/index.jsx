@@ -2,7 +2,7 @@
 /* eslint-disable import/no-cycle */
 /* eslint-disable react/no-unused-state */
 // @flow
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 // import Select from 'react-select';
 import {
   Input,
@@ -11,7 +11,9 @@ import {
   Button,
 } from '@sfxdx/ui-kit';
 import createTestContext from 'utils/createTestContext';
-// import { Picker } from '..';
+import {
+  getModify,
+} from '../../helpers/helperHappeDays';
 import type { FilterBlockProps } from './type';
 import './style.scss';
 
@@ -32,7 +34,6 @@ const customStyles = {
 const FilterBlock = ({
   date,
   endDate,
-  // changeDate,
   changeFilter,
   onSubmitFilter,
   filterObject,
@@ -40,11 +41,21 @@ const FilterBlock = ({
   managers,
   idManager,
   idStatus,
+  getCalendarData,
 }: FilterBlockProps) => {
   const [data, func] = useState({
     status: filterObject.status,
     manager: filterObject.manager,
   });
+  const [startMonth, onChangeStartMonth] = useState(new Date());
+  const [endMonth, onChangeEndMonth] = useState(new Date());
+  const [calendarStart, onChangeCalendarStart] = useState(null);
+  const [calendarEnd, onChangeCalendarEnd] = useState(null);
+
+  useEffect(() => {
+    getCalendarData(String(startMonth.getFullYear()), (d) => onChangeCalendarStart(d[0]));
+    getCalendarData(String(endMonth.getFullYear()), (d) => onChangeCalendarEnd(d[0]));
+  }, [startMonth, endMonth]);
 
   const submitFilter = () => {
     onSubmitFilter(data.status, data.manager);
@@ -97,6 +108,11 @@ const FilterBlock = ({
             <Datepicker
               label="Date"
               value={date}
+              disabledDays={{ daysOfWeek: [0, 6] }}
+              onMonthChange={onChangeStartMonth}
+              modifiers={getModify(calendarStart, startMonth).days}
+              month={startMonth}
+              modifiersStyles={getModify(calendarStart, startMonth).modifiersStyles}
               onDayChange={(dateRes) => changeFilter('start', dateRes)}
               containerProps={{
                 'data-test': createTestAttr('datepicker-start'),
@@ -107,6 +123,11 @@ const FilterBlock = ({
           <div className="field-block">
             <Datepicker
               value={endDate}
+              disabledDays={{ daysOfWeek: [0, 6] }}
+              onMonthChange={onChangeEndMonth}
+              modifiers={getModify(calendarEnd, endMonth).days}
+              month={endMonth}
+              modifiersStyles={getModify(calendarEnd, endMonth).modifiersStyles}
               onDayChange={(dateRes) => {
                 changeFilter('end', dateRes);
               }}
