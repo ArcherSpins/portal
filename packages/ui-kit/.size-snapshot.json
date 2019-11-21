@@ -1,7 +1,13 @@
 {
   "dist/index.js": {
+<<<<<<< HEAD
+    "bundled": 477735,
+    "minified": 477837,
+    "gzipped": 113728
+=======
     "bundled": 477844,
     "minified": 477946,
     "gzipped": 113766
+>>>>>>> 5d0c3f2bcc8070fa6cdb5c669070c394e2667995
   }
 }

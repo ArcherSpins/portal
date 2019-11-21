@@ -35,7 +35,7 @@ export const Content = styled.p`
   line-height: 20px;
 `;
 
-export const HeaderTitle = styled.p`
+export const HeaderTitle = styled.div`
   display: flex;
   align-items: center;
   color: #818A95;
@@ -50,7 +50,7 @@ export const HeaderTitle = styled.p`
     display: flex;
     align-items: center;
 
-    span {
+    .date-info {
       margin-left: 7px;
     }
 
@@ -61,7 +61,7 @@ export const HeaderTitle = styled.p`
       color: #333333;
     }
 
-    p {
+    .title {
       display: flex;
       align-items: center;
     }
