@@ -32,7 +32,9 @@ const createTestAttr = createTestContext('modal');
 type Props = {
   isOpen: boolean,
   onClose: () => void,
-  onCreate: (typeID: string, description: string, startDate: Date, endDate: Date,) => void,
+  onCreate: (
+    typeID: string, description: string, startDate: Date | number, endDate: Date | number
+  ) => void,
   dealTypes: Array<TypeDeal>,
   getCalendarData: (string, returnFunc?: (Array<CalendarType>) => void) => void,
   isNewTask: boolean,
@@ -56,6 +58,8 @@ export default ({
   const [description, onChangeDescription] = useState('');
   const [resolveDescription, onChangeResolveDescription] = useState('');
   const [activeType, onChangeTypes] = useState({ label: 'Not selected', id: '' });
+  const [startTime, onChangeStartTime] = useState('1100');
+  const [startEnd, onChangeEndTime] = useState('1200');
 
   useEffect(() => {
     getCalendarData(String(month.getFullYear()), (date) => onChangeCalendar(date[0]));
@@ -66,7 +70,18 @@ export default ({
   );
 
   const modifDays = getModify(calendar, month).days;
-
+  const hoursStart = startTime.replace(':', '').match(/\d{2}/);
+  const minutesStart = startTime.replace(':', '').replace(/\d{2}/, '');
+  const hoursEnd = startEnd.replace(':', '').match(/\d{2}/);
+  const minutesEnd = startEnd.replace(':', '').replace(/\d{2}/, '');
+  const startD = new Date(dateValue).setMinutes(
+    dateValue.getMinutes()
+      + (hoursStart ? Number(hoursStart[0]) * 60 + Number(minutesStart) : 0),
+  );
+  const endD = new Date(dateValue).setMinutes(
+    dateValue.getMinutes()
+      + (hoursEnd ? Number(hoursEnd[0]) * 60 + Number(minutesEnd) : 0),
+  );
   return (
     <Modal
       show={isOpen}
@@ -119,7 +134,13 @@ export default ({
                   modifiersStyles={getModify(calendar, month).modifiersStyles}
                 />
               </div>
-              <InputsCouple dataTest={createTestAttr('inputs-couple')} />
+              <InputsCouple
+                dataTest={createTestAttr('inputs-couple')}
+                startTime={startTime}
+                startEnd={startEnd}
+                onChangeStartTime={onChangeStartTime}
+                onChangeEndTime={onChangeEndTime}
+              />
             </div>
             <div className="col-6 fz-14">
               <div className="mb-2 color-gray dropdown_not-padding">
@@ -177,7 +198,12 @@ export default ({
                 <Button
                   data-test={createTestAttr('close-button')}
                   onClick={() => {
-                    onCreate(activeType.id, description, dateValue, new Date(2020, 11, 2));
+                    onCreate(
+                      activeType.id,
+                      description,
+                      new Date(startD),
+                      new Date(endD),
+                    );
                     onClose();
                   }}
                 >
