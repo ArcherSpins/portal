@@ -110,7 +110,6 @@ export default ({
                   label="Date"
                   month={month}
                   value={dateValue}
-                  firstDayOfWeek={1}
                   modifiers={modifDays}
                   onMonthChange={onMonthChange}
                   onDayChange={(date) => {
