@@ -131,6 +131,7 @@ const Datepicker = ({
               }
             }
           },
+          firstDayOfWeek: 1,
         }}
         ref={inputRef}
         inputProps={{ ref: null }}

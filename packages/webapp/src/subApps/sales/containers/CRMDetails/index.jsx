@@ -34,7 +34,6 @@ class CRMDetailsContainer extends React.PureComponent<PropsCrmDetails, State> {
 
   componentDidMount = () => {
     const { logDeals, dealTasks } = this.props;
-    console.log(logDeals, dealTasks);
     this.getData();
   }
 

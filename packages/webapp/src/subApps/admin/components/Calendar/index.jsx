@@ -65,8 +65,8 @@ const CalendarWrap = ({
       hourFormat="HH"
     >
       <Wrap>
-        {getAllMonthsOfGivenYear(currentYear || 2019).map((month) => (
-          <Monthly data={data} key={month.toTimeString()} month={month} />
+        {getAllMonthsOfGivenYear(currentYear || 2019).map((month, i) => (
+          <Monthly data={data} key={month.toTimeString() + i} month={month} />
         ))}
       </Wrap>
     </Calendar>

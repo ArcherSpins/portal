@@ -9,14 +9,12 @@ type Response = Array<CalendarType>
 // eslint-disable-next-line import/prefer-default-export
 export async function fetchCalendarData(data: { year: string }): Promise<FetchResult<Response>> {
   try {
-    console.log(data);
     const response = await client.query({
       query: queryCalendar,
       variables: data,
     });
     return response.data.calendar;
   } catch (err) {
-    console.log(err);
     throw new Error(err.message);
   }
 }
