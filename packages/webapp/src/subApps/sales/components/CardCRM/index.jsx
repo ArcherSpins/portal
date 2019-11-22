@@ -18,6 +18,10 @@ export type CardCRMProps = {
   index: number,
   id: string,
   allStatus: boolean,
+  dealInfo: {
+    overdueTasks: number
+  },
+  createdAt: Date
 }
 
 const CardCRM = React.memo<CardCRMProps>((props: CardCRMProps) => {
@@ -28,8 +32,14 @@ const CardCRM = React.memo<CardCRMProps>((props: CardCRMProps) => {
     index,
     id,
     allStatus,
+    dealInfo,
+    ...restProps
   } = props;
+  console.log(restProps, dealInfo);
   const linkTitle = String(title).replace(/\s/g, '_').replace('/', '&');
+  // const testTrueA = (new Date(a.endDate) > new Date() || new Date(a.endDate) < new Date());
+  // const testTrueB = (new Date(b.endDate) > new Date() || new Date(b.endDate) < new Date());
+
   return (
     <Draggable
       draggableId={id}
@@ -76,9 +86,12 @@ const CardCRM = React.memo<CardCRMProps>((props: CardCRMProps) => {
                     )
                     : null}
                 </div>
-                <div className="footer-card_crm">
-                  <img src={icon} alt="icon-card_crm" />
-                  <p>Estimate Today, 11:00 - 18:00</p>
+                <div className="footer-card_crm justify-content-between">
+                  <div className="d-flex align-items-center">
+                    <img src={icon} alt="icon-card_crm" />
+                    <p>Estimate Today, 11:00 - 18:00</p>
+                  </div>
+                  <div className="tasks-length">{dealInfo.overdueTasks}</div>
                 </div>
               </div>
             </div>

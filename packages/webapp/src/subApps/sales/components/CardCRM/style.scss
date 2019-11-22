@@ -30,6 +30,19 @@
     }
 }
 
+.tasks-length {
+    float: right;
+    padding: 3px;
+    border-radius: 50%;
+    color: white;
+    background: #00000045;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
 
 .card-crm {
     background-color: white;
