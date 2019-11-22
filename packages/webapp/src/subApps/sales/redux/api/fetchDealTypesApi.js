@@ -20,7 +20,6 @@ export async function fetchDealLogs(data: { dealID: string }): Promise<void> {
       query: getDealLogs,
       variables: {
         limit: '35',
-        offset: '0',
         ...data,
       },
       fetchPolicy: 'no-cache',

@@ -19,6 +19,36 @@ import { LeftBlock } from './ComponentsPage';
 import type { CrmPageProps } from './type';
 import './style.scss';
 
+function convertTasksInfo(dealsData: {
+  dealInfo: {
+    tasksForToday: number,
+    overdueTasks: number
+  }
+}) {
+  if (dealsData) {
+    return Object.values(dealsData).reduce((
+      obj,
+      // $FlowFixMe
+      item: {
+        dealInfo: {
+          tasksForToday: number,
+          overdueTasks: number
+        }
+      },
+    ) => {
+      if (item.dealInfo.overdueTasks + item.dealInfo.tasksForToday === 0) {
+        return { ...obj, without: obj.without + 1 };
+      }
+      return {
+        ...obj,
+        overdue: obj.overdue + item.dealInfo.overdueTasks,
+        today: obj.today + item.dealInfo.tasksForToday,
+      };
+    }, { today: 0, overdue: 0, without: 0 });
+  }
+  return {};
+}
+
 const createTestAttr = createTestContext('crm');
 
 const CRMPage = ({
@@ -48,7 +78,7 @@ const CRMPage = ({
     const propsDeals = !state.tabStatus ? { limit } : { limit, managerID: activeManager.id };
     getDealsFilter(propsDeals);
   };
-  console.log(dealsData);
+  const tasksInfo = convertTasksInfo(dealsData);
   return (
     <>
       <ModalMessage
@@ -80,7 +110,7 @@ const CRMPage = ({
           </LinkButton>
         </div>
       </Header>
-      <HeaderCRMList />
+      <HeaderCRMList tasksInfo={tasksInfo} />
       {
         loading ? <LoadingContainer style={{ paddingBottom: 100 }} /> : (
           <DragDropContext onDragEnd={onDragEnd}>

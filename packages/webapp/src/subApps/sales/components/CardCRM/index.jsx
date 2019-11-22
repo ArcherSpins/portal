@@ -34,12 +34,8 @@ const CardCRM = React.memo<CardCRMProps>((props: CardCRMProps) => {
     id,
     allStatus,
     dealInfo,
-    ...restProps
   } = props;
-  console.log(restProps, dealInfo, id);
   const linkTitle = String(title).replace(/\s/g, '_').replace('/', '&');
-  // const testTrueA = (new Date(a.endDate) > new Date() || new Date(a.endDate) < new Date());
-  // const testTrueB = (new Date(b.endDate) > new Date() || new Date(b.endDate) < new Date());
 
   return (
     <Draggable
