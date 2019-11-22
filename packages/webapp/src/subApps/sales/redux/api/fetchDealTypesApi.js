@@ -109,7 +109,6 @@ export async function fetchUpdateDealTask(data: {
   resolveComment: string
 }): Promise<void> {
   try {
-    console.log(data);
     const result = await client.mutate({
       mutation: updateDealTask,
       variables: data,

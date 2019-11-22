@@ -30,6 +30,21 @@ const getDate = (data) => {
   }
 };
 
+function getColor(data) {
+  let color;
+  let label = 'Complete';
+  if (data.resolved) {
+    color = 'info';
+  } else if (new Date(data.endDate) < new Date() && !data.resolved) {
+    color = 'danger';
+    label = 'Close';
+  } else if (new Date(data.endDate) > new Date() && !data.resolved) {
+    color = 'success';
+    label = 'Open';
+  }
+  return { color, label };
+}
+
 export default ({ onClick, data, lineRect }: Props) => (
   <TaskBlock>
     {
@@ -40,7 +55,10 @@ export default ({ onClick, data, lineRect }: Props) => (
         </LineContainer>
       )
     }
-    <Accent style={{ width: '75%' }}>
+    <Accent
+      color={getColor(data).color}
+      style={{ width: '75%' }}
+    >
       <Container onClick={() => onClick(data)}>
         <HeaderTitle>
           <div className="main-title">
@@ -52,7 +70,7 @@ export default ({ onClick, data, lineRect }: Props) => (
               {getDate(new Date(data.createdAt))}
             </span>
           </div>
-          <Status status="success">Open</Status>
+          <Status status="success">{getColor(data).label}</Status>
         </HeaderTitle>
         <Content>
           {data.description}
