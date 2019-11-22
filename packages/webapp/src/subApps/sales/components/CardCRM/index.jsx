@@ -19,7 +19,8 @@ export type CardCRMProps = {
   id: string,
   allStatus: boolean,
   dealInfo: {
-    overdueTasks: number
+    overdueTasks: number,
+    tasksForToday: number
   },
   createdAt: Date
 }
@@ -35,7 +36,7 @@ const CardCRM = React.memo<CardCRMProps>((props: CardCRMProps) => {
     dealInfo,
     ...restProps
   } = props;
-  console.log(restProps, dealInfo);
+  console.log(restProps, dealInfo, id);
   const linkTitle = String(title).replace(/\s/g, '_').replace('/', '&');
   // const testTrueA = (new Date(a.endDate) > new Date() || new Date(a.endDate) < new Date());
   // const testTrueB = (new Date(b.endDate) > new Date() || new Date(b.endDate) < new Date());
@@ -91,7 +92,7 @@ const CardCRM = React.memo<CardCRMProps>((props: CardCRMProps) => {
                     <img src={icon} alt="icon-card_crm" />
                     <p>Estimate Today, 11:00 - 18:00</p>
                   </div>
-                  <div className="tasks-length">{dealInfo.overdueTasks}</div>
+                  <div className="tasks-length">{dealInfo.overdueTasks + dealInfo.tasksForToday}</div>
                 </div>
               </div>
             </div>

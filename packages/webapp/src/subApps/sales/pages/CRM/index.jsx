@@ -48,7 +48,7 @@ const CRMPage = ({
     const propsDeals = !state.tabStatus ? { limit } : { limit, managerID: activeManager.id };
     getDealsFilter(propsDeals);
   };
-
+  console.log(dealsData);
   return (
     <>
       <ModalMessage

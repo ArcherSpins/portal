@@ -91,7 +91,6 @@ class DetailsContent extends React.Component<Props, State> {
   changeMessage = (value: string) => {
     this.setState({ message: value });
   }
-
   render() {
     const {
       activeUser,
@@ -104,6 +103,7 @@ class DetailsContent extends React.Component<Props, State> {
       isNewDeal,
       toggleNewTask,
     } = this.props;
+    console.log(comments);
     const { message } = this.state;
     return (
       <div className="details-content">
