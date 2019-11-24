@@ -18,7 +18,10 @@ export async function fetchDealLogs(data: { dealID: string }): Promise<void> {
   try {
     const result = await client.query({
       query: getDealLogs,
-      variables: data,
+      variables: {
+        limit: '25',
+        ...data,
+      },
       fetchPolicy: 'no-cache',
     });
     return result.data.dealLogs;

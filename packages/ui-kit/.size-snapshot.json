@@ -3,5 +3,10 @@
     "bundled": 477820,
     "minified": 477922,
     "gzipped": 113753
+  },
+  "dist\\index.js": {
+    "bundled": 477820,
+    "minified": 477922,
+    "gzipped": 113758
   }
 }

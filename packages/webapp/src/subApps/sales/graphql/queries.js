@@ -696,8 +696,8 @@ export const updateDealTask = gql`
 `;
 
 export const getDealLogs = gql`
-  query dealLogs($dealID: ID!) {
-    dealLogs(dealID: $dealID) {
+  query dealLogs($dealID: ID!, $limit: Int = 25) {
+    dealLogs(dealID: $dealID, limit: $limit) {
       __typename,
       id,
       createdAt,

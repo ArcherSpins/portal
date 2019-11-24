@@ -28,7 +28,7 @@ export function* getDealLogs(action: {
     yield put({ type: 'GET_DEAL_LOGS_SUCCESS', payload: response.reverse() });
   } catch (error) {
     Toast.push({ message: String(error), type: 'danger' });
-    yield put({ type: 'GET_DEAL_LOGS_FAIL' });
+    yield put({ type: 'GET_DEAL_LOGS_SUCCESS', payload: [] });
   }
 }
 
