@@ -8,37 +8,37 @@ import {
 } from 'redux-saga/effects';
 import type { Saga } from 'redux-saga';
 import {
-  fetchCommentsData,
+  // fetchCommentsData,
   fetchCreateComment,
   fetchDeleteComment,
   fetchUpdateComment,
 } from '../api/fetchCommentsApi';
 import type { CommentType } from '../../types';
 
-export function* getCommentsSaga(action: {
-  type: 'GET_COMMENTS_REQUEST',
-  payload: {
-    idDeal: string,
-    returnComments?: (Array<CommentType>) => void
-  }
-}): Saga<void> {
-  try {
-    const response = yield call(fetchCommentsData, {
-      dealId: action.payload.idDeal,
-      limit: '15',
-      offset: '0',
-    });
-    if (action.payload.returnComments && typeof action.payload.returnComments === 'function') {
-      action.payload.returnComments(response);
-    }
-    yield put({ type: 'GET_COMMENTS_SUCCESS', payload: response.reverse() });
-  } catch (error) {
-    yield put({ type: 'OPEN_ERROR_ALERT', payload: error.message });
-    yield put({ type: 'GET_COMMENTS_FAIL' });
-    yield delay(3500);
-    yield put({ type: 'CLOSE_ERROR_ALERT' });
-  }
-}
+// export function* getCommentsSaga(action: {
+//   type: 'GET_COMMENTS_REQUEST',
+//   payload: {
+//     idDeal: string,
+//     returnComments?: (Array<CommentType>) => void
+//   }
+// }): Saga<void> {
+//   try {
+//     const response = yield call(fetchCommentsData, {
+//       dealId: action.payload.idDeal,
+//       limit: '15',
+//       offset: '0',
+//     });
+//     if (action.payload.returnComments && typeof action.payload.returnComments === 'function') {
+//       action.payload.returnComments(response);
+//     }
+//     yield put({ type: 'GET_COMMENTS_SUCCESS', payload: response.reverse() });
+//   } catch (error) {
+//     yield put({ type: 'OPEN_ERROR_ALERT', payload: error.message });
+//     yield put({ type: 'GET_COMMENTS_FAIL' });
+//     yield delay(3500);
+//     yield put({ type: 'CLOSE_ERROR_ALERT' });
+//   }
+// }
 
 export function* createCommentSaga(action: {
   type: 'CREATE_COMMENT_REQUEST',
@@ -105,7 +105,7 @@ export function* updateCommentSaga(action: {
 
 export default function* watchCommentSaga(): any {
   yield all([
-    takeEvery('GET_COMMENTS_REQUEST', getCommentsSaga),
+    // takeEvery('GET_COMMENTS_REQUEST', getCommentsSaga),
     takeEvery('CREATE_COMMENT_REQUEST', createCommentSaga),
     takeEvery('DELETE_COMMENT_REQUEST', deleteCommentSaga),
     takeEvery('UPDATE_COMMENT_REQUEST', updateCommentSaga),
