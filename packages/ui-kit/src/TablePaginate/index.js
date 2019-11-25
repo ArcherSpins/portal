@@ -30,7 +30,8 @@ type Props = {
   columns: Array<ColumnType>,
   manual?: boolean,
   count?: number,
-  history: RouterHistory
+  history: RouterHistory,
+  classNameContainer?: string
 };
 
 const getPageItems = (array: Array<any>, chunkSize: number): Array<any> => {
@@ -125,6 +126,7 @@ const TablePaginate = ({
   columns,
   manual,
   count,
+  classNameContainer,
   history,
   ...restProps
 }: Props) => {
@@ -142,7 +144,7 @@ const TablePaginate = ({
   const data = manual ? items : getPageItems(items, Number(pageSize))[index - 1];
 
   return (
-    <div>
+    <div className={classNameContainer}>
       <Paginate
         className={classNamePaginate}
         style={stylePaginate}
@@ -169,6 +171,7 @@ TablePaginate.defaultProps = {
   style: {},
   activeIndex: 1,
   pageSize: 1,
+  classNameContainer: '',
   getNumber: () => {},
   manual: false,
   count: null,
