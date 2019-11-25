@@ -425,8 +425,8 @@ class CRMDetailsContainer extends React.PureComponent<PropsCrmDetails, State> {
   }
 
   deleteMessage = (find: { id: string }) => {
-    const { fetchDeleteCommentAction } = this.props;
-    fetchDeleteCommentAction(find.id);
+    const { fetchDeleteCommentAction, activeUser } = this.props;
+    fetchDeleteCommentAction(find.id, activeUser.id);
   }
 
   updateMessage = (

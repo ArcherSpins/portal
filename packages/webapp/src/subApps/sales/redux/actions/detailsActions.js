@@ -69,9 +69,10 @@ export const fetchDeleteDealAction = (deleteDeal: { id: string }) => ({
   payload: deleteDeal,
 });
 
-export const fetchDeleteCommentAction = (id: string) => ({
+export const fetchDeleteCommentAction = (id: string, dealId?: string) => ({
   type: 'DELETE_COMMENT_REQUEST',
   payload: id,
+  dealId,
 });
 
 export const fetchUpdateCommentAction = (obj: { id: string, content: string }) => ({

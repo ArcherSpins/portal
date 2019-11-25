@@ -5,6 +5,10 @@ type DealType = {
   title: string,
   createdAt: string,
   updatedAT: string,
+  dealInfo: {
+    tasksForToday: number,
+    overdueTasks: number
+  },
   pipeline: {
     id: string,
     title: string,

@@ -81,6 +81,11 @@ export const createDeal = gql`
         name
       }
 
+      dealInfo {
+        overdueTasks,
+        tasksForToday
+      }
+
       source {
         id,
         title
@@ -165,6 +170,10 @@ export const updateDeal = gql`
         id,
         title
       }
+      dealInfo {
+        overdueTasks,
+        tasksForToday
+      }
 
       jobProposalURL,
       jobPostingURL,
@@ -224,6 +233,15 @@ const getDeals = gql`
         name
       }
 
+      ... on DealTask {
+        description,
+        resolved
+      }
+      dealInfo {
+        overdueTasks,
+        tasksForToday
+      }
+
       customFields {
         id,
         parameter {
@@ -276,6 +294,10 @@ const getDealById = gql`
         title
         createdAt,
         updatedAT,
+      }
+      dealInfo {
+        overdueTasks,
+        tasksForToday
       }
 
       manager {
@@ -508,6 +530,11 @@ const filterDeals = gql`
         title
         createdAt,
         updatedAT,
+      }
+
+      dealInfo {
+        overdueTasks,
+        tasksForToday
       }
 
       manager {

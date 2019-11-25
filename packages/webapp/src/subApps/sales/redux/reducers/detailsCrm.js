@@ -76,6 +76,11 @@ export default (state = initialState, action) => {
         ...state,
         loadingComments: true,
       };
+    case 'GET_DEAL_LOGS_FAIL':
+      return {
+        ...state,
+        loadingComments: false,
+      };
     case 'GET_DEAL_LOGS_SUCCESS':
       return {
         ...state,

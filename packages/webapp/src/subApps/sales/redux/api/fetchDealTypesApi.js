@@ -58,7 +58,11 @@ export async function fetchDealTasks(data: { dealID: string }): Promise<FetchRes
   try {
     const result = await client.query({
       query: getDealTasks,
-      variables: data,
+      variables: {
+        limit: '25',
+        ...data,
+      },
+      fetchPolicy: 'no-cache',
     });
 
     return result.data.dealTasks;
@@ -71,7 +75,11 @@ export async function fetchDealTaskId(data: { id: string }): Promise<FetchResult
   try {
     const result = await client.query({
       query: getDealTaskId,
-      variables: data,
+      variables: {
+        limit: '25',
+        ...data,
+      },
+      fetchPolicy: 'no-cache',
     });
     return result;
   } catch (err) {
