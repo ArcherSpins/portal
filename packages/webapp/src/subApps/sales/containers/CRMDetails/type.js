@@ -91,7 +91,7 @@ export type PropsCrmDetails = {
     status: boolean,
     message: string
   },
-  fetchDeleteCommentAction: (string) => void,
+  fetchDeleteCommentAction: (string, dealId?: string) => void,
   fetchCreateContactAction: (
     payload: {
       dealId: string,

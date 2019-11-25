@@ -1,12 +1,21 @@
+// @flow
 import React from 'react';
 import './style.scss';
 
-const HeaderCRMList = () => (
+type Props = {
+  tasksInfo: {
+    today: number,
+    overdue: number,
+    without: number
+  }
+}
+
+const HeaderCRMList = ({ tasksInfo }: Props) => (
   <div>
     <div className="statuses-crm-list">
-      <p className="success_status">6 Tasks for Today</p>
-      <p className="error_status">12 overdue Tasks</p>
-      <p className="default_status">16 without Tasks</p>
+      <p className="success_status">{`${tasksInfo.today || 0} Tasks for Today`}</p>
+      <p className="error_status">{`${tasksInfo.overdue || 0} overdue Tasks`}</p>
+      <p className="default_status">{`${tasksInfo.without || 0} without Tasks`}</p>
     </div>
     <div className="header-crm-list fz-14">
       <ul>

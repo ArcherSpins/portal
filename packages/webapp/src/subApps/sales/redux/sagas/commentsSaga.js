@@ -70,10 +70,14 @@ export function* createCommentSaga(action: {
 export function* deleteCommentSaga(action: {
   type: 'DELETE_COMMENT_REQUEST',
   payload: string,
+  dealId?: string
 }): Saga<void> {
   try {
     const response = yield call(fetchDeleteComment, { id: action.payload });
     yield put({ type: 'DELETE_COMMENT_SUCCESS', payload: response });
+    if (action.dealId) {
+      yield put({ type: 'GET_DEAL_LOGS_REQUEST', payload: { dealID: action.dealId } });
+    }
   } catch (error) {
     yield put({ type: 'OPEN_ERROR_ALERT', payload: error.message });
     yield put({ type: 'DELETE_COMMENT_FAIL' });

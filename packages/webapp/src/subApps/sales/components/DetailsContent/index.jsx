@@ -91,7 +91,6 @@ class DetailsContent extends React.Component<Props, State> {
   changeMessage = (value: string) => {
     this.setState({ message: value });
   }
-
   render() {
     const {
       activeUser,
