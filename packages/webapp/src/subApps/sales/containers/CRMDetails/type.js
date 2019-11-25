@@ -105,7 +105,7 @@ export type PropsCrmDetails = {
     returnCreated?: (DealType) => void
   ) => void,
   closeErrorAlert: () => void,
-  fetchCommentsAction: (id: string, returnData?: (Array<CommentType>) => void) => void,
+  // fetchCommentsAction: (id: string, returnData?: (Array<CommentType>) => void) => void,
   fetchDealParametersAction: (
     returnParameters?: (Array<ParameterType>) => void
   ) => void,

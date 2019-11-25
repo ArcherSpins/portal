@@ -7,13 +7,35 @@ import {
 import { Block, Label } from './styled';
 import './style.scss';
 
-export default () => (
+type Props = {
+  startTime: string,
+  startEnd: string,
+  onChangeStartTime: (string) => void,
+  onChangeEndTime: (string) => void
+}
+
+export default ({
+  startTime,
+  startEnd,
+  onChangeStartTime,
+  onChangeEndTime,
+}: Props) => (
   <>
     <Label>Time</Label>
     <Block>
-      <Input className="sm-input" value="11:00" />
+      <Input
+        className="sm-input"
+        value={startTime}
+        mask={[/\d/, /\d/, ':', /\d/, /\d/]}
+        onChange={(e) => onChangeStartTime(e.target.value)}
+      />
       <span className="span-couple">-</span>
-      <Input className="sm-input" value="11:00" />
+      <Input
+        className="sm-input"
+        value={startEnd}
+        mask={[/\d/, /\d/, ':', /\d/, /\d/]}
+        onChange={(e) => onChangeEndTime(e.target.value)}
+      />
     </Block>
   </>
 );

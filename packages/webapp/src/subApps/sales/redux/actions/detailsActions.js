@@ -152,16 +152,16 @@ export const fetchDealParametersAction = (
   payload: returnParameters,
 });
 
-export const fetchCommentsAction = (
-  id: string,
-  returnComments?: (Array<CommentType>) => void,
-) => ({
-  type: 'GET_COMMENTS_REQUEST',
-  payload: {
-    idDeal: id,
-    returnComments,
-  },
-});
+// export const fetchCommentsAction = (
+//   id: string,
+//   returnComments?: (Array<CommentType>) => void,
+// ) => ({
+//   type: 'GET_COMMENTS_REQUEST',
+//   payload: {
+//     idDeal: id,
+//     returnComments,
+//   },
+// });
 
 export const fetchSourcesAction = (returnSources?: (Array<SourceType>) => void) => ({
   type: 'GET_SOURCES_REQUEST',

@@ -126,7 +126,6 @@ class CRMDetailsContainer extends React.PureComponent<PropsCrmDetails, State> {
     const {
       setActiveUser,
       setContactsDeal,
-      fetchCommentsAction,
       fetchDealParametersAction,
       fetchDealTypesRequest,
       fetchDealTypeIdRequest,
@@ -135,7 +134,6 @@ class CRMDetailsContainer extends React.PureComponent<PropsCrmDetails, State> {
     } = this.props;
     const activeDeal = data.find((item) => item.title === id);
     if (activeDeal) {
-      fetchCommentsAction(activeDeal.id);
       fetchDealTypesRequest();
       setContactsDeal(activeDeal.customFields);
       setActiveUser(activeDeal);
