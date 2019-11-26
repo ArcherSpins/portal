@@ -2,6 +2,7 @@
 import React, { Component, type AbstractComponent } from 'react';
 import { connect } from 'react-redux';
 import { TablePaginate, H2 } from '@sfxdx/ui-kit';
+import { NotFindLeads, DescriptionLeads } from '../../components';
 import styles from './Home.module.scss';
 import './style.scss';
 
@@ -38,22 +39,27 @@ export const columns = [
   },
 ];
 
+const data = [
+  {
+    job_title: 'Mobile app development',
+    posted: '213213',
+    loaded: '231232',
+    age: '27d 3h',
+    owner: 'Ivan Ivanchenko',
+    status: 'Pending',
+  },
+];
+
 export class Home extends Component<Props> {
   render() {
     return (
       <div className={styles.home}>
-        <div className="d-flex justify-content-between">
+        <div className="d-flex h-100 justify-content-between">
           <div className="col-6">
             <H2 className="title-gray_leads mb-1">Job Postings</H2>
             <TablePaginate
               classNameContainer="reverse-table-paginate"
-              items={[].map((item) => ({
-                // url: `${EMPLOYEES_ROUTE}/${item.id}`,
-                name: item.name,
-                department: item.department ? item.department.title : 'Not department',
-                position: item.position ? item.position.title : 'Not position',
-                location: `${(item.city.name || 'Not city, ')} ${(item.city.country || 'not country')}`,
-              }))}
+              items={data}
               pageSize={6}
               getNumber={this.togglePaginate}
               columns={columns}
@@ -64,15 +70,17 @@ export class Home extends Component<Props> {
               data-test="leads__table"
             />
           </div>
-          <div className="col-6">
+          <div className="col-6 ml-20">
             <H2 className="title-gray_leads mb-1 text-left">Description</H2>
+            <DescriptionLeads />
+            <NotFindLeads />
           </div>
         </div>
       </div>
     );
   }
 }
-
+//  d-flex justify-content-center align-items-center
 const mapStateToProps = () => ({});
 
 const mapDispatchToProps = () => ({});
