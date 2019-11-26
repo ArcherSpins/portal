@@ -1,0 +1,64 @@
+.color-green {
+    color: #61B16F;
+}
+
+.fz-14 {
+    font-size: 14px;
+}
+
+.danger-button_transparent {
+    border-color: #EB5757;
+    color: #EB5757;
+
+    &:hover {
+        background-color: #EB5757;
+        color: white;
+    }
+}
+
+.primary-button_transparent {
+    border-color: #2F80ED;
+    color: #2F80ED;
+
+    &:hover {
+        background-color: #2F80ED;
+        color: white;
+    }
+}
+
+.success-button_transparent {
+    border-color: #61B16F;
+    color: #61B16F;
+
+    &:hover {
+        background-color: #61B16F;
+        color: white;
+    }
+}
+
+.cut-text {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.footer-description_leads {
+    height: 170px;
+    overflow-y: auto;
+    padding-right: 15px;
+}
+
+.before-content {
+    height: 45%;
+    overflow-y: auto;
+}
+
+.input-description_leads {
+    max-height: 130px;
+    min-height: 80px;
+}
+
+.link {
+    color: #2F80ED;
+    text-decoration: none;
+}

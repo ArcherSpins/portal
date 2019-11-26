@@ -2,7 +2,7 @@
 import React, { Component, type AbstractComponent } from 'react';
 import { connect } from 'react-redux';
 import { TablePaginate, H2 } from '@sfxdx/ui-kit';
-import { NotFindLeads, DescriptionLeads } from '../../components';
+import { DescriptionLeads } from '../../components';
 import styles from './Home.module.scss';
 import './style.scss';
 
@@ -56,7 +56,7 @@ export class Home extends Component<Props> {
       <div className={styles.home}>
         <div className="d-flex h-100 justify-content-between">
           <div className="col-6">
-            <H2 className="title-gray_leads mb-1">Job Postings</H2>
+            <H2 className="title-gray_leads mb-2">Job Postings</H2>
             <TablePaginate
               classNameContainer="reverse-table-paginate"
               items={data}
@@ -71,9 +71,9 @@ export class Home extends Component<Props> {
             />
           </div>
           <div className="col-6 ml-20">
-            <H2 className="title-gray_leads mb-1 text-left">Description</H2>
+            <H2 className="title-gray_leads mb-2 text-left">Description</H2>
             <DescriptionLeads />
-            <NotFindLeads />
+            {/* <NotFindLeads /> */}
           </div>
         </div>
       </div>
