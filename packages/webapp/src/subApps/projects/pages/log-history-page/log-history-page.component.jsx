@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import type { RouterHistory, Match } from 'react-router-dom';
 import { Button, H1 } from '@sfxdx/ui-kit';
+import createTestContext from 'utils/createTestContext';
 
 import './log-history-page.styles.scss';
 
@@ -19,6 +20,8 @@ import type { Log } from '../../redux/log/log.flow-types';
 
 import LogHistoryItem from '../../components/log-history-item/log-history-item.component';
 import PaginationComponent from '../../components/pagination/pagination.component';
+
+const createTestAttr = createTestContext('log-history');
 
 type Props = {
   logs: Array<Log>,
@@ -67,6 +70,7 @@ class LogHistoryPage extends React.Component<Props, State> {
                 type="button"
                 className={`${!openDescription ? 'active' : ''} toggler`}
                 onClick={() => this.setState({ openDescription: false })}
+                data-test={createTestAttr('toggle-description-button')}
               >
                 <svg
                   width="12"
@@ -82,6 +86,7 @@ class LogHistoryPage extends React.Component<Props, State> {
                 </svg>
               </button>
               <button
+                data-test={createTestAttr('toggle-description-button')}
                 type="button"
                 className={`${openDescription ? 'active' : ''} toggler`}
                 onClick={() => this.setState({ openDescription: true })}
