@@ -107,6 +107,7 @@ class LogHistoryPage extends React.Component<Props, State> {
             </div>
           </div>
           <Button
+            data-test={createTestAttr('add-log-button')}
             onClick={() => history.push(`${match.url}/logcreate`)}
           >
             Add Log
