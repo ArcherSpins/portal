@@ -21,23 +21,27 @@ type Props = {
 
 const Participants = ({
   chips, onDelete, className, children, name, ...restProps
-}: Props) => (
-  <div className={classNames(styles.participants, className)} {...restProps}>
-    {children}
-    <div className={styles['chips-list']} data-test="chips-list">
-      {Array.isArray(chips) && chips.map((item) => (
-        <Chip
-          key={item.id}
-          onDelete={() => onDelete(
-            { name, value: item.id },
-          )}
-          title={item.label}
-          {...item}
-        />
-      ))}
+}: Props) => {
+  const func = onDelete ? (id) => onDelete(
+    { name, value: id },
+  ) : null;
+
+  return (
+    <div className={classNames(styles.participants, className)} {...restProps}>
+      {children}
+      <div className={styles['chips-list']} data-test="chips-list">
+        {Array.isArray(chips) && chips.map((item) => (
+          <Chip
+            key={item.id}
+            onDelete={func}
+            title={item.label}
+            {...item}
+          />
+        ))}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 Participants.defaultProps = {
   className: '',
