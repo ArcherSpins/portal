@@ -5,11 +5,15 @@ import { withRouter } from "react-router-dom";
 import type { RouterHistory, Match } from "react-router-dom";
 import moment from "moment";
 import { differenceInHours, addMinutes } from 'date-fns';
+import createTestContext from 'utils/createTestContext';
 import { ROOT } from '../../routes';
 
 import "./log-history-item.styles.scss";
 
 import type { Log } from "../../redux/log/log.flow-types";
+
+
+const createTestAttr = createTestContext('log-history-item');
 
 type Props = {
   log: Log,
@@ -63,6 +67,7 @@ class LogHistoryItem extends React.Component<Props, State> {
           </span>
           <div className="edit-button-wrapper">
             <button
+              data-test={createTestAttr('leg-edit-button')}
               className="log-edit-button"
               onClick={() => this.props.history.push(`${this.props.match.url || " "}/${this.props.log.id}`)}
             >
