@@ -40,6 +40,7 @@ import {
   fetchCreateDealTask,
   fetchUpdateDealTask,
   fetchDealLogs,
+  cleanDealsLog,
 } from '../../redux/actions';
 
 const mapStateToProps = (state) => ({
@@ -94,6 +95,7 @@ const mapDispatchToProps = {
   fetchDeleteDealAction,
   fetchUpdateContactAction,
   getDealById,
+  cleanDealsLog,
   fetchDealTypesRequest,
   fetchDealTypeIdRequest,
   fetchDealTasksRequest,

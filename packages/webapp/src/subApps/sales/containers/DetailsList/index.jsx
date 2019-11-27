@@ -148,27 +148,23 @@ class DetailsListContainer extends React.PureComponent<Props, State> {
     // eslint-disable-next-line no-restricted-syntax
     for (const input of inputs) {
       if (input.value !== '') {
-        input.style.borderColor = '#C6CCD5';
         deleteErrorForm(input.id);
         // TODO: REFACTOR THIS TO MORE READABLE
         // eslint-disable-next-line no-continue
         continue;
       } else if (input.value.trim() === '') {
         if (data.stage && data.stage.title.toLowerCase() !== 'introduction' && input.id === 'jobProposalURL') {
-          input.style.borderColor = '#C6CCD5';
           deleteErrorForm(input.id);
           // eslint-disable-next-line no-continue
           continue;
         } else if (data.stage.title.toLowerCase() === 'introduction' && input.id === 'jobProposalURL') {
           toggleShowModal(true);
         }
-        input.style.borderColor = 'tomato';
         status = false;
         setErrorForm(input.id, null);
       }
-
-      if (!status) return false;
-      input.style.borderColor = '#C6CCD5';
+      // eslint-disable-next-line no-continue
+      if (!status) continue;
       status = true;
       deleteErrorForm(input.id);
     }
@@ -179,7 +175,10 @@ class DetailsListContainer extends React.PureComponent<Props, State> {
     e.preventDefault();
     const { fetchEditForm, deleteContact, toggleShowModal } = this.props;
     const { data, contacts, deletedContacts } = this.state;
-    const inputs = document.querySelectorAll('.input-edit');
+    const inputs = [
+      ...document.querySelectorAll('.input-edit'),
+      ...document.querySelectorAll('.input-edit-form input'),
+    ];
     // $FlowFixMe
     const status = this.valideInputs(inputs);
     if (deletedContacts.length > 0) {

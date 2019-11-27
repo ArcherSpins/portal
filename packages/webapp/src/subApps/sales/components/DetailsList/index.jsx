@@ -111,8 +111,9 @@ const DetailsList = ({
         >
           <FieldBlock className="field">
             <Input
-              className="pl-0"
+              className="pl-0 input-edit-form"
               label="Client"
+              id="client"
               onChange={(e) => changeInput('client', e.target.value)}
               use="borderless"
               value={data.client}
@@ -218,9 +219,10 @@ const DetailsList = ({
               >
                 <div className="field">
                   <Input
-                    className="pl-0"
+                    className="pl-0 input-edit-form"
                     onChange={(e) => changeInput('source', e.target.value, 'jobPostingURL', 'upwork')}
                     use="borderless"
+                    id="jobPostingURL"
                     value={data.jobPostingURL}
                     error={errorsFormCreate.jobPostingURL.error}
                     name="jobPostingURL"
@@ -232,7 +234,8 @@ const DetailsList = ({
                 </div>
                 <div className="field">
                   <Input
-                    className="pl-0"
+                    className="pl-0 input-edit-form"
+                    id="jobProposalURL"
                     onChange={(e) => changeInput('source', e.target.value, 'jobProposalURL', 'upwork')}
                     use="borderless"
                     value={data.jobProposalURL}
