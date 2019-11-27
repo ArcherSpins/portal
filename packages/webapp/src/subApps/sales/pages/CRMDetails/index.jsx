@@ -137,19 +137,17 @@ const CRMDetailsPage = ({
         />
         {
           activeUser.id && (
-            <div>
-              <DetailsContent
-                loading={loadingComments}
-                deleteMessageCrm={deleteMessage}
-                setMessage={setMessage}
-                activeUser={activeUser}
-                comments={logDeals}
-                updateMessage={updateMessage}
-                toggleNewTask={toggleNewTask}
-                toggleModalNewDeal={toggleModalNewDeal}
-                isNewDeal={isNewDeal}
-              />
-            </div>
+            <DetailsContent
+              loading={loadingComments}
+              deleteMessageCrm={deleteMessage}
+              setMessage={setMessage}
+              activeUser={activeUser}
+              comments={logDeals}
+              updateMessage={updateMessage}
+              toggleNewTask={toggleNewTask}
+              toggleModalNewDeal={toggleModalNewDeal}
+              isNewDeal={isNewDeal}
+            />
           )
         }
       </div>

@@ -22,7 +22,7 @@ const App = () => (
   <>
     <GlobalStyle />
     <ThemeProvider theme={theme}>
-      <div className="page app-sales">
+      <div className="page">
         <Content>
           <Switch>
             <Route exact path={getRoute('/')} component={CRMContainer} />
