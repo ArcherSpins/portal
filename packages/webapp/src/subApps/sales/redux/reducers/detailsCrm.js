@@ -87,6 +87,11 @@ export default (state = initialState, action) => {
         logDeals: action.payload,
         loadingComments: false,
       };
+    case 'GET_DEAL_LOGS_CLEAN':
+      return {
+        ...state,
+        logDeals: [],
+      };
     case 'GET_COMMENTS_SUCCESS':
       return {
         ...state,
@@ -150,6 +155,10 @@ export default (state = initialState, action) => {
       return {
         ...state,
         sources: action.payload,
+        activeUser: {
+          ...state.activeUser,
+          source: action.payload[0],
+        },
         loadingSources: false,
       };
     case 'GET_SOURCES_FAIL':

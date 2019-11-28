@@ -20,6 +20,10 @@ export const getDealsAction = (
   },
 });
 
+export const cleanDealsLog = () => ({
+  type: 'GET_DEAL_LOGS_CLEAN',
+});
+
 export const getDealById = (
   id: string,
   returnDeal?: (DealType) => void,

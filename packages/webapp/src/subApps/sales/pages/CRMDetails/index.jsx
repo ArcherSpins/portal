@@ -93,21 +93,23 @@ const CRMDetailsPage = ({
           endDate,
         })}
       />
-      <HeaderDetails
-        goBack={goBack}
-        title={activeUser.title}
-        statuses={statuses}
-        activeUser={activeUser}
-        toggleStatus={toggleStatus}
-        editTitle={editTitle}
-        toggleActiveTitle={toggleActiveTitle}
-        changeTitleText={changeTitleText}
-        titleText={titleText}
-        deleteDeal={setDeleteDataDeal}
-        errorsFormCreate={errorsFormCreate}
-        setTitleComponent={setTitleComponent}
-      />
-      <div className="content-page d-flex fz-14">
+      <div className="header-sales-content">
+        <HeaderDetails
+          goBack={goBack}
+          title={activeUser.title}
+          statuses={statuses}
+          activeUser={activeUser}
+          toggleStatus={toggleStatus}
+          editTitle={editTitle}
+          toggleActiveTitle={toggleActiveTitle}
+          changeTitleText={changeTitleText}
+          titleText={titleText}
+          deleteDeal={setDeleteDataDeal}
+          errorsFormCreate={errorsFormCreate}
+          setTitleComponent={setTitleComponent}
+        />
+      </div>
+      <div className="content-page container-sales-content d-flex fz-14">
         <ModalApproval
           isOpen={modalApproval}
           onCancel={() => toggleModalApproval(false)}
@@ -133,17 +135,21 @@ const CRMDetailsPage = ({
           toggleShowModal={toggleShowModal}
           showModalErrorMessage={showModalErrorMessage}
         />
-        <DetailsContent
-          loading={loadingComments}
-          deleteMessageCrm={deleteMessage}
-          setMessage={setMessage}
-          activeUser={activeUser}
-          comments={logDeals}
-          updateMessage={updateMessage}
-          toggleNewTask={toggleNewTask}
-          toggleModalNewDeal={toggleModalNewDeal}
-          isNewDeal={isNewDeal}
-        />
+        {
+          activeUser.id && (
+            <DetailsContent
+              loading={loadingComments}
+              deleteMessageCrm={deleteMessage}
+              setMessage={setMessage}
+              activeUser={activeUser}
+              comments={logDeals}
+              updateMessage={updateMessage}
+              toggleNewTask={toggleNewTask}
+              toggleModalNewDeal={toggleModalNewDeal}
+              isNewDeal={isNewDeal}
+            />
+          )
+        }
       </div>
     </div>
   );

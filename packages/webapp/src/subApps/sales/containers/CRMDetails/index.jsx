@@ -38,8 +38,9 @@ class CRMDetailsContainer extends React.PureComponent<PropsCrmDetails, State> {
   }
 
   componentWillUnmount() {
-    const { errorsFormCreate, deleteErrorForm } = this.props;
+    const { errorsFormCreate, deleteErrorForm, cleanDealsLog } = this.props;
     Object.keys(errorsFormCreate).forEach((key) => deleteErrorForm(key));
+    cleanDealsLog();
   }
 
   toggleModalApproval = (status: boolean) => {

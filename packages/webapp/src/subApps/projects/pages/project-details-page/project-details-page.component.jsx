@@ -14,12 +14,10 @@ import {
   Radio, H1, Participants, Combobox,
 } from '@sfxdx/ui-kit';
 // $FlowFixMe
-import type { Action as ParticipantsAction } from '@sfxdx/ui-kit/src/Participants';
+import type { Action, Option } from '@sfxdx/ui-kit/src/Participants';
 import Header from 'subApps/projects/components/header';
 
 import { ROOT } from 'subApps/projects/routes';
-// $FlowFixMe
-import type { Option, Action } from '@sfxdx/ui-kit/src/Combobox';
 import createTestContext from 'utils/createTestContext';
 import { editProject, getProjectTypes } from '../../redux/project/project.actions';
 import {
@@ -297,7 +295,7 @@ class ProjectDetailPage extends Component<Props, State> {
     value: employee.id,
   });
 
-  onChipDelete = ({ name, value }: ParticipantsAction) => {
+  onChipDelete = ({ name, value }: Action) => {
     this.setState((state) => ({
       [name]: state[name].filter((item) => item.id !== value),
     }));

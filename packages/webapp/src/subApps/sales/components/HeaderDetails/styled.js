@@ -14,9 +14,9 @@ const InputForTitle = styled.input`
     width: auto;
 
     background: #FFFFFF;
-    border: 1px solid #C6CCD5;
+    border: 1px solid #e5e5e5;
     box-sizing: border-box;
-    border-radius: 4px;
+    border-radius: 2px;
     color: #333333;
 `;
 

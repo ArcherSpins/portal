@@ -1,7 +1,7 @@
 // @flow
 
 import type { FetchResult } from 'apollo-link';
-import { client } from '../../graphql/client';
+import client from 'utils/api';
 import {
   getEmployeeById,
   getEmployess,

@@ -1,7 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 // @flow
 import type { FetchResult } from 'apollo-link';
-import { client } from '../../graphql/client';
+import client from 'utils/api';
 import {
   getPositions,
 } from '../../graphql/queries';
