@@ -8,12 +8,8 @@ import type { RouterHistory } from 'react-router-dom';
 import uniqBy from 'lodash.uniqby';
 import createTestContext from 'utils/createTestContext';
 import {
-  Input, TextArea, Button, Radio, H1, Combobox, Participants,
+  Input, TextArea, Button, Radio, H1, Combobox, Participants, type Option, type Action,
 } from '@sfxdx/ui-kit';
-// $FlowFixMe
-import type { Option, Action } from '@sfxdx/ui-kit/src/Combobox';
-// $FlowFixMe
-import type { Action as ParticipantsAction } from '@sfxdx/ui-kit/src/Participants';
 import Header from 'subApps/projects/components/header';
 import { saveProject, getProjectTypes } from '../../redux/project/project.actions';
 import translate from '../../helpers/translator';
@@ -203,7 +199,7 @@ class CreateProjectPage extends Component<Props, State> {
     value: employee.id,
   });
 
-  onChipDelete = ({ name, value }: ParticipantsAction) => {
+  onChipDelete = ({ name, value }: Action) => {
     this.setState((state) => ({
       [name]: state[name].filter((item) => item.id !== value),
     }));

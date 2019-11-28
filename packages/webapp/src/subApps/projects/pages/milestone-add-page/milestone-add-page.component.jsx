@@ -14,8 +14,6 @@ import {
 import createTestContext from 'utils/createTestContext';
 // $FlowFixMe
 import type { Option, Action } from '@sfxdx/ui-kit/src/Combobox';
-// $FlowFixMe
-import type { Action as ParticipantsAction } from '@sfxdx/ui-kit/src/Participants';
 
 import { createMilestone } from '../../redux/milestone/milestone.actions';
 
@@ -175,7 +173,7 @@ class MilestoneAddPage extends React.Component<Props, State> {
     value: employee.id,
   });
 
-  onChipDelete = ({ name, value }: ParticipantsAction) => {
+  onChipDelete = ({ name, value }: Action) => {
     this.setState((state) => ({
       [name]: state[name].filter((item) => item.id !== value),
     }));

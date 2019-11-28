@@ -1,6 +1,6 @@
 // @flow
 import type { FetchResult } from 'apollo-link';
-import { client } from '../../graphql/client';
+import client from 'utils/api';
 import { getSpentTimeBounds, updateSpentTime } from '../../graphql/queries';
 import type { SpentTimeBoundsType } from '../../types';
 

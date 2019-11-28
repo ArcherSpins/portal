@@ -1,6 +1,6 @@
 // @flow
 import type { FetchResult } from 'apollo-link';
-import { client } from '../../graphql/client';
+import client from 'utils/api';
 import { getCities } from '../../graphql/queries';
 import type { CityType } from '../../types';
 
