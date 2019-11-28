@@ -338,7 +338,7 @@ class LogCreate extends React.Component<Props, State> {
             >
               Sorry, something went wrong please check
               {' '}
-              {errors.join(', ')}
+              {[...new Set(errors)].join(', ')}
 .
             </div>
           )}
