@@ -3,8 +3,7 @@ import { Provider } from 'react-redux';
 import App from './containers/App';
 import configureStore from './redux/store';
 
-const initialState = {};
-const store = configureStore(initialState);
+const store = configureStore();
 
 export default () => (
   <Provider store={store}>

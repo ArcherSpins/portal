@@ -6,16 +6,12 @@ export const getJobForCurrentUser = gql`
     $to: Time!,
     $sorting: JobsSorting = CREATED_AT,
     $sortDirection: SortingDirection = INCREASE,
-    $limit: Int! = 15,
-    $offset: Int! = 0
   ) {
     jobsForCurrentUser(
       from: $from,
       to: $to,
       sorting: $sorting,
       sortDirection: $sortDirection,
-      limit: $limit,
-      offset: $offset
     ) {
       id,
       title,
@@ -27,7 +23,9 @@ export const getJobForCurrentUser = gql`
       budget,
       totalCharge,
       avgHourlyRate,
-      price,
+      price {
+        Min, Max
+      },
       tags {
         id, title
       },
@@ -43,17 +41,13 @@ export const getBlockingJobsCurrentUser = gql`
     $from: Time!,
     $to: Time!,
     $sorting: JobsSorting = CREATED_AT,
-    $sortDirection: SortingDirection = INCREASE,
-    $limit: Int! = 15,
-    $offset: Int! = 0
+    $sortDirection: SortingDirection = INCREASE
   ) {
     blockingJobsCurrentUser(
       from: $from,
       to: $to,
       sorting: $sorting,
       sortDirection: $sortDirection,
-      limit: $limit,
-      offset: $offset
     ) {
       id,
       title,
@@ -65,7 +59,9 @@ export const getBlockingJobsCurrentUser = gql`
       budget,
       totalCharge,
       avgHourlyRate,
-      price,
+      price {
+        Min, Max
+      },
       tags {
         id, title
       },

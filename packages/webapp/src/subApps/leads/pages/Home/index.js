@@ -3,6 +3,10 @@ import React, { Component, type AbstractComponent } from 'react';
 import { connect } from 'react-redux';
 import { TablePaginate, H2 } from '@sfxdx/ui-kit';
 import { DescriptionLeads } from '../../components';
+import {
+  fetchJobForCurrentUser,
+  fetchBlockingJobsCurrentUser,
+} from '../../redux/actions';
 import styles from './Home.module.scss';
 import './style.scss';
 
@@ -51,6 +55,18 @@ const data = [
 ];
 
 export class Home extends Component<Props> {
+  componentDidMount() {
+    const { fetchJobForCurrentUserAction, fetchBlockingJobsCurrentUserAction } = this.props;
+    fetchJobForCurrentUserAction({
+      from: new Date(2018, 11, 12).toISOString(),
+      to: new Date().toISOString(),
+    });
+    fetchBlockingJobsCurrentUserAction({
+      from: new Date(2018, 11, 12).toISOString(),
+      to: new Date().toISOString(),
+    });
+  }
+
   render() {
     return (
       <div className={styles.home}>
@@ -83,6 +99,9 @@ export class Home extends Component<Props> {
 //  d-flex justify-content-center align-items-center
 const mapStateToProps = () => ({});
 
-const mapDispatchToProps = () => ({});
+const mapDispatchToProps = {
+  fetchJobForCurrentUserAction: fetchJobForCurrentUser,
+  fetchBlockingJobsCurrentUserAction: fetchBlockingJobsCurrentUser,
+};
 
 export default (connect(mapStateToProps, mapDispatchToProps)(Home): AbstractComponent<OwnProps>);
