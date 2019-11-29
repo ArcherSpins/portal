@@ -2,6 +2,7 @@
 import React, { Component, type AbstractComponent } from 'react';
 import { connect } from 'react-redux';
 import { TablePaginate, H2 } from '@sfxdx/ui-kit';
+import createTestContext from 'utils/createTestContext';
 import { DescriptionLeads } from '../../components';
 import {
   fetchJobForCurrentUser,
@@ -9,6 +10,8 @@ import {
 } from '../../redux/actions';
 import styles from './Home.module.scss';
 import './style.scss';
+
+const createTestAttr = createTestContext('leads-home');
 
 type OwnProps = {||};
 
@@ -56,12 +59,8 @@ const data = [
 
 export class Home extends Component<Props> {
   componentDidMount() {
-    const { fetchJobForCurrentUserAction, fetchBlockingJobsCurrentUserAction } = this.props;
+    const { fetchJobForCurrentUserAction } = this.props;
     fetchJobForCurrentUserAction({
-      from: new Date(2018, 11, 12).toISOString(),
-      to: new Date().toISOString(),
-    });
-    fetchBlockingJobsCurrentUserAction({
       from: new Date(2018, 11, 12).toISOString(),
       to: new Date().toISOString(),
     });
@@ -83,7 +82,7 @@ export class Home extends Component<Props> {
               count={Math.ceil(3)}
               // history={history}
               manual
-              data-test="leads__table"
+              data-test={createTestAttr('leads__table')}
             />
           </div>
           <div className="col-6 ml-20">

@@ -1,5 +1,6 @@
 // @flow
 import React from 'react';
+import createTestContext from 'utils/createTestContext';
 import {
   Accent,
   Participants,
@@ -9,6 +10,9 @@ import {
 import BadgeBlock from '../BadgeBlock';
 import BlockTitle from '../BlockTItle';
 import './style.scss';
+
+
+const createTestAttr = createTestContext('description-leads');
 
 export default () => (
   <div className="h-100">
@@ -83,9 +87,15 @@ export default () => (
       </BlockTitle>
     </div>
     <div className="d-flex mb-20 justify-content-end mt-20">
-      <Button className="danger-button_transparent" use="transparent">Decline</Button>
-      <Button className="primary-button_transparent mx-10" use="transparent">Bid</Button>
-      <Button className="success-button_transparent" use="transparent">Pending</Button>
+      <Button
+        data-test={createTestAttr('decline-button')}
+        className="danger-button_transparent"
+        use="transparent"
+      >
+        Decline
+      </Button>
+      <Button data-test={createTestAttr('bid-button')} className="primary-button_transparent mx-10" use="transparent">Bid</Button>
+      <Button data-test={createTestAttr('pending-button')} className="success-button_transparent" use="transparent">Pending</Button>
     </div>
   </div>
 );

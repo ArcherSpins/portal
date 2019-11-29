@@ -1,23 +1,25 @@
 // @flow
-// import type { FetchResult } from 'apollo-link';
+import type { FetchResult } from 'apollo-link';
 import client from 'utils/api';
 import {
   getJobForCurrentUser,
   getBlockingJobsCurrentUser,
   createBlockingJobsForCurrentUser,
 } from '../../graphql/queries';
+import type { JobCurrentUserType } from '../../types/api';
+
+type Response = Array<JobCurrentUserType>;
 
 export async function fetchJobForCurrentUser(data: {
     from: Date,
     to: Date
-}): Promise<void> {
+}): Promise<FetchResult<Response>> {
   try {
     const response = await client.query({
       query: getJobForCurrentUser,
       variables: data,
     });
-    console.log(response);
-    return response.data.calendar;
+    return response.data.jobsForCurrentUser;
   } catch (err) {
     throw new Error(err.message);
   }
@@ -27,13 +29,13 @@ export async function fetchJobForCurrentUser(data: {
 export async function fetchBlockingJobsCurrentUser(data: {
   from: Date,
   to: Date
-}): Promise<void> {
+}): Promise<FetchResult<Response>> {
   try {
     const response = await client.query({
       query: getBlockingJobsCurrentUser,
       variables: data,
     });
-    return response.data.calendar;
+    return response.data.blockingJobsCurrentUser;
   } catch (err) {
     throw new Error(err.message);
   }

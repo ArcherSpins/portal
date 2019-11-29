@@ -8,6 +8,7 @@ import {
 import type { Saga } from 'redux-saga';
 import {
   fetchJobForCurrentUser,
+  fetchBlockingJobsCurrentUser,
 } from '../api/fetchJobForCurrentUserApi';
 
 export function* getJobForCurrentUser(action: {
@@ -18,14 +19,12 @@ export function* getJobForCurrentUser(action: {
   }
 }): Saga<void> {
   try {
-    console.log(action);
     const data = yield call(fetchJobForCurrentUser, action.payload);
     yield put({
       type: 'FETCH_JOB_FOR_CURRENT_USER_SUCCESS',
       payload: data,
     });
   } catch (err) {
-    console.log(err);
     yield put({ type: 'FETCH_JOB_FOR_CURRENT_USER_FAIL' });
     yield put({
       type: 'SHOW_ERROR_MESSAGE',
@@ -42,13 +41,12 @@ export function* getBlockingJobSForCurrentUser(action: {
   }
 }): Saga<void> {
   try {
-    const data = yield call(fetchJobForCurrentUser, action.payload);
+    const data = yield call(fetchBlockingJobsCurrentUser, action.payload);
     yield put({
       type: 'FETCH_BLOCKING_JOB_FOR_CURRENT_USER_SUCCESS',
       payload: data,
     });
   } catch (err) {
-    console.log(err);
     yield put({ type: 'FETCH_BLOCKING_JOB_FOR_CURRENT_USER_FAIL' });
     yield put({
       type: 'SHOW_ERROR_MESSAGE',
