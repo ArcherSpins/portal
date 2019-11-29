@@ -182,11 +182,16 @@ class LogCreate extends React.Component<Props, State> {
   };
 
   handleMinutesChange = (e: SyntheticInputEvent<*>) => {
-    this.setState({ minutes: this.filterMinutes(e.target.value) });
+    this.setState({
+      minutes: Number(this.filterMinutes(e.target.value)) <= 59
+        ? this.filterMinutes(e.target.value) : 59,
+    });
   };
 
   handleHoursChange = (e: SyntheticInputEvent<*>) => {
-    this.setState({ hours: this.filterHours(e.target.value) });
+    this.setState({
+      hours: this.filterHours(e.target.value),
+    });
   };
 
   validate = () => {
@@ -245,13 +250,13 @@ class LogCreate extends React.Component<Props, State> {
     if (isValid.length) {
       this.setState({ errors: isValid });
     } else {
-      const newMinutes = parseFloat(minutes) || 0;
-      const newHours = hours ? parseFloat(hours) * 60 : 0;
-      const sum = newMinutes + newHours;
+      // const newMinutes = parseFloat(minutes) || 0;
+      // const newHours = hours ? parseFloat(hours) * 60 : 0;
+      // const sum = newMinutes + newHours;
       const newLog = {
         taskID: task.id,
         date,
-        spentTime: sum.toString(),
+        spentTime: (Number(hours * 60) + Number(minutes)).toString(),
         comment,
       };
       createLog(newLog, history);
