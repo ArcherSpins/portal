@@ -82,6 +82,10 @@ class LogCreate extends React.Component<Props, State> {
     }
   };
 
+  componentWillUnmount() {
+    this.setState({ errors: [] });
+  }
+
   componentDidMount = () => {
     const { milestone } = this.props;
     getEstimation(milestone.id).then((response) => {
@@ -243,22 +247,22 @@ class LogCreate extends React.Component<Props, State> {
   handleSubmit = (e: SyntheticInputEvent<*>) => {
     e.preventDefault();
     const isValid = this.validate();
-    const { task, createLog, history } = this.props;
+    const {
+      task, createLog, history,
+    } = this.props;
     const {
       date, comment, minutes, hours,
     } = this.state;
     if (isValid.length) {
       this.setState({ errors: isValid });
     } else {
-      // const newMinutes = parseFloat(minutes) || 0;
-      // const newHours = hours ? parseFloat(hours) * 60 : 0;
-      // const sum = newMinutes + newHours;
       const newLog = {
         taskID: task.id,
         date,
         spentTime: (Number(hours * 60) + Number(minutes)).toString(),
         comment,
       };
+
       createLog(newLog, history);
     }
   };
@@ -269,7 +273,6 @@ class LogCreate extends React.Component<Props, State> {
       date, comment, errors, minutes, hours,
     } = this.state;
     const now = new Date();
-
     return (
       <div className="log-create">
         <Header>
