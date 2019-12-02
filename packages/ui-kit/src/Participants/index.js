@@ -1,6 +1,7 @@
 // @flow
 import React, { type Node } from 'react';
 import classNames from 'classnames';
+import noop from 'lodash.noop';
 import Chip from '../Chip';
 
 import styles from './Participants.module.scss';
@@ -22,9 +23,9 @@ type Props = {
 const Participants = ({
   chips, onDelete, className, children, name, ...restProps
 }: Props) => {
-  const func = onDelete ? (id) => onDelete(
+  const onDeleteWrap = onDelete ? (id) => onDelete(
     { name, value: id },
-  ) : null;
+  ) : noop;
 
   return (
     <div className={classNames(styles.participants, className)} {...restProps}>
@@ -33,7 +34,7 @@ const Participants = ({
         {Array.isArray(chips) && chips.map((item) => (
           <Chip
             key={item.id}
-            onDelete={func}
+            onDelete={onDeleteWrap}
             title={item.label}
             {...item}
           />
