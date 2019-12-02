@@ -49,6 +49,7 @@ export const getMilestone = async (id) => {
           id
           title
           description
+          spentTime
           number
           state {
             id

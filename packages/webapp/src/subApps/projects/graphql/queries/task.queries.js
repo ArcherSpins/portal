@@ -29,6 +29,7 @@ export const getAllTasks = async (milestoneID) => {
               id
               title
               number
+              spentTime
             }
             project {
               id
