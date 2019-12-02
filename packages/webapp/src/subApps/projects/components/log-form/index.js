@@ -13,7 +13,6 @@ import { addYears } from 'date-fns';
 import type { Project } from '../../redux/project/project.flow-types';
 import type { Milestone } from '../../redux/milestone/milestone.flow-types';
 import type { Task } from '../../redux/task/task.flow-types';
-// import type { Log, LogCreation } from '../../redux/log/log.flow-types';
 
 const showAbleToLog = (estimated: number, spent: number): string => {
   const diff = estimated - spent;
@@ -23,8 +22,8 @@ const showAbleToLog = (estimated: number, spent: number): string => {
 };
 
 export type Fields = {
-  hours: string,
-  minutes: string,
+  hours: number,
+  minutes: number,
   date: Date,
   comment: string
 }
@@ -35,10 +34,7 @@ type Props = {
   project: Project,
   milestone: Milestone,
   testContext: 'create-log' | 'edit-log',
-  hours?: string,
-  minutes?: string,
-  date?: string,
-  comment?: string
+  initialValues?: Fields
 }
 
 const LogForm = ({
@@ -47,24 +43,15 @@ const LogForm = ({
   project,
   milestone,
   testContext,
-  hours,
-  minutes,
-  date,
-  comment,
+  initialValues,
 }: Props) => {
   const formik = useFormik({
-    initialValues: {
-      hours,
-      minutes,
-      date,
-      comment,
-    },
+    initialValues,
 
     onSubmit: (values) => onSubmit(values),
 
     validate: (values) => {
       const errors = {};
-
       if (!values.hours) {
         errors.hours = 'Please, set hours field';
       }
@@ -84,6 +71,9 @@ const LogForm = ({
       return errors;
     },
 
+    validateOnBlur: false,
+    validateOnChange: false,
+
   });
 
   const createTestAttr = createTestContext(testContext);
@@ -91,6 +81,7 @@ const LogForm = ({
 
   const { estimatedTime, spentTime } = milestone;
 
+  const submitted = formik.submitCount > 0;
   return (
     <form onSubmit={formik.handleSubmit} className="body">
       <div className="pb1 mb1 border">
@@ -163,13 +154,15 @@ const LogForm = ({
         data-test={createTestAttr('comment-input')}
         onChange={formik.handleChange}
       />
-      {Object.keys(formik.errors).map((field) => (
-        <ErrorText key={field}>{formik.errors[field]}</ErrorText>
-      ))}
+      {submitted && (
+        Object.keys(formik.errors).map((field) => (
+          <ErrorText key={field}>{formik.errors[field]}</ErrorText>
+        ))
+      )}
       <Button
         type="submit"
         data-test={createTestAttr('log-button')}
-        disabled={!formik.isValid}
+        disabled={!submitted && !formik.isValid}
         style={{ marginTop: '1rem' }}
       >
         Log It
@@ -179,10 +172,12 @@ const LogForm = ({
 };
 
 LogForm.defaultProps = {
-  hours: '',
-  minutes: '',
-  date: '',
-  comment: '',
+  initialValues: {
+    comment: '',
+    date: new Date(),
+    hours: 0,
+    minutes: 0,
+  },
 };
 
 export default LogForm;
