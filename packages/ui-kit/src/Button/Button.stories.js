@@ -106,6 +106,18 @@ const stories = storiesOf('Button', module)
       }
     ]
   })
+  .addWithChapters('Primary', {
+    chapters: [
+      {
+        sections: [
+          {
+            title: "Idle",
+            sectionFn: () => <Button use="primary" onClick={onClick}>Add Employee</Button>,
+          },
+        ],
+      }
+    ]
+  })
   .addWithChapters('Grey Filled', {
     chapters: [
       {

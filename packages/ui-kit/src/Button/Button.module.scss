@@ -49,6 +49,8 @@
   border-radius: 0.2rem;
 }
 
+
+
 .default {
   @extend .button;
   background: $main-color;
@@ -93,10 +95,9 @@
       }
     }
   }
-  
 
-  
 }
+
 
 .transparent {
   @extend .button;
@@ -303,6 +304,53 @@
     div[type="spinner"] {
       &:after {
         background: $danger-100;
+      }
+    }
+  }
+}
+
+.primary {
+  @extend .button;
+  background: $blue-400;
+  color: white;
+  border: 1px solid transparent;
+
+  div[type="spinner"] {
+    background: linear-gradient(to right,  rgba(white,1) 10%,rgba(white,0) 65%);
+    &:before { 
+      background: white;
+    }
+
+    &:after {
+      background: $blue-400;
+    }
+  }
+
+  &:hover {
+    background: $blue-200;
+
+    div[type="spinner"] {
+      &:after {
+        background: $blue-200;
+      }
+    }
+  }
+
+  &:focus {
+    background: $blue-600;
+
+    div[type="spinner"] {
+      &:after {
+        background: $blue-600;
+      }
+    }
+  }
+
+  &:disabled {
+    background: $blue-100;
+    div[type="spinner"] {
+      &:after {
+        background: $blue-100;
       }
     }
   }
