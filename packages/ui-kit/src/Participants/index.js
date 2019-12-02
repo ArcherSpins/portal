@@ -23,6 +23,7 @@ type Props = {
 const Participants = ({
   chips, onDelete, className, children, name, ...restProps
 }: Props) => {
+  // TODO: need fix. on every render new anonymous function created
   const onDeleteWrap = onDelete ? (id) => onDelete(
     { name, value: id },
   ) : noop;
