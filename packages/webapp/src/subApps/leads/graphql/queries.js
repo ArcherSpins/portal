@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 
-export const getJobForCurrentUser = gql`
+export const getJobsForCurrentUser = gql`
   query(
     $from: Time!,
     $to: Time!,

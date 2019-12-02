@@ -7,25 +7,25 @@ import {
 } from 'redux-saga/effects';
 import type { Saga } from 'redux-saga';
 import {
-  fetchJobForCurrentUser,
+  fetchJobsForCurrentUser,
   fetchBlockingJobsCurrentUser,
 } from '../api/fetchJobForCurrentUserApi';
 
 export function* getJobForCurrentUser(action: {
-  type: 'FETCH_JOB_FOR_CURRENT_USER_REQUEST',
+  type: 'FETCH_JOBS_FOR_CURRENT_USER_REQUEST',
   payload: {
     from: Date,
     to: Date
   }
 }): Saga<void> {
   try {
-    const data = yield call(fetchJobForCurrentUser, action.payload);
+    const data = yield call(fetchJobsForCurrentUser, action.payload);
     yield put({
-      type: 'FETCH_JOB_FOR_CURRENT_USER_SUCCESS',
+      type: 'FETCH_JOBS_FOR_CURRENT_USER_SUCCESS',
       payload: data,
     });
   } catch (err) {
-    yield put({ type: 'FETCH_JOB_FOR_CURRENT_USER_FAIL' });
+    yield put({ type: 'FETCH_JOBS_FOR_CURRENT_USER_FAIL' });
     yield put({
       type: 'SHOW_ERROR_MESSAGE',
       payload: String(err),
@@ -34,7 +34,7 @@ export function* getJobForCurrentUser(action: {
 }
 
 export function* getBlockingJobSForCurrentUser(action: {
-  type: 'FETCH_BLOCKING_JOB_FOR_CURRENT_USER_REQUEST',
+  type: 'FETCH_BLOCKING_JOBS_FOR_CURRENT_USER_REQUEST',
   payload: {
     from: Date,
     to: Date
@@ -43,11 +43,11 @@ export function* getBlockingJobSForCurrentUser(action: {
   try {
     const data = yield call(fetchBlockingJobsCurrentUser, action.payload);
     yield put({
-      type: 'FETCH_BLOCKING_JOB_FOR_CURRENT_USER_SUCCESS',
+      type: 'FETCH_BLOCKING_JOBS_FOR_CURRENT_USER_SUCCESS',
       payload: data,
     });
   } catch (err) {
-    yield put({ type: 'FETCH_BLOCKING_JOB_FOR_CURRENT_USER_FAIL' });
+    yield put({ type: 'FETCH_BLOCKING_JOBS_FOR_CURRENT_USER_FAIL' });
     yield put({
       type: 'SHOW_ERROR_MESSAGE',
       payload: String(err),
@@ -58,7 +58,7 @@ export function* getBlockingJobSForCurrentUser(action: {
 
 export default function* watchSaga(): Saga<void> {
   yield all([
-    takeEvery('FETCH_JOB_FOR_CURRENT_USER_REQUEST', getJobForCurrentUser),
-    takeEvery('FETCH_BLOCKING_JOB_FOR_CURRENT_USER_REQUEST', getBlockingJobSForCurrentUser),
+    takeEvery('FETCH_JOBS_FOR_CURRENT_USER_REQUEST', getJobForCurrentUser),
+    takeEvery('FETCH_BLOCKING_JOBS_FOR_CURRENT_USER_REQUEST', getBlockingJobSForCurrentUser),
   ]);
 }

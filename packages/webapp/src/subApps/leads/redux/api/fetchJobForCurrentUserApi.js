@@ -2,7 +2,7 @@
 import type { FetchResult } from 'apollo-link';
 import client from 'utils/api';
 import {
-  getJobForCurrentUser,
+  getJobsForCurrentUser,
   getBlockingJobsCurrentUser,
   createBlockingJobsForCurrentUser,
 } from '../../graphql/queries';
@@ -10,13 +10,13 @@ import type { JobCurrentUserType } from '../../types/api';
 
 type Response = Array<JobCurrentUserType>;
 
-export async function fetchJobForCurrentUser(data: {
+export async function fetchJobsForCurrentUser(data: {
     from: Date,
     to: Date
 }): Promise<FetchResult<Response>> {
   try {
     const response = await client.query({
-      query: getJobForCurrentUser,
+      query: getJobsForCurrentUser,
       variables: data,
     });
     return response.data.jobsForCurrentUser;

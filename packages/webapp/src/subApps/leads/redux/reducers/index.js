@@ -1,8 +1,8 @@
 // @flow
 import { combineReducers } from 'redux';
-import jobCurrentUser from './jobCurrentUser';
+import jobsCurrentUser from './jobCurrentUser';
 
 // $FlowFixMe
 export default () => combineReducers({
-  jobCurrentUser,
+  jobsCurrentUser,
 });

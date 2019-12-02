@@ -11,7 +11,7 @@ export type TagClouds = {
   title: string
 }
 
-export type JobCurrentUserType = {
+export type JobsCurrentUserType = {
   avgHourlyRate: mixed,
   budget: number,
   country: string,

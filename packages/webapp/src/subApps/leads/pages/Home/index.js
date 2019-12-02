@@ -5,7 +5,7 @@ import { TablePaginate, H2 } from '@sfxdx/ui-kit';
 import createTestContext from 'utils/createTestContext';
 import { DescriptionLeads } from '../../components';
 import {
-  fetchJobForCurrentUser,
+  fetchJobsForCurrentUser,
   fetchBlockingJobsCurrentUser,
 } from '../../redux/actions';
 import styles from './Home.module.scss';
@@ -59,14 +59,16 @@ const data = [
 
 export class Home extends Component<Props> {
   componentDidMount() {
-    const { fetchJobForCurrentUserAction } = this.props;
-    fetchJobForCurrentUserAction({
+    const { fetchJobsForCurrentUserAction } = this.props;
+    fetchJobsForCurrentUserAction({
       from: new Date(2018, 11, 12).toISOString(),
       to: new Date().toISOString(),
     });
   }
 
   render() {
+    const { jobsForCurrentUser } = this.props;
+    console.log(jobsForCurrentUser);
     return (
       <div className={styles.home}>
         <div className="d-flex h-100 justify-content-between">
@@ -96,10 +98,12 @@ export class Home extends Component<Props> {
   }
 }
 //  d-flex justify-content-center align-items-center
-const mapStateToProps = () => ({});
+const mapStateToProps = (state) => ({
+  jobsForCurrentUser: state.jobsCurrentUser.jobsForCurrentUser,
+});
 
 const mapDispatchToProps = {
-  fetchJobForCurrentUserAction: fetchJobForCurrentUser,
+  fetchJobsForCurrentUserAction: fetchJobsForCurrentUser,
   fetchBlockingJobsCurrentUserAction: fetchBlockingJobsCurrentUser,
 };
 

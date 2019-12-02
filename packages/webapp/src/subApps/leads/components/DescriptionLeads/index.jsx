@@ -62,7 +62,7 @@ export default () => (
       </div>
       <div className="mt-10">
         <BlockTitle title="Description">
-          <p className="line-height-30">
+          <div className="line-height-30">
             <p>Simple Cryptowallet (eventually based on electrum wallet).</p>
             <p>Create send/receive address;</p>
             <p>Display confirmed/unconfirmed transaction;</p>
@@ -72,7 +72,7 @@ export default () => (
             <p>21 Sep 2019/ 17:01</p>
             <p>http://otrs.sfxdx.ru/otrs/index.pl?Action=AgentTicketZoom;TicketID=258</p>
             <p>Regards, Vadim</p>
-          </p>
+          </div>
         </BlockTitle>
       </div>
     </div>
@@ -83,7 +83,7 @@ export default () => (
     </Accent>
     <div className="mt-20 footer-description_leads">
       <BlockTitle title="Input text">
-        <TextArea placeholder="Input text" className="input-description_leads" value="" />
+        <TextArea placeholder="Input text" className="input-description_leads" onChange={() => {}} />
       </BlockTitle>
     </div>
     <div className="d-flex mb-20 justify-content-end mt-20">
