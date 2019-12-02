@@ -8,4 +8,12 @@
 3. `npm install` or `yarn install` 
 4. `yarn start`
 
+
+## UI Kit
+
+Разработка компонентов ведется в [storybook](https://storybook.js.org/).
+
+Запуск: `yarn storybook`
+
+
 Подробнее в `package.json`
