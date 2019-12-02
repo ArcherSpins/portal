@@ -6,9 +6,9 @@ import {
   getBlockingJobsCurrentUser,
   createBlockingJobsForCurrentUser,
 } from '../../graphql/queries';
-import type { JobCurrentUserType } from '../../types/api';
+import type { JobsCurrentUserType } from '../../types/api';
 
-type Response = Array<JobCurrentUserType>;
+type Response = Array<JobsCurrentUserType>;
 
 export async function fetchJobsForCurrentUser(data: {
     from: Date,

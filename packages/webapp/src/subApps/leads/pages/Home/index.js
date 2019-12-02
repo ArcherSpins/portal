@@ -9,15 +9,10 @@ import {
   fetchBlockingJobsCurrentUser,
 } from '../../redux/actions';
 import styles from './Home.module.scss';
+import type { Props } from './type';
 import './style.scss';
 
 const createTestAttr = createTestContext('leads-home');
-
-type OwnProps = {||};
-
-type Props = {|
-  ...OwnProps
-|};
 
 export const columns = [
   {
@@ -66,9 +61,11 @@ export class Home extends Component<Props> {
     });
   }
 
+  togglePaginate = () => {
+
+  }
+
   render() {
-    const { jobsForCurrentUser } = this.props;
-    console.log(jobsForCurrentUser);
     return (
       <div className={styles.home}>
         <div className="d-flex h-100 justify-content-between">
@@ -107,4 +104,4 @@ const mapDispatchToProps = {
   fetchBlockingJobsCurrentUserAction: fetchBlockingJobsCurrentUser,
 };
 
-export default (connect(mapStateToProps, mapDispatchToProps)(Home): AbstractComponent<OwnProps>);
+export default (connect(mapStateToProps, mapDispatchToProps)(Home): AbstractComponent<Props>);

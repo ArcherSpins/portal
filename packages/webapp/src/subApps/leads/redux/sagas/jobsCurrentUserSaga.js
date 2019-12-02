@@ -10,6 +10,7 @@ import {
   fetchJobsForCurrentUser,
   fetchBlockingJobsCurrentUser,
 } from '../api/fetchJobForCurrentUserApi';
+import { fetchJobsForCurrentUserSuccess, fetchBlockingJobsCurrentUserSuccess } from '../actions';
 
 export function* getJobForCurrentUser(action: {
   type: 'FETCH_JOBS_FOR_CURRENT_USER_REQUEST',
@@ -20,10 +21,7 @@ export function* getJobForCurrentUser(action: {
 }): Saga<void> {
   try {
     const data = yield call(fetchJobsForCurrentUser, action.payload);
-    yield put({
-      type: 'FETCH_JOBS_FOR_CURRENT_USER_SUCCESS',
-      payload: data,
-    });
+    fetchJobsForCurrentUserSuccess(data);
   } catch (err) {
     yield put({ type: 'FETCH_JOBS_FOR_CURRENT_USER_FAIL' });
     yield put({
@@ -42,10 +40,7 @@ export function* getBlockingJobSForCurrentUser(action: {
 }): Saga<void> {
   try {
     const data = yield call(fetchBlockingJobsCurrentUser, action.payload);
-    yield put({
-      type: 'FETCH_BLOCKING_JOBS_FOR_CURRENT_USER_SUCCESS',
-      payload: data,
-    });
+    fetchBlockingJobsCurrentUserSuccess(data);
   } catch (err) {
     yield put({ type: 'FETCH_BLOCKING_JOBS_FOR_CURRENT_USER_FAIL' });
     yield put({

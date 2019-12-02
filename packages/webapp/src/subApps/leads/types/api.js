@@ -7,18 +7,18 @@ export type TagType = {
 
 export type TagClouds = {
   id: string,
-  tags: Array<TabType>,
+  tags: Array<TagType>,
   title: string
 }
 
 export type JobsCurrentUserType = {
-  avgHourlyRate: mixed,
+  avgHourlyRate: number,
   budget: number,
   country: string,
-  createdAt: Date | string,
+  createdAt: string,
   description: string,
   id: string,
-  price: mixed,
+  price: number,
   tags: Array<TagType>,
   tagClouds: TagClouds,
   title: string,
