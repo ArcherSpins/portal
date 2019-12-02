@@ -16,7 +16,7 @@ export type InputProps = {
   /** Тип текстового значения инпута. @example: input[type="text"] */
   type?: ValueType,
   placeholder?: string,
-  error?: boolean,
+  error?: string,
   /** Тип инпута */
   use?: InputType,
   disabled?: boolean,
@@ -150,7 +150,7 @@ Input.defaultProps = {
   onChange: noop,
   onBlur: noop,
   onFocus: noop,
-  error: false,
+  error: '',
   disabled: false,
   use: 'default',
   value: '',

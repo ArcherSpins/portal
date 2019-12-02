@@ -6,25 +6,6 @@
   width: 100%;
   position: relative;
 
-  &.error_picker {
-    i, label {
-      color: $danger-400 !important;
-    }
-
-    ::-webkit-input-placeholder {
-      color: $danger-400 !important;
-    }
-    :-ms-input-placeholder {
-      color: $danger-400 !important;
-    }
-    ::-moz-placeholder {
-      color: $danger-400 !important;
-    }
-    :-moz-placeholder {
-      color: $danger-400 !important;
-    }
-  }
-
   label {
     display: block;
     margin-bottom: .4rem;

@@ -10,6 +10,7 @@ type Props = {
   id: string,
   placeholder?: string,
   className?: string,
+  error?: string,
   style?: {
     [string]: mixed
   },
@@ -32,11 +33,15 @@ const TextArea = ({
   cols,
   rows,
   label,
+  error,
   disabled,
   labelClassName,
   ...restProps
 }: Props) => (
-  <label htmlFor={name} className={classNames(styles.label, labelClassName)}>
+  <label
+    htmlFor={name}
+    className={classNames(styles.label, { [styles.error]: error }, labelClassName)}
+  >
     <span>{label}</span>
     <textarea
       {...restProps}
@@ -65,6 +70,7 @@ TextArea.defaultProps = {
   label: '',
   disabled: false,
   labelClassName: '',
+  error: '',
 };
 
 export default TextArea;
