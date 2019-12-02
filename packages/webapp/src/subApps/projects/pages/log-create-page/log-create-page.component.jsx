@@ -11,12 +11,11 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import Header from 'subApps/projects/components/header';
 import {
-  Input, Button, TextArea, Datepicker, H1,
+  H1,
 } from '@sfxdx/ui-kit';
-import createTestContext from 'utils/createTestContext';
-import { addYears } from 'date-fns';
 
 import type { RouterHistory } from 'react-router-dom';
+import LogForm from '../../components/log-form';
 
 import { createLog } from '../../redux/log/log.actions';
 
@@ -37,8 +36,6 @@ import type { Log, LogCreation } from '../../redux/log/log.flow-types';
 // $FlowFixMe
 import 'react-datepicker/dist/react-datepicker.css';
 import './log-create-page.styles.scss';
-
-const createTestAttr = createTestContext('create-log');
 
 type State = {
   date: Date,
@@ -268,95 +265,19 @@ class LogCreate extends React.Component<Props, State> {
   };
 
   render() {
-    const { title, number } = this.props.milestone;
-    const {
-      date, comment, errors, minutes, hours,
-    } = this.state;
-    const now = new Date();
+    const { milestone, task, project } = this.props;
     return (
       <div className="log-create">
         <Header>
           <H1>New Log</H1>
         </Header>
-        <form onSubmit={this.handleSubmit} className="body">
-          <div className="pb1 mb1 border">
-            <h2 className="sub-header-title mb05">{this.props.task.title}</h2>
-            <div className="project-wrapper mb05">
-              <span className="project-label">Project:</span>
-              <span className="project-title">{this.props.project.title}</span>
-            </div>
-            <span className="log-create-milestone mb05">
-              Milestone #
-              {number}
-:
-              {' '}
-              {title}
-            </span>
-          </div>
-          <div className="time-wrapper mb1">
-            <div className="hours-wrapper">
-              <Input
-                label="Hours"
-                onChange={this.handleHoursChange}
-                value={hours}
-                data-test={createTestAttr('hours-input')}
-              />
-            </div>
-            <div className="minutes-wrapper mr1">
-              <Input
-                label="Minutes"
-                onChange={this.handleMinutesChange}
-                value={minutes}
-                data-test={createTestAttr('minutes-input')}
-              />
-            </div>
-            <span className="time-note">{this.showAbleToLog()}</span>
-          </div>
-          <div>
-            <Datepicker
-              className="project__datepicker mb1"
-              label="Date"
-              onDayChange={this.handleDateChange}
-              value={date}
-              containerProps={{
-                'data-test': createTestAttr('datepicker'),
-              }}
-              disabledDays={{
-                before: now,
-                after: addYears(now, 2),
-              }}
-            />
-          </div>
-          <TextArea
-            label="Comment"
-            name="comment"
-            placeholder="Please describe the work you have done"
-            className="mb1"
-            value={comment}
-            data-test={createTestAttr('comment-input')}
-            onChange={this.handleChange}
-          />
-          {errors.length >= 1 && (
-            <div
-              style={{
-                color: 'red',
-                margin: '5px',
-                fontSize: '14px',
-              }}
-            >
-              Sorry, something went wrong please check
-              {' '}
-              {[...new Set(errors)].join(', ')}
-.
-            </div>
-          )}
-          <Button
-            type="submit"
-            data-test={createTestAttr('log-button')}
-          >
-            Log It
-          </Button>
-        </form>
+        <LogForm
+          milestone={milestone}
+          task={task}
+          project={project}
+          onSubmit={(values) => console.log(values)}
+          testContext="create-log"
+        />
       </div>
     );
   }
