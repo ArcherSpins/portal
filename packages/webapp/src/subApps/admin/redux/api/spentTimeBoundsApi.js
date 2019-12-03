@@ -22,8 +22,8 @@ export async function fetchUpdateSpentTimeBounds(
 ): Promise<FetchResult<Response>> {
   try {
     // TODO: fix this
-    await client.query({
-      query: updateSpentTime,
+    await client.mutate({
+      mutation: updateSpentTime,
       variables: {
         ...data,
         weeks: '0',

@@ -155,9 +155,9 @@ class SittingsProjectsModulePage extends React.Component<Props, State> {
     }
 
     const selected = arr.find((item) => item.selected);
-
+    const stateData = data.times ? { label: data.times, value: data.times } : selected;
     return {
-      selected,
+      selected: stateData,
       times: arr,
     };
   }
