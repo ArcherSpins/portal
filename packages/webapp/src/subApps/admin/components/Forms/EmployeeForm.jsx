@@ -377,7 +377,9 @@ class EmployeeForm extends React.Component<
               this.onChange('birthday', value);
               this.toggleEdit(true);
             }}
-            data-test={createTestAttr('birthdate-input')}
+            containerProps={{
+              'data-test': createTestAttr('birthdate-input'),
+            }}
           />
         </FieldBlock>
 
