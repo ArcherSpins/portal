@@ -1,5 +1,16 @@
+@import '../variables.scss';
+@import '../mixins.scss';
+
 .link {
   position: relative;
   text-decoration: none;
   display: inline-block;
+  color: $text-color-200;
+  border-bottom: 1px solid transparent;
+  border-radius: 0;
+  padding: 0 0 0.12rem 0;
+  @include default-transition(all);
+  &:hover {
+    border-color: $text-color-200;
+  }
 }
