@@ -1,16 +1,13 @@
-/*eslint-disable */
 // @flow
-import React from "react";
-import { withRouter } from "react-router-dom";
-import type { RouterHistory, Match } from "react-router-dom";
-import moment from "moment";
-import { differenceInHours, addMinutes } from 'date-fns';
+import React from 'react';
+import { withRouter } from 'react-router-dom';
+import type { RouterHistory, Match } from 'react-router-dom';
+import moment from 'moment';
 import createTestContext from 'utils/createTestContext';
-import { ROOT } from '../../routes';
 
-import "./log-history-item.styles.scss";
+import './log-history-item.styles.scss';
 
-import type { Log } from "../../redux/log/log.flow-types";
+import type { Log } from '../../redux/log/log.flow-types';
 
 
 const createTestAttr = createTestContext('log-history-item');
@@ -18,7 +15,7 @@ const createTestAttr = createTestContext('log-history-item');
 type Props = {
   log: Log,
   match: Match,
-  history: RouterHistory, 
+  history: RouterHistory,
   openDescriptionToggler: boolean,
   number: number
 };
@@ -28,17 +25,19 @@ type State = {
 }
 
 class LogHistoryItem extends React.Component<Props, State> {
-
-  state = {
-    openDescription: false
+  constructor(props) {
+    super(props);
+    this.state = {
+      openDescription: false,
+    };
   }
 
   showTime = () => {
-    const { spentTime } = this.props.log;
-    console.log(spentTime);
+    const { log } = this.props;
+    const { spentTime } = log;
     const hours = parseInt(spentTime / 60, 10);
     const minutes = spentTime - (hours * 60);
-    
+
     return `${this.formatTime(hours)}:${this.formatTime(minutes)}`;
   };
 
@@ -48,19 +47,30 @@ class LogHistoryItem extends React.Component<Props, State> {
   }
 
   cutComment = () => {
-    return this.props.log.comment.length > 50 ? this.props.log.comment.substring(0, 30) + "..." : this.props.log.comment
+    const { log } = this.props;
+    return log.comment.length > 50 ? `${log.comment.substring(0, 30)}...` : log.comment;
   }
 
-  render(){
-    const { openDescription } = this.state;
+  changeDescription = () => {
+    this.setState(({ openDescription }) => ({ openDescription: !openDescription }));
+  }
+
+  render() {
+    const {
+      openDescriptionToggler, log, number, history, match,
+    } = this.props;
     return (
-      <div className="log-history-item" onClick={() => this.setState({ openDescription: !openDescription})}>
+      // TODO: fix this
+      // eslint-disable-next-line
+      <div
+        className="log-history-item"
+        onClick={this.changeDescription}
+      >
         <div className="item-wrapper">
-          <span className="item">{this.props.number ? this.props.number : "null"}</span>
-          <span className="item">{this.props.log.assignedUser.name}</span>
-          <span className="item">{moment(this.props.log.createdAt).format("hh:mm DD/MM/YY")}</span>
+          <span className="item">{number || 'null'}</span>
+          <span className="item">{log.assignedUser.name}</span>
+          <span className="item">{moment(log.createdAt).format('hh:mm DD/MM/YY')}</span>
           <span className="item">
-            {/* {this.props.log.spentTime}:{this.props.log.spentTime.toString().length >= 2 ? this.props.log.minutes : "0" + this.props.log.minutes} */}
             {this.showTime()}
           </span>
           <span className="item">
@@ -70,7 +80,8 @@ class LogHistoryItem extends React.Component<Props, State> {
             <button
               data-test={createTestAttr('leg-edit-button')}
               className="log-edit-button"
-              onClick={() => this.props.history.push(`${this.props.match.url || " "}/${this.props.log.id}`)}
+              type="button"
+              onClick={() => history.push(`${match.url || ' '}/${log.id}`)}
             >
               <svg
                 width="15"
@@ -88,15 +99,17 @@ class LogHistoryItem extends React.Component<Props, State> {
           </div>
         </div>
         {
-          this.props.openDescriptionToggler && <div className='log-item-comment'>
-            <div className='full-comment'>
-              {this.props.log.comment}
+          openDescriptionToggler && (
+          <div className="log-item-comment">
+            <div className="full-comment">
+              {log.comment}
             </div>
           </div>
+          )
         }
       </div>
     );
-  };
+  }
 }
 
 export default withRouter(LogHistoryItem);

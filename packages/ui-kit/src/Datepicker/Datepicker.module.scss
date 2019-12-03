@@ -6,12 +6,6 @@
   width: 100%;
   position: relative;
 
-  &.error_picker {
-    i {
-      color: $danger-400 !important;
-    }
-  }
-
   label {
     display: block;
     margin-bottom: .4rem;

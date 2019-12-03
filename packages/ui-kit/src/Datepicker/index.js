@@ -95,9 +95,9 @@ const Datepicker = ({
   name,
   label,
   style,
-  error,
   containerProps,
   overlayAlign,
+  error,
   ...props
 }: Props) => {
   const inputRef = React.createRef();
@@ -105,7 +105,7 @@ const Datepicker = ({
     <div
       {...containerProps}
       style={style}
-      className={classNames(styles.datepicker, { [styles.error_picker]: error }, className)}
+      className={classNames(styles.datepicker, className)}
     >
       <label htmlFor={name}>{label}</label>
       {/* <span className={styles.label}>{label}</span> */}
@@ -134,7 +134,7 @@ const Datepicker = ({
           firstDayOfWeek: 1,
         }}
         ref={inputRef}
-        inputProps={{ ref: null }}
+        inputProps={{ ref: null, error }}
         component={DateInput}
         classNames={styles}
         format={format}

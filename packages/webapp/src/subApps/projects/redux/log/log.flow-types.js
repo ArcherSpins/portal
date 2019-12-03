@@ -6,7 +6,7 @@ import type { ErrorAction } from '../error/error.flow-types';
 export type Log = {
   id: string,
   comment: string,
-  date: Date,
+  date: string,
   spentTime: number,
   assignedUser: {
     id: string,
