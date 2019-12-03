@@ -6,34 +6,9 @@
     font-size: 14px;
 }
 
-.danger-button_transparent {
-    border-color: #EB5757;
-    color: #EB5757;
-
-    &:hover {
-        background-color: #EB5757;
-        color: white;
-    }
-}
-
-.primary-button_transparent {
-    border-color: #2F80ED;
-    color: #2F80ED;
-
-    &:hover {
-        background-color: #2F80ED;
-        color: white;
-    }
-}
-
-.success-button_transparent {
-    border-color: #61B16F;
-    color: #61B16F;
-
-    &:hover {
-        background-color: #61B16F;
-        color: white;
-    }
+.mx-10 {
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .cut-text {
