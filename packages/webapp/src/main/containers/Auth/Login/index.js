@@ -3,14 +3,13 @@ import React, { Component } from 'react';
 import {
   Formik, Form, type FormikActions, FormikValues,
 } from 'formik';
-import { Link } from 'react-router-dom';
 import history from 'utils/history';
 import client from 'utils/api';
 import { AUTH_TOKEN_KEY, ROOT_PAGE_ROUTE } from 'utils/constants';
 
 import { SIGN_IN, type SignInResponse } from 'graphql/auth';
 import {
-  Button, ButtonWithProgress, H1, Input, Separator,
+  ButtonWithProgress, H1, Input, Separator, Link,
 } from '@sfxdx/ui-kit';
 import createTestContext from 'utils/createTestContext';
 import styles from '../Auth.module.scss';
@@ -121,14 +120,14 @@ class Login extends Component<Props> {
                   </ButtonWithProgress>
                 </div>
                 <div className={styles.actions}>
-                  <Button
+                  <Link
                     className={styles.button}
-                    use="simple"
-                    size="sm"
                     data-test={createTestAttr('forgot-password-link')}
+                    to="/auth/reset-password"
+                    size="sm"
                   >
-                    <Link to="/auth/reset-password">Forgot password?</Link>
-                  </Button>
+                    Forgot password?
+                  </Link>
                 </div>
               </Form>
             )}

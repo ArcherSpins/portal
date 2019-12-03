@@ -43,7 +43,7 @@ class Switcher extends Component<Props> {
           return (
             <Button
               key={value}
-              use={swValue === value ? 'default' : 'grey-filled'}
+              color={swValue === value ? 'success' : 'grey'}
               className={styles.button}
               data-value={value}
               onClick={this.selectItem}

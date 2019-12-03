@@ -87,15 +87,9 @@ export default () => (
       </BlockTitle>
     </div>
     <div className="d-flex mb-20 justify-content-end mt-20">
-      <Button
-        data-test={createTestAttr('decline-button')}
-        className="danger-button_transparent"
-        use="transparent"
-      >
-        Decline
-      </Button>
-      <Button data-test={createTestAttr('bid-button')} className="primary-button_transparent mx-10" use="transparent">Bid</Button>
-      <Button data-test={createTestAttr('pending-button')} className="success-button_transparent" use="transparent">Pending</Button>
+      <Button color="danger" use="transparent">Decline</Button>
+      <Button color="primary" className="mx-10" use="transparent">Bid</Button>
+      <Button color="success" use="transparent">Pending</Button>
     </div>
   </div>
 );
