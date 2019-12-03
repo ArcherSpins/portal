@@ -21,7 +21,7 @@ export function* getJobForCurrentUser(action: {
 }): Saga<void> {
   try {
     const data = yield call(fetchJobsForCurrentUser, action.payload);
-    fetchJobsForCurrentUserSuccess(data);
+    yield put(fetchJobsForCurrentUserSuccess(data));
   } catch (err) {
     yield put({ type: 'FETCH_JOBS_FOR_CURRENT_USER_FAIL' });
     yield put({
@@ -40,7 +40,7 @@ export function* getBlockingJobSForCurrentUser(action: {
 }): Saga<void> {
   try {
     const data = yield call(fetchBlockingJobsCurrentUser, action.payload);
-    fetchBlockingJobsCurrentUserSuccess(data);
+    yield put(fetchBlockingJobsCurrentUserSuccess(data));
   } catch (err) {
     yield put({ type: 'FETCH_BLOCKING_JOBS_FOR_CURRENT_USER_FAIL' });
     yield put({
