@@ -12,3 +12,24 @@
   $remSize: $size / $root-font-size;
   @return #{$remSize}rem;
 }
+
+@mixin spinner-color($color, $bgColor) {
+  div[type="spinner"] {
+    background: linear-gradient(to right,  rgba($bgColor,1) 10%,rgba($bgColor,0) 65%);
+    &:before { 
+      background: $bgColor;
+    }
+  
+    &:after {
+      background: $color;
+    }
+  }
+}
+
+@mixin spinner-bg($color) {
+  div[type="spinner"] {
+    &:after {
+      background: $color;
+    }
+  }
+}

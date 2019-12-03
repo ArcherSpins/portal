@@ -4,7 +4,7 @@ import React, { type Node } from 'react';
 import noop from 'lodash.noop';
 import classNames from 'classnames';
 import styles from './Button.module.scss';
-import { type ButtonUse } from './types';
+import type { ButtonUse, ButtonColor } from './types';
 
 export const DEFAULT = 'default';
 
@@ -20,7 +20,8 @@ export type ButtonProps = {
   disabled?: boolean,
   className?: string,
   size?: ButtonSize,
-  type?: ButtonType
+  type?: ButtonType,
+  color?: ButtonColor
 };
 
 const Button = (props: ButtonProps) => {
@@ -31,6 +32,7 @@ const Button = (props: ButtonProps) => {
     disabled,
     className = [],
     size,
+    color,
     type = 'button',
     ...restProps
   } = props;
@@ -40,7 +42,7 @@ const Button = (props: ButtonProps) => {
       {...restProps}
       disabled={disabled}
       type={type}
-      className={classNames(styles[use], styles[size], className)}
+      className={classNames(styles[use], styles[size], styles[color], className)}
       onClick={onClick}
     >
       {children}
@@ -55,6 +57,7 @@ Button.defaultProps = {
   size: 'md',
   className: '',
   type: 'button',
+  color: 'success',
 };
 
 export default Button;

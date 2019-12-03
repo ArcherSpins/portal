@@ -8,6 +8,7 @@
 
 .button {
   @include default-transition(all);
+
   padding: 0;
   border: none;
   font: inherit;
@@ -23,14 +24,17 @@
   position: relative;
   outline: none;
   font-family: 'Proxima Nova';
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: .5;
+  }
+
   div[type="spinner"] {
     position: absolute;
     left: 50%;
     margin-left: -0.5rem;
     top: 0.5rem;
-  }
-  &:disabled {
-    cursor: not-allowed;
   }
 }
 
@@ -51,214 +55,22 @@
 
 
 
-.default {
+.success {
   @extend .button;
   background: $main-color;
   color: white;
   border: 1px solid $main-color-focused;
 
-  div[type="spinner"] {
-    background: linear-gradient(to right,  rgba(white,1) 10%,rgba(white,0) 65%);
-    &:before { 
-      background: white;
-    }
-  
-    &:after {
-      background: $main-color;
-    }
-  }
+  @include spinner-color($main-color, white);
 
-  &:hover {
+  &:hover:not(:disabled) {
     background: $main-color-hovered;
-    div[type="spinner"] {
-      &:after {
-        background: $main-color-hovered;
-      }
-    }
+    @include spinner-bg($main-color-hovered);
   }
 
   &:focus {
     background: $main-color-focused;
-    div[type="spinner"] {
-      &:after {
-        background: $main-color-focused;
-      }
-    }
-  }
-
-  &:disabled {
-    background: $disabled-color;
-    border: 1px solid $disabled-color;
-    div[type="spinner"] {
-      &:after {
-        background: $disabled-color;
-      }
-    }
-  }
-
-}
-
-
-.transparent {
-  @extend .button;
-  background: transparent;
-  color: $main-color;
-  border: 1px solid $main-color;
-
-  div[type="spinner"] {
-    background: linear-gradient(to right,  rgba($main-color,1) 10%,rgba($main-color,0) 65%);
-    &:before { 
-      background: $main-color;
-    }
-  
-    &:after {
-      background: white;
-    }
-  }
-
-  &:hover {
-    background: $main-color-hovered;
-    color: white;
-    div[type="spinner"] {
-      background: linear-gradient(to right,  rgba(white,1) 10%,rgba(white,0) 65%);
-      &:before { 
-        background: white;
-      }
-    
-      &:after {
-        background: $main-color-hovered;
-      }
-    }
-  }
-
-  &:focus {
-    background: $main-color-focused;
-    color: white;
-
-    div[type="spinner"] {
-      background: linear-gradient(to right,  rgba(white,1) 10%,rgba(white,0) 65%);
-      &:before { 
-        background: white;
-      }
-    
-      &:after {
-        background: $main-color-focused;
-      }
-    }
-  }
-
-  &:disabled {
-    background: white;
-    border: 1px solid $grey-disabled;
-    color: $grey-disabled;
-    div[type="spinner"] {
-      background: linear-gradient(to right,  rgba($grey-disabled,1) 10%,rgba($grey-disabled,0) 65%);
-      &:before { 
-        background: $grey-disabled;
-      }
-    
-      &:after {
-        background: white;
-      }
-    }
-  }
-}
-
-.grey {
-  @extend .button;
-  background: transparent;
-  color: $text-color;
-  border: 1px solid $grey-hovered;
-
-  div[type="spinner"] {
-    background: linear-gradient(to right,  rgba($text-color,1) 10%,rgba($text-color,0) 65%);
-    &:before { 
-      background: $text-color;
-    }
-
-    &:after {
-      background: white;
-    }
-  }
-
-  &:hover {
-    background: $grey-hovered;
-
-    div[type="spinner"] {
-      &:after {
-        background: $grey-hovered;
-      }
-    }
-  }
-
-  &:focus {
-    background: $grey-focused;
-    border: 1px solid $grey-focused;
-
-    div[type="spinner"] {
-      &:after {
-        background: $grey-focused;
-      }
-    }
-  }
-
-  &:disabled {
-    background: $grey-disabled;
-    color: $disabled-color;
-    div[type="spinner"] {
-      &:after {
-        background: $grey-hovered;
-      }
-    }
-  }
-}
-
-.grey-filled {
-  @extend .button;
-  background: $grey-hovered;
-  color: $text-color;
-  border: 1px solid $grey-hovered;
-
-  div[type="spinner"] {
-    background: linear-gradient(to right,  rgba($text-color,1) 10%,rgba($text-color,0) 65%);
-    &:before { 
-      background: $text-color;
-    }
-
-    &:after {
-      background: $grey-hovered;
-    }
-  }
-
-  &:hover {
-    background: $grey;
-
-    div[type="spinner"] {
-      &:after {
-        background: $grey;
-      }
-    }
-  }
-
-  &:focus {
-    background: $grey;
-    border: 1px solid $grey;
-
-    div[type="spinner"] {
-      &:after {
-        background: $grey;
-      }
-    }
-  }
-
-  &:disabled {
-    background: $grey-disabled;
-    color: $disabled-color;
-    div[type="spinner"] {
-      &:after {
-        background: $grey-hovered;
-      }
-    }
+    @include spinner-bg($main-color-focused);
   }
 }
 
@@ -267,94 +79,57 @@
   background: $danger-400;
   color: white;
   border: 1px solid transparent;
+  @include spinner-color($danger-400, white);
 
-  div[type="spinner"] {
-    background: linear-gradient(to right,  rgba(white,1) 10%,rgba(white,0) 65%);
-    &:before { 
-      background: white;
-    }
-
-    &:after {
-      background: $danger-400;
-    }
-  }
-
-  &:hover {
+  &:hover:not(:disabled){
     background: $danger-200;
-
-    div[type="spinner"] {
-      &:after {
-        background: $danger-200;
-      }
-    }
+    @include spinner-bg($danger-200);
   }
 
   &:focus {
     background: $danger-600;
-
-    div[type="spinner"] {
-      &:after {
-        background: $danger-600;
-      }
-    }
-  }
-
-  &:disabled {
-    background: $danger-100;
-    div[type="spinner"] {
-      &:after {
-        background: $danger-100;
-      }
-    }
+    @include spinner-bg($danger-600);
   }
 }
+
+.grey {
+  @extend .button;
+  background: $grey-hovered;
+  color: $text-color;
+  border: 1px solid $grey-hovered;
+  @include spinner-color($grey-hovered, $text-color);
+
+  &:hover:not(:disabled) {
+    background: $grey;
+    @include spinner-bg($grey);
+  }
+
+  &:focus {
+    background: $grey;
+    border: 1px solid $grey;
+    @include spinner-bg($grey);
+  }
+}
+
 
 .primary {
   @extend .button;
   background: $blue-400;
   color: white;
   border: 1px solid transparent;
+  @include spinner-color($blue-400, white);
 
-  div[type="spinner"] {
-    background: linear-gradient(to right,  rgba(white,1) 10%,rgba(white,0) 65%);
-    &:before { 
-      background: white;
-    }
-
-    &:after {
-      background: $blue-400;
-    }
-  }
-
-  &:hover {
+  &:hover:not(:disabled) {
     background: $blue-200;
-
-    div[type="spinner"] {
-      &:after {
-        background: $blue-200;
-      }
-    }
+    @include spinner-bg($blue-200);
   }
 
   &:focus {
     background: $blue-600;
-
-    div[type="spinner"] {
-      &:after {
-        background: $blue-600;
-      }
-    }
-  }
-
-  &:disabled {
-    background: $blue-100;
-    div[type="spinner"] {
-      &:after {
-        background: $blue-100;
-      }
-    }
+    @include spinner-bg($blue-600);
   }
 }
+
 
 .simple {
   @extend .button;
