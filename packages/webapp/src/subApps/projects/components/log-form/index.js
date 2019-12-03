@@ -70,10 +70,6 @@ const LogForm = ({
 
       return errors;
     },
-
-    validateOnBlur: false,
-    validateOnChange: false,
-
   });
 
   const createTestAttr = createTestContext(testContext);
@@ -162,7 +158,7 @@ const LogForm = ({
       <Button
         type="submit"
         data-test={createTestAttr('log-button')}
-        disabled={!submitted && !formik.isValid}
+        disabled={!formik.isValid}
         style={{ marginTop: '1rem' }}
       >
         Log It
