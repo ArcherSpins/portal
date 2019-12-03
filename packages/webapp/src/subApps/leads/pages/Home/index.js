@@ -2,15 +2,17 @@
 import React, { Component, type AbstractComponent } from 'react';
 import { connect } from 'react-redux';
 import { TablePaginate, H2 } from '@sfxdx/ui-kit';
+import createTestContext from 'utils/createTestContext';
 import { DescriptionLeads } from '../../components';
+import {
+  fetchJobsForCurrentUser,
+  fetchBlockingJobsCurrentUser,
+} from '../../redux/actions';
 import styles from './Home.module.scss';
+import type { Props } from './type';
 import './style.scss';
 
-type OwnProps = {||};
-
-type Props = {|
-  ...OwnProps
-|};
+const createTestAttr = createTestContext('leads-home');
 
 export const columns = [
   {
@@ -51,6 +53,18 @@ const data = [
 ];
 
 export class Home extends Component<Props> {
+  componentDidMount() {
+    const { fetchJobsForCurrentUserAction } = this.props;
+    fetchJobsForCurrentUserAction({
+      from: new Date(2018, 11, 12).toISOString(),
+      to: new Date().toISOString(),
+    });
+  }
+
+  togglePaginate = () => {
+
+  }
+
   render() {
     return (
       <div className={styles.home}>
@@ -67,7 +81,7 @@ export class Home extends Component<Props> {
               count={Math.ceil(3)}
               // history={history}
               manual
-              data-test="leads__table"
+              data-test={createTestAttr('leads__table')}
             />
           </div>
           <div className="col-6 ml-20">
@@ -81,8 +95,13 @@ export class Home extends Component<Props> {
   }
 }
 //  d-flex justify-content-center align-items-center
-const mapStateToProps = () => ({});
+const mapStateToProps = (state) => ({
+  jobsForCurrentUser: state.jobsCurrentUser.jobsForCurrentUser,
+});
 
-const mapDispatchToProps = () => ({});
+const mapDispatchToProps = {
+  fetchJobsForCurrentUserAction: fetchJobsForCurrentUser,
+  fetchBlockingJobsCurrentUserAction: fetchBlockingJobsCurrentUser,
+};
 
-export default (connect(mapStateToProps, mapDispatchToProps)(Home): AbstractComponent<OwnProps>);
+export default (connect(mapStateToProps, mapDispatchToProps)(Home): AbstractComponent<Props>);
