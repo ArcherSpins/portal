@@ -51,15 +51,15 @@ type Props = {
 
 class LogEditPage extends React.Component<Props, State> {
   handleSubmit = (values: Fields) => {
-    const { history, editLog } = this.props;
-    const sum = Number(values.hours);
-    let id; let date; const
-      comment = '';
+    const { history, editLog, task } = this.props;
+    const {
+      date, comment, hours, minutes,
+    } = values;
     const editedLog = {
-      id,
+      id: task.id,
       date,
       comment,
-      spentTime: sum.toString(),
+      spentTime: `${Number(hours) * 60 + Number(minutes)}`,
     };
     editLog(editedLog, history);
   };
@@ -80,9 +80,9 @@ class LogEditPage extends React.Component<Props, State> {
           task={task}
           initialValues={{
             comment: log.comment,
-            hours: `${parseInt(log.spentTime / 60, 10)}`,
-            minutes: `${log.spentTime % 60}`,
-            date: log.date,
+            hours: parseInt(log.spentTime / 60, 10),
+            minutes: log.spentTime % 60,
+            date: new Date(log.date),
           }}
           onSubmit={this.handleSubmit}
         />

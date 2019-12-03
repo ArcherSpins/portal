@@ -35,7 +35,6 @@ class LogHistoryItem extends React.Component<Props, State> {
 
   showTime = () => {
     const { spentTime } = this.props.log;
-    console.log(spentTime);
     const hours = parseInt(spentTime / 60, 10);
     const minutes = spentTime - (hours * 60);
     

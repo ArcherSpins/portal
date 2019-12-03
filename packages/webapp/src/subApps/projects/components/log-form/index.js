@@ -21,6 +21,8 @@ const showAbleToLog = (estimated: number, spent: number): string => {
   return `Able to log: ${hours}:${minutes}`;
 };
 
+const getError = (error: string, isErrorVisible: boolean): string => (isErrorVisible ? error : '');
+
 export type Fields = {
   hours: number,
   minutes: number,
@@ -78,6 +80,7 @@ const LogForm = ({
   const { estimatedTime, spentTime } = milestone;
 
   const submitted = formik.submitCount > 0;
+
   return (
     <form onSubmit={formik.handleSubmit} className="body">
       <div className="pb1 mb1 border">
@@ -101,7 +104,7 @@ const LogForm = ({
             onChange={formik.handleChange}
             name="hours"
             type="number"
-            error={formik.errors.hours}
+            error={getError(formik.errors.hours, submitted)}
             min="0"
             max="23"
             value={formik.values.hours}
@@ -114,7 +117,7 @@ const LogForm = ({
             onChange={formik.handleChange}
             name="minutes"
             type="number"
-            error={formik.errors.minutes}
+            error={getError(formik.errors.minutes, submitted)}
             min="0"
             max="59"
             value={formik.values.minutes}
@@ -145,7 +148,7 @@ const LogForm = ({
         name="comment"
         placeholder="Please describe the work you have done"
         className="mb1"
-        error={formik.errors.comment}
+        error={getError(formik.errors.comment, submitted)}
         value={formik.values.comment}
         data-test={createTestAttr('comment-input')}
         onChange={formik.handleChange}
@@ -158,7 +161,7 @@ const LogForm = ({
       <Button
         type="submit"
         data-test={createTestAttr('log-button')}
-        disabled={!formik.isValid}
+        disabled={submitted && !formik.isValid}
         style={{ marginTop: '1rem' }}
       >
         Log It
