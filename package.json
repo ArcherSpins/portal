@@ -5,7 +5,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "postinstall": "npx lerna bootstrap && yarn build-ui",
+    "postinstall": "npx lerna bootstrap",
     "build-ui": "cd packages/ui-kit && yarn build && cd ../../",
     "start": "cd packages/webapp && yarn start",
     "storybook": "cd packages/ui-kit && yarn storybook",
