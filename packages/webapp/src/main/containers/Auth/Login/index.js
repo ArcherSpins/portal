@@ -9,7 +9,7 @@ import { AUTH_TOKEN_KEY, ROOT_PAGE_ROUTE } from 'utils/constants';
 
 import { SIGN_IN, type SignInResponse } from 'graphql/auth';
 import {
-  ButtonWithProgress, H1, Input, Separator, LinkButton,
+  ButtonWithProgress, H1, Input, Separator, Link,
 } from '@sfxdx/ui-kit';
 import createTestContext from 'utils/createTestContext';
 import styles from '../Auth.module.scss';
@@ -120,14 +120,14 @@ class Login extends Component<Props> {
                   </ButtonWithProgress>
                 </div>
                 <div className={styles.actions}>
-                  <LinkButton
+                  <Link
                     className={styles.button}
                     data-test={createTestAttr('forgot-password-link')}
                     to="/auth/reset-password"
                     size="sm"
                   >
                     Forgot password?
-                  </LinkButton>
+                  </Link>
                 </div>
               </Form>
             )}

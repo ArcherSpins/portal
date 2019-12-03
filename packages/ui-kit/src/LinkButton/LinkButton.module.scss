@@ -5,11 +5,16 @@
   position: relative;
   text-decoration: none;
   display: inline-block;
+}
+
+.a {
+  @extend .link;
   color: $text-color-200;
-  border-bottom: 1px solid transparent;
+  padding: 0 0 0.15rem 0;
   border-radius: 0;
-  padding: 0 0 0.12rem 0;
+  border-bottom: 1px solid transparent;
   @include default-transition(all);
+
   &:hover {
     border-color: $text-color-200;
   }

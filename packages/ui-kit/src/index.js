@@ -17,10 +17,10 @@ export { default as TextArea } from './TextArea';
 export { default as TablePaginate } from './TablePaginate';
 export { default as Participants } from './Participants';
 export { default as ErrorText } from './ErrorText';
-export { default as LinkButton } from './LinkButton';
 export { default as IconInput } from './IconInput';
 export { default as PopoverButton } from './PopoverButton';
 export { default as Accent } from './Accent';
+export * from './LinkButton';
 export {
   Modal, ModalHeader, ModalBody, ModalFooter,
 } from './Modal';
