@@ -13,13 +13,10 @@
   @return #{$remSize}rem;
 }
 
-@mixin spinner-color($color, $bgColor) {
+
+
+@mixin spinner-color($color) {
   div[type="spinner"] {
-    background: linear-gradient(to right,  rgba($bgColor,1) 10%,rgba($bgColor,0) 65%);
-    &:before { 
-      background: $bgColor;
-    }
-  
     &:after {
       background: $color;
     }
@@ -28,8 +25,38 @@
 
 @mixin spinner-bg($color) {
   div[type="spinner"] {
-    &:after {
+    background: linear-gradient(to right,  rgba($color,1) 10%,rgba($color,0) 65%);
+    &:before { 
       background: $color;
     }
+  }
+}
+
+@mixin spinner($color, $bgColor) {
+  @include spinner-bg($bgColor);
+  @include spinner-color($color);
+}
+
+
+@mixin transparentize($color, $hoverColor, $hoverBg, $focusBg) {
+  color: $color;
+  @include spinner-bg($color);
+  @include spinner-color(white);
+
+  &:hover, &:focus {
+    color: $hoverColor;
+    @include spinner-bg($hoverColor);
+  }
+
+  &:focus {
+    @include spinner-color($focusBg);
+  }
+  
+  &:hover {
+    @include spinner-color($hoverBg);
+  }
+
+  &:disabled {
+    color: $color;
   }
 }

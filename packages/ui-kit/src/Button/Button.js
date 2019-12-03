@@ -42,7 +42,7 @@ const Button = (props: ButtonProps) => {
       {...restProps}
       disabled={disabled}
       type={type}
-      className={classNames(styles[use], styles[size], styles[color], className)}
+      className={classNames(styles[size], styles[color], styles[use], className)}
       onClick={onClick}
     >
       {children}

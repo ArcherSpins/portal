@@ -54,23 +54,22 @@
 }
 
 
-
 .success {
   @extend .button;
   background: $main-color;
   color: white;
   border: 1px solid $main-color-focused;
 
-  @include spinner-color($main-color, white);
+  @include spinner($main-color, white);
 
   &:hover:not(:disabled) {
     background: $main-color-hovered;
-    @include spinner-bg($main-color-hovered);
+    @include spinner-color($main-color-hovered);
   }
 
   &:focus {
     background: $main-color-focused;
-    @include spinner-bg($main-color-focused);
+    @include spinner-color($main-color-focused);
   }
 }
 
@@ -78,63 +77,62 @@
   @extend .button;
   background: $danger-400;
   color: white;
-  border: 1px solid transparent;
-  @include spinner-color($danger-400, white);
+  border: 1px solid $danger-400;
+  @include spinner($danger-400, white);
 
   &:hover:not(:disabled){
     background: $danger-200;
-    @include spinner-bg($danger-200);
+    @include spinner-color($danger-200);
   }
 
   &:focus {
     background: $danger-600;
-    @include spinner-bg($danger-600);
+    @include spinner-color($danger-600);
   }
 }
-
 .grey {
   @extend .button;
   background: $grey-hovered;
   color: $text-color;
   border: 1px solid $grey-hovered;
-  @include spinner-color($grey-hovered, $text-color);
+  @include spinner($grey-hovered, $text-color);
 
   &:hover:not(:disabled) {
     background: $grey;
-    @include spinner-bg($grey);
+    @include spinner-color($grey);
   }
 
   &:focus {
     background: $grey;
     border: 1px solid $grey;
-    @include spinner-bg($grey);
+    @include spinner-color($grey);
   }
 }
-
 
 .primary {
   @extend .button;
   background: $blue-400;
   color: white;
-  border: 1px solid transparent;
-  @include spinner-color($blue-400, white);
+  border: 1px solid $blue-400;
+  @include spinner($blue-400, white);
 
   &:hover:not(:disabled) {
     background: $blue-200;
-    @include spinner-bg($blue-200);
+    @include spinner-color($blue-200);
   }
 
   &:focus {
     background: $blue-600;
-    @include spinner-bg($blue-600);
+    @include spinner-color($blue-600);
   }
 }
-
 
 .simple {
   @extend .button;
   color: $text-color-200;
   padding-left: 0 !important;
+  background: transparent;
+  border: none;
   padding-right: 0 !important;
   &:after {
     @include default-transition(background);
@@ -149,6 +147,7 @@
 
   &:hover {
     border-color: $text-color-200;
+    background: none;
     &:after {
       background: $text-color-200;
     }
@@ -166,5 +165,24 @@
     &:after {
       height: 0;
     }
+  }
+}
+
+.transparent {
+  background: white;
+  &.success {
+    @include transparentize($main-color, white, $main-color-hovered, $main-color-focused);
+  }
+
+  &.danger {
+    @include transparentize($danger-400, white, $danger-200, $danger-600);
+  }
+
+  &.primary {
+    @include transparentize($blue-400, white, $blue-200, $blue-600);
+  }
+
+  &.grey {
+    @include transparentize($text-color, $text-color, $grey, $grey);
   }
 }
