@@ -20,16 +20,16 @@
         min-height: calc(100% - 170px);
 
         &::-webkit-scrollbar-track {
-            background-color: rgba(216, 216, 216, 0.247);
+            background-color: rgba(152, 166, 173, 0.08);
             border-radius: 2px;
         }
     
         &::-webkit-scrollbar {
-            width: 8px;
+            width: 7px;
         }
     
         &::-webkit-scrollbar-thumb {
-            background-color: #61b16f8c;
+            background-color: rgba(51, 51, 51, 0.12);
             border-radius: 2px;
         }
     }
@@ -54,7 +54,7 @@
             padding-top: 7px;
   
             &::-webkit-scrollbar-track {
-                background-color: rgba(152, 166, 173, .08);
+                background-color: rgba(152, 166, 173, 0.08);
                 border-radius: 2px;
             }
         
@@ -63,7 +63,7 @@
             }
         
             &::-webkit-scrollbar-thumb {
-                background-color: rgba(51, 51, 51, .12);
+                background-color: rgba(51, 51, 51, 0.12);
                 border-radius: 2px;
             }
 

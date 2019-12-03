@@ -7,20 +7,7 @@
   position: relative;
 
   &.error_picker {
-    i, label {
-      color: $danger-400 !important;
-    }
-
-    ::-webkit-input-placeholder {
-      color: $danger-400 !important;
-    }
-    :-ms-input-placeholder {
-      color: $danger-400 !important;
-    }
-    ::-moz-placeholder {
-      color: $danger-400 !important;
-    }
-    :-moz-placeholder {
+    i {
       color: $danger-400 !important;
     }
   }

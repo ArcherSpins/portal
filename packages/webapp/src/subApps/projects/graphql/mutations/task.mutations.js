@@ -44,6 +44,7 @@ export const createTask = async ({
           milestone {
             id
             title
+            spentTime
             number
           }
           project {

@@ -1,6 +1,6 @@
 // @flow
 import type { FetchResult } from 'apollo-link';
-import { client } from '../../graphql/client';
+import client from 'utils/api';
 import { getSpentTimeBounds, updateSpentTime } from '../../graphql/queries';
 import type { SpentTimeBoundsType } from '../../types';
 
@@ -22,8 +22,8 @@ export async function fetchUpdateSpentTimeBounds(
 ): Promise<FetchResult<Response>> {
   try {
     // TODO: fix this
-    await client.query({
-      query: updateSpentTime,
+    await client.mutate({
+      mutation: updateSpentTime,
       variables: {
         ...data,
         weeks: '0',

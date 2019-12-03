@@ -83,6 +83,7 @@ export type PropsCrmDetails = {
   loadingDeals: boolean,
   loadingChannels: boolean,
   loadingById: boolean,
+  cleanDealsLog: () => void,
   loadingSources: boolean,
   fetchDealTypeIdRequest: (string) => void,
   fetchDealTypesRequest: () => void,
