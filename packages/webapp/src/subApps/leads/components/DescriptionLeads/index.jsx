@@ -1,6 +1,5 @@
 // @flow
 import React from 'react';
-import createTestContext from 'utils/createTestContext';
 import {
   Accent,
   Participants,
@@ -11,8 +10,6 @@ import BadgeBlock from '../BadgeBlock';
 import BlockTitle from '../BlockTItle';
 import './style.scss';
 
-
-const createTestAttr = createTestContext('description-leads');
 
 export default () => (
   <div className="h-100">
