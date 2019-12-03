@@ -1,10 +1,10 @@
 // @flow
-import React from 'react';
+import React, { type Node } from 'react';
 import { Title, Container } from './styled';
 
 type Props = {
   title: string,
-  children?: React.Node,
+  children?: Node,
 }
 
 const BlockTitle = ({
