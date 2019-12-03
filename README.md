@@ -6,7 +6,8 @@
 1. Node v8+, npm v5+
 2. Клонировать репозиторий
 3. `npm install` or `yarn install` 
-4. `yarn start`
+4. `yarn build-ui`
+5. `yarn start`
 
 
 ## UI Kit
